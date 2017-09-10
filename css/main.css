@@ -1,0 +1,25 @@
+/*Home Page*/
+.overlay {
+  display: none;
+  height: 1000px;
+  max-height: 100vh;
+  background-image: URL("../images/background.png");
+  opacity: .6;
+  background-size: cover; }
+  .overlay h1 {
+    padding-top: 2em;
+    color: black; }
+
+.overlayModal {
+  list-style-type: none;
+  position: fixed;
+  top: 45%;
+  left: 37.5%;
+  background: rgba(255, 255, 255, 0.9);
+  width: 25%;
+  height: 25%;
+  border-radius: 5px; }
+  .overlayModal li {
+    margin-top: 1em; }
+
+/*# sourceMappingURL=main.css.map */
