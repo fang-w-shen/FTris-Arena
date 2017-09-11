@@ -2,13 +2,13 @@
   'use strict';
 
   var AuthFactory = function($http, $rootScope) {
-    $rootScope.currentUser = firebase.auth().currentUser;
+    let user = firebase.auth().currentUser;
     return {
-      loginWithGoogle: function() {
+      logInGoogle: function() {
         let google = new firebase.auth.GoogleAuthProvider();
         return firebase.auth().signInWithPopup(google);
       },
-      logout: function() {
+      logOut: function() {
         return firebase.auth().signOut();
       },
       getUser: function() {

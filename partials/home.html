@@ -1,5 +1,60 @@
-<div class="overlayModal text-center">
-  <li><h4>Play</h4></li>
-  <a><li>High Scores</li></a>
-  <a><li>How To Play</li></a>
+<div class="overlay hidden"><h1 class="text-center">Tetris Arena</h1></div>
+<form class="example overlayCModal">
+    <fieldset>
+        <legend class="text-center">Arena Options</legend>
+        <div>
+            <input class="btn btn-primary btn-lg btn-block" type="radio" id="play" name="tetris" checked focused>
+            <label id="playButton" for="play">Play</label>
+        </div>
+        <div>
+            <input type="radio" id="highScores" name="tetris" >
+            <label id="highScoresButton" for="highScores" data-toggle="modal" data-target="#highScoreModal">High Scores</label>
+        </div>
+        <div>
+            <input type="radio" id="howToPlay" name="tetris">
+            <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal">How-To-Play</label>
+        </div>
+    </fieldset>
+</form>
+
+
+<!-- High Score Modal-->
+<div class="modal fade bd-example-modal-lg" id="highScoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">All Time High Scores</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>High Scores....</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- How To Play Modal-->
+<div class="modal fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">How To Play</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Directions....</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

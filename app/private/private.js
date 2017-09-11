@@ -3,6 +3,6 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     authDomain: "tetris-arena.firebaseapp.com",
     databaseURL: "https://tetris-arena.firebaseio.com",
     projectId: "tetris-arena",
-    storageBucket: "tetris-arena.appspot.com",
+    storageBucket: "",
     messagingSenderId: "735100394750"
 });

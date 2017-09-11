@@ -1,0 +1,80 @@
+<div ng-include="'partials/navbar.html'">
+</div>
+
+<div class="row">
+    <!-- FIRST COL 4  -->
+    <div class="col-sm-12 col-md-4">
+        <div class="jumbotron text-left">
+          <h1 class="display-3">Welcome to Tetris Arena!</h1>
+          <hr class="my-4">
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#!/register" role="button">Learn more</a>
+          </p>
+        </div>
+
+        <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+    </div>
+
+
+
+    <!-- SECOND COL 4  -->
+    <div class="col-sm-12 col-md-4">
+        <div class="row">
+            <div class="grid" id="tetris" class="row col-8">
+
+            </div>
+            <div class="right-column col-4">
+                <div id="next" class="grid">Next:</div>
+                <div id="preview" class="grid"></div>
+                <div id="currentshape" class="grid"></div>
+                <div id="time"></div>
+            </div>
+                    <input type="button" id="startGame" class="btn btn-success" name="" value="Start Game">
+                    <input type="button" id="spacebar" value="Space (Drop Block)">
+                    <ul id="arrows">
+                        <li><input type="button" id="left" value="Left (Move Left)"></li>
+                        <li><input type="button" id="right" value="Right (Move Right)"></li>
+                        <input type="button" id="up" value="Up (Rotate Block)">
+                        <input type="button" id="down" value="Down (Move Down)">
+                    </ul>
+        </div>
+
+
+    </div>
+
+    <!-- THIRD COL 4  -->
+    <div class="col-sm-12 col-md-4">
+<!--         <div class="jumbotron">
+          <h1 class="display-3">Register</h1>
+          <hr class="my-4">
+          E-Mail:
+          <input type="text" name="NAME" ng-model="auth.email"><br>
+          Password:
+          <input type="password" name="NAME" ng-model="auth.password">
+          <p class="lead">
+            <button class="btn btn-lg" ng-click="registerUser(auth)" href="#!/notes" role="button">Register!</button>
+          </p>
+        </div> -->
+
+
+        <div class="jumbotron">
+          <h1 class="display-3">Sign In!</h1>
+          <hr class="my-4">
+          E-Mail:
+          <input type="text" id="email" name="NAME" ng-model="auth.email"><br>
+          Password:
+          <input type="password" name="NAME" ng-model="auth.password">
+          <p class="lead">
+            <button class="btn btn-lg" ng-click="logIn(auth)" href="#!/notes" role="button">Log In!</button>
+          </p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+

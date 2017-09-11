@@ -1,25 +1,141 @@
+/*NAV BAR*/
+.dropdown-toggle {
+  background: black !important;
+  margin-bottom: 3px; }
+
 /*Home Page*/
+body {
+  overflow: hidden; }
+
+.modal {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: none; }
+
+#playButton {
+  background: rgba(255, 255, 255, 0.4); }
+
 .overlay {
+  margin-top: -2em;
   display: none;
   height: 1000px;
   max-height: 100vh;
   background-image: URL("../images/background.png");
-  opacity: .6;
+  opacity: 1;
   background-size: cover; }
   .overlay h1 {
-    padding-top: 2em;
-    color: black; }
+    padding-top: 1.4em;
+    color: white;
+    font-weight: bolder;
+    text-shadow: 2px 2px black; }
 
-.overlayModal {
+.overlayCModal {
   list-style-type: none;
   position: fixed;
   top: 45%;
   left: 37.5%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.1) !important;
   width: 25%;
   height: 25%;
   border-radius: 5px; }
-  .overlayModal li {
+  .overlayCModal li {
     margin-top: 1em; }
+  .overlayCModal label {
+    width: 100%;
+    color: black;
+    font-weight: bolder; }
+  .overlayCModal label:hover {
+    background-color: rgba(255, 255, 255, 0.4); }
+  .overlayCModal fieldset {
+    border: 2px solid white;
+    padding-bottom: 4rem; }
+
+/*///////MEDIA FOR PHONES////////*/
+@media screen and (max-width: 415px) {
+  .overlay {
+    position: fixed;
+    left: 5%;
+    width: 100%;
+    margin-left: -1.26em;
+    margin-right: 2em;
+    padding-right: 2em;
+    margin-top: 0; }
+
+  body {
+    overflow: scroll !important;
+    position: default !important; }
+
+  .overlayCModal {
+    width: 200px;
+    left: 20%; }
+    .overlayCModal fieldset {
+      padding-bottom: 0em !important; }
+
+  .side-nav {
+    width: 50%; }
+
+  .right-column {
+    padding-left: 0em;
+    margin-left: 1em; } }
+/*Tetris Page*/
+* {
+  margin: 0;
+  padding: 0; }
+
+body, html {
+  height: 100%;
+  background-color: "brown";
+  opacity: .9;
+  /*background-image: URL('http://geekandsundry.com/wp-content/uploads/2015/04/tumblr_static_video_20games_20tetris_20blocks_20retro_20games_201280x800_20wallpaper_www_wall321_com_13-970x545.jpg');
+  background-size: cover;
+  background-attachment: fixed;*/
+  /*background-image: URL('../images/gameboy.png');*/
+  background-position: 50% -30px;
+  background-repeat: no-repeat; }
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: .7;
+  z-index: -1; }
+
+.grid {
+  /*background-color: #9ead86;*/
+  /*border: 1px solid #ddd;*/
+  /*display: inline-block;*/
+  /*padding: 1px;*/
+  /*margin:;*/ }
+
+input {
+  z-index: 999; }
+
+/*//////////////CONTROLLERS/////////////////////*/
+#spacebar {
+  size: 2em;
+  width: 400px;
+  height: 40px; }
+
+/*//////////////SLAV/////////////////////*/
+.row {
+  margin: 0; }
+
+.cell {
+  border: 1px solid #ddd;
+  width: 15px;
+  height: 15px;
+  background-color: #9ead86;
+  /*display: inline-block;*/
+  margin: 1px;
+  /*vertical-align: top;*/ }
+
+.right-column {
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 10px; }
+
+nav {
+  margin-bottom: 2em;
+  background-color: black; }
 
 /*# sourceMappingURL=main.css.map */
