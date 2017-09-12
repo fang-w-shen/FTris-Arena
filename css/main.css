@@ -3,13 +3,27 @@
   background: black !important;
   margin-bottom: 3px; }
 
+.brand-logo {
+  margin-left: -100px; }
+
+img {
+  height: 55px;
+  margin-bottom: 10px; }
+
 /*Home Page*/
 body {
   overflow: hidden; }
 
+.colorTheme {
+  background-color: black; }
+
 .modal {
   background-color: rgba(255, 255, 255, 0) !important;
   border: none; }
+
+.modal-open .modal {
+  overflow-y: hidden !important;
+  height: 800px; }
 
 #playButton {
   background: rgba(255, 255, 255, 0.4); }
@@ -23,7 +37,7 @@ body {
   opacity: 1;
   background-size: cover; }
   .overlay h1 {
-    padding-top: 1.4em;
+    padding-top: 2em;
     color: white;
     font-weight: bolder;
     text-shadow: 2px 2px black; }
@@ -41,7 +55,7 @@ body {
     margin-top: 1em; }
   .overlayCModal label {
     width: 100%;
-    color: black;
+    color: white;
     font-weight: bolder; }
   .overlayCModal label:hover {
     background-color: rgba(255, 255, 255, 0.4); }
@@ -49,16 +63,45 @@ body {
     border: 2px solid white;
     padding-bottom: 4rem; }
 
+.material {
+  padding-top: 10.1px !important;
+  padding-bottom: 3px;
+  margin-right: 7px; }
+
+.material-icons {
+  font-size: 20px; }
+
+.letters {
+  display: inline-block;
+  margin-top: -5px;
+  height: 28px;
+  padding-bottom: 26px; }
+  .letters .s {
+    padding-right: 5px;
+    padding-left: 4px; }
+  .letters .a {
+    padding-right: 3px;
+    padding-left: 3px; }
+  .letters .d {
+    padding-right: 3px;
+    padding-left: 3px; }
+
 /*///////MEDIA FOR PHONES////////*/
+@media screen and (min-width: 415px) {
+  #githubforkright {
+    visibility: hidden; } }
 @media screen and (max-width: 415px) {
   .overlay {
-    position: fixed;
-    left: 5%;
-    width: 100%;
-    margin-left: -1.26em;
-    margin-right: 2em;
-    padding-right: 2em;
-    margin-top: 0; }
+    background: url("../images/background.png") no-repeat center fixed;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%; }
+
+  #githubforkleft {
+    display: none; }
+
+  h1 {
+    padding-top: 1em !important; }
 
   body {
     overflow: scroll !important;
@@ -75,7 +118,13 @@ body {
 
   .right-column {
     padding-left: 0em;
-    margin-left: 1em; } }
+    margin-left: 1em; }
+
+  .letters {
+    display: none; }
+
+  img {
+    margin-left: 60%; } }
 /*Tetris Page*/
 * {
   margin: 0;

@@ -13,7 +13,15 @@
       },
       getUser: function() {
         return $rootScope.currentUser;
+      },
+      logInWithEmailAndPassword: function(credentials) {
+        return firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+      },
+      registerWithEmailAndPassword: function(credentials) {
+        $(".progress").css("visibility","visible");
+        return firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
       }
+
     };
   };
 

@@ -1,14 +1,15 @@
   <nav>
-    <div class="nav-wrapper text-center">
-      <a href="#!/home" class="brand-logo">Tetris Arena</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">Menu</i></a>
-
+    <div class="nav-wrapper text-center ">
+      <a href="#!/home" class="brand-logo"><img src="images/navbar.ftris.jpg" style="height:55px"></a>
+      <a id="githubforkright" href="https://github.com/fang-w-shen/Tetris-Arena"><img style="position: absolute; top: 0; right: 0px; border: 0;height:90px" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+      <a id="githubforkleft" href="https://github.com/fang-w-shen/Tetris-Arena"><img style="position: absolute; top: 0; left: 0; border: 0;height:100px" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">list</i></a>
 
       <ul class="right hide-on-med-and-down" >
 
         <li><a href="#!/register" ng-if="!isLoggedIn"> Register</a></li>
         <li><a href="#!/home" ng-if="isLoggedIn">Main Menu</a></li>
-        <li><a href="#!/Tetris" ng-if="isLoggedIn">Tetris Arena</a></li>
+        <li><a href="#!/Tetris" ng-if="isLoggedIn">Ftris Arena</a></li>
         <div class="btn-group">
           <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-if="!isLoggedIn">
             Sign In<i class="material-icons right"></i>
@@ -28,7 +29,7 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="#!/home">Main Menu</a></li>
-        <li ng-if="!isLoggedIn"><a href="#!/register" >Register</a></li>
+        <li ng-if="!isLoggedIn"><a href="#!/register">Register</a></li>
         <li ng-if="!isLoggedIn"><a href="#!/login">Sign In E-Mail</a></li>
         <li ng-if="!isLoggedIn"><a href="" ng-click="logInGoogle()">Sign In Google</a></li>
         <li ng-if="isLoggedIn"><a href="#!/Tetris">Tetris</a></li>

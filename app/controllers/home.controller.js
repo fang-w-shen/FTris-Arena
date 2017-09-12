@@ -4,10 +4,10 @@
   var HomeCtrl = function($rootScope, $scope,$window,firebaseInfo) {
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
-    $('.overlay').fadeIn(1000);
-    setInterval(()=>{
-        $('.overlay').css("transition","all 6s").css("transform","scale(1.2)");
-    },500);
+        $('.overlay').fadeIn(5000);
+    setTimeout(()=>{
+        $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
+    },1000);
     //////////////CLICK EVENTS///////////////
     document.getElementById("playButton").addEventListener("click",()=>{
       $window.location.href = "#!/Tetris";

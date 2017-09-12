@@ -4,10 +4,10 @@
   <h1 class="display-3">Register</h1>
   <hr class="my-4">
   E-Mail:
-  <input type="text" name="NAME" ng-model="auth.email"><br>
+  <input type="text" name="NAME" ng-model="userCredentials.email"><br>
   Password:
-  <input type="password" name="NAME" ng-model="auth.password">
+  <input type="password" name="NAME" ng-model="userCredentials.password">
   <p class="lead">
-    <button class="btn btn-lg" ng-click="registerUser(auth)" href="#!/notes" role="button">Register!</button>
+    <button class="btn btn-lg" ng-click="registerWithEmailAndPassword(userCredentials)" href="#!/notes" role="button">Register!</button>
   </p>
 </div>

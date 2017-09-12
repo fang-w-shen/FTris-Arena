@@ -122,8 +122,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../tetris');
   require('../scoregrid');
   var AuthCtrl = function($rootScope, $scope, AuthFactory, $location) {
+    $scope.userCredentials = {};
     $scope.logInGoogle = logInGoogle;
     $scope.logOutUser = logOutUser;
+    $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
+    $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
     $scope.isLoggedIn = firebase.auth().currentUser;
     //////////////INITIALIZING GAME//////////////////////
     function initializeGame() {
@@ -138,14 +141,34 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
           $("#startGame").on("click",()=>{
+              // Find the right method, call on correct element
+function launchFullScreen(element) {
+  if(element.requestFullScreen) {
+    element.requestFullScreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullScreen) {
+    element.webkitRequestFullScreen();
+  }
+}
+
+// Launch fullscreen for browsers that support it!
+launchFullScreen(document.getElementById("tetris")); // the whole page
             tetris.init();
+          });
+          $("#endGame").on("click",()=>{
+            tetris.endGame();
+            $("#tetris").html(' ');
+            $("#preview").html(' ');
+            tetris.render();
+
           });
       }
       initializeGame();
-
+      //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
-            .then(result => {
+            .then(response => {
                 let user = result.user.uid;
                 $(".progress").css("visibility","hidden");
                 $scope.isLoggedIn = true;
@@ -161,9 +184,22 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         $location.url('/home');
       }
 
+      function registerWithEmailAndPassword(userCredentials) {
+        AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
+            console.log("response from register", response);
+            $scope.logInWithEmailAndPassword(userCredentials);
+        });
+      }
 
 
+      function logInWithEmailAndPassword(userCredentials){
+        AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
+          console.log("response from sign in", response);
 
+          $location.path("/Tetris");
+          $scope.$apply();
+        });
+      }
 
 
   };
@@ -179,10 +215,10 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   var HomeCtrl = function($rootScope, $scope,$window,firebaseInfo) {
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
-    $('.overlay').fadeIn(1000);
-    setInterval(()=>{
-        $('.overlay').css("transition","all 6s").css("transform","scale(1.2)");
-    },500);
+        $('.overlay').fadeIn(5000);
+    setTimeout(()=>{
+        $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
+    },1000);
     //////////////CLICK EVENTS///////////////
     document.getElementById("playButton").addEventListener("click",()=>{
       $window.location.href = "#!/Tetris";
@@ -253,7 +289,15 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       },
       getUser: function() {
         return $rootScope.currentUser;
+      },
+      logInWithEmailAndPassword: function(credentials) {
+        return firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+      },
+      registerWithEmailAndPassword: function(credentials) {
+        $(".progress").css("visibility","visible");
+        return firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
       }
+
     };
   };
 
@@ -875,9 +919,9 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 "use strict";
 require('./shapes');
 require('./grid');
-var pauseGame = require('./canvas.js');
-(function( global, Grid, Shape) {
 
+(function( global, Grid, Shape) {
+  let pauseGame = require('./canvas.js');
   var paused = false;
   var speed = 1000;
   var score = 0;
@@ -1230,8 +1274,9 @@ var pauseGame = require('./canvas.js');
     endGame: function () {
       this.clearInterval();
       this.gameOver = true;
-      // this.shape = false;
+      this.shape = false;
       $(document).off('keydown');
+      $(document).off('click');
       console.log("game:over");
     },
 

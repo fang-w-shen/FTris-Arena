@@ -1,9 +1,9 @@
 "use strict";
 require('./shapes');
 require('./grid');
-var pauseGame = require('./canvas.js');
-(function( global, Grid, Shape) {
 
+(function( global, Grid, Shape) {
+  let pauseGame = require('./canvas.js');
   var paused = false;
   var speed = 1000;
   var score = 0;
@@ -356,8 +356,9 @@ var pauseGame = require('./canvas.js');
     endGame: function () {
       this.clearInterval();
       this.gameOver = true;
-      // this.shape = false;
+      this.shape = false;
       $(document).off('keydown');
+      $(document).off('click');
       console.log("game:over");
     },
 
