@@ -358,7 +358,7 @@ require('./grid');
       this.gameOver = true;
       this.shape = false;
       $(document).off('keydown');
-      $(document).off('click');
+      // $(document).off('click');
       console.log("game:over");
     },
 

@@ -22,20 +22,21 @@ body {
   border: none; }
 
 .modal-open .modal {
-  overflow-y: hidden !important;
+  overflow: hidden !important;
   height: 800px; }
 
 #playButton {
   background: rgba(255, 255, 255, 0.4); }
 
 .overlay {
-  margin-top: -2em;
+  margin-top: 1em;
   display: none;
-  height: 1000px;
+  height: 95vh;
   max-height: 100vh;
   background-image: URL("../images/background.png");
   opacity: 1;
-  background-size: cover; }
+  background-size: cover;
+  left: 0px; }
   .overlay h1 {
     padding-top: 2em;
     color: white;
@@ -45,9 +46,9 @@ body {
 .overlayCModal {
   list-style-type: none;
   position: fixed;
-  top: 45%;
+  top: 35%;
   left: 37.5%;
-  background: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0) !important;
   width: 25%;
   height: 25%;
   border-radius: 5px; }
@@ -86,16 +87,98 @@ body {
     padding-right: 3px;
     padding-left: 3px; }
 
-/*///////MEDIA FOR PHONES////////*/
-@media screen and (min-width: 415px) {
+/*///////MEDIA FOR IPAD PRO////////*/
+@media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  #githubforkleft {
+    visibility: hidden; }
+
   #githubforkright {
-    visibility: hidden; } }
-@media screen and (max-width: 415px) {
+    visibility: visible; }
+
+  img {
+    margin-left: 60%; }
+
   .overlay {
-    background: url("../images/background.png") no-repeat center fixed;
+    position: relative;
+    background-repeat: no-repeat;
     background-size: 91%;
     max-width: 91%;
-    max-height: 99%; }
+    max-height: 99%;
+    top: 220px;
+    left: 30px; } }
+/*///////MEDIA FOR SCREENS ABOVE 1024PX////////*/
+@media only screen and (min-device-width: 1024px) {
+  #githubforkright {
+    visibility: hidden; } }
+/*///////MEDIA FOR SCREENS ABOVE IPAD 1024PX////////*/
+@media only screen and (min-device-width: 1024px) and (orientation: portrait) {
+  #githubforkright {
+    visibility: hidden; }
+
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 220px;
+    left: 80px;
+    margin-left: 10px; } }
+/*///////MEDIA FOR IPAD 767PX////////*/
+@media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 220px;
+    left: 70px;
+    margin-left: 6px; } }
+/*///////MEDIA FOR IPHONE6////////*/
+@media only screen and (min-device-width: 374px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .overlayCModal {
+    margin-left: 20px; }
+
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 220px;
+    left: 70px;
+    margin-left: 6px; } }
+/*///////MEDIA FOR PHONES+IPAD-PRO////////*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+  #githubforkleft {
+    visibility: hidden; }
+
+  body {
+    position: default !important; }
+
+  img {
+    margin-left: 60%; }
+
+  .overlayCModal {
+    width: 200px;
+    left: 35%; }
+    .overlayCModal fieldset {
+      padding-bottom: 0em !important; } }
+/*///////MEDIA FOR IPHONE5////////*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .mobileDevices {
+    overflow-y: scroll !important; }
+
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 220px;
+    left: 30.5px;
+    right: 2px; }
 
   #githubforkleft {
     display: none; }
@@ -104,7 +187,7 @@ body {
     padding-top: 1em !important; }
 
   body {
-    overflow: scroll !important;
+    overflow: none;
     position: default !important; }
 
   .overlayCModal {

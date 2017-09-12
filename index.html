@@ -2,7 +2,7 @@
 <html lang="en" ng-app="TetrisApp">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
@@ -14,15 +14,18 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <title>Tetris Arena</title>
-        <!-- Firebase Dependencies -->
-        <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+
     </head>
 
-    <body>
-        <div id="ngview" ng-view></div>
-        <canvas id="myCanvas"></canvas>
+    <body style="overflow-y;hidden !important">
+        <div class="body" style="overflow;hidden !important">
+            <div id="ngview" ng-view></div>
+            <canvas id="myCanvas"></canvas>
+        </div>
 
 
+        <!-- Firebase Dependencies -->
+        <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
         <!-- JQUERY -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <!-- Materialize Dependency -->
