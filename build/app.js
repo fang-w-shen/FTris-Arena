@@ -121,78 +121,33 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location) {
-    $scope.userCredentials = {};
-    $scope.logInGoogle = logInGoogle;
-    $scope.logOutUser = logOutUser;
-    $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
-    $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
-    $scope.isLoggedIn = firebase.auth().currentUser;
-    //////////////INITIALIZING GAME//////////////////////
-    function initializeGame() {
-      var tetris = new Tetris({
-          rows: 20,
-          cols: 10,
-          gamePlaceholder: '#tetris',
-          previewPlaceholder: '#preview',
-          currentShapePlaceholder: '#currentshape',
-          difficulty:"easy"
-        });
-        // tetris.init();
-        // tetris.grid.getCellAt(2,0).$el.css('background','red');
-          $("#startGame").on("click",()=>{
-              // Find the right method, call on correct element
-              function launchFullScreen(element) {
-                if(element.requestFullScreen) {
-                  element.requestFullScreen();
-                } else if(element.mozRequestFullScreen) {
-                  element.mozRequestFullScreen();
-                } else if(element.webkitRequestFullScreen) {
-                  element.webkitRequestFullScreen();
-                }
-              }
-
-
-              // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
-            tetris.init();
-
-          });
-          $("#endGame").on("click",()=>{
-              function exitFullScreen(element) {
-                if(element.exitFullscreen) {
-                  element.exitFullscreen();
-                } else if(element.mozCancelFullScreen) {
-                  element.mozCancelFullScreen();
-                } else if(element.webkitExitFullscreen) {
-                  element.webkitExitFullscreen();
-                }
-              }
-            tetris.endGame();
-            $("#tetris").html(' ');
-            $("#preview").html(' ');
-            tetris.render();
-            exitFullScreen(document);
-          });
+  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location,$route) {
+      //////////////WINDOW INITIALIZATION/////////////
+      var mq = window.matchMedia( "(max-width: 570px)" );
+      if (mq.matches) {
+          // window width is at less than 500px
+          $('body').css("overflow-y","scroll");
       }
-      initializeGame();
-      //////////////EVENT LISTENTERS///////////////////
-      $(window).on("keyup",(e)=>{
-        switch(e.keyCode) {
-          case 27:
-            $location.url('/home');
-            $('*').css("overflow","hidden !important");
-            $scope.$apply();
-            break;
-        }
+      else {
+          // window width is greater than 500px
+      }
 
-      });
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      $("#sidenav-overlay").css("display",'none');
+      //////////////VARIABLE DECLARATIONS////////////
+      $scope.userCredentials = {};
+      $scope.logInGoogle = logInGoogle;
+      $scope.logOutUser = logOutUser;
+      $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
+      $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
+      $scope.isLoggedIn = firebase.auth().currentUser;
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
             .then(response => {
-                let user = result.user.uid;
-                $(".progress").css("visibility","hidden");
+                let user = response.user.uid;
+                // $(".progress").css("visibility","hidden");
                 $scope.isLoggedIn = true;
                 $location.url('/Tetris');
                 $scope.$apply();
@@ -222,21 +177,102 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $scope.$apply();
         });
       }
+    //////////////INITIALIZING GAME//////////////////////
+    function initializeGame() {
+      var tetris = new Tetris({
+          rows: 20,
+          cols: 10,
+          gamePlaceholder: '#tetris',
+          previewPlaceholder: '#preview',
+          currentShapePlaceholder: '#currentshape',
+          difficulty:"easy"
+        });
+        // tetris.init();
+        // tetris.grid.getCellAt(2,0).$el.css('background','red');
+          $("#startGame").on("click",()=>{
+              // Find the right method, call on correct element
+              function launchFullScreen(element) {
+                if(element.requestFullScreen) {
+                  element.requestFullScreen();
+                } else if(element.mozRequestFullScreen) {
+                  element.mozRequestFullScreen();
+                } else if(element.webkitRequestFullScreen) {
+                  element.webkitRequestFullScreen();
+                }
+              }
 
+
+              // Launch fullscreen for browsers that support it!
+              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+            tetris.init();
+            $(document).on("keydown",(e)=>{
+              if(e.keyCode === 27) {
+
+              }
+            });
+          });
+          $("#endGame").on("click",()=>{
+              function exitFullScreen(element) {
+                if(element.exitFullscreen) {
+                  element.exitFullscreen();
+                } else if(element.mozCancelFullScreen) {
+                  element.mozCancelFullScreen();
+                } else if(element.webkitExitFullscreen) {
+                  element.webkitExitFullscreen();
+                }
+              }
+            // tetris.endGame();
+            // $("#tetris").html(' ');
+            // $("#preview").html(' ');
+            // tetris.render();
+            // exitFullScreen(document);
+            $location.url("/home");
+            $scope.$apply();
+          });
+      }
+      if ($location.url()==="/Tetris"){
+        initializeGame();
+      }
+
+      //////////////EVENT LISTENTERS///////////////////
+      $(window).on("keyup",(e)=>{
+        switch(e.keyCode) {
+          case 27:
+            $location.url('/home');
+            $('*').css("overflow","hidden !important");
+            $scope.$apply();
+            break;
+        }
+
+      });
+      $(window).on("keydown",(e)=>{
+        switch(e.keyCode) {
+          case 13:
+console.log("hey trying to start the game");
+            break;
+        }
+
+      });
+      $(window).on("click",()=>{
+        $(".drag-target").css("display",'none');
+        $("#sidenav-overlay").css("z-index",'-1');
+        $("#sidenav-overlay").css("display",'none');
+      });
 
   };
 
-  AuthCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location'];
+  AuthCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
   angular.module('TetrisApp').controller('AuthCtrl', AuthCtrl);
 })();
 
-},{"../scoregrid":8,"../tetris":10}],4:[function(require,module,exports){
+},{"../scoregrid":9,"../tetris":11}],4:[function(require,module,exports){
 (function() {
   'use strict';
 
-  var HomeCtrl = function($rootScope, $scope,$window,firebaseInfo) {
+  var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
-    $('.body').css("overflow","hidden");
+    $scope.getHighScores = getHighScores;
+    $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
         $('.overlay').css("display","block").css("opacity","0");
@@ -250,8 +286,25 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             $('.overlay').css("overflow","hidden");
         },1000);
     //////////////CLICK EVENTS///////////////
+    $(window).on("click",()=>{
+      if (document.getElementById("play")===null) {
+        return false;
+      }
+      if(document.getElementById("play").checked === true) {
+        document.getElementById("play").focus();
+
+      } else if (document.getElementById("highScores").checked) {
+        document.getElementById("highScores").focus();
+      } else if (document.getElementById("howToPlay").checked) {
+        document.getElementById("howToPlay").focus();
+      }
+    });
+
+
     document.getElementById("playButton").addEventListener("click",()=>{
-      $('body').css("overflow-y","scroll");
+
+      $('body').css("overflow-y","hidden !important");
+      $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
       $window.location.href = "#!/Tetris";
     });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
@@ -299,11 +352,25 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           }
       }
     });
-    ////////////////END KEYBOARD EVENTS
+    ////////////////HIGH SCORE MODAL///////////////
+    function getHighScores() {
+      FirebaseFactory.getHighScores().then((score)=>{
+        let scores = score;
+        let keys = Object.keys(scores);
+        let values = Object.values(scores);
+
+        console.log("score", keys,values);
+        values.forEach((player)=>{
+          console.log(player);
+        });
+      });
+    }
+    $scope.getHighScores();
+
 
   };
 
-  HomeCtrl.$inject = ['$rootScope', '$scope','$window'];
+  HomeCtrl.$inject = ['$rootScope', '$scope','$window','FirebaseFactory'];
   angular.module('TetrisApp').controller('HomeCtrl', HomeCtrl);
 })();
 
@@ -312,7 +379,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
 
   var AuthFactory = function($http, $rootScope) {
-    let user = firebase.auth().currentUser;
     return {
       logInGoogle: function() {
         let google = new firebase.auth.GoogleAuthProvider();
@@ -340,6 +406,32 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 })();
 
 },{}],6:[function(require,module,exports){
+(function() {
+  'use strict';
+
+  var FirebaseFactory = function($q, $http, $rootScope,firebaseInfo) {
+    return {
+      getHighScores: function(){
+        let scores;
+        return $q( (resolve, reject) => {
+            $http.get(`${firebaseInfo.databaseURL}/highscores.json`)
+            .then((itemObject) => {
+                scores = (itemObject.data);
+                resolve(scores);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+  };
+};
+
+  FirebaseFactory.$inject = ['$q','$http', '$rootScope','firebaseInfo'];
+  angular.module('TetrisApp').factory('FirebaseFactory', FirebaseFactory);
+})();
+
+},{}],7:[function(require,module,exports){
 "use strict";
 (function ( global ) {
 
@@ -413,7 +505,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 }(window));
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 angular.module('TetrisApp').constant("firebaseInfo", {
     apiKey: "AIzaSyBNq9eV8vzdFJwUlxCzeAh3wsC5apGsdjY",
     authDomain: "tetris-arena.firebaseapp.com",
@@ -423,7 +515,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     messagingSenderId: "735100394750"
 });
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 (function instantiateLiveTime(){
     var time = new Date();
@@ -456,7 +548,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 })();
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 (function( global ){
 
@@ -949,7 +1041,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -1325,4 +1417,4 @@ require('./grid');
 }( window , window.Grid,window.Shape));
 
 
-},{"./canvas.js":2,"./grid":6,"./shapes":9}]},{},[1,2,3,4,5,6,7,8,9,10]);
+},{"./canvas.js":2,"./grid":7,"./shapes":10}]},{},[1,2,3,4,5,6,7,8,9,10,11]);

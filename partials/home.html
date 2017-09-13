@@ -6,20 +6,21 @@
         <legend class="text-center" style="color:white">Options</legend>
         <div>
             <input class="btn btn-primary btn-lg btn-block" type="radio" id="play" name="tetris" checked focused>
-            <label id="playButton" for="play">Play</label>
+            <label id="playButton" for="play">PLAY</label>
         </div>
         <div>
             <input type="radio" id="highScores" name="tetris" >
-            <label id="highScoresButton" for="highScores" data-toggle="modal" data-target="#highScoreModal">High Scores</label>
+            <label id="highScoresButton" for="highScores" data-toggle="modal" data-target="#highScoreModal">HIGH SCORES</label>
         </div>
         <div>
             <input type="radio" id="howToPlay" name="tetris">
-            <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal">How-To-Play</label>
+            <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal">HOW TO PLAY?</label>
         </div>
     </fieldset>
     <div class="progress" style="background-color:black">
     <div class="indeterminate" style="background-color:white"></div>
 </div>
+<span class="blink_me text-center row">PRESS ENTER TO PLAY</span>
 </form>
 
 <div>
@@ -29,16 +30,38 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">All Time High Scores</h5>
+        <h5 class="modal-title" id="exampleModalLabel">High Scores</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>High Scores....</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i class="fa fa-trophy fa-3x" aria-hidden="true" style="color:gold"></i>
+              <span class="title">Champion</span>
+              <p>{{highScorePlayers[0].name}} <br>
+                 Second Line
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons">looks_two</i>
+              <span class="title"></span>
+              <p>First Line <br>
+                 Second Line
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons">looks_3</i>
+              <span class="title"></span>
+              <p>First Line <br>
+                 Second Line
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -49,26 +72,24 @@
 <div class="modal fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="border-bottom:none">
         <h5 class="modal-title" id="exampleModalLabel2">How To Play</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:black">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <table class="table table-condensed">
-              <thead>
                 <tr><th>Button</th><th>Move</th></tr>
-              </thead>
               <tbody>
-                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd> <kbd class="letters"><i class="material-icons">W</i></kbd></th><td>Rotate Block</td></tr>
-                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd> <kbd class="letters"><i class="material-icons s">S</i></kbd></th><td>Move Down</td></tr>
-                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd> <kbd class="letters"><i class="material-icons a">A</i></kbd></th><td>Move Left</td></tr>
-                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd> <kbd class="letters"><i class="material-icons d">D</i></kbd></th><td>Move Right</td></tr>
-                <tr><th><kbd class="material">Spacebar</kbd></th><td>Drop Block</td></tr>
-                <tr><th><kbd class="material">P</kbd></th><td>Pause Game</td></tr>
-                <tr><th><kbd class="material">F</kbd></th><td>Full-Screen Mode</td></tr>
-                <tr><th><kbd class="material">Esc</kbd></th><td>Exit Game</td></tr>
+                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons">W</i></kbd></th><td>Rotate Block</td></tr>
+                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons s">S</i></kbd></th><td>Move Down</td></tr>
+                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons a">A</i></kbd></th><td>Move Left</td></tr>
+                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons d">D</i></kbd></th><td>Move Right</td></tr>
+                <tr class="browser-buttons"><th><kbd class="material">Spacebar</kbd></th><td>Drop Block</td></tr>
+                <tr class="browser-buttons"><th><kbd class="material">P</kbd></th><td>Pause Game</td></tr>
+                <tr class="browser-buttons"><th><kbd class="material">F11</kbd></th><td>Full-Screen Mode</td></tr>
+                <tr class="browser-buttons"><th><kbd class="material">Esc</kbd></th><td>Exit Game/ Back</td></tr>
               </tbody>
             </table>
       </div>

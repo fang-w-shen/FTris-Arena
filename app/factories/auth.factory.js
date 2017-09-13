@@ -2,7 +2,6 @@
   'use strict';
 
   var AuthFactory = function($http, $rootScope) {
-    let user = firebase.auth().currentUser;
     return {
       logInGoogle: function() {
         let google = new firebase.auth.GoogleAuthProvider();

@@ -1,9 +1,10 @@
 (function() {
   'use strict';
 
-  var HomeCtrl = function($rootScope, $scope,$window,firebaseInfo) {
+  var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
-    $('.body').css("overflow","hidden");
+    $scope.getHighScores = getHighScores;
+    $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
         $('.overlay').css("display","block").css("opacity","0");
@@ -17,8 +18,25 @@
             $('.overlay').css("overflow","hidden");
         },1000);
     //////////////CLICK EVENTS///////////////
+    $(window).on("click",()=>{
+      if (document.getElementById("play")===null) {
+        return false;
+      }
+      if(document.getElementById("play").checked === true) {
+        document.getElementById("play").focus();
+
+      } else if (document.getElementById("highScores").checked) {
+        document.getElementById("highScores").focus();
+      } else if (document.getElementById("howToPlay").checked) {
+        document.getElementById("howToPlay").focus();
+      }
+    });
+
+
     document.getElementById("playButton").addEventListener("click",()=>{
-      $('body').css("overflow-y","scroll");
+
+      $('body').css("overflow-y","hidden !important");
+      $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
       $window.location.href = "#!/Tetris";
     });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
@@ -66,10 +84,24 @@
           }
       }
     });
-    ////////////////END KEYBOARD EVENTS
+    ////////////////HIGH SCORE MODAL///////////////
+    function getHighScores() {
+      FirebaseFactory.getHighScores().then((score)=>{
+        let scores = score;
+        let keys = Object.keys(scores);
+        let values = Object.values(scores);
+
+        console.log("score", keys,values);
+        values.forEach((player)=>{
+          console.log(player);
+        });
+      });
+    }
+    $scope.getHighScores();
+
 
   };
 
-  HomeCtrl.$inject = ['$rootScope', '$scope','$window'];
+  HomeCtrl.$inject = ['$rootScope', '$scope','$window','FirebaseFactory'];
   angular.module('TetrisApp').controller('HomeCtrl', HomeCtrl);
 })();
