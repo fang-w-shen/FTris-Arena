@@ -17,10 +17,7 @@
             <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal">HOW TO PLAY?</label>
         </div>
     </fieldset>
-    <div class="progress" style="background-color:black">
-    <div class="indeterminate" style="background-color:white"></div>
-</div>
-<span class="blink_me text-center row">PRESS ENTER TO PLAY</span>
+    <span class="blink_me text-center row">PRESS ENTER TO PLAY</span>
 </form>
 
 <div>
@@ -28,7 +25,7 @@
 <!-- High Score Modal-->
 <div class="modal fade bd-example-modal-lg" id="highScoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content highscoremodal">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">High Scores</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -40,24 +37,24 @@
             <li class="collection-item avatar">
               <i class="fa fa-trophy fa-3x" aria-hidden="true" style="color:gold"></i>
               <span class="title">Champion</span>
-              <p>{{highScorePlayers[0].name}} <br>
-                 Second Line
+              <p>Player: {{highScorePlayers[0].name}} <br>
+                 Score: {{highScorePlayers[0].score}}
               </p>
               <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
             </li>
             <li class="collection-item avatar">
               <i class="material-icons">looks_two</i>
               <span class="title"></span>
-              <p>First Line <br>
-                 Second Line
+              <p>Player: {{highScorePlayers[1].name}}<br>
+                 Score: {{highScorePlayers[1].score}}
               </p>
               <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
             </li>
             <li class="collection-item avatar">
               <i class="material-icons">looks_3</i>
               <span class="title"></span>
-              <p>First Line <br>
-                 Second Line
+              <p>Player: {{highScorePlayers[2].name}}<br>
+                 Score: {{highScorePlayers[2].score}}
               </p>
               <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
             </li>
@@ -69,16 +66,14 @@
 
 
 <!-- How To Play Modal-->
-<div class="modal fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal  fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="border-bottom:none">
-        <h5 class="modal-title" id="exampleModalLabel2">How To Play</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:black">
+    <div class="modal-content howtoplaymodal">
+
+      <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:black">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
         <table class="table table-condensed">
                 <tr><th>Button</th><th>Move</th></tr>
               <tbody>

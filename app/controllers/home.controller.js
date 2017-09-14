@@ -9,12 +9,11 @@
     document.getElementById("play").focus();
         $('.overlay').css("display","block").css("opacity","0");
         setTimeout(()=>{
-            $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
+            $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
             $('.overlay').css("opacity","1").css("ease-in","20s");
-            setTimeout(()=>{
-              $(".progress").css("visibility","hidden");
+            // setTimeout(()=>{
 
-            },5000);
+            // },1000);
             $('.overlay').css("overflow","hidden");
         },1000);
     //////////////CLICK EVENTS///////////////
@@ -36,8 +35,11 @@
     document.getElementById("playButton").addEventListener("click",()=>{
 
       $('body').css("overflow-y","hidden !important");
-      $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
+          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+      setTimeout(()=>{
+
       $window.location.href = "#!/Tetris";
+      },1000);
     });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
         $("#playButton").css("background-color","rgba(255,255,255,0)");
@@ -71,8 +73,12 @@
       switch(e.keyCode) {
         case 13:
           if(document.getElementById("play").checked){
-            $('body').css("overflow-y","scroll");
-            $window.location.href = "#!/Tetris";
+              $('body').css("overflow-y","scroll !important");
+                  $('.overlay').css("transition","all .6s").css("transform","scale(7)").css("position ","fixed");
+              setTimeout(()=>{
+
+              $window.location.href = "#!/Tetris";
+              },200);
           } else if(document.getElementById("highScores").checked) {
             $("#highScoreModal").modal("toggle");
             document.getElementById("highScores").focus();
@@ -91,10 +97,19 @@
         let keys = Object.keys(scores);
         let values = Object.values(scores);
 
-        console.log("score", keys,values);
-        values.forEach((player)=>{
-          console.log(player);
+        values.sort((a,b)=>{
+
+          if (a.score < b.score){
+            return 1;
+          }
+          if (a.score > b.score){
+            return -1;
+          }
+          return 0;
+
         });
+        values = values.splice(0,3);
+        $scope.highScorePlayers=values;
       });
     }
     $scope.getHighScores();

@@ -1,18 +1,29 @@
-"use strict";
 (function( global ){
+  "use strict";
 
+  var colors = [
+    'aqua',
+    'deepskyblue',
+    'lawngreen',
+    'hotpink',
+    'lightseagreen',
+    'orange',
+    'grey',
+    'springgreen',
+    'gold'
+  ];
 
   var Shape = {};
 
   function BaseShape() {
-    this.cells = [];
+    this.getRandomColor();
   }
   BaseShape.prototype.constructor = BaseShape;
 
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
       console.error('failed render');
-      this.collisionState.triggerEvent('failedRender', [cell]);
+      this.mediator.triggerEvent('failedRender', [cell]);
       return false;
     }
     cell.$el.css('background', 'black');
@@ -38,13 +49,6 @@
     return this;
   };
 
-  BaseShape.prototype.markAsSolid = function() {
-    this.cells.forEach(function( cell ) {
-      cell.isSolid = true;
-      cell.isCurrentShape = false;
-    });
-  };
-
   BaseShape.prototype.moveLeft = function() {
     this.makeMove({x: -1, y: 0});
   };
@@ -56,11 +60,8 @@
   BaseShape.prototype.moveDown = function() {
     this.makeMove({x: 0, y: -1}, function() {
       this.markAsSolid();
-      this.collisionState.triggerEvent('landed');
+      this.mediator.triggerEvent('landed');
     });
-  };
-  BaseShape.prototype.moveUp = function() {
-    this.makeMove({x: 0, y: 1});
   };
 
   BaseShape.prototype.rotate = function() {
@@ -84,7 +85,7 @@
     }
   };
 
-  BaseShape.prototype.makeMove = function( move, callbackfunction ) {
+  BaseShape.prototype.makeMove = function( move, onObstacle ) {
     var self = this;
     var canMakeMove = this.cells.every(function( cell ) {
       var newCell = self.grid.getCellAt(cell.x + move.x, cell.y + move.y);
@@ -97,8 +98,8 @@
       this.coords.forEach(function( coord ) {
         self.occupyCell(self.grid.getCellAt(coord.x + move.x, coord.y + move.y));
       });
-    } else if (callbackfunction) {
-      callbackfunction.call(this);
+    } else if (onObstacle) {
+      onObstacle.call(this);
     }
   };
 
@@ -119,9 +120,20 @@
     return this;
   };
 
-  BaseShape.prototype.onInit = function(grid,collisionState ) {
+  BaseShape.prototype.markAsSolid = function() {
+    this.cells.forEach(function( cell ) {
+      cell.isSolid = true;
+      cell.isCurrentShape = false;
+    });
+  };
+
+  BaseShape.prototype.getRandomColor = function() {
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  BaseShape.prototype.onInit = function(grid, mediator ) {
     this.rotationState = 1;
-    this.collisionState = collisionState;
+    this.mediator = mediator;
     this.grid = grid;
     this.events = [];
     this.coords = [];

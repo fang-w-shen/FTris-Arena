@@ -13,11 +13,18 @@ img {
   margin-bottom: 10px; }
 
 /*Home Page*/
+.blinks {
+  animation: blinker .9s linear infinite; }
+
 .blink_me {
-  animation: blinker .8s linear infinite;
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  animation: blinker .9s linear infinite;
   color: yellow;
   font-weight: bolder;
-  margin-left: 6.8rem !important; }
+  position: relative;
+  left: 18%;
+  top: 5%; }
 
 @keyframes blinker {
   50% {
@@ -28,18 +35,40 @@ body {
 .colorTheme {
   background-color: black; }
 
+.table td, .table th {
+  border-top: none !important;
+  padding-top: 8px !important; }
+
 .modal {
-  background-color: rgba(255, 255, 255, 0) !important;
+  background-color: rgba(255, 255, 255, 0.5);
   border: none; }
 
+.modal-content {
+  padding: 0 !important;
+  margin-top: -20px;
+  border-radius: 5%; }
+
+.highscoremodal {
+  margin-top: 0px !important; }
+
+.modal-body {
+  padding: 0 !important;
+  margin-bottom: 1em !important;
+  border-radius: 5%; }
+
 .modal-header {
-  margin-top: -3em;
-  margin-bottom: -2em; }
+  margin-bottom: -1em; }
 
 .modal-open .modal {
   overflow: hidden !important;
   height: 800px;
-  padding-right: 0 !important; }
+  padding-right: 0 !important;
+  background: rgba(20, 254, 192, 0.76);
+  border-radius: 5%; }
+  .modal-open .modal li {
+    border-radius: 5%; }
+  .modal-open .modal ul {
+    border-radius: 5%; }
 
 #playButton {
   background: rgba(255, 255, 255, 0.4); }
@@ -142,27 +171,41 @@ body {
     display: show; }
 
   .blink_me {
-    margin-left: 1.6rem !important; } }
+    position: relative !important;
+    margin-left: -1em !important;
+    font-size: 9px !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1278px) {
   .blink_me {
-    margin-left: 3.7rem !important; } }
+    margin-left: -1rem !important; } }
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: 1em !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
-    margin-left: 5.2rem !important; }
+    margin-left: 1rem !important; }
 
   #githhubforkright {
     visibility: hidden; } }
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
-    margin-left: 5rem !important;
-    padding-left: 2em; } }
+    margin-top: 1em !important;
+    margin-left: -32px !important;
+    font-size: 1.2em !important; }
+
+  .overlay {
+    background-size: 92%;
+    margin-left: 4em !important;
+    width: 100% !important;
+    background-repeat: no-repeat; }
+
+  .overlayCModal {
+    top: 330px; }
+
+  .modal-content {
+    margin-top: 5em !important; } }
 @media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
   .blink_me {
-    margin-left: 50px !important;
-    padding-left: 6em; } }
+    padding-left: 3em; } }
 @media screen and (min-device-width: 700px) {
   #githubforkright {
     display: none !important; } }
@@ -204,7 +247,10 @@ body {
     max-height: 99%;
     top: 160px;
     left: 70px;
-    margin-left: 6px; } }
+    margin-left: 6px; }
+
+  .howtoplaymodal {
+    margin-top: 40px !important; } }
 /*///////MEDIA FOR PHONES+IPAD-PRO LANDSCAPE////////*/
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
   #githubforkleft {
@@ -222,7 +268,7 @@ body {
     .overlayCModal fieldset {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
   * {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -230,10 +276,10 @@ body {
     padding-top: 0 !important; }
 
   .blink_me {
-    animation: blinker .8s linear infinite;
     color: yellow;
     font-weight: bolder;
-    margin-left: 25px !important; }
+    left: 10% !important;
+    font-size: 9px; }
 
   label {
     padding-left: 30px !important;
@@ -247,7 +293,7 @@ body {
     background-repeat: no-repeat;
     background-size: 91%;
     max-width: 91%;
-    max-height: 99%;
+    max-height: 98%;
     top: 160px;
     left: 30.5px;
     right: 2px; }
@@ -271,9 +317,8 @@ body {
   .side-nav {
     width: 50%; }
 
-  .right-column {
-    padding-left: 0em;
-    margin-left: 1em; }
+  .grid {
+    margin-left: 3em; }
 
   .letters {
     display: none; }
@@ -289,11 +334,30 @@ body {
     overflow: auto; }
     .modal-open .modal-header {
       padding-bottom: 0;
-      margin-top: 1em;
-      margin-bottom: 1em; }
+      margin-top: -15px;
+      border-bottom: none !important;
+      margin-bottom: -5px; }
+
+  .modal-content {
+    margin-top: -6px !important;
+    margin-bottom: -2px !important; }
+
+  .modal-body {
+    padding-bottom: 20px !important;
+    margin-bottom: -40px !important; }
 
   .browser-buttons {
-    display: none; } }
+    display: none; }
+
+  .modal-open .modal {
+    height: 52% !important; }
+
+  .howtoplaymodal {
+    margin-top: 30px !important; }
+
+  .cell {
+    width: 15px !important;
+    height: 15px !important; } }
 /*Tetris Page*/
 * {
   margin: 0;
@@ -323,10 +387,11 @@ canvas {
   /*border: 1px solid #ddd;*/
   /*display: inline-block;*/
   /*padding: 1px;*/
-  /*margin:;*/ }
+  /*margin:;*/
+  margin-left: 20px; }
 
 input {
-  z-index: 999; }
+  z-index: 3; }
 
 /*//////////////CONTROLLERS/////////////////////*/
 #spacebar {
@@ -340,20 +405,20 @@ input {
 
 .cell {
   border: 1px solid #ddd;
-  width: 15px;
-  height: 15px;
+  width: 23px;
+  height: 23px;
   background-color: #9ead86;
   /*display: inline-block;*/
   margin: 1px;
   /*vertical-align: top;*/ }
 
-.right-column {
-  vertical-align: top;
-  display: inline-block;
-  margin-left: 10px; }
-
 nav {
   margin-bottom: 2em;
   background-color: black; }
+
+.right-column {
+  margin-left: 4%; }
+  .right-column #score {
+    display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */

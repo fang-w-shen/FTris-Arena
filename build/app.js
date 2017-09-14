@@ -121,15 +121,15 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location,$route) {
+  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
       //////////////WINDOW INITIALIZATION/////////////
-      var mq = window.matchMedia( "(max-width: 570px)" );
-      if (mq.matches) {
+      var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
+      if (yourDeviceWidth.matches) {
           // window width is at less than 500px
           $('body').css("overflow-y","scroll");
       }
       else {
-          // window width is greater than 500px
+          $('body').css("overflow-y","hidden");
       }
 
       $(".dropdown-button").dropdown();
@@ -184,35 +184,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           cols: 10,
           gamePlaceholder: '#tetris',
           previewPlaceholder: '#preview',
-          currentShapePlaceholder: '#currentshape',
           difficulty:"easy"
         });
-        // tetris.init();
-        // tetris.grid.getCellAt(2,0).$el.css('background','red');
-          $("#startGame").on("click",()=>{
-              // Find the right method, call on correct element
-              function launchFullScreen(element) {
-                if(element.requestFullScreen) {
-                  element.requestFullScreen();
-                } else if(element.mozRequestFullScreen) {
-                  element.mozRequestFullScreen();
-                } else if(element.webkitRequestFullScreen) {
-                  element.webkitRequestFullScreen();
-                }
-              }
-
-
-              // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
-            tetris.init();
-            $(document).on("keydown",(e)=>{
-              if(e.keyCode === 27) {
-
-              }
-            });
-          });
-          $("#endGame").on("click",()=>{
-              function exitFullScreen(element) {
+      function exitFullScreen(element) {
                 if(element.exitFullscreen) {
                   element.exitFullscreen();
                 } else if(element.mozCancelFullScreen) {
@@ -221,23 +195,63 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                   element.webkitExitFullscreen();
                 }
               }
-            // tetris.endGame();
-            // $("#tetris").html(' ');
-            // $("#preview").html(' ');
-            // tetris.render();
-            // exitFullScreen(document);
+      function launchFullScreen(element) {
+                if(element.requestFullScreen) {
+                  element.requestFullScreen();
+                } else if(element.mozRequestFullScreen) {
+                  element.mozRequestFullScreen();
+                } else if(element.webkitRequestFullScreen) {
+                  element.webkitRequestFullScreen();
+                }
+              }
+        // tetris.init();
+        // tetris.grid.getCellAt(2,0).$el.css('background','red');
+          $("#startGame").on("click",()=>{
+              // Launch fullscreen for browsers that support it!
+              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+              tetris.init();
+              $(window).on("keyup",(e)=>{
+                if(e.keyCode === 82) {
+                  console.log("trying to restart game");
+                  exitFullScreen(document.getElementById("tetrisScreen"));
+                  $route.reload();
+                }
+              });
+          });
+          $(window).on("keydown",(e)=>{
+
+            switch(e.keyCode) {
+              case 13:
+                $(window).off("keydown");
+                launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+                tetris.init();
+                $(window).on("keyup",(e)=>{
+                    if(e.keyCode === 82) {
+                      console.log("trying to restart game");
+                      $(window).off("keyup");
+                      $route.reload();
+                    }
+                  });
+                break;
+              }
+            });
+          $("#endGame").on("click",()=>{
             $location.url("/home");
             $scope.$apply();
           });
       }
-      if ($location.url()==="/Tetris"){
-        initializeGame();
-      }
+
+        if($location.url()==="/Tetris"){
+          initializeGame();
+        }
+
+
 
       //////////////EVENT LISTENTERS///////////////////
       $(window).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27:
+            $(window).off("keydown");
             $location.url('/home');
             $('*').css("overflow","hidden !important");
             $scope.$apply();
@@ -245,19 +259,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         }
 
       });
-      $(window).on("keydown",(e)=>{
-        switch(e.keyCode) {
-          case 13:
-console.log("hey trying to start the game");
-            break;
-        }
 
-      });
-      $(window).on("click",()=>{
-        $(".drag-target").css("display",'none');
-        $("#sidenav-overlay").css("z-index",'-1');
-        $("#sidenav-overlay").css("display",'none');
-      });
+      // $(window).on("click",()=>{
+      //   $(".drag-target").css("display",'none');
+      //   $("#sidenav-overlay").css("z-index",'-1');
+      //   $("#sidenav-overlay").css("display",'none');
+      // });
 
   };
 
@@ -277,12 +284,11 @@ console.log("hey trying to start the game");
     document.getElementById("play").focus();
         $('.overlay').css("display","block").css("opacity","0");
         setTimeout(()=>{
-            $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
+            $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
             $('.overlay').css("opacity","1").css("ease-in","20s");
-            setTimeout(()=>{
-              $(".progress").css("visibility","hidden");
+            // setTimeout(()=>{
 
-            },5000);
+            // },1000);
             $('.overlay').css("overflow","hidden");
         },1000);
     //////////////CLICK EVENTS///////////////
@@ -304,8 +310,11 @@ console.log("hey trying to start the game");
     document.getElementById("playButton").addEventListener("click",()=>{
 
       $('body').css("overflow-y","hidden !important");
-      $('.overlay').css("transition","all 4s").css("transform","scale(1.2)");
+          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+      setTimeout(()=>{
+
       $window.location.href = "#!/Tetris";
+      },1000);
     });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
         $("#playButton").css("background-color","rgba(255,255,255,0)");
@@ -339,8 +348,12 @@ console.log("hey trying to start the game");
       switch(e.keyCode) {
         case 13:
           if(document.getElementById("play").checked){
-            $('body').css("overflow-y","scroll");
-            $window.location.href = "#!/Tetris";
+              $('body').css("overflow-y","scroll !important");
+                  $('.overlay').css("transition","all .6s").css("transform","scale(7)").css("position ","fixed");
+              setTimeout(()=>{
+
+              $window.location.href = "#!/Tetris";
+              },200);
           } else if(document.getElementById("highScores").checked) {
             $("#highScoreModal").modal("toggle");
             document.getElementById("highScores").focus();
@@ -359,10 +372,19 @@ console.log("hey trying to start the game");
         let keys = Object.keys(scores);
         let values = Object.values(scores);
 
-        console.log("score", keys,values);
-        values.forEach((player)=>{
-          console.log(player);
+        values.sort((a,b)=>{
+
+          if (a.score < b.score){
+            return 1;
+          }
+          if (a.score > b.score){
+            return -1;
+          }
+          return 0;
+
         });
+        values = values.splice(0,3);
+        $scope.highScorePlayers=values;
       });
     }
     $scope.getHighScores();
@@ -549,21 +571,32 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 
 },{}],10:[function(require,module,exports){
-"use strict";
 (function( global ){
+  "use strict";
 
+  var colors = [
+    'aqua',
+    'deepskyblue',
+    'lawngreen',
+    'hotpink',
+    'lightseagreen',
+    'orange',
+    'grey',
+    'springgreen',
+    'gold'
+  ];
 
   var Shape = {};
 
   function BaseShape() {
-    this.cells = [];
+    this.getRandomColor();
   }
   BaseShape.prototype.constructor = BaseShape;
 
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
       console.error('failed render');
-      this.collisionState.triggerEvent('failedRender', [cell]);
+      this.mediator.triggerEvent('failedRender', [cell]);
       return false;
     }
     cell.$el.css('background', 'black');
@@ -589,13 +622,6 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     return this;
   };
 
-  BaseShape.prototype.markAsSolid = function() {
-    this.cells.forEach(function( cell ) {
-      cell.isSolid = true;
-      cell.isCurrentShape = false;
-    });
-  };
-
   BaseShape.prototype.moveLeft = function() {
     this.makeMove({x: -1, y: 0});
   };
@@ -607,11 +633,8 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   BaseShape.prototype.moveDown = function() {
     this.makeMove({x: 0, y: -1}, function() {
       this.markAsSolid();
-      this.collisionState.triggerEvent('landed');
+      this.mediator.triggerEvent('landed');
     });
-  };
-  BaseShape.prototype.moveUp = function() {
-    this.makeMove({x: 0, y: 1});
   };
 
   BaseShape.prototype.rotate = function() {
@@ -635,7 +658,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     }
   };
 
-  BaseShape.prototype.makeMove = function( move, callbackfunction ) {
+  BaseShape.prototype.makeMove = function( move, onObstacle ) {
     var self = this;
     var canMakeMove = this.cells.every(function( cell ) {
       var newCell = self.grid.getCellAt(cell.x + move.x, cell.y + move.y);
@@ -648,8 +671,8 @@ angular.module('TetrisApp').constant("firebaseInfo", {
       this.coords.forEach(function( coord ) {
         self.occupyCell(self.grid.getCellAt(coord.x + move.x, coord.y + move.y));
       });
-    } else if (callbackfunction) {
-      callbackfunction.call(this);
+    } else if (onObstacle) {
+      onObstacle.call(this);
     }
   };
 
@@ -670,9 +693,20 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     return this;
   };
 
-  BaseShape.prototype.onInit = function(grid,collisionState ) {
+  BaseShape.prototype.markAsSolid = function() {
+    this.cells.forEach(function( cell ) {
+      cell.isSolid = true;
+      cell.isCurrentShape = false;
+    });
+  };
+
+  BaseShape.prototype.getRandomColor = function() {
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  BaseShape.prototype.onInit = function(grid, mediator ) {
     this.rotationState = 1;
-    this.collisionState = collisionState;
+    this.mediator = mediator;
     this.grid = grid;
     this.events = [];
     this.coords = [];
@@ -1050,8 +1084,8 @@ require('./grid');
   let pauseGame = require('./canvas.js');
   var paused = false;
   var speed = 1000;
-  var score = 0;
   var rowscleared = [];
+  var score = 0;
   function CollisionState() {
     this.events = [];
   }
@@ -1067,14 +1101,13 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  function Tetris( options ) {
+  var Tetris = function( options ) {
     this.difficulty = options.difficulty;
 
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    // this.currentShapePlaceholder = options.currentShapePlaceholder;
     this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
@@ -1088,7 +1121,7 @@ require('./grid');
 
     this.render();
     this.subscribe();
-  }
+  };
   Tetris.prototype = {
     render: function() {
       this.grid = new Grid({
@@ -1106,13 +1139,7 @@ require('./grid');
            boardplaceholder: this.previewPlaceholder
           }
         });
-      // this.currentshape = new Grid({
-      //    rows: 3,
-      //    cols: 4,
-      //    render: {
-      //      boardplaceholder: this.currentShapePlaceholder
-      //     }
-      //   });
+
 
       return this;
     },
@@ -1135,16 +1162,6 @@ require('./grid');
                  self.shape.moveDown();
                }, 1);
              }
-
-            // $('#currentshape').html(' ');
-            // self.currentshape = new Grid({
-            //                          rows: 3,
-            //                          cols: 4,
-            //                          render: {
-            //                            boardplaceholder: self.currentShapePlaceholder
-            //                           }
-            //                         });
-            // self.previewpanel = new self.shape.constructor(self.currentshape);
             break;
           case 37: // Left arrow
             $('#left').attr("style",'border-style:inset');
@@ -1232,15 +1249,6 @@ require('./grid');
                  self.shape.moveDown();
                }, 1);
              }
-            // $('#currentshape').html(' ');
-            // self.currentshape = new Grid({
-            //                          rows: 3,
-            //                          cols: 4,
-            //                          render: {
-            //                            boardplaceholder: self.currentShapePlaceholder
-            //                           }
-            //                         });
-            // self.previewpanel = new self.shape.constructor(self.currentshape);
             break;
           case "left":
             self.shape.moveLeft();
@@ -1308,6 +1316,7 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
+          $('#score').html(score);
           console.log("what is the score", score);
         }
       });
@@ -1401,7 +1410,11 @@ require('./grid');
       this.clearInterval();
       this.gameOver = true;
       this.shape = false;
-      $(document).off('keydown');
+      this.startGame = false;
+      score = 0;
+      $('#score').html(score);
+      $(this).off('keydown');
+
       // $(document).off('click');
       console.log("game:over");
     },
@@ -1412,7 +1425,7 @@ require('./grid');
       this.startGame = true;
     }
   };
-
+  Tetris.$inject = ['$rootScope'];
   global.Tetris = Tetris;
 }( window , window.Grid,window.Shape));
 

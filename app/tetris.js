@@ -6,8 +6,8 @@ require('./grid');
   let pauseGame = require('./canvas.js');
   var paused = false;
   var speed = 1000;
-  var score = 0;
   var rowscleared = [];
+  var score = 0;
   function CollisionState() {
     this.events = [];
   }
@@ -23,14 +23,13 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  function Tetris( options ) {
+  var Tetris = function( options ) {
     this.difficulty = options.difficulty;
 
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    // this.currentShapePlaceholder = options.currentShapePlaceholder;
     this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
@@ -44,7 +43,7 @@ require('./grid');
 
     this.render();
     this.subscribe();
-  }
+  };
   Tetris.prototype = {
     render: function() {
       this.grid = new Grid({
@@ -62,13 +61,7 @@ require('./grid');
            boardplaceholder: this.previewPlaceholder
           }
         });
-      // this.currentshape = new Grid({
-      //    rows: 3,
-      //    cols: 4,
-      //    render: {
-      //      boardplaceholder: this.currentShapePlaceholder
-      //     }
-      //   });
+
 
       return this;
     },
@@ -91,16 +84,6 @@ require('./grid');
                  self.shape.moveDown();
                }, 1);
              }
-
-            // $('#currentshape').html(' ');
-            // self.currentshape = new Grid({
-            //                          rows: 3,
-            //                          cols: 4,
-            //                          render: {
-            //                            boardplaceholder: self.currentShapePlaceholder
-            //                           }
-            //                         });
-            // self.previewpanel = new self.shape.constructor(self.currentshape);
             break;
           case 37: // Left arrow
             $('#left').attr("style",'border-style:inset');
@@ -188,15 +171,6 @@ require('./grid');
                  self.shape.moveDown();
                }, 1);
              }
-            // $('#currentshape').html(' ');
-            // self.currentshape = new Grid({
-            //                          rows: 3,
-            //                          cols: 4,
-            //                          render: {
-            //                            boardplaceholder: self.currentShapePlaceholder
-            //                           }
-            //                         });
-            // self.previewpanel = new self.shape.constructor(self.currentshape);
             break;
           case "left":
             self.shape.moveLeft();
@@ -264,6 +238,7 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
+          $('#score').html(score);
           console.log("what is the score", score);
         }
       });
@@ -357,7 +332,11 @@ require('./grid');
       this.clearInterval();
       this.gameOver = true;
       this.shape = false;
-      $(document).off('keydown');
+      this.startGame = false;
+      score = 0;
+      $('#score').html(score);
+      $(this).off('keydown');
+
       // $(document).off('click');
       console.log("game:over");
     },
@@ -368,7 +347,7 @@ require('./grid');
       this.startGame = true;
     }
   };
-
+  Tetris.$inject = ['$rootScope'];
   global.Tetris = Tetris;
 }( window , window.Grid,window.Shape));
 

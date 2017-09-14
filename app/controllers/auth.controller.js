@@ -2,15 +2,15 @@
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location,$route) {
+  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
       //////////////WINDOW INITIALIZATION/////////////
-      var mq = window.matchMedia( "(max-width: 570px)" );
-      if (mq.matches) {
+      var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
+      if (yourDeviceWidth.matches) {
           // window width is at less than 500px
           $('body').css("overflow-y","scroll");
       }
       else {
-          // window width is greater than 500px
+          $('body').css("overflow-y","hidden");
       }
 
       $(".dropdown-button").dropdown();
@@ -65,35 +65,9 @@
           cols: 10,
           gamePlaceholder: '#tetris',
           previewPlaceholder: '#preview',
-          currentShapePlaceholder: '#currentshape',
           difficulty:"easy"
         });
-        // tetris.init();
-        // tetris.grid.getCellAt(2,0).$el.css('background','red');
-          $("#startGame").on("click",()=>{
-              // Find the right method, call on correct element
-              function launchFullScreen(element) {
-                if(element.requestFullScreen) {
-                  element.requestFullScreen();
-                } else if(element.mozRequestFullScreen) {
-                  element.mozRequestFullScreen();
-                } else if(element.webkitRequestFullScreen) {
-                  element.webkitRequestFullScreen();
-                }
-              }
-
-
-              // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
-            tetris.init();
-            $(document).on("keydown",(e)=>{
-              if(e.keyCode === 27) {
-
-              }
-            });
-          });
-          $("#endGame").on("click",()=>{
-              function exitFullScreen(element) {
+      function exitFullScreen(element) {
                 if(element.exitFullscreen) {
                   element.exitFullscreen();
                 } else if(element.mozCancelFullScreen) {
@@ -102,23 +76,63 @@
                   element.webkitExitFullscreen();
                 }
               }
-            // tetris.endGame();
-            // $("#tetris").html(' ');
-            // $("#preview").html(' ');
-            // tetris.render();
-            // exitFullScreen(document);
+      function launchFullScreen(element) {
+                if(element.requestFullScreen) {
+                  element.requestFullScreen();
+                } else if(element.mozRequestFullScreen) {
+                  element.mozRequestFullScreen();
+                } else if(element.webkitRequestFullScreen) {
+                  element.webkitRequestFullScreen();
+                }
+              }
+        // tetris.init();
+        // tetris.grid.getCellAt(2,0).$el.css('background','red');
+          $("#startGame").on("click",()=>{
+              // Launch fullscreen for browsers that support it!
+              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+              tetris.init();
+              $(window).on("keyup",(e)=>{
+                if(e.keyCode === 82) {
+                  console.log("trying to restart game");
+                  exitFullScreen(document.getElementById("tetrisScreen"));
+                  $route.reload();
+                }
+              });
+          });
+          $(window).on("keydown",(e)=>{
+
+            switch(e.keyCode) {
+              case 13:
+                $(window).off("keydown");
+                launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+                tetris.init();
+                $(window).on("keyup",(e)=>{
+                    if(e.keyCode === 82) {
+                      console.log("trying to restart game");
+                      $(window).off("keyup");
+                      $route.reload();
+                    }
+                  });
+                break;
+              }
+            });
+          $("#endGame").on("click",()=>{
             $location.url("/home");
             $scope.$apply();
           });
       }
-      if ($location.url()==="/Tetris"){
-        initializeGame();
-      }
+
+        if($location.url()==="/Tetris"){
+          initializeGame();
+        }
+
+
 
       //////////////EVENT LISTENTERS///////////////////
       $(window).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27:
+            $(window).off("keydown");
             $location.url('/home');
             $('*').css("overflow","hidden !important");
             $scope.$apply();
@@ -126,19 +140,12 @@
         }
 
       });
-      $(window).on("keydown",(e)=>{
-        switch(e.keyCode) {
-          case 13:
-console.log("hey trying to start the game");
-            break;
-        }
 
-      });
-      $(window).on("click",()=>{
-        $(".drag-target").css("display",'none');
-        $("#sidenav-overlay").css("z-index",'-1');
-        $("#sidenav-overlay").css("display",'none');
-      });
+      // $(window).on("click",()=>{
+      //   $(".drag-target").css("display",'none');
+      //   $("#sidenav-overlay").css("z-index",'-1');
+      //   $("#sidenav-overlay").css("display",'none');
+      // });
 
   };
 
