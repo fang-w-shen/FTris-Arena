@@ -2,6 +2,7 @@
   'use strict';
 
   var FirebaseFactory = function($q, $http, $rootScope,firebaseInfo) {
+    let lowestHighScore;
     return {
       getHighScores: function(){
         let scores;
@@ -15,6 +16,12 @@
                     reject(error);
                 });
         });
+    },
+    setLowestHighScore: function(score){
+      lowestHighScore = score;
+    },
+    getLowestHighScore: function(){
+      return lowestHighScore;
     }
   };
 };

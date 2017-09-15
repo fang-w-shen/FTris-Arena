@@ -9,13 +9,13 @@ angular.module('TetrisApp').config(function($routeProvider) {
       controller: 'HomeCtrl'
     }).when("/Tetris", {
       templateUrl: "partials/tetris.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     }).when("/register", {
       templateUrl: "partials/register.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     }).when("/login", {
       templateUrl: "partials/login.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     })
     .otherwise("/home");
 });

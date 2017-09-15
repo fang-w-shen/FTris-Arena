@@ -10,13 +10,13 @@ angular.module('TetrisApp').config(function($routeProvider) {
       controller: 'HomeCtrl'
     }).when("/Tetris", {
       templateUrl: "partials/tetris.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     }).when("/register", {
       templateUrl: "partials/register.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     }).when("/login", {
       templateUrl: "partials/login.html",
-      controller: 'AuthCtrl'
+      controller: 'TetrisCtrl'
     })
     .otherwise("/home");
 });
@@ -119,9 +119,133 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 },{}],3:[function(require,module,exports){
 (function() {
   'use strict';
+
+  var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
+    $('body').css("overflow","hidden");
+    $scope.getHighScores = getHighScores;
+    $scope.highScorePlayers=[];
+    //////////////HOME ANIMATION EVENTS///////////////
+    document.getElementById("play").focus();
+        $('.overlay').css("display","block").css("opacity","0");
+        setTimeout(()=>{
+            $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
+            $('.overlay').css("opacity","1").css("ease-in","20s");
+            // setTimeout(()=>{
+
+            // },1000);
+            $('.overlay').css("overflow","hidden");
+        },1000);
+    //////////////CLICK EVENTS///////////////
+    $(window).on("click",()=>{
+      if (document.getElementById("play")===null) {
+        return false;
+      }
+      if(document.getElementById("play").checked === true) {
+        document.getElementById("play").focus();
+
+      } else if (document.getElementById("highScores").checked) {
+        document.getElementById("highScores").focus();
+      } else if (document.getElementById("howToPlay").checked) {
+        document.getElementById("howToPlay").focus();
+      }
+    });
+
+
+    document.getElementById("playButton").addEventListener("click",()=>{
+
+      $('body').css("overflow-y","hidden !important");
+          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+      setTimeout(()=>{
+
+      $window.location.href = "#!/Tetris";
+      },1000);
+    });
+    document.getElementById("highScoresButton").addEventListener("click",()=>{
+        $("#playButton").css("background-color","rgba(255,255,255,0)");
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
+    });
+    document.getElementById("howToPlay").addEventListener("click",()=>{
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
+        $("#playButton").css("background-color","rgba(255,255,255,0)");
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
+    });
+    //////////////KEYBOARD EVENTS///////////////
+    $(window).on("keyup",(e)=>{
+      if (document.getElementById("play")===null) {
+        return false;
+      }
+      if(document.getElementById("play").checked === true) {
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
+        $("#playButton").css("background-color","rgba(255,255,255,0.4)");
+
+      } else if (document.getElementById("highScores").checked) {
+        $("#playButton").css("background-color","rgba(255,255,255,0)");
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
+      } else if (document.getElementById("howToPlay").checked) {
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
+        $("#playButton").css("background-color","rgba(255,255,255,0)");
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
+      }
+      switch(e.keyCode) {
+        case 13:
+          if(document.getElementById("play").checked){
+              $('body').css("overflow-y","scroll !important");
+                  $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+              setTimeout(()=>{
+
+              $window.location.href = "#!/Tetris";
+              },1000);
+          } else if(document.getElementById("highScores").checked) {
+            $("#highScoreModal").modal("toggle");
+            document.getElementById("highScores").focus();
+          } else if(document.getElementById("howToPlay").checked) {
+            $("#howToPlayModal").modal("toggle");
+            document.getElementById("howToPlay").focus();
+          } else {
+            document.getElementById("play").focus();
+          }
+      }
+    });
+    ////////////////HIGH SCORE MODAL///////////////
+    function getHighScores() {
+      FirebaseFactory.getHighScores().then((score)=>{
+        let scores = score;
+        let keys = Object.keys(scores);
+        let values = Object.values(scores);
+
+        values.sort((a,b)=>{
+
+          if (a.score < b.score){
+            return 1;
+          }
+          if (a.score > b.score){
+            return -1;
+          }
+          return 0;
+
+        });
+        values = values.splice(0,3);
+        $scope.highScorePlayers=values;
+      });
+    }
+    $scope.getHighScores();
+
+
+  };
+
+  HomeCtrl.$inject = ['$rootScope', '$scope','$window','FirebaseFactory'];
+  angular.module('TetrisApp').controller('HomeCtrl', HomeCtrl);
+})();
+
+},{}],4:[function(require,module,exports){
+(function() {
+  'use strict';
   require('../tetris');
   require('../scoregrid');
-  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
+  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -250,7 +374,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
 
-      //////////////EVENT LISTENTERS///////////////////
+      //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(window).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27:
@@ -271,135 +395,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
   };
 
-  AuthCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
-  angular.module('TetrisApp').controller('AuthCtrl', AuthCtrl);
+  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
+  angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
 })();
 
-},{"../scoregrid":9,"../tetris":11}],4:[function(require,module,exports){
-(function() {
-  'use strict';
-
-  var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
-    $('body').css("overflow","hidden");
-    $scope.getHighScores = getHighScores;
-    $scope.highScorePlayers=[];
-    //////////////HOME ANIMATION EVENTS///////////////
-    document.getElementById("play").focus();
-        $('.overlay').css("display","block").css("opacity","0");
-        setTimeout(()=>{
-            $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
-            $('.overlay').css("opacity","1").css("ease-in","20s");
-            // setTimeout(()=>{
-
-            // },1000);
-            $('.overlay').css("overflow","hidden");
-        },1000);
-    //////////////CLICK EVENTS///////////////
-    $(window).on("click",()=>{
-      if (document.getElementById("play")===null) {
-        return false;
-      }
-      if(document.getElementById("play").checked === true) {
-        document.getElementById("play").focus();
-
-      } else if (document.getElementById("highScores").checked) {
-        document.getElementById("highScores").focus();
-      } else if (document.getElementById("howToPlay").checked) {
-        document.getElementById("howToPlay").focus();
-      }
-    });
-
-
-    document.getElementById("playButton").addEventListener("click",()=>{
-
-      $('body').css("overflow-y","hidden !important");
-          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
-      setTimeout(()=>{
-
-      $window.location.href = "#!/Tetris";
-      },1000);
-    });
-    document.getElementById("highScoresButton").addEventListener("click",()=>{
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
-    });
-    document.getElementById("howToPlay").addEventListener("click",()=>{
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
-    });
-    //////////////KEYBOARD EVENTS///////////////
-    $(window).on("keyup",(e)=>{
-      if (document.getElementById("play")===null) {
-        return false;
-      }
-      if(document.getElementById("play").checked === true) {
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0.4)");
-
-      } else if (document.getElementById("highScores").checked) {
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
-      } else if (document.getElementById("howToPlay").checked) {
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
-      }
-      switch(e.keyCode) {
-        case 13:
-          if(document.getElementById("play").checked){
-              $('body').css("overflow-y","scroll !important");
-                  $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
-              setTimeout(()=>{
-
-              $window.location.href = "#!/Tetris";
-              },1000);
-          } else if(document.getElementById("highScores").checked) {
-            $("#highScoreModal").modal("toggle");
-            document.getElementById("highScores").focus();
-          } else if(document.getElementById("howToPlay").checked) {
-            $("#howToPlayModal").modal("toggle");
-            document.getElementById("howToPlay").focus();
-          } else {
-            document.getElementById("play").focus();
-          }
-      }
-    });
-    ////////////////HIGH SCORE MODAL///////////////
-    function getHighScores() {
-      FirebaseFactory.getHighScores().then((score)=>{
-        let scores = score;
-        let keys = Object.keys(scores);
-        let values = Object.values(scores);
-
-        values.sort((a,b)=>{
-
-          if (a.score < b.score){
-            return 1;
-          }
-          if (a.score > b.score){
-            return -1;
-          }
-          return 0;
-
-        });
-        values = values.splice(0,3);
-        $scope.highScorePlayers=values;
-      });
-    }
-    $scope.getHighScores();
-
-
-  };
-
-  HomeCtrl.$inject = ['$rootScope', '$scope','$window','FirebaseFactory'];
-  angular.module('TetrisApp').controller('HomeCtrl', HomeCtrl);
-})();
-
-},{}],5:[function(require,module,exports){
+},{"../scoregrid":9,"../tetris":11}],5:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -435,6 +435,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
 
   var FirebaseFactory = function($q, $http, $rootScope,firebaseInfo) {
+    let lowestHighScore;
     return {
       getHighScores: function(){
         let scores;
@@ -448,6 +449,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                     reject(error);
                 });
         });
+    },
+    setLowestHighScore: function(score){
+      lowestHighScore = score;
+    },
+    getLowestHighScore: function(){
+      return lowestHighScore;
     }
   };
 };

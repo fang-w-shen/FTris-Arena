@@ -2,7 +2,7 @@
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var AuthCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
+  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -131,7 +131,7 @@
 
 
 
-      //////////////EVENT LISTENTERS///////////////////
+      //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(window).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27:
@@ -152,6 +152,6 @@
 
   };
 
-  AuthCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
-  angular.module('TetrisApp').controller('AuthCtrl', AuthCtrl);
+  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
+  angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
 })();

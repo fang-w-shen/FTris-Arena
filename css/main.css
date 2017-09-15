@@ -25,6 +25,9 @@ nav {
   top: 20px;
   right: 20px; }
 
+.mobileDevices {
+  margin-top: 1em; }
+
 .blink_me {
   font-family: 'Press Start 2P';
   font-size: 11px;
@@ -39,7 +42,8 @@ nav {
   50% {
     opacity: 0; } }
 body {
-  overflow: hidden; }
+  overflow: hidden;
+  background: beige; }
 
 .colorTheme {
   background-color: black; }
@@ -280,7 +284,7 @@ body {
     .overlayCModal fieldset {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
-@media only screen and (min-device-width: 319px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 319px) and (max-device-width: 767px) {
   * {
     padding-right: 0 !important;
     padding-left: 0 !important;
