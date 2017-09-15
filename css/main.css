@@ -305,7 +305,7 @@ body {
 
   .mobileDevices {
     overflow-y: scroll !important;
-    margin-top: -1.5em; }
+    margin-top: -.5em; }
 
   .overlay {
     position: relative;
@@ -337,7 +337,7 @@ body {
     width: 50%; }
 
   .grid {
-    margin-left: -.2em !important; }
+    margin-left: 1.5em !important; }
 
   .right-column {
     max-width: 60px;
@@ -362,11 +362,14 @@ body {
   .d-pad {
     top: -.7em; }
 
+  #endGame {
+    position: absolute !important;
+    left: 7em !important;
+    bottom: 0em; }
+
   .system {
     margin-left: 1.5em;
     margin-top: 0em !important; }
-    .system #endGame {
-      margin-left: 3em; }
     .system .d-pad .label {
       display: none; }
 
