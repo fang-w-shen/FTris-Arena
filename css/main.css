@@ -180,21 +180,24 @@ body {
     font-size: 9px !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1278px) {
   .blink_me {
-    margin-left: -1rem !important; } }
+    margin-left: -3rem !important;
+    font-size: 1em !important; } }
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
   .blink_me {
-    margin-left: 1em !important; } }
+    margin-left: -3em !important;
+    font-size: 1.2em !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
-    margin-left: 1rem !important; }
+    margin-left: -2rem !important;
+    font-size: 1.2em !important; }
 
   #githhubforkright {
     visibility: hidden; } }
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -2.5em !important;
-    font-size: 1.8em !important; }
+    margin-left: -3em !important;
+    font-size: 2em !important; }
 
   .overlay {
     background-size: 92%;
