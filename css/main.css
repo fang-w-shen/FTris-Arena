@@ -12,6 +12,10 @@ img {
   height: 55px;
   margin-bottom: 10px; }
 
+nav {
+  margin-bottom: 2em;
+  background-color: black; }
+
 /*Home Page*/
 .blinks {
   animation: blinker .9s linear infinite; }
@@ -23,7 +27,7 @@ img {
   color: yellow;
   font-weight: bolder;
   position: relative;
-  left: 18%;
+  left: 16.5%;
   top: 5%; }
 
 @keyframes blinker {
@@ -189,8 +193,8 @@ body {
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -32px !important;
-    font-size: 1.2em !important; }
+    margin-left: -2.5em !important;
+    font-size: 1.8em !important; }
 
   .overlay {
     background-size: 92%;
@@ -273,12 +277,14 @@ body {
     padding-right: 0 !important;
     padding-left: 0 !important;
     padding-top: 0 !important;
-    padding-top: 0 !important; }
+    padding-top: 0 !important;
+    max-height: 100vh;
+    max-width: 100vh; }
 
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 10% !important;
+    left: 8% !important;
     font-size: 9px; }
 
   label {
@@ -286,7 +292,8 @@ body {
     font-size: 12px !important; }
 
   .mobileDevices {
-    overflow-y: scroll !important; }
+    overflow-y: scroll !important;
+    margin-top: -1.5em; }
 
   .overlay {
     position: relative;
@@ -318,7 +325,31 @@ body {
     width: 50%; }
 
   .grid {
-    margin-left: 3em; }
+    margin-left: 0em !important; }
+
+  .right-column {
+    max-width: 200px;
+    margin-left: 3em !important; }
+
+  #tetrisScreen {
+    margin-left: 3.7em !important; }
+
+  .control-buttons {
+    right: 3.3em !important;
+    top: 1.7em !important; }
+    .control-buttons .label {
+      top: -7px !important; }
+
+  .d-pad {
+    top: -.7em; }
+
+  .system {
+    margin-left: 1.5em;
+    margin-top: -.2em; }
+    .system #endGame {
+      margin-left: 3em; }
+    .system .d-pad .label {
+      display: none; }
 
   .letters {
     display: none; }
@@ -332,6 +363,8 @@ body {
     margin: 0 !important;
     padding-bottom: 0em !important;
     overflow: auto; }
+    .modal-open .table {
+      margin-left: 1em !important; }
     .modal-open .modal-header {
       padding-bottom: 0;
       margin-top: -15px;
@@ -367,10 +400,7 @@ body, html {
   height: 100%;
   background-color: "brown";
   opacity: .9;
-  /*background-image: URL('http://geekandsundry.com/wp-content/uploads/2015/04/tumblr_static_video_20games_20tetris_20blocks_20retro_20games_201280x800_20wallpaper_www_wall321_com_13-970x545.jpg');
-  background-size: cover;
-  background-attachment: fixed;*/
-  /*background-image: URL('../images/gameboy.png');*/
+  /*MIDLINE: URL('http://geekandsundry.com/wp-content/uploads/2015/04/tumblr_static_video_20games_20tetris_20blocks_20retro_20games_201280x800_20wallpaper_www_wall321_com_13-970x545.jpg');*/
   background-position: 50% -30px;
   background-repeat: no-repeat; }
 
@@ -393,13 +423,11 @@ canvas {
 input {
   z-index: 3; }
 
-/*//////////////CONTROLLERS/////////////////////*/
 #spacebar {
   size: 2em;
   width: 400px;
   height: 40px; }
 
-/*//////////////SLAV/////////////////////*/
 .row {
   margin: 0; }
 
@@ -412,13 +440,173 @@ input {
   margin: 1px;
   /*vertical-align: top;*/ }
 
-nav {
-  margin-bottom: 2em;
-  background-color: black; }
-
 .right-column {
   margin-left: 4%; }
   .right-column #score {
     display: inline-block; }
+
+.mobileDevices {
+  width: 600px; }
+
+#tetrisScreen {
+  margin-left: 2em; }
+
+/*//////////////CONTROLLERS/////////////////////*/
+/* COLORS VARIABLES */
+.system {
+  font-size: 16px; }
+  @media screen and (min-width: 220px) {
+    .system {
+      font-size: 18px; } }
+  @media screen and (min-width: 240px) {
+    .system {
+      font-size: 20px; } }
+  @media screen and (min-width: 260px) {
+    .system {
+      font-size: 22px; } }
+  @media screen and (min-width: 280px) {
+    .system {
+      font-size: 24px; } }
+  @media screen and (min-width: 300px) {
+    .system {
+      font-size: 26px; } }
+  @media screen and (min-width: 320px) {
+    .system {
+      font-size: 28px; } }
+  @media screen and (min-width: 340px) {
+    .system {
+      font-size: 30px; } }
+  @media screen and (min-width: 360px) {
+    .system {
+      font-size: 32px; } }
+  @media screen and (min-width: 380px) {
+    .system {
+      font-size: 34px; } }
+  @media screen and (min-width: 400px) {
+    .system {
+      font-size: 36px; } }
+  @media screen and (min-width: 420px) {
+    .system {
+      font-size: 38px; } }
+  @media screen and (min-width: 440px) {
+    .system {
+      font-size: 40px; } }
+
+.system {
+  float: left;
+  padding: 1em;
+  padding-bottom: 2em; }
+
+.system .screen {
+  width: 320px;
+  max-width: 100%; }
+.system .controls {
+  position: relative;
+  padding-bottom: 1em; }
+.system .button {
+  cursor: pointer;
+  box-shadow: 0 0 3px 1px #555;
+  color: #474881;
+  text-align: center; }
+  .system .button:hover {
+    box-shadow: 0 0 5px 1px #333; }
+  .system .button:active {
+    box-shadow: 0 0 5px 1px #333 inset; }
+  .system .button .label {
+    font-size: .4em;
+    position: relative;
+    text-transform: uppercase; }
+.system .d-pad {
+  width: 3em;
+  height: 3em;
+  position: relative; }
+.system .d {
+  width: 1em;
+  height: 1em;
+  background: #1d1f20;
+  position: absolute;
+  border-top: 0.05em solid #7e878b;
+  border-bottom: 0.05em solid black; }
+  .system .d:hover, .system .d:active {
+    background: #414648; }
+.system .up {
+  left: 1em;
+  top: 2em;
+  border-radius: .25em .25em 0 0; }
+  .system .up .label {
+    top: -5.5em; }
+  .system .up .labelfont {
+    font-size: .9rem;
+    color: #fff; }
+.system .right {
+  top: 3em;
+  right: 0;
+  border-radius: 0 .25em .25em 0; }
+  .system .right .label {
+    top: -3.5em;
+    right: -2em; }
+  .system .right .labelfont {
+    font-size: .9rem;
+    color: #fff; }
+.system .down {
+  left: 1em;
+  top: 4em;
+  border-radius: 0 0 .25em .25em; }
+  .system .down .label {
+    top: -1.5em; }
+  .system .down .labelfont {
+    font-size: .9rem;
+    color: #fff; }
+.system .left {
+  top: 3em;
+  left: 0;
+  border-radius: .25em 0 0 .25em; }
+  .system .left .label {
+    top: -3.5em;
+    left: -2em; }
+  .system .left .labelfont {
+    font-size: .9rem;
+    color: #fff; }
+.system .control-buttons {
+  position: absolute;
+  right: 0em;
+  top: 2.5em;
+  background: #afb2b6;
+  border-radius: 1em; }
+.system .control {
+  background: #79215b;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1.5em;
+  float: left;
+  margin: .25em;
+  border-top: 0.05em solid #de88c1;
+  border-bottom: 0.05em solid #290b1f; }
+  .system .control:hover, .system .control:active {
+    background: #8d266a; }
+  .system .control .label {
+    top: -1em;
+    color: white;
+    font-size: .9rem; }
+.system .menu-buttons {
+  position: absolute;
+  background: #afb2b6;
+  top: 0em;
+  left: 0em;
+  border-radius: 2em; }
+.system .menu {
+  background: #717b85;
+  width: 3.5em;
+  height: .5em;
+  border-radius: .4em;
+  float: right;
+  margin: .25em;
+  border-top: 0.05em solid #8c959d;
+  border-bottom: 0.05em solid #5a6269; }
+  .system .menu:hover, .system .menu:active {
+    background: #7e8891; }
+  .system .menu .label {
+    top: -2em;
+    color: white; }
 
 /*# sourceMappingURL=main.css.map */

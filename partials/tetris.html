@@ -1,44 +1,41 @@
 <div ng-include="'partials/navbar.html'">
 </div>
-<input type="button" id="startGame" class="btn btn-success" name="" value="Start Game">
 
-<div class="mobileDevices container">
-    <div class="row">
-      <div class="col-6">.col-6</div>
-      <div class="col-6">.col-6</div>
-    </div>
-<div id="tetrisScreen" class="row">
+<div class="mobileDevices container" id="mobileDevice">
 
-            <div class="grid" id="tetris" class="col-8">
-
+    <div id="tetrisScreen" class="row">
+            <div class="grid" id="tetris" class="col-md-8">
             </div>
-            <div class="right-column col-4">
+            <div class="right-column col-md-4">
                 <div id="next" class="grid">Next:</div>
                 <div id="preview" class="grid"></div>
                 <div class="grid">Score: <div id="score"> 0</div></div>
                 <div id="time" class="grid"></div>
+
             </div>
-<ul id="arrows">
-                    <input type="button" id="endGame" class="btn btn-success" name="" value="End Game">
-                    <input type="button" id="spacebar" value="Space (Drop Block)">
-                        <li><input type="button" id="left" value="Left (Move Left)"></li>
-                        <li><input type="button" id="right" value="Right (Move Right)"></li>
-                        <input type="button" id="up" value="Up (Rotate Block)">
-                        <input type="button" id="down" value="Down (Move Down)">
-                    </ul>
-</div>
-        <div class="row">
+    </div>
 
+    <div class="system">
+    <input type="button" id="endGame" class="btn btn-success" name="" value="Exit/ Main Menu" style="width:135px;padding-left:2px">
+      <div class=" screen"></div>
+      <div class="controls">
+        <div class="menu-buttons">
 
+          <div id="menu-select" class="button menu select" data-id="menu-select" ><span class="label" data-id="menu-select" >Options</span></div>
+          <div id="startGame" class="button menu start"  data-id="startGame" ><span class="label"  data-id="startGame" >Start</span></div>
         </div>
-        <div>
-
+        <div class="d-pad">
+          <div id="d-up" class="button d up" data-id="d-up"><p class="labelfont" data-id="d-up">Spin</p><span class="label" data-id="d-up">&#9650</span></div>
+          <div id="d-right" class="button d right" data-id="d-right"><p class="labelfont" data-id="d-right">Right</p><span class="label">&#9654</span></div>
+          <div id="d-down" class="button d down" data-id="d-down"><p class="labelfont" data-id="d-down">Down</p><span class="label">&#9660</span></div>
+          <div id="d-left" class="button d left" data-id="d-left"><p class="labelfont" data-id="d-left">Left</p><span class="label">&#9664</span></div>
+        </div>
+        <div class="control-buttons">
+          <div id="control-a" class="button control a" data-id="control-a"><span class="label" data-id="control-a">Rotate</span></div>
+          <div id="control-b" class="button control b" data-id="control-b"><span class="label" data-id="control-b">Drop</span></div>
+        </div>
+      </div>
+    </div>
 
 </div>
-
-
-</div>
-
-
-
 

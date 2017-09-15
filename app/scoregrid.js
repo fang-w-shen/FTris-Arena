@@ -10,7 +10,7 @@
     hour = getNonMilitaryTime(hour);
     minute = getTime(minute);
     sec = getTime(sec);
-    $('#time').html(month+1+ "/" + day  + "/" + year + " " + hour + ":" + minute + ":" + sec);
+    $('#time').html(month+1+ "/" + day  + "/" + year + `<br>` + hour + ":" + minute + ":" + sec);
     var newTime = setTimeout(instantiateLiveTime, 1000);
     function getTime(i){
         if(i < 10){

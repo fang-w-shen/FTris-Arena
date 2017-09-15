@@ -207,13 +207,16 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
           $("#startGame").on("click",()=>{
+            $(window).off("keydown");
               // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+              launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+
               tetris.init();
               $(window).on("keyup",(e)=>{
                 if(e.keyCode === 82) {
                   console.log("trying to restart game");
-                  exitFullScreen(document.getElementById("tetrisScreen"));
+                  // exitFullScreen(document.getElementById("tetrisScreen"));
+                  $(document).off("keydown");
                   $route.reload();
                 }
               });
@@ -223,7 +226,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             switch(e.keyCode) {
               case 13:
                 $(window).off("keydown");
-                launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+                launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                 tetris.init();
                 $(window).on("keyup",(e)=>{
                     if(e.keyCode === 82) {
@@ -349,11 +352,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         case 13:
           if(document.getElementById("play").checked){
               $('body').css("overflow-y","scroll !important");
-                  $('.overlay').css("transition","all .6s").css("transform","scale(7)").css("position ","fixed");
+                  $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
               setTimeout(()=>{
 
               $window.location.href = "#!/Tetris";
-              },200);
+              },1000);
           } else if(document.getElementById("highScores").checked) {
             $("#highScoreModal").modal("toggle");
             document.getElementById("highScores").focus();
@@ -550,7 +553,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     hour = getNonMilitaryTime(hour);
     minute = getTime(minute);
     sec = getTime(sec);
-    $('#time').html(month+1+ "/" + day  + "/" + year + " " + hour + ":" + minute + ":" + sec);
+    $('#time').html(month+1+ "/" + day  + "/" + year + `<br>` + hour + ":" + minute + ":" + sec);
     var newTime = setTimeout(instantiateLiveTime, 1000);
     function getTime(i){
         if(i < 10){
@@ -1150,9 +1153,9 @@ require('./grid');
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
           case 32: // Space move all the way down
-            $('#spacebar').attr("style",'border-style:inset');
+            $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#spacebar').attr("style",'');
+            $('#control-b').attr("style",'');
             console.log(self.grid);
             },200);
             self.clearInterval(self.dropRate);
@@ -1164,16 +1167,16 @@ require('./grid');
              }
             break;
           case 37: // Left arrow
-            $('#left').attr("style",'border-style:inset');
+            $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#left').attr("style",'');
+            $('.left').attr("style",'');
             },200);
             self.shape.moveLeft();
             break;
           case 90: // Z key rotate counterclockwise
-            $('#up').attr("style",'border-style:inset');
+            $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#up').attr("style",'');
+            $('.up').attr("style",'');
             },200);
             if (self.shape.rotationState == 1) {
               self.shape.rotationState =3;
@@ -1187,31 +1190,31 @@ require('./grid');
             self.shape.rotate();
             break;
           case 88: // X key rotate clockwise
-            $('#up').attr("style",'border-style:inset');
+            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#up').attr("style",'');
+            $('#control-a').attr("style",'');
             },200);
             self.shape.rotate();
             break;
           case 38: // Up arrow rotate right
-            $('#up').attr("style",'border-style:inset');
+            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#up').attr("style",'');
+            $('#control-a').attr("style",'');
             },200);
             self.shape.rotate();
             break;
 
           case 39: // Right arrow
-            $('#right').attr("style",'border-style:inset');
+            $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#right').attr("style",'');
+            $('.right').attr("style",'');
             },200);
             self.shape.moveRight();
             break;
           case 40: // Down arrow
-            $('#down').attr("style",'border-style:inset');
+            $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
             setTimeout(()=>{
-            $('#down').attr("style",'');
+            $('.down').attr("style",'');
             },200);
             self.shape.moveDown();
             break;
@@ -1238,10 +1241,12 @@ require('./grid');
       ////////////////////////CLICK EVENTS/////////////////////////////
 
       $(document).on('click', function( e ) {
-        // $(e.target)[0].id is the id of the DOM element that is clicked
-        let domId = $(e.target)[0].id;
+        console.log("what is e", $(e),e.target,e.currentTarget);
+        // $(e.target).data.id is the id of the DOM element that is clicked
+        let domId = $(e.target).data('id');
+        console.log("what is domId",domId);
         switch (domId) {
-          case "spacebar": // Space bar move all the way down
+          case "control-b": // Space bar move all the way down
             self.clearInterval(self.dropRate);
 
              if (!paused) {
@@ -1250,16 +1255,19 @@ require('./grid');
                }, 1);
              }
             break;
-          case "left":
+          case "d-left":
             self.shape.moveLeft();
             break;
-          case "right":
+          case "d-right":
             self.shape.moveRight();
             break;
-          case "down":
+          case "d-down":
             self.shape.moveDown();
             break;
-          case "up":
+          case "control-a":
+            self.shape.rotate();
+            break;
+          case "d-up":
             self.shape.rotate();
             break;
            }
@@ -1412,8 +1420,10 @@ require('./grid');
       this.shape = false;
       this.startGame = false;
       score = 0;
-      $('#score').html(score);
       $(this).off('keydown');
+      if(firebase.auth().currentUser){
+        console.log("keep track of scores");
+      }
 
       // $(document).off('click');
       console.log("game:over");
@@ -1423,6 +1433,8 @@ require('./grid');
       this.bind();
       this.createNewShape();
       this.startGame = true;
+      $('#startGame').off("click");
+      $('#startGame').off("keydown");
     }
   };
   Tetris.$inject = ['$rootScope'];

@@ -88,13 +88,16 @@
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
           $("#startGame").on("click",()=>{
+            $(window).off("keydown");
               // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+              launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+
               tetris.init();
               $(window).on("keyup",(e)=>{
                 if(e.keyCode === 82) {
                   console.log("trying to restart game");
-                  exitFullScreen(document.getElementById("tetrisScreen"));
+                  // exitFullScreen(document.getElementById("tetrisScreen"));
+                  $(document).off("keydown");
                   $route.reload();
                 }
               });
@@ -104,7 +107,7 @@
             switch(e.keyCode) {
               case 13:
                 $(window).off("keydown");
-                launchFullScreen(document.getElementById("tetrisScreen")); // the whole page
+                launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                 tetris.init();
                 $(window).on("keyup",(e)=>{
                     if(e.keyCode === 82) {

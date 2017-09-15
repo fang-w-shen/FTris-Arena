@@ -74,11 +74,11 @@
         case 13:
           if(document.getElementById("play").checked){
               $('body').css("overflow-y","scroll !important");
-                  $('.overlay').css("transition","all .6s").css("transform","scale(7)").css("position ","fixed");
+                  $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
               setTimeout(()=>{
 
               $window.location.href = "#!/Tetris";
-              },200);
+              },1000);
           } else if(document.getElementById("highScores").checked) {
             $("#highScoreModal").modal("toggle");
             document.getElementById("highScores").focus();
