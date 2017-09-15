@@ -284,7 +284,7 @@ body {
     .overlayCModal fieldset {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
-@media only screen and (min-device-width: 319px) and (max-device-width: 767px) {
+@media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   * {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -408,8 +408,8 @@ body {
     margin-top: 25px !important; }
 
   .cell {
-    width: 15px !important;
-    height: 15px !important; }
+    width: 12px !important;
+    height: 12px !important; }
 
   #highScoreModal {
     height: 320px !important; }
