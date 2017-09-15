@@ -340,11 +340,10 @@ body {
     margin-left: -.2em !important; }
 
   .right-column {
-    max-width: 200px;
-    position: relative;
+    max-width: 60px;
+    position: relative !important;
     top: 0em !important;
-    right: 0em !important;
-    margin-left: 1em !important; }
+    right: -1em !important; }
 
   #tetrisScreen {
     margin-left: 1.5em !important; }
@@ -360,7 +359,7 @@ body {
 
   .system {
     margin-left: 1.5em;
-    margin-top: -.2em; }
+    margin-top: 0em !important; }
     .system #endGame {
       margin-left: 3em; }
     .system .d-pad .label {
