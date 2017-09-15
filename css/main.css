@@ -346,7 +346,11 @@ body {
     right: -1em !important; }
 
   #tetrisScreen {
-    margin-left: 1.5em !important; }
+    margin-left: 1.5em !important;
+    margin-top: 2em;
+    max-width: 99%; }
+    #tetrisScreen #tetris {
+      margin-right: 0px !important; }
 
   .control-buttons {
     right: 3.3em !important;
