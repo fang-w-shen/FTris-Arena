@@ -196,8 +196,8 @@ body {
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -3em !important;
-    font-size: 2em !important; }
+    margin-left: -2.5em !important;
+    font-size: 1.4em !important; }
 
   .overlay {
     background-size: 92%;
@@ -275,7 +275,7 @@ body {
     .overlayCModal fieldset {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 319px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
   * {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -328,14 +328,14 @@ body {
     width: 50%; }
 
   .grid {
-    margin-left: 0em !important; }
+    margin-left: -.2em !important; }
 
   .right-column {
     max-width: 200px;
     margin-left: 3em !important; }
 
   #tetrisScreen {
-    margin-left: 3.7em !important; }
+    margin-left: 1.5em !important; }
 
   .control-buttons {
     right: 3.3em !important;
