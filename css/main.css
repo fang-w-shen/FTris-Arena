@@ -341,16 +341,17 @@ body {
 
   .right-column {
     max-width: 60px;
-    position: relative !important;
-    top: 0em !important;
-    right: -1em !important; }
+    position: absolute !important;
+    top: 1em !important;
+    left: 25%;
+    margin-left: -1em; }
 
   #tetrisScreen {
     margin-left: 1.5em !important;
     margin-top: 2em;
     max-width: 99%; }
     #tetrisScreen #tetris {
-      margin-right: 0px !important; }
+      margin-right: -2em !important; }
 
   .control-buttons {
     right: 3.3em !important;
