@@ -337,6 +337,9 @@ body {
 
   .right-column {
     max-width: 200px;
+    position: relative;
+    top: 0em !important;
+    right: 0em !important;
     margin-left: 1em !important; }
 
   #tetrisScreen {
