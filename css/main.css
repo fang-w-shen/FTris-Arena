@@ -290,7 +290,7 @@ body {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 7% !important;
+    left: 6.5% !important;
     font-size: 9px; }
 
   label {
@@ -426,7 +426,8 @@ body {
     height: 52% !important; }
 
   .howtoplaymodal {
-    margin-top: 25px !important; }
+    margin-top: 25px !important;
+    height: 220px !important; }
 
   .cell {
     width: 12px !important;
@@ -442,7 +443,7 @@ body {
     margin-left: 20px; }
 
   .overlay {
-    position: relative;
+    position: absolute;
     background-repeat: no-repeat;
     background-size: 91%;
     max-width: 91%;

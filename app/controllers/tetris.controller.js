@@ -24,6 +24,7 @@
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
+      console.log("rootscope is what",  $rootScope);
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
@@ -105,32 +106,42 @@
         bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
+
+
           $("#startGame").on("click",()=>{
-            $(document).off("click");
+            $(document).off("keydown");
               // Launch fullscreen for browsers that support it!
               launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
               $(document).on("keyup",(e)=>{
-                if(e.keyCode === 82) {
-                 $(document).off("keydown");
+                if(e.keyCode === 82) { //R Restart KEY
+                 $(window).off("keydown");
                   console.log("trying to restart game");
                   tetris.endGame();
-                  // exitFullScreen(document.getElementById("tetrisScreen"));
                   $route.reload();
                 }
               });
+            $('#menu-select').on("click",()=>{
+              /////restart
+              tetris.endGame();
+              $route.reload();
+            });
+
+
+
           });
+
+
+
           $(document).on("keydown",(e)=>{
 
             switch(e.keyCode) {
               case 13:
-                // $(document).off("keydown");
+                $(document).off("keydown");
                 tetris.init();
                 $(document).on("keyup",(e)=>{
                     if(e.keyCode === 82) { //R Restart Key
                       $(document).off("keydown");
-                      $(document).off("keyup");
-                      tetris.endGame();
                       $route.reload();
                       console.log("trying to restart game");
                     }
@@ -141,27 +152,25 @@
             });
 
 
-          $('#menu-select').on("click",()=>{
-            tetris.endGame();
-            $route.reload();
-          });
 
 
-          $("#endGame").on("click",()=>{
 
-            $location.url("/home");
-            $scope.$apply();
-          });
+      $("#endGame").on("click",()=>{
+        tetris.endGame();
+        $location.url("/home");
+        $route.reload();
+      });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27: /// ESC KEY
             tetris.endGame();
-            $(document).off("keyup");
-            $(document).off("keydown");
+            // $(document).off("keyup");
+            // $(document).off("keydown");
             $location.url('/home');
+
             $('*').css("overflow","hidden !important");
-            $scope.$apply();
+            $route.reload();
             break;
         }
 

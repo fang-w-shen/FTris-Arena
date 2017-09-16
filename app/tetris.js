@@ -23,9 +23,9 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options ) {
+  var Tetris = function( options, $rootScope ) {
     this.difficulty = options.difficulty;
-
+    $rootScope = "pooop";
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
@@ -336,41 +336,43 @@ require('./grid');
         // $(e.target).data.id is the id of the DOM element that is clicked
         let domId = $(e.target).data('id');
         console.log("what is domId",domId);
-        switch (domId) {
-          case "control-b": // Space bar move all the way down
-            self.clearInterval();
+        if (self.startGame) {
+          switch (domId) {
+            case "control-b": // Space bar move all the way down
+              self.clearInterval();
 
-             if (!self.paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
+               if (!self.paused) {
+                 self.interval = setInterval(function() {
+                   self.shape.moveDown();
+                 }, 1);
+               }
+              break;
+            case "d-left":
+              if (!self.paused) {
+                self.shape.moveLeft();
+              }
+              break;
+            case "d-right":
+              if (!self.paused) {
+                self.shape.moveRight();
+              }
+              break;
+            case "d-down":
+              if (!self.paused) {
+                self.shape.moveDown();
+              }
+              break;
+            case "control-a":
+              if (!self.paused) {
+                self.shape.rotate();
+              }
+              break;
+            case "d-up":
+              if (!self.paused) {
+                self.shape.rotate();
+              }
+              break;
              }
-            break;
-          case "d-left":
-            if (!self.paused) {
-              self.shape.moveLeft();
-            }
-            break;
-          case "d-right":
-            if (!self.paused) {
-              self.shape.moveRight();
-            }
-            break;
-          case "d-down":
-            if (!self.paused) {
-              self.shape.moveDown();
-            }
-            break;
-          case "control-a":
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
-          case "d-up":
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
            }
          });
 
@@ -386,7 +388,8 @@ require('./grid');
       this.paused = false;
       this.level=0;
       clearTimeout(this.time);
-      $(window).off('keydown');
+      $(document).off('keydown');
+      // $(window).off("click");
       if(firebase.auth().currentUser){
         console.log("keep track of scores");
       }

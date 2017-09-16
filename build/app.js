@@ -229,6 +229,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
+        $scope.lowestHighScore = $scope.highScorePlayers[2];
       });
     }
     $scope.getHighScores();
@@ -267,6 +268,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
+      console.log("rootscope is what",  $rootScope);
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
@@ -348,32 +350,42 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
+
+
           $("#startGame").on("click",()=>{
-            $(document).off("click");
+            $(document).off("keydown");
               // Launch fullscreen for browsers that support it!
               launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
               $(document).on("keyup",(e)=>{
-                if(e.keyCode === 82) {
-                 $(document).off("keydown");
+                if(e.keyCode === 82) { //R Restart KEY
+                 $(window).off("keydown");
                   console.log("trying to restart game");
                   tetris.endGame();
-                  // exitFullScreen(document.getElementById("tetrisScreen"));
                   $route.reload();
                 }
               });
+            $('#menu-select').on("click",()=>{
+              /////restart
+              tetris.endGame();
+              $route.reload();
+            });
+
+
+
           });
+
+
+
           $(document).on("keydown",(e)=>{
 
             switch(e.keyCode) {
               case 13:
-                // $(document).off("keydown");
+                $(document).off("keydown");
                 tetris.init();
                 $(document).on("keyup",(e)=>{
                     if(e.keyCode === 82) { //R Restart Key
                       $(document).off("keydown");
-                      $(document).off("keyup");
-                      tetris.endGame();
                       $route.reload();
                       console.log("trying to restart game");
                     }
@@ -384,27 +396,25 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             });
 
 
-          $('#menu-select').on("click",()=>{
-            tetris.endGame();
-            $route.reload();
-          });
 
 
-          $("#endGame").on("click",()=>{
 
-            $location.url("/home");
-            $scope.$apply();
-          });
+      $("#endGame").on("click",()=>{
+        tetris.endGame();
+        $location.url("/home");
+        $route.reload();
+      });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27: /// ESC KEY
             tetris.endGame();
-            $(document).off("keyup");
-            $(document).off("keydown");
+            // $(document).off("keyup");
+            // $(document).off("keydown");
             $location.url('/home');
+
             $('*').css("overflow","hidden !important");
-            $scope.$apply();
+            $route.reload();
             break;
         }
 
@@ -1146,9 +1156,9 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options ) {
+  var Tetris = function( options, $rootScope ) {
     this.difficulty = options.difficulty;
-
+    $rootScope = "pooop";
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
@@ -1459,41 +1469,43 @@ require('./grid');
         // $(e.target).data.id is the id of the DOM element that is clicked
         let domId = $(e.target).data('id');
         console.log("what is domId",domId);
-        switch (domId) {
-          case "control-b": // Space bar move all the way down
-            self.clearInterval();
+        if (self.startGame) {
+          switch (domId) {
+            case "control-b": // Space bar move all the way down
+              self.clearInterval();
 
-             if (!self.paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
+               if (!self.paused) {
+                 self.interval = setInterval(function() {
+                   self.shape.moveDown();
+                 }, 1);
+               }
+              break;
+            case "d-left":
+              if (!self.paused) {
+                self.shape.moveLeft();
+              }
+              break;
+            case "d-right":
+              if (!self.paused) {
+                self.shape.moveRight();
+              }
+              break;
+            case "d-down":
+              if (!self.paused) {
+                self.shape.moveDown();
+              }
+              break;
+            case "control-a":
+              if (!self.paused) {
+                self.shape.rotate();
+              }
+              break;
+            case "d-up":
+              if (!self.paused) {
+                self.shape.rotate();
+              }
+              break;
              }
-            break;
-          case "d-left":
-            if (!self.paused) {
-              self.shape.moveLeft();
-            }
-            break;
-          case "d-right":
-            if (!self.paused) {
-              self.shape.moveRight();
-            }
-            break;
-          case "d-down":
-            if (!self.paused) {
-              self.shape.moveDown();
-            }
-            break;
-          case "control-a":
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
-          case "d-up":
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
            }
          });
 
@@ -1509,7 +1521,8 @@ require('./grid');
       this.paused = false;
       this.level=0;
       clearTimeout(this.time);
-      $(window).off('keydown');
+      $(document).off('keydown');
+      // $(window).off("click");
       if(firebase.auth().currentUser){
         console.log("keep track of scores");
       }

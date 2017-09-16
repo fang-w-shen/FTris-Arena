@@ -110,6 +110,7 @@
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
+        $scope.lowestHighScore = $scope.highScorePlayers[2];
       });
     }
     $scope.getHighScores();
