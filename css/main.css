@@ -20,6 +20,10 @@ nav {
 .blinks {
   animation: blinker .9s linear infinite; }
 
+.pauseGame {
+  visibility: visible;
+  animation: blinker .9s linear infinite; }
+
 .howtoclose {
   position: relative;
   top: 20px;
@@ -27,6 +31,9 @@ nav {
 
 .mobileDevices {
   margin-top: 1em; }
+
+#mobileDevice {
+  background: beige; }
 
 .blink_me {
   font-family: 'Press Start 2P';
@@ -156,6 +163,9 @@ body {
     padding-right: 3px;
     padding-left: 3px; }
 
+.toast {
+  background: green; }
+
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #githubforkleft {
@@ -251,22 +261,6 @@ body {
     left: 70px;
     margin-left: 6px; } }
 /*///////MEDIA FOR IPHONE6////////*/
-@media only screen and (min-device-width: 374px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .overlayCModal {
-    margin-left: 20px; }
-
-  .overlay {
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: 91%;
-    max-width: 91%;
-    max-height: 99%;
-    top: 160px;
-    left: 70px;
-    margin-left: 6px; }
-
-  .howtoplaymodal {
-    margin-top: 40px !important; } }
 /*///////MEDIA FOR PHONES+IPAD-PRO LANDSCAPE////////*/
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
   #githubforkleft {
@@ -348,30 +342,49 @@ body {
 
   #tetrisScreen {
     margin-left: 1.5em !important;
-    margin-top: 2em;
+    margin-top: 1.5em;
     max-width: 99%; }
     #tetrisScreen #tetris {
       margin-right: -2em !important; }
 
   .control-buttons {
-    right: 3.3em !important;
-    top: 1.7em !important; }
+    right: 2.8em !important;
+    top: 2.2em !important; }
     .control-buttons .label {
       top: -7px !important; }
+
+  .menu-buttons {
+    left: .2em; }
 
   .d-pad {
     top: -.7em; }
 
   #endGame {
     position: absolute !important;
-    left: 7em !important;
-    bottom: 0em; }
+    left: 13em !important;
+    top: 16em; }
 
   .system {
     margin-left: 1.5em;
     margin-top: 0em !important; }
     .system .d-pad .label {
       display: none; }
+    .system .d-pad #d-up {
+      top: 1.5em;
+      width: 1.5em;
+      height: 1.5em; }
+    .system .d-pad #d-left {
+      width: 1.5em;
+      height: 1.5em;
+      left: -.5em; }
+    .system .d-pad #d-right {
+      width: 1.5em;
+      height: 1.5em;
+      right: -1em; }
+    .system .d-pad #d-down {
+      width: 1.5em;
+      height: 1.5em;
+      top: 4.5em; }
 
   .letters {
     display: none; }
@@ -424,6 +437,26 @@ body {
 
   .howtoclose {
     top: 1.3em; } }
+@media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
+  .overlayCModal {
+    margin-left: 20px; }
+
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 160px;
+    left: 70px;
+    margin-left: 6px; }
+
+  .howtoplaymodal {
+    margin-top: 40px !important; }
+
+  .control-buttons {
+    position: absolute;
+    right: .5em !important; } }
 /*Tetris Page*/
 * {
   margin: 0;
@@ -477,6 +510,8 @@ input {
   margin-left: 4%; }
   .right-column #score {
     display: inline-block; }
+  .right-column #level {
+    display: inline-block; }
 
 .mobileDevices {
   width: 600px; }
@@ -511,13 +546,17 @@ input {
       font-size: 30px; } }
   @media screen and (min-width: 360px) {
     .system {
-      font-size: 32px; } }
+      font-size: 32px; }
+      .system .control-buttons {
+        right: 1.5em !important; } }
   @media screen and (min-width: 380px) {
     .system {
       font-size: 34px; } }
-  @media screen and (min-width: 400px) {
+  @media screen and (min-width: 412px) {
     .system {
-      font-size: 36px; } }
+      font-size: 36px; }
+      .system .control-buttons {
+        right: .5em !important; } }
   @media screen and (min-width: 420px) {
     .system {
       font-size: 38px; } }

@@ -266,6 +266,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
+      $scope.fullScreen = false;
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
@@ -328,19 +329,36 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                   element.webkitRequestFullScreen();
                 }
               }
+      function bindFullScreenKey() {
+          $(window).on("keyup",(e)=>{
+            if (e.keyCode === 70) {
+                  if(!$scope.fullScreen){
+                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+                    $scope.fullScreen = true;
+                    $scope.$apply();
+                  }else {
+                    exitFullScreen(document); // the whole page
+                    $scope.fullScreen = false;
+
+                  }
+            }
+
+          });
+        }
+        bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
           $("#startGame").on("click",()=>{
             $(window).off("keydown");
               // Launch fullscreen for browsers that support it!
               launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-
               tetris.init();
               $(window).on("keyup",(e)=>{
                 if(e.keyCode === 82) {
+                 $(document).off("keydown");
                   console.log("trying to restart game");
+                  tetris.endGame();
                   // exitFullScreen(document.getElementById("tetrisScreen"));
-                  $(document).off("keydown");
                   $route.reload();
                 }
               });
@@ -350,35 +368,40 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             switch(e.keyCode) {
               case 13:
                 $(window).off("keydown");
-                launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                 tetris.init();
                 $(window).on("keyup",(e)=>{
-                    if(e.keyCode === 82) {
-                      console.log("trying to restart game");
+                    if(e.keyCode === 82) { //R Restart Key
+                      $(document).off("keydown");
                       $(window).off("keyup");
+                      tetris.endGame();
                       $route.reload();
+                      console.log("trying to restart game");
                     }
                   });
                 break;
+
               }
             });
+
+
+          $('#menu-select').on("click",()=>{
+            tetris.endGame();
+            $route.reload();
+          });
+
+
           $("#endGame").on("click",()=>{
+
             $location.url("/home");
             $scope.$apply();
           });
-      }
-
-        if($location.url()==="/Tetris"){
-          initializeGame();
-        }
-
-
-
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(window).on("keyup",(e)=>{
         switch(e.keyCode) {
-          case 27:
-            $(window).off("keydown");
+          case 27: /// ESC KEY
+            tetris.endGame();
+            $(window).off("keyup");
+            $(document).off("keydown");
             $location.url('/home');
             $('*').css("overflow","hidden !important");
             $scope.$apply();
@@ -386,6 +409,18 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         }
 
       });
+
+
+      }
+
+        if($location.url()==="/Tetris"){
+          $("#pauseGame").css("visibility","hidden");
+          initializeGame();
+        }
+
+
+
+
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');
@@ -606,7 +641,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
       console.error('failed render');
-      this.mediator.triggerEvent('failedRender', [cell]);
+      this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
     cell.$el.css('background', 'black');
@@ -643,7 +678,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   BaseShape.prototype.moveDown = function() {
     this.makeMove({x: 0, y: -1}, function() {
       this.markAsSolid();
-      this.mediator.triggerEvent('landed');
+      this.collisionState.triggerEvent('landed');
     });
   };
 
@@ -714,9 +749,9 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     this.color = colors[Math.floor(Math.random() * colors.length)];
   };
 
-  BaseShape.prototype.onInit = function(grid, mediator ) {
+  BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
-    this.mediator = mediator;
+    this.collisionState = collisionState;
     this.grid = grid;
     this.events = [];
     this.coords = [];
@@ -1091,11 +1126,11 @@ require('./shapes');
 require('./grid');
 
 (function( global, Grid, Shape) {
-  let pauseGame = require('./canvas.js');
-  var paused = false;
-  var speed = 1000;
+  // let pauseGame = require('./canvas.js');
+  var speed = 1065;
   var rowscleared = [];
   var score = 0;
+  var time;
   function CollisionState() {
     this.events = [];
   }
@@ -1121,16 +1156,11 @@ require('./grid');
     this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
-    this.dropRate = setInterval(()=>{
-                      if(this.startGame) {
-
-                     this.shape.moveDown();
-                      }
-                    },speed);
     this.startGame = false;
-
+    this.time = 0;
+    this.level = 0;
     this.render();
-    this.subscribe();
+    this.initializeCollisionEvents();
   };
   Tetris.prototype = {
     render: function() {
@@ -1153,138 +1183,16 @@ require('./grid');
 
       return this;
     },
-    bind: function() {
-      var self = this;
 
-      ////////////////////////KEYBOARD EVENTS/////////////////////////////
-      $(document).on('keydown', function( e ) {
-        switch (e.keyCode) {
-          case 32: // Space move all the way down
-            $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('#control-b').attr("style",'');
-            console.log(self.grid);
-            },200);
-            self.clearInterval(self.dropRate);
-
-             if (!paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
-             }
-            break;
-          case 37: // Left arrow
-            $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('.left').attr("style",'');
-            },200);
-            self.shape.moveLeft();
-            break;
-          case 90: // Z key rotate counterclockwise
-            $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('.up').attr("style",'');
-            },200);
-            if (self.shape.rotationState == 1) {
-              self.shape.rotationState =3;
-            }
-            else if (self.shape.rotationState== 2) {
-              self.shape.rotationState =4;
-            }
-            else {
-              self.shape.rotationState= self.shape.rotationState-2;
-            }
-            self.shape.rotate();
-            break;
-          case 88: // X key rotate clockwise
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('#control-a').attr("style",'');
-            },200);
-            self.shape.rotate();
-            break;
-          case 38: // Up arrow rotate right
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('#control-a').attr("style",'');
-            },200);
-            self.shape.rotate();
-            break;
-
-          case 39: // Right arrow
-            $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('.right').attr("style",'');
-            },200);
-            self.shape.moveRight();
-            break;
-          case 40: // Down arrow
-            $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
-            $('.down').attr("style",'');
-            },200);
-            self.shape.moveDown();
-            break;
-          case 80: // 'P'
-            if (!paused) {
-              self.dropRate = clearInterval(self.dropRate);
-              paused = true;
-
-            }
-            else if (paused) {
-              self.dropRate = setInterval(()=>{
-                       self.shape.moveDown();
-              },speed);
-              paused = false;
-            }
-            pauseGame(e);
-            break;
-
-          default:
-          // ..
-        }
-      });
-
-      ////////////////////////CLICK EVENTS/////////////////////////////
-
-      $(document).on('click', function( e ) {
-        console.log("what is e", $(e),e.target,e.currentTarget);
-        // $(e.target).data.id is the id of the DOM element that is clicked
-        let domId = $(e.target).data('id');
-        console.log("what is domId",domId);
-        switch (domId) {
-          case "control-b": // Space bar move all the way down
-            self.clearInterval(self.dropRate);
-
-             if (!paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
-             }
-            break;
-          case "d-left":
-            self.shape.moveLeft();
-            break;
-          case "d-right":
-            self.shape.moveRight();
-            break;
-          case "d-down":
-            self.shape.moveDown();
-            break;
-          case "control-a":
-            self.shape.rotate();
-            break;
-          case "d-up":
-            self.shape.rotate();
-            break;
-           }
-         });
-
-
-    },
     createNewShape: function() {
       var self = this;
       this.shape = this.getNextShape();
+      this.interval = setInterval(()=>{
+
+
+                     self.shape.moveDown();
+
+                    },speed);
     },
 
     getNextShape: function() {
@@ -1308,8 +1216,25 @@ require('./grid');
     clearInterval: function() {
       clearInterval(this.interval);
     },
-
-    subscribe: function() {
+    pause: function() {
+      var self = this;
+      if (this.paused) {
+        this.interval = setInterval(function() {
+          self.shape.moveDown();
+        },speed);
+        this.paused = false;
+        this.timer();
+        console.log("game:unthis.paused");
+        $("#pauseGame").css('visibility',"hidden");
+      } else {
+        this.clearInterval();
+        this.paused = true;
+        clearTimeout(self.time);
+        console.log("game:this.paused");
+        $("#pauseGame").css('visibility',"visible");
+      }
+    },
+    initializeCollisionEvents: function() {
       var self = this;
       this.collisionState.on('landed', function() {
         self.clearInterval();
@@ -1332,7 +1257,6 @@ require('./grid');
           self.collapseRow(row);
           score++;
           $('#score').html(score);
-          console.log("what is the score", score);
         }
       });
       if (rowsWereCollapsed) {
@@ -1420,28 +1344,190 @@ require('./grid');
 
 
     },
+    timer: function() {
+      if (speed >= 165 && !this.paused) {
+        this.time = setTimeout(()=>{
 
+
+              if(!this.paused) {
+                speed=speed-100;
+                this.level++;
+                $('#level').html(this.level);
+                console.log("level",this.level);
+                this.timer();
+              }
+        },60000);
+      }
+    },
+    bind: function() {
+      var self = this;
+
+      ////////////////////////KEYBOARD EVENTS/////////////////////////////
+      $(document).on('keydown', function( e ) {
+        switch (e.keyCode) {
+          case 32: // Space move all the way down
+            $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('#control-b').attr("style",'');
+            console.log(self.grid);
+            },200);
+            self.clearInterval();
+
+             if (!self.paused) {
+               self.interval = setInterval(function() {
+                 self.shape.moveDown();
+               }, 1);
+             }
+            break;
+          case 37: // Left arrow
+            $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('.left').attr("style",'');
+            },200);
+            if (!self.paused) {
+              self.shape.moveLeft();
+            }
+            break;
+          case 90: // Z key rotate counterclockwise
+            $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('.up').attr("style",'');
+            },200);
+            if (self.shape.rotationState == 1) {
+              self.shape.rotationState =3;
+            }
+            else if (self.shape.rotationState== 2) {
+              self.shape.rotationState =4;
+            }
+            else {
+              self.shape.rotationState= self.shape.rotationState-2;
+            }
+            if (!self.paused) {
+              self.shape.rotate();
+            }
+            break;
+          case 88: // X key rotate clockwise
+            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('#control-a').attr("style",'');
+            },200);
+            if (!self.paused) {
+              self.shape.rotate();
+            }
+            break;
+          case 38: // Up arrow rotate right
+            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('#control-a').attr("style",'');
+            },200);
+            if (!self.paused) {
+              self.shape.rotate();
+            }
+            break;
+
+          case 39: // Right arrow
+            $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('.right').attr("style",'');
+            },200);
+            if (!self.paused) {
+              self.shape.moveRight();
+            }
+            break;
+          case 40: // Down arrow
+            $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
+            setTimeout(()=>{
+            $('.down').attr("style",'');
+            },200);
+            if (!self.paused) {
+              self.shape.moveDown();
+            }
+            break;
+          case 80: // 'P'
+            self.pause();
+            break;
+
+          default:
+          // ..
+        }
+      });
+
+      ////////////////////////CLICK EVENTS/////////////////////////////
+
+      $(document).on('click', function( e ) {
+        console.log("what is e", $(e),e.target,e.currentTarget);
+        // $(e.target).data.id is the id of the DOM element that is clicked
+        let domId = $(e.target).data('id');
+        console.log("what is domId",domId);
+        switch (domId) {
+          case "control-b": // Space bar move all the way down
+            self.clearInterval();
+
+             if (!self.paused) {
+               self.interval = setInterval(function() {
+                 self.shape.moveDown();
+               }, 1);
+             }
+            break;
+          case "d-left":
+            if (!self.paused) {
+              self.shape.moveLeft();
+            }
+            break;
+          case "d-right":
+            if (!self.paused) {
+              self.shape.moveRight();
+            }
+            break;
+          case "d-down":
+            if (!self.paused) {
+              self.shape.moveDown();
+            }
+            break;
+          case "control-a":
+            if (!self.paused) {
+              self.shape.rotate();
+            }
+            break;
+          case "d-up":
+            if (!self.paused) {
+              self.shape.rotate();
+            }
+            break;
+           }
+         });
+
+
+    },
     endGame: function () {
       this.clearInterval();
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
-      score = 0;
-      $(this).off('keydown');
+
+      speed = 1065;
+      this.paused = false;
+      this.level=0;
+      clearTimeout(this.time);
+      $(window).off('keydown');
       if(firebase.auth().currentUser){
         console.log("keep track of scores");
       }
 
       // $(document).off('click');
-      console.log("game:over");
+       Materialize.toast('Game Over<br> your score was...'+' '+score, 4000);
+       score = 0;
     },
 
     init: function() {
+
       this.bind();
       this.createNewShape();
       this.startGame = true;
+      this.paused = false;
       $('#startGame').off("click");
       $('#startGame').off("keydown");
+      this.timer();
     }
   };
   Tetris.$inject = ['$rootScope'];
@@ -1449,4 +1535,4 @@ require('./grid');
 }( window , window.Grid,window.Shape));
 
 
-},{"./canvas.js":2,"./grid":7,"./shapes":10}]},{},[1,2,3,4,5,6,7,8,9,10,11]);
+},{"./grid":7,"./shapes":10}]},{},[1,2,3,4,5,6,7,8,9,10,11]);

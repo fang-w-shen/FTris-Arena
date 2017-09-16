@@ -23,7 +23,7 @@
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
       console.error('failed render');
-      this.mediator.triggerEvent('failedRender', [cell]);
+      this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
     cell.$el.css('background', 'black');
@@ -60,7 +60,7 @@
   BaseShape.prototype.moveDown = function() {
     this.makeMove({x: 0, y: -1}, function() {
       this.markAsSolid();
-      this.mediator.triggerEvent('landed');
+      this.collisionState.triggerEvent('landed');
     });
   };
 
@@ -131,9 +131,9 @@
     this.color = colors[Math.floor(Math.random() * colors.length)];
   };
 
-  BaseShape.prototype.onInit = function(grid, mediator ) {
+  BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
-    this.mediator = mediator;
+    this.collisionState = collisionState;
     this.grid = grid;
     this.events = [];
     this.coords = [];
