@@ -330,7 +330,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 }
               }
       function bindFullScreenKey() {
-          $(window).on("keyup",(e)=>{
+          $(document).on("keyup",(e)=>{
             if (e.keyCode === 70) {
                   if(!$scope.fullScreen){
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
@@ -349,11 +349,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
           $("#startGame").on("click",()=>{
-            $(window).off("keydown");
+            $(document).off("click");
               // Launch fullscreen for browsers that support it!
               launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
-              $(window).on("keyup",(e)=>{
+              $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) {
                  $(document).off("keydown");
                   console.log("trying to restart game");
@@ -363,16 +363,16 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 }
               });
           });
-          $(window).on("keydown",(e)=>{
+          $(document).on("keydown",(e)=>{
 
             switch(e.keyCode) {
               case 13:
-                $(window).off("keydown");
+                // $(document).off("keydown");
                 tetris.init();
-                $(window).on("keyup",(e)=>{
+                $(document).on("keyup",(e)=>{
                     if(e.keyCode === 82) { //R Restart Key
                       $(document).off("keydown");
-                      $(window).off("keyup");
+                      $(document).off("keyup");
                       tetris.endGame();
                       $route.reload();
                       console.log("trying to restart game");
@@ -396,11 +396,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             $scope.$apply();
           });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
-      $(window).on("keyup",(e)=>{
+      $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27: /// ESC KEY
             tetris.endGame();
-            $(window).off("keyup");
+            $(document).off("keyup");
             $(document).off("keydown");
             $location.url('/home');
             $('*').css("overflow","hidden !important");
