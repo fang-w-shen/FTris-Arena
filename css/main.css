@@ -86,9 +86,13 @@ body {
   background: rgba(20, 254, 192, 0.76);
   border-radius: 5%; }
   .modal-open .modal li {
-    border-radius: 5%; }
+    border-radius: 5%;
+    border: none !important; }
   .modal-open .modal ul {
-    border-radius: 5%; }
+    border-radius: 5%;
+    border: none !important; }
+  .modal-open .modal tbody {
+    border: none !important; }
 
 #playButton {
   background: rgba(255, 255, 255, 0.4); }
@@ -290,7 +294,7 @@ body {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 6% !important;
+    left: 5% !important;
     font-size: 9px; }
 
   label {
@@ -334,7 +338,7 @@ body {
     margin-left: 1.5em !important; }
 
   .right-column {
-    max-width: 60px;
+    max-width: 110px;
     position: absolute !important;
     top: 1em !important;
     left: 25%;
@@ -362,7 +366,7 @@ body {
   #endGame {
     position: absolute !important;
     left: 13em !important;
-    top: 16em; }
+    top: 18em; }
 
   .system {
     margin-left: 1.5em;

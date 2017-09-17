@@ -23,9 +23,8 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options, $rootScope ) {
+  var Tetris = function( options, $rootScope, FirebaseFactory ) {
     this.difficulty = options.difficulty;
-    $rootScope = "pooop";
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
@@ -50,12 +49,12 @@ require('./grid');
         }
       });
       this.preview = new Grid({
-         rows: 4,
-         cols: 4,
-         render: {
-           boardplaceholder: this.previewPlaceholder
-          }
-        });
+       rows: 4,
+       cols: 4,
+       render: {
+         boardplaceholder: this.previewPlaceholder
+       }
+     });
 
 
       return this;
@@ -67,9 +66,9 @@ require('./grid');
       this.interval = setInterval(()=>{
 
 
-                     self.shape.moveDown();
+       self.shape.moveDown();
 
-                    },speed);
+     },speed);
     },
 
     getNextShape: function() {
@@ -178,7 +177,7 @@ require('./grid');
         }
         self.moveRowDown(row, lowestEmptyRowIndex);
               // score += rowscleared[rowscleared.length-1];
-      });
+            });
     },
 
     isEmptyRow: function( row ) {
@@ -226,13 +225,13 @@ require('./grid');
         this.time = setTimeout(()=>{
 
 
-              if(!this.paused) {
-                speed=speed-100;
-                this.level++;
-                $('#level').html(this.level);
-                console.log("level",this.level);
-                this.timer();
-              }
+          if(!this.paused) {
+            speed=speed-100;
+            this.level++;
+            $('#level').html(this.level);
+            console.log("level",this.level);
+            this.timer();
+          }
         },60000);
       }
     },
@@ -243,86 +242,85 @@ require('./grid');
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
           case 32: // Space move all the way down
-            $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-b').attr("style",'');
-            console.log(self.grid);
-            },200);
-            self.clearInterval();
+          },200);
+          self.clearInterval();
 
-             if (!self.paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
-             }
-            break;
+          if (!self.paused) {
+           self.interval = setInterval(function() {
+             self.shape.moveDown();
+           }, 1);
+         }
+         break;
           case 37: // Left arrow
-            $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.left').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveLeft();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveLeft();
+          }
+          break;
           case 90: // Z key rotate counterclockwise
-            $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.up').attr("style",'');
-            },200);
-            if (self.shape.rotationState == 1) {
-              self.shape.rotationState =3;
-            }
-            else if (self.shape.rotationState== 2) {
-              self.shape.rotationState =4;
-            }
-            else {
-              self.shape.rotationState= self.shape.rotationState-2;
-            }
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (self.shape.rotationState == 1) {
+            self.shape.rotationState =3;
+          }
+          else if (self.shape.rotationState== 2) {
+            self.shape.rotationState =4;
+          }
+          else {
+            self.shape.rotationState= self.shape.rotationState-2;
+          }
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
           case 88: // X key rotate clockwise
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-a').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
           case 38: // Up arrow rotate right
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-a').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
 
           case 39: // Right arrow
-            $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.right').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveRight();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveRight();
+          }
+          break;
           case 40: // Down arrow
-            $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.down').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveDown();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveDown();
+          }
+          break;
           case 80: // 'P'
-            self.pause();
-            break;
+          self.pause();
+          break;
 
           default:
           // ..
@@ -332,49 +330,47 @@ require('./grid');
       ////////////////////////CLICK EVENTS/////////////////////////////
 
       $(document).on('click', function( e ) {
-        console.log("what is e", $(e),e.target,e.currentTarget);
         // $(e.target).data.id is the id of the DOM element that is clicked
         let domId = $(e.target).data('id');
-        console.log("what is domId",domId);
         if (self.startGame) {
           switch (domId) {
             case "control-b": // Space bar move all the way down
-              self.clearInterval();
+            self.clearInterval();
 
-               if (!self.paused) {
-                 self.interval = setInterval(function() {
-                   self.shape.moveDown();
-                 }, 1);
-               }
-              break;
-            case "d-left":
-              if (!self.paused) {
-                self.shape.moveLeft();
-              }
-              break;
-            case "d-right":
-              if (!self.paused) {
-                self.shape.moveRight();
-              }
-              break;
-            case "d-down":
-              if (!self.paused) {
-                self.shape.moveDown();
-              }
-              break;
-            case "control-a":
-              if (!self.paused) {
-                self.shape.rotate();
-              }
-              break;
-            case "d-up":
-              if (!self.paused) {
-                self.shape.rotate();
-              }
-              break;
-             }
+            if (!self.paused) {
+             self.interval = setInterval(function() {
+               self.shape.moveDown();
+             }, 1);
            }
-         });
+           break;
+           case "d-left":
+           if (!self.paused) {
+            self.shape.moveLeft();
+          }
+          break;
+          case "d-right":
+          if (!self.paused) {
+            self.shape.moveRight();
+          }
+          break;
+          case "d-down":
+          if (!self.paused) {
+            self.shape.moveDown();
+          }
+          break;
+          case "control-a":
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
+          case "d-up":
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
+        }
+      }
+    });
 
 
     },
@@ -390,13 +386,10 @@ require('./grid');
       clearTimeout(this.time);
       $(document).off('keydown');
       // $(window).off("click");
-      if(firebase.auth().currentUser){
-        console.log("keep track of scores");
-      }
+      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
 
       // $(document).off('click');
-       Materialize.toast('Game Over<br> your score was...'+' '+score, 4000);
-       score = 0;
+      score = 0;
     },
 
     init: function() {
@@ -410,7 +403,8 @@ require('./grid');
       this.timer();
     }
   };
-  Tetris.$inject = ['$rootScope'];
+  Tetris.$inject = ['$rootScope','FirebaseFactory'];
+  angular.module('TetrisApp').controller('Tetris', Tetris);
   global.Tetris = Tetris;
 }( window , window.Grid,window.Shape));
 

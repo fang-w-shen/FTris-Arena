@@ -3,19 +3,23 @@
 <div class="mobileDevices container" id="mobileDevice">
 
     <div id="tetrisScreen" class="row">
-            <div class="grid" id="tetris" class="col-md-8 col-sm-7">
-            </div>
-            <div class="right-column col-md-4 col-sm-3">
-                <div id="next" class="grid">Next:</div>
-                <div id="preview" class="grid"></div>
-                <div class="grid">Score: <div id="score"> 0</div></div>
-                <div class="grid" >Level: <div id="level"> 0</div></div>
-                <div id="time" class="grid"></div>
+        <div class="grid" id="tetris" class="col-md-8 col-sm-7">
+        </div>
+        <div class="right-column col-md-4 col-sm-3">
+            <div id="next" class="grid">Next:</div>
+            <div id="preview" class="grid"></div>
+            <div class="grid">Hi-Score: <div id="highScore"> {{highScore.score}}</div></div>
+            <div class="grid">Score: <div id="score"> 0</div></div>
+            <div class="grid" >Level: <div id="level"> 0</div></div>
+            <div id="pauseGame" class="grid pauseGame" >Paused ||</div>
+            <div id="time" class="grid"></div>
 
-                <div id="pauseGame" class="grid pauseGame" >Paused ||</div>
-            </div>
+
+        </div>
     </div>
-
+    <div class="row">
+                <div class="grid" id="tetris2" class="col-md-8">
+        </div>
     <div class="system">
 
       <div class=" screen"></div>
@@ -24,18 +28,19 @@
 
           <div id="menu-select" class="button menu select" data-id="menu-select" ><span class="label" data-id="menu-select" >Reset</span></div>
           <div id="startGame" class="button menu start"  data-id="startGame" ><span class="label"  data-id="startGame" >Start</span></div>
-        </div>
-        <div class="d-pad">
+
+      </div>
+      <div class="d-pad">
           <div id="d-up" class="button d up" data-id="d-up"><p class="labelfont" data-id="d-up">Spin</p><span class="label" data-id="d-up">&#9650</span></div>
           <div id="d-right" class="button d right" data-id="d-right"><p class="labelfont" data-id="d-right">Right</p><span class="label">&#9654</span></div>
           <div id="d-down" class="button d down" data-id="d-down"><p class="labelfont" data-id="d-down">Down</p><span class="label">&#9660</span></div>
           <div id="d-left" class="button d left" data-id="d-left"><p class="labelfont" data-id="d-left">Left</p><span class="label">&#9664</span></div>
-        </div>
-        <div class="control-buttons">
+      </div>
+      <div class="control-buttons">
           <div id="control-a" class="button control a" data-id="control-a"><span class="label" data-id="control-a">Rotate</span></div>
           <div id="control-b" class="button control b" data-id="control-b"><span class="label" data-id="control-b">Drop</span></div>
-        </div>
       </div>
-    </div>
+  </div>
+</div>
 <input type="button" id="endGame" class="btn btn-success" name="button" value="Exit/ Main Menu" style="position;absolute;width:135px;padding-left:2px">
 </div>

@@ -126,15 +126,15 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
-        $('.overlay').css("display","block").css("opacity","0");
-        setTimeout(()=>{
-            $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
-            $('.overlay').css("opacity","1").css("ease-in","20s");
+    $('.overlay').css("display","block").css("opacity","0");
+    setTimeout(()=>{
+      $('.overlay').css("transition","all 3s").css("transform","scale(1.2)");
+      $('.overlay').css("opacity","1").css("ease-in","20s");
             // setTimeout(()=>{
 
             // },1000);
             $('.overlay').css("overflow","hidden");
-        },1000);
+          },1000);
     //////////////CLICK EVENTS///////////////
     $(window).on("click",()=>{
       if (document.getElementById("play")===null) {
@@ -154,21 +154,21 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     document.getElementById("playButton").addEventListener("click",()=>{
 
       $('body').css("overflow-y","hidden !important");
-          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+      $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
       setTimeout(()=>{
 
-      $window.location.href = "#!/Tetris";
+        $window.location.href = "#!/Tetris";
       },1000);
     });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
+      $("#playButton").css("background-color","rgba(255,255,255,0)");
+      $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
+      $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
     });
     document.getElementById("howToPlay").addEventListener("click",()=>{
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
+      $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
+      $("#playButton").css("background-color","rgba(255,255,255,0)");
+      $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
     });
     //////////////KEYBOARD EVENTS///////////////
     $(window).on("keyup",(e)=>{
@@ -191,22 +191,22 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       }
       switch(e.keyCode) {
         case 13:
-          if(document.getElementById("play").checked){
-              $('body').css("overflow-y","scroll !important");
-                  $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
-              setTimeout(()=>{
+        if(document.getElementById("play").checked){
+          $('body').css("overflow-y","scroll !important");
+          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+          setTimeout(()=>{
 
-              $window.location.href = "#!/Tetris";
-              },1000);
-          } else if(document.getElementById("highScores").checked) {
-            $("#highScoreModal").modal("toggle");
-            document.getElementById("highScores").focus();
-          } else if(document.getElementById("howToPlay").checked) {
-            $("#howToPlayModal").modal("toggle");
-            document.getElementById("howToPlay").focus();
-          } else {
-            document.getElementById("play").focus();
-          }
+            $window.location.href = "#!/Tetris";
+          },1000);
+        } else if(document.getElementById("highScores").checked) {
+          $("#highScoreModal").modal("toggle");
+          document.getElementById("highScores").focus();
+        } else if(document.getElementById("howToPlay").checked) {
+          $("#howToPlayModal").modal("toggle");
+          document.getElementById("howToPlay").focus();
+        } else {
+          document.getElementById("play").focus();
+        }
       }
     });
     ////////////////HIGH SCORE MODAL///////////////
@@ -225,7 +225,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             return -1;
           }
           return 0;
-
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
@@ -252,14 +251,14 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       if (yourDeviceWidth.matches) {
           // window width is at less than 500px
           $('body').css("overflow-y","scroll");
-      }
-      else {
+        }
+        else {
           $('body').css("overflow-y","hidden");
-      }
+        }
 
-      $(".dropdown-button").dropdown();
-      $(".button-collapse").sideNav();
-      $("#sidenav-overlay").css("display",'none');
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+        $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
       $scope.userCredentials = {};
       $scope.logInGoogle = logInGoogle;
@@ -268,17 +267,18 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
+      $scope.highScore = 0;
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
-            .then(response => {
-                let user = response.user.uid;
+        .then(response => {
+          let user = response.user.uid;
                 // $(".progress").css("visibility","hidden");
                 $scope.isLoggedIn = true;
                 $location.url('/Tetris');
                 $scope.$apply();
-            })
-            .catch(error => console.log("google login error", error.message, error.code));
+              })
+        .catch(error => console.log("google login error", error.message, error.code));
       }
 
       function logOutUser() {
@@ -289,8 +289,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
       function registerWithEmailAndPassword(userCredentials) {
         AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
-            console.log("response from register", response);
-            $scope.logInWithEmailAndPassword(userCredentials);
+          console.log("response from register", response);
+          $scope.logInWithEmailAndPassword(userCredentials);
         });
       }
 
@@ -303,37 +303,41 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $scope.$apply();
         });
       }
-    //////////////INITIALIZING GAME//////////////////////
-    function initializeGame() {
-      var tetris = new Tetris({
+      //////////////INITIALIZING GAME//////////////////////
+      function initializeGame() {
+        var tetris = new Tetris({
           rows: 20,
           cols: 10,
           gamePlaceholder: '#tetris',
           previewPlaceholder: '#preview',
           difficulty:"easy"
         });
-      function exitFullScreen(element) {
-                if(element.exitFullscreen) {
-                  element.exitFullscreen();
-                } else if(element.mozCancelFullScreen) {
-                  element.mozCancelFullScreen();
-                } else if(element.webkitExitFullscreen) {
-                  element.webkitExitFullscreen();
-                }
-              }
-      function launchFullScreen(element) {
-                if(element.requestFullScreen) {
-                  element.requestFullScreen();
-                } else if(element.mozRequestFullScreen) {
-                  element.mozRequestFullScreen();
-                } else if(element.webkitRequestFullScreen) {
-                  element.webkitRequestFullScreen();
-                }
-              }
-      function bindFullScreenKey() {
+
+
+
+
+        function exitFullScreen(element) {
+          if(element.exitFullscreen) {
+            element.exitFullscreen();
+          } else if(element.mozCancelFullScreen) {
+            element.mozCancelFullScreen();
+          } else if(element.webkitExitFullscreen) {
+            element.webkitExitFullscreen();
+          }
+        }
+        function launchFullScreen(element) {
+          if(element.requestFullScreen) {
+            element.requestFullScreen();
+          } else if(element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+          } else if(element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+          }
+        }
+        function bindFullScreenKey() {
           $(document).on("keyup",(e)=>{
             if (e.keyCode === 70) {
-                  if(!$scope.fullScreen){
+              if(!$scope.fullScreen){
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
@@ -342,72 +346,72 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                     $scope.fullScreen = false;
 
                   }
-            }
+                }
 
-          });
+              });
         }
         bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
 
 
-          $("#startGame").on("click",()=>{
-            $(document).off("keydown");
+        $("#startGame").on("click",()=>{
+          $(document).off("keydown");
               // Launch fullscreen for browsers that support it!
-              launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+              // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
               $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
                  $(window).off("keydown");
-                  console.log("trying to restart game");
-                  tetris.endGame();
-                  $route.reload();
-                }
-              });
-            $('#menu-select').on("click",()=>{
+                 console.log("trying to restart game");
+                 tetris.endGame();
+                 $route.reload();
+               }
+             });
+              $('#menu-select').on("click",()=>{
               /////restart
-              tetris.endGame();
+              // tetris.endGame();
               $route.reload();
             });
 
 
 
-          });
-
-
-
-          $(document).on("keydown",(e)=>{
-
-            switch(e.keyCode) {
-              case 13:
-                $(document).off("keydown");
-                tetris.init();
-                $(document).on("keyup",(e)=>{
-                    if(e.keyCode === 82) { //R Restart Key
-                      $(document).off("keydown");
-                      $route.reload();
-                      console.log("trying to restart game");
-                    }
-                  });
-                break;
-
-              }
             });
 
 
 
+        $(document).on("keydown",(e)=>{
+
+          switch(e.keyCode) {
+            case 13:
+            $(document).off("keydown");
+            tetris.init();
+            $(document).on("keyup",(e)=>{
+              if(e.keyCode === 82) { //R Restart Key
+                $(document).off("keydown");
+                $route.reload();
+                console.log("trying to restart game");
+              }
+            });
+            break;
+
+          }
+        });
 
 
-      $("#endGame").on("click",()=>{
-        tetris.endGame();
-        $location.url("/home");
-        $route.reload();
-      });
+
+
+
+        $("#endGame").on("click",()=>{
+          tetris.endGame();
+          $location.url("/home");
+          $route.reload();
+        });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
           case 27: /// ESC KEY
-            tetris.endGame();
+          tetris.endGame();
             // $(document).off("keyup");
             // $(document).off("keydown");
             $location.url('/home');
@@ -415,23 +419,22 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             $('*').css("overflow","hidden !important");
             $route.reload();
             break;
-        }
+          }
 
-      });
+        });
 
+    }
 
-      }
+    if($location.url()==="/Tetris"){
+      $("#pauseGame").css("visibility","hidden");
+      initializeGame();
+    }
 
-        if($location.url()==="/Tetris"){
-          $("#pauseGame").css("visibility","hidden");
-          initializeGame();
-        }
+    function getHighScoreToBeat() {
+      $scope.highScore = FirebaseFactory.getLowestHighScore();
+    }
 
-        function getLowestHighScore() {
-          console.log("whats the third highest score",FirebaseFactory.getLowestHighScore());
-        }
-
-        getLowestHighScore();
+    getHighScoreToBeat();
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');
@@ -439,11 +442,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       //   $("#sidenav-overlay").css("display",'none');
       // });
 
-  };
+    };
 
-  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
-  angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
-})();
+    TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+    angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
+  })();
 
 },{"../scoregrid":9,"../tetris":11}],5:[function(require,module,exports){
 (function() {
@@ -486,24 +489,36 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       getHighScores: function(){
         let scores;
         return $q( (resolve, reject) => {
-            $http.get(`${firebaseInfo.databaseURL}/highscores.json`)
-            .then((itemObject) => {
-                scores = (itemObject.data);
-                resolve(scores);
-                })
-                .catch((error) => {
-                    reject(error);
-                });
+          $http.get(`${firebaseInfo.databaseURL}/highscores.json`)
+          .then((itemObject) => {
+            scores = (itemObject.data);
+            resolve(scores);
+          })
+          .catch((error) => {
+            reject(error);
+          });
         });
-    },
-    setLowestHighScore: function(score){
-      lowestHighScore = score;
-    },
-    getLowestHighScore: function(){
-      return lowestHighScore;
-    }
+      },
+      postNewHighScore: function(score){
+        return $q((resolve, reject) => {
+          let newObj = JSON.stringify(score);
+          $http.patch(`${firebaseInfo.databaseURL}/highscores/${id}.json`, newObj)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        });
+      },
+      setLowestHighScore: function(score){
+        lowestHighScore = score;
+      },
+      getLowestHighScore: function(){
+        return lowestHighScore;
+      }
+    };
   };
-};
 
   FirebaseFactory.$inject = ['$q','$http', '$rootScope','firebaseInfo'];
   angular.module('TetrisApp').factory('FirebaseFactory', FirebaseFactory);
@@ -631,14 +646,14 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   "use strict";
 
   var colors = [
-    'aqua',
-    'deepskyblue',
-    'lawngreen',
-    'hotpink',
-    'lightseagreen',
-    'orange',
-    'springgreen',
-    'gold'
+  'aqua',
+  'deepskyblue',
+  'lawngreen',
+  'hotpink',
+  'lightseagreen',
+  'orange',
+  'springgreen',
+  'gold'
   ];
 
   var Shape = {};
@@ -761,13 +776,13 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   //   return this.color;
   // };
   BaseShape.prototype.getRandomColors = function() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
 
   BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
@@ -828,37 +843,37 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -887,37 +902,37 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x - 1, y: center.y});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x - 1, y: center.y});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -946,37 +961,37 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -1005,37 +1020,37 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 3;
+      break;
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x-1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x-1, y: center.y - 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      newRotationState = 2;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -1064,37 +1079,37 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -1111,8 +1126,6 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   IShape.prototype.constructor = IShape;
   IShape.prototype.setInitialCoordinates = function() {
     var secondRow = this.grid.rowsCount - 2;
-    console.log("what is this.secondRow", secondRow);
-
     var middleColumn = parseInt(this.grid.colsCount / 2, 10);
     this.coords.push({x: middleColumn-2, y: secondRow+1});
     this.coords.push({x: middleColumn-1, y: secondRow+1});
@@ -1125,38 +1138,38 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[1];
+      center = this.cells[1];
 
-        coords.push({x: center.x+1, y: center.y+1});
-        coords.push({x: center.x+1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y-1});
-        coords.push({x: center.x + 1, y: center.y-2});
-        newRotationState = 2;
-        break;
+      coords.push({x: center.x+1, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      coords.push({x: center.x + 1, y: center.y-2});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[2];
-        coords.push({x: center.x-2, y: center.y+1});
-        coords.push({x: center.x-1, y: center.y+1});
-        coords.push({x: center.x, y: center.y+1});
-        coords.push({x: center.x+1, y: center.y+1});
-        newRotationState = 3;
-        break;
+      center = this.cells[2];
+      coords.push({x: center.x-2, y: center.y+1});
+      coords.push({x: center.x-1, y: center.y+1});
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y+1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[2];
-        coords.push({x: center.x, y: center.y+1});
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y-1});
-        coords.push({x: center.x, y: center.y-2});
-        newRotationState = 4;
-        break;
+      center = this.cells[2];
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y-1});
+      coords.push({x: center.x, y: center.y-2});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[1];console.log(center);
-        coords.push({x: center.x-2, y: center.y});
-        coords.push({x: center.x-1,y: center.y});
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x+1, y: center.y});
-        newRotationState = 1;
-        break;
+      center = this.cells[1];
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x-1,y: center.y});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x+1, y: center.y});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -1164,7 +1177,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function FShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = this.getRandomColors();
+    self.color = colors[7];
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1187,45 +1200,45 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     var newRotationState;
     switch (this.rotationState) {
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x - 2, y: center.y});
-        coords.push({x: center.x - 2, y: center.y+1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x - 2, y: center.y});
+      coords.push({x: center.x - 2, y: center.y+1});
+      newRotationState = 4;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 2});
-        coords.push({x: center.x - 1, y: center.y - 2});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x - 1, y: center.y - 2});
+      newRotationState = 3;
+      break;
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x-1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x-1, y: center.y - 1});
-        coords.push({x: center.x-2, y: center.y});
-        coords.push({x: center.x + 1, y: center.y-1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      newRotationState = 2;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y - 2});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -1271,9 +1284,8 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options, $rootScope ) {
+  var Tetris = function( options, $rootScope, FirebaseFactory ) {
     this.difficulty = options.difficulty;
-    $rootScope = "pooop";
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
@@ -1298,12 +1310,12 @@ require('./grid');
         }
       });
       this.preview = new Grid({
-         rows: 4,
-         cols: 4,
-         render: {
-           boardplaceholder: this.previewPlaceholder
-          }
-        });
+       rows: 4,
+       cols: 4,
+       render: {
+         boardplaceholder: this.previewPlaceholder
+       }
+     });
 
 
       return this;
@@ -1315,9 +1327,9 @@ require('./grid');
       this.interval = setInterval(()=>{
 
 
-                     self.shape.moveDown();
+       self.shape.moveDown();
 
-                    },speed);
+     },speed);
     },
 
     getNextShape: function() {
@@ -1426,7 +1438,7 @@ require('./grid');
         }
         self.moveRowDown(row, lowestEmptyRowIndex);
               // score += rowscleared[rowscleared.length-1];
-      });
+            });
     },
 
     isEmptyRow: function( row ) {
@@ -1474,13 +1486,13 @@ require('./grid');
         this.time = setTimeout(()=>{
 
 
-              if(!this.paused) {
-                speed=speed-100;
-                this.level++;
-                $('#level').html(this.level);
-                console.log("level",this.level);
-                this.timer();
-              }
+          if(!this.paused) {
+            speed=speed-100;
+            this.level++;
+            $('#level').html(this.level);
+            console.log("level",this.level);
+            this.timer();
+          }
         },60000);
       }
     },
@@ -1491,86 +1503,85 @@ require('./grid');
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
           case 32: // Space move all the way down
-            $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-b').attr("style",'');
-            console.log(self.grid);
-            },200);
-            self.clearInterval();
+          },200);
+          self.clearInterval();
 
-             if (!self.paused) {
-               self.interval = setInterval(function() {
-                 self.shape.moveDown();
-               }, 1);
-             }
-            break;
+          if (!self.paused) {
+           self.interval = setInterval(function() {
+             self.shape.moveDown();
+           }, 1);
+         }
+         break;
           case 37: // Left arrow
-            $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.left').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveLeft();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveLeft();
+          }
+          break;
           case 90: // Z key rotate counterclockwise
-            $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.up').attr("style",'');
-            },200);
-            if (self.shape.rotationState == 1) {
-              self.shape.rotationState =3;
-            }
-            else if (self.shape.rotationState== 2) {
-              self.shape.rotationState =4;
-            }
-            else {
-              self.shape.rotationState= self.shape.rotationState-2;
-            }
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (self.shape.rotationState == 1) {
+            self.shape.rotationState =3;
+          }
+          else if (self.shape.rotationState== 2) {
+            self.shape.rotationState =4;
+          }
+          else {
+            self.shape.rotationState= self.shape.rotationState-2;
+          }
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
           case 88: // X key rotate clockwise
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-a').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
           case 38: // Up arrow rotate right
-            $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('#control-a').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.rotate();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
 
           case 39: // Right arrow
-            $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.right').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveRight();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveRight();
+          }
+          break;
           case 40: // Down arrow
-            $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
-            setTimeout(()=>{
+          $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
             $('.down').attr("style",'');
-            },200);
-            if (!self.paused) {
-              self.shape.moveDown();
-            }
-            break;
+          },200);
+          if (!self.paused) {
+            self.shape.moveDown();
+          }
+          break;
           case 80: // 'P'
-            self.pause();
-            break;
+          self.pause();
+          break;
 
           default:
           // ..
@@ -1580,49 +1591,47 @@ require('./grid');
       ////////////////////////CLICK EVENTS/////////////////////////////
 
       $(document).on('click', function( e ) {
-        console.log("what is e", $(e),e.target,e.currentTarget);
         // $(e.target).data.id is the id of the DOM element that is clicked
         let domId = $(e.target).data('id');
-        console.log("what is domId",domId);
         if (self.startGame) {
           switch (domId) {
             case "control-b": // Space bar move all the way down
-              self.clearInterval();
+            self.clearInterval();
 
-               if (!self.paused) {
-                 self.interval = setInterval(function() {
-                   self.shape.moveDown();
-                 }, 1);
-               }
-              break;
-            case "d-left":
-              if (!self.paused) {
-                self.shape.moveLeft();
-              }
-              break;
-            case "d-right":
-              if (!self.paused) {
-                self.shape.moveRight();
-              }
-              break;
-            case "d-down":
-              if (!self.paused) {
-                self.shape.moveDown();
-              }
-              break;
-            case "control-a":
-              if (!self.paused) {
-                self.shape.rotate();
-              }
-              break;
-            case "d-up":
-              if (!self.paused) {
-                self.shape.rotate();
-              }
-              break;
-             }
+            if (!self.paused) {
+             self.interval = setInterval(function() {
+               self.shape.moveDown();
+             }, 1);
            }
-         });
+           break;
+           case "d-left":
+           if (!self.paused) {
+            self.shape.moveLeft();
+          }
+          break;
+          case "d-right":
+          if (!self.paused) {
+            self.shape.moveRight();
+          }
+          break;
+          case "d-down":
+          if (!self.paused) {
+            self.shape.moveDown();
+          }
+          break;
+          case "control-a":
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
+          case "d-up":
+          if (!self.paused) {
+            self.shape.rotate();
+          }
+          break;
+        }
+      }
+    });
 
 
     },
@@ -1638,13 +1647,10 @@ require('./grid');
       clearTimeout(this.time);
       $(document).off('keydown');
       // $(window).off("click");
-      if(firebase.auth().currentUser){
-        console.log("keep track of scores");
-      }
+      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
 
       // $(document).off('click');
-       Materialize.toast('Game Over<br> your score was...'+' '+score, 4000);
-       score = 0;
+      score = 0;
     },
 
     init: function() {
@@ -1658,7 +1664,8 @@ require('./grid');
       this.timer();
     }
   };
-  Tetris.$inject = ['$rootScope'];
+  Tetris.$inject = ['$rootScope','FirebaseFactory'];
+  angular.module('TetrisApp').controller('Tetris', Tetris);
   global.Tetris = Tetris;
 }( window , window.Grid,window.Shape));
 

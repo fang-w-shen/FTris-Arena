@@ -2,14 +2,14 @@
   "use strict";
 
   var colors = [
-    'aqua',
-    'deepskyblue',
-    'lawngreen',
-    'hotpink',
-    'lightseagreen',
-    'orange',
-    'springgreen',
-    'gold'
+  'aqua',
+  'deepskyblue',
+  'lawngreen',
+  'hotpink',
+  'lightseagreen',
+  'orange',
+  'springgreen',
+  'gold'
   ];
 
   var Shape = {};
@@ -132,13 +132,13 @@
   //   return this.color;
   // };
   BaseShape.prototype.getRandomColors = function() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
 
   BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
@@ -199,37 +199,37 @@
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -258,37 +258,37 @@
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x - 1, y: center.y});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x - 1, y: center.y});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -317,37 +317,37 @@
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -376,37 +376,37 @@
     var newRotationState;
     switch (this.rotationState) {
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 3;
+      break;
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x-1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x-1, y: center.y - 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      newRotationState = 2;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -435,37 +435,37 @@
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x - 1, y: center.y + 1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y - 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -482,8 +482,6 @@
   IShape.prototype.constructor = IShape;
   IShape.prototype.setInitialCoordinates = function() {
     var secondRow = this.grid.rowsCount - 2;
-    console.log("what is this.secondRow", secondRow);
-
     var middleColumn = parseInt(this.grid.colsCount / 2, 10);
     this.coords.push({x: middleColumn-2, y: secondRow+1});
     this.coords.push({x: middleColumn-1, y: secondRow+1});
@@ -496,38 +494,38 @@
     var newRotationState;
     switch (this.rotationState) {
       case 1:
-        center = this.cells[1];
+      center = this.cells[1];
 
-        coords.push({x: center.x+1, y: center.y+1});
-        coords.push({x: center.x+1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y-1});
-        coords.push({x: center.x + 1, y: center.y-2});
-        newRotationState = 2;
-        break;
+      coords.push({x: center.x+1, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      coords.push({x: center.x + 1, y: center.y-2});
+      newRotationState = 2;
+      break;
       case 2:
-        center = this.cells[2];
-        coords.push({x: center.x-2, y: center.y+1});
-        coords.push({x: center.x-1, y: center.y+1});
-        coords.push({x: center.x, y: center.y+1});
-        coords.push({x: center.x+1, y: center.y+1});
-        newRotationState = 3;
-        break;
+      center = this.cells[2];
+      coords.push({x: center.x-2, y: center.y+1});
+      coords.push({x: center.x-1, y: center.y+1});
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y+1});
+      newRotationState = 3;
+      break;
       case 3:
-        center = this.cells[2];
-        coords.push({x: center.x, y: center.y+1});
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y-1});
-        coords.push({x: center.x, y: center.y-2});
-        newRotationState = 4;
-        break;
+      center = this.cells[2];
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y-1});
+      coords.push({x: center.x, y: center.y-2});
+      newRotationState = 4;
+      break;
       case 4:
-        center = this.cells[1];console.log(center);
-        coords.push({x: center.x-2, y: center.y});
-        coords.push({x: center.x-1,y: center.y});
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x+1, y: center.y});
-        newRotationState = 1;
-        break;
+      center = this.cells[1];
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x-1,y: center.y});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x+1, y: center.y});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
@@ -535,7 +533,7 @@
   function FShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = this.getRandomColors();
+    self.color = colors[7];
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -558,45 +556,45 @@
     var newRotationState;
     switch (this.rotationState) {
       case 3:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x - 2, y: center.y});
-        coords.push({x: center.x - 2, y: center.y+1});
-        newRotationState = 4;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x - 2, y: center.y});
+      coords.push({x: center.x - 2, y: center.y+1});
+      newRotationState = 4;
+      break;
       case 2:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x - 1, y: center.y});
-        coords.push({x: center.x, y: center.y - 2});
-        coords.push({x: center.x - 1, y: center.y - 2});
-        newRotationState = 3;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x - 1, y: center.y - 2});
+      newRotationState = 3;
+      break;
       case 1:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x-1, y: center.y});
-        coords.push({x: center.x + 1, y: center.y});
-        coords.push({x: center.x-1, y: center.y - 1});
-        coords.push({x: center.x-2, y: center.y});
-        coords.push({x: center.x + 1, y: center.y-1});
-        newRotationState = 2;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      newRotationState = 2;
+      break;
       case 4:
-        center = this.cells[0];
-        coords.push({x: center.x, y: center.y});
-        coords.push({x: center.x, y: center.y + 1});
-        coords.push({x: center.x, y: center.y - 1});
-        coords.push({x: center.x + 1, y: center.y - 1});
-        coords.push({x: center.x, y: center.y - 2});
-        coords.push({x: center.x + 1, y: center.y + 1});
-        newRotationState = 1;
-        break;
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 1;
+      break;
     }
     return [coords, newRotationState];
   };
