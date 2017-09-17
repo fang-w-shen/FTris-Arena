@@ -2,7 +2,7 @@
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
+  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -24,7 +24,6 @@
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
-      console.log("rootscope is what",  $rootScope);
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
@@ -184,9 +183,11 @@
           initializeGame();
         }
 
+        function getLowestHighScore() {
+          console.log("whats the third highest score",FirebaseFactory.getLowestHighScore());
+        }
 
-
-
+        getLowestHighScore();
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');
@@ -196,6 +197,6 @@
 
   };
 
-  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
+  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
   angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
 })();

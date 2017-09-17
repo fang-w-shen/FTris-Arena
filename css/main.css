@@ -290,7 +290,7 @@ body {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 6.5% !important;
+    left: 6% !important;
     font-size: 9px; }
 
   label {

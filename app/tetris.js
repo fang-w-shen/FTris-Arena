@@ -30,7 +30,7 @@ require('./grid');
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
+    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I,Shape.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -50,7 +50,7 @@ require('./grid');
         }
       });
       this.preview = new Grid({
-         rows: 3,
+         rows: 4,
          cols: 4,
          render: {
            boardplaceholder: this.previewPlaceholder

@@ -8,7 +8,6 @@
     'hotpink',
     'lightseagreen',
     'orange',
-    'grey',
     'springgreen',
     'gold'
   ];
@@ -16,7 +15,7 @@
   var Shape = {};
 
   function BaseShape() {
-    this.getRandomColor();
+    // this.getRandomColor();
   }
   BaseShape.prototype.constructor = BaseShape;
 
@@ -26,7 +25,7 @@
       this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
-    cell.$el.css('background', 'black');
+    cell.$el.css('background', this.color);
     cell.isCurrentShape = true;
     this.cells.push(cell);
     return this;
@@ -127,9 +126,19 @@
     });
   };
 
-  BaseShape.prototype.getRandomColor = function() {
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  };
+  // BaseShape.prototype.getRandomColor = function() {
+  //   let self = this;
+  //   this.color = colors[Math.floor(Math.random() * colors.length)];
+  //   return this.color;
+  // };
+  BaseShape.prototype.getRandomColors = function() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
 
   BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
@@ -144,6 +153,12 @@
 
   function OShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[0];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+
   }
   OShape.prototype = new BaseShape();
   OShape.prototype.constructor = OShape;
@@ -161,6 +176,11 @@
 
   function TShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[1];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   TShape.prototype = new BaseShape();
   TShape.prototype.constructor = TShape;
@@ -216,6 +236,11 @@
 
   function SShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[2];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   SShape.prototype  = new BaseShape();
   SShape.prototype.constructor = SShape;
@@ -270,6 +295,11 @@
 
   function ZShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[3];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   ZShape.prototype  = new BaseShape();
   ZShape.prototype.constructor = ZShape;
@@ -324,6 +354,11 @@
 
   function LShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[4];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   LShape.prototype = new BaseShape();
   LShape.prototype.constructor = LShape;
@@ -378,6 +413,11 @@
 
   function JShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[5];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   JShape.prototype = new BaseShape();
   JShape.prototype.constructor = JShape;
@@ -432,6 +472,11 @@
 
   function IShape( grid, collisionState) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[6];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   IShape.prototype = new BaseShape();
   IShape.prototype.constructor = IShape;
@@ -487,6 +532,74 @@
     return [coords, newRotationState];
   };
 
+  function FShape( grid, collisionState ) {
+    this.onInit(grid,collisionState);
+    let self = this;
+    self.color = this.getRandomColors();
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  FShape.prototype = new BaseShape();
+  FShape.prototype.constructor = FShape;
+  FShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10)-1;
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn, y: secondRow - 2});
+    this.coords.push({x: middleColumn + 1, y: secondRow - 1});
+    this.coords.push({x: middleColumn + 1, y: secondRow + 1});
+  };
+  FShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 3:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x - 1, y: center.y});
+        coords.push({x: center.x + 1, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x - 2, y: center.y});
+        coords.push({x: center.x - 2, y: center.y+1});
+        newRotationState = 4;
+        break;
+      case 2:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x, y: center.y - 1});
+        coords.push({x: center.x - 1, y: center.y});
+        coords.push({x: center.x, y: center.y - 2});
+        coords.push({x: center.x - 1, y: center.y - 2});
+        newRotationState = 3;
+        break;
+      case 1:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x-1, y: center.y});
+        coords.push({x: center.x + 1, y: center.y});
+        coords.push({x: center.x-1, y: center.y - 1});
+        coords.push({x: center.x-2, y: center.y});
+        coords.push({x: center.x + 1, y: center.y-1});
+        newRotationState = 2;
+        break;
+      case 4:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x, y: center.y - 1});
+        coords.push({x: center.x + 1, y: center.y - 1});
+        coords.push({x: center.x, y: center.y - 2});
+        coords.push({x: center.x + 1, y: center.y + 1});
+        newRotationState = 1;
+        break;
+    }
+    return [coords, newRotationState];
+  };
 
   // Pack all the shape classes in one object (namespace)
   Shape.Sq = OShape;
@@ -496,6 +609,7 @@
   Shape.L = LShape;
   Shape.J = JShape;
   Shape.I = IShape;
+  Shape.F = FShape;
 
   // Export the shape namespace to the global scope
   global.Shape = Shape;

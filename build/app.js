@@ -229,7 +229,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
-        $scope.lowestHighScore = $scope.highScorePlayers[2];
+        FirebaseFactory.setLowestHighScore($scope.highScorePlayers[2]);
       });
     }
     $scope.getHighScores();
@@ -246,7 +246,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
   require('../tetris');
   require('../scoregrid');
-  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route) {
+  var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -268,7 +268,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
-      console.log("rootscope is what",  $rootScope);
       //////////////AUTHORIZATION METHODS//////////////////////
       function logInGoogle() {
         AuthFactory.logInGoogle()
@@ -428,9 +427,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           initializeGame();
         }
 
+        function getLowestHighScore() {
+          console.log("whats the third highest score",FirebaseFactory.getLowestHighScore());
+        }
 
-
-
+        getLowestHighScore();
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');
@@ -440,7 +441,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
   };
 
-  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route'];
+  TetrisCtrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
   angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
 })();
 
@@ -636,7 +637,6 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     'hotpink',
     'lightseagreen',
     'orange',
-    'grey',
     'springgreen',
     'gold'
   ];
@@ -644,7 +644,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   var Shape = {};
 
   function BaseShape() {
-    this.getRandomColor();
+    // this.getRandomColor();
   }
   BaseShape.prototype.constructor = BaseShape;
 
@@ -654,7 +654,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
       this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
-    cell.$el.css('background', 'black');
+    cell.$el.css('background', this.color);
     cell.isCurrentShape = true;
     this.cells.push(cell);
     return this;
@@ -755,9 +755,19 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     });
   };
 
-  BaseShape.prototype.getRandomColor = function() {
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  };
+  // BaseShape.prototype.getRandomColor = function() {
+  //   let self = this;
+  //   this.color = colors[Math.floor(Math.random() * colors.length)];
+  //   return this.color;
+  // };
+  BaseShape.prototype.getRandomColors = function() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
 
   BaseShape.prototype.onInit = function(grid, collisionState ) {
     this.rotationState = 1;
@@ -772,6 +782,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function OShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[0];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+
   }
   OShape.prototype = new BaseShape();
   OShape.prototype.constructor = OShape;
@@ -789,6 +805,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function TShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[1];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   TShape.prototype = new BaseShape();
   TShape.prototype.constructor = TShape;
@@ -844,6 +865,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function SShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[2];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   SShape.prototype  = new BaseShape();
   SShape.prototype.constructor = SShape;
@@ -898,6 +924,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function ZShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[3];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   ZShape.prototype  = new BaseShape();
   ZShape.prototype.constructor = ZShape;
@@ -952,6 +983,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function LShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[4];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   LShape.prototype = new BaseShape();
   LShape.prototype.constructor = LShape;
@@ -1006,6 +1042,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function JShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[5];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   JShape.prototype = new BaseShape();
   JShape.prototype.constructor = JShape;
@@ -1060,6 +1101,11 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   function IShape( grid, collisionState) {
     this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[6];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
   }
   IShape.prototype = new BaseShape();
   IShape.prototype.constructor = IShape;
@@ -1115,6 +1161,74 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     return [coords, newRotationState];
   };
 
+  function FShape( grid, collisionState ) {
+    this.onInit(grid,collisionState);
+    let self = this;
+    self.color = this.getRandomColors();
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  FShape.prototype = new BaseShape();
+  FShape.prototype.constructor = FShape;
+  FShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10)-1;
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn, y: secondRow - 2});
+    this.coords.push({x: middleColumn + 1, y: secondRow - 1});
+    this.coords.push({x: middleColumn + 1, y: secondRow + 1});
+  };
+  FShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 3:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x - 1, y: center.y});
+        coords.push({x: center.x + 1, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x - 2, y: center.y});
+        coords.push({x: center.x - 2, y: center.y+1});
+        newRotationState = 4;
+        break;
+      case 2:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x, y: center.y - 1});
+        coords.push({x: center.x - 1, y: center.y});
+        coords.push({x: center.x, y: center.y - 2});
+        coords.push({x: center.x - 1, y: center.y - 2});
+        newRotationState = 3;
+        break;
+      case 1:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x-1, y: center.y});
+        coords.push({x: center.x + 1, y: center.y});
+        coords.push({x: center.x-1, y: center.y - 1});
+        coords.push({x: center.x-2, y: center.y});
+        coords.push({x: center.x + 1, y: center.y-1});
+        newRotationState = 2;
+        break;
+      case 4:
+        center = this.cells[0];
+        coords.push({x: center.x, y: center.y});
+        coords.push({x: center.x, y: center.y + 1});
+        coords.push({x: center.x, y: center.y - 1});
+        coords.push({x: center.x + 1, y: center.y - 1});
+        coords.push({x: center.x, y: center.y - 2});
+        coords.push({x: center.x + 1, y: center.y + 1});
+        newRotationState = 1;
+        break;
+    }
+    return [coords, newRotationState];
+  };
 
   // Pack all the shape classes in one object (namespace)
   Shape.Sq = OShape;
@@ -1124,6 +1238,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   Shape.L = LShape;
   Shape.J = JShape;
   Shape.I = IShape;
+  Shape.F = FShape;
 
   // Export the shape namespace to the global scope
   global.Shape = Shape;
@@ -1163,7 +1278,7 @@ require('./grid');
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
+    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I,Shape.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -1183,7 +1298,7 @@ require('./grid');
         }
       });
       this.preview = new Grid({
-         rows: 3,
+         rows: 4,
          cols: 4,
          render: {
            boardplaceholder: this.previewPlaceholder
