@@ -100,6 +100,8 @@
     } else if (onObstacle) {
       onObstacle.call(this);
     }
+    // console.log("what is this.grid", this.grid);
+
   };
 
   BaseShape.prototype.clearCoords = function() {

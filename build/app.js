@@ -744,6 +744,8 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     } else if (onObstacle) {
       onObstacle.call(this);
     }
+    // console.log("what is this.grid", this.grid);
+
   };
 
   BaseShape.prototype.clearCoords = function() {
@@ -1284,7 +1286,7 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options, $rootScope, FirebaseFactory ) {
+  var Tetris = function( options, $rootScope, firebaseInfo ) {
     this.difficulty = options.difficulty;
     this.rows = options.rows;
     this.cols = options.cols;
@@ -1437,8 +1439,7 @@ require('./grid');
           return;
         }
         self.moveRowDown(row, lowestEmptyRowIndex);
-              // score += rowscleared[rowscleared.length-1];
-            });
+      });
     },
 
     isEmptyRow: function( row ) {
@@ -1647,6 +1648,18 @@ require('./grid');
       clearTimeout(this.time);
       $(document).off('keydown');
       // $(window).off("click");
+      if(score>$('#highScore').html()){
+        let newhighscorename = prompt("Congratulations! Enter your name...");
+        $.ajax({
+          url: `https://tetris-arena.firebaseio.com/highscores.json`,
+          method: "POST",
+          data : JSON.stringify({name:newhighscorename,score:score})
+        })
+        .done(function(response) {
+          console.log("response",response);
+
+        });
+      }
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
 
       // $(document).off('click');
@@ -1664,7 +1677,7 @@ require('./grid');
       this.timer();
     }
   };
-  Tetris.$inject = ['$rootScope','FirebaseFactory'];
+  Tetris.$inject = ['$rootScope','firebaseInfo'];
   angular.module('TetrisApp').controller('Tetris', Tetris);
   global.Tetris = Tetris;
 }( window , window.Grid,window.Shape));
