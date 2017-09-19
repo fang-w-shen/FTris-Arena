@@ -31,8 +31,10 @@
       console.log("item is", values);
 
       $scope.board = values;
+      $scope.$apply();
     } else {
       $scope.board = '';
+      $scope.$apply();
     }
   });
   let gamesref = firebase.database().ref('games');
@@ -40,8 +42,10 @@
     if(snapshot.val()){
      let values= Object.values(snapshot.val());
      $scope.board = values;
+     $scope.$apply();
    }else {
       $scope.board = '';
+      $scope.$apply();
     }
 
  });
