@@ -483,6 +483,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       console.log("item is", values);
 
       $scope.board = values;
+    } else {
+      $scope.board = '';
     }
   });
   let gamesref = firebase.database().ref('games');
@@ -490,7 +492,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     if(snapshot.val()){
      let values= Object.values(snapshot.val());
      $scope.board = values;
-   }
+   }else {
+      $scope.board = '';
+    }
 
  });
 
