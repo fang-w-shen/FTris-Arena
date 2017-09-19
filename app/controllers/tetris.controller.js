@@ -3,6 +3,8 @@
   require('../tetris');
   require('../scoregrid');
   var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
+    var themesong = document.getElementById("myAudio");
+    themesong.currentTime = 0;
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -17,49 +19,10 @@
         $(".button-collapse").sideNav();
         $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
-      $scope.userCredentials = {};
-      $scope.logInGoogle = logInGoogle;
-      $scope.logOutUser = logOutUser;
-      $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
-      $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
-      $scope.highScore = 0;
-      //////////////AUTHORIZATION METHODS//////////////////////
-      function logInGoogle() {
-        AuthFactory.logInGoogle()
-        .then(response => {
-          let user = response.user.uid;
-                // $(".progress").css("visibility","hidden");
-                $scope.isLoggedIn = true;
-                $location.url('/Tetris');
-                $scope.$apply();
-              })
-        .catch(error => console.log("google login error", error.message, error.code));
-      }
+      $scope.highScore = '';
 
-      function logOutUser() {
-        AuthFactory.logOut();
-        $scope.isLoggedIn = false;
-        $location.url('/home');
-      }
-
-      function registerWithEmailAndPassword(userCredentials) {
-        AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
-          console.log("response from register", response);
-          $scope.logInWithEmailAndPassword(userCredentials);
-        });
-      }
-
-
-      function logInWithEmailAndPassword(userCredentials){
-        AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
-          console.log("response from sign in", response);
-
-          $location.path("/Tetris");
-          $scope.$apply();
-        });
-      }
       //////////////INITIALIZING GAME//////////////////////
       function initializeGame() {
         var tetris = new Tetris({
@@ -113,21 +76,25 @@
 
 
         $("#startGame").on("click",()=>{
-          $(document).off("keydown");
               // Launch fullscreen for browsers that support it!
               // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
+              $(window).off("keydown");
               $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
-                 $(window).off("keydown");
+                 $(document).off("keyup");
+                 $(document).off("keydown");
                  console.log("trying to restart game");
+                 themesong.pause();
                  tetris.endGame();
                  $route.reload();
                }
              });
               $('#menu-select').on("click",()=>{
               /////restart
-              // tetris.endGame();
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
               $route.reload();
             });
 
@@ -137,18 +104,27 @@
 
 
 
-        $(document).on("keydown",(e)=>{
+        $(window).on("keydown",(e)=>{
 
           switch(e.keyCode) {
             case 13:
-            $(document).off("keydown");
             tetris.init();
+            $(window).off("keydown");
             $(document).on("keyup",(e)=>{
               if(e.keyCode === 82) { //R Restart Key
+                $(document).off("keyup");
                 $(document).off("keydown");
+                tetris.endGame();
                 $route.reload();
                 console.log("trying to restart game");
               }
+            });
+            $('#menu-select').on("click",()=>{
+              /////restart
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
+              $route.reload();
             });
             break;
 
@@ -169,7 +145,7 @@
         switch(e.keyCode) {
           case 27: /// ESC KEY
           tetris.endGame();
-            // $(document).off("keyup");
+            $(window).off("keydown");
             // $(document).off("keydown");
             $location.url('/home');
 
@@ -182,16 +158,22 @@
 
     }
 
+
     if($location.url()==="/Tetris"){
       $("#pauseGame").css("visibility","hidden");
       initializeGame();
     }
 
     function getHighScoreToBeat() {
-      $scope.highScore = FirebaseFactory.getLowestHighScore();
+      let highscore = FirebaseFactory.getLowestHighScore().then((item)=>{
+
+        $scope.highScore = item;
+      });
+
     }
 
     getHighScoreToBeat();
+    console.log("localstorage", localStorage.score);
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');

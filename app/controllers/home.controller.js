@@ -3,6 +3,8 @@
 
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
+    $(document).off("keydown");
+    $(document).off("keyup");
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
@@ -109,7 +111,6 @@
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
-        FirebaseFactory.setLowestHighScore($scope.highScorePlayers[2]);
       });
     }
     $scope.getHighScores();

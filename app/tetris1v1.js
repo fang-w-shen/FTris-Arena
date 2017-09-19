@@ -2,7 +2,7 @@
 require('./shapes');
 require('./grid');
 
-(function( global, Grid, Shape) {
+(function( global, Grid, Shape2) {
   // let pauseGame = require('./canvas.js');
   var speed = 1065;
   var rowscleared = [];
@@ -31,13 +31,18 @@ require('./grid');
       this.events.push({ eventName: eventName, cb: cb });
     }
   };
-  var Tetris = function( options, $rootScope, firebaseInfo ) {
+
+
+  var Tetris2 = function( options, $rootScope, firebaseInfo ) {
     this.difficulty = options.difficulty;
     this.rows = options.rows;
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I,Shape.F];
+    this.opponentPlaceholder = options.opponentPlaceholder;
+    this.gameBoardRef = options.gameBoardRef;
+    this.databaseref = this.FBRef();
+    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -46,7 +51,7 @@ require('./grid');
     this.render();
     this.initializeCollisionEvents();
   };
-  Tetris.prototype = {
+  Tetris2.prototype = {
     render: function() {
       this.grid = new Grid({
         difficulty: this.difficulty,
@@ -63,7 +68,14 @@ require('./grid');
          boardplaceholder: this.previewPlaceholder
        }
      });
-
+      this.opponent = new Grid({
+        difficulty: this.difficulty,
+        rows: this.rows,
+        cols: this.cols,
+        render: {
+          boardplaceholder: this.opponentPlaceholder
+        }
+      });
 
       return this;
     },
@@ -75,16 +87,30 @@ require('./grid');
 
 
        self.shape.moveDown();
+
      },speed);
 
-      // this.opponent.getCellAt(0,1).$el.css('background','red');
+
+      let selfref = firebase.database().ref(this.databaseref);
+      selfref.on("value",(snapshot)=>{
+        let eachrow = this.grid.grid.forEach((item)=>{
+          item.forEach((items,index)=>{
+            this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+          });
+        });
+        if (snapshot.val()) {
+          snapshot.val().forEach((item)=>{
+            this.opponent.getCellAt(item.x,item.y).$el.css('background','red');
+          });
+        }
+      });
     },
 
     getNextShape: function() {
       var NextShape = this.next;
       this.next = this.getRandomShape();
       this.displayInPreview(this.next);
-      return new NextShape(this.grid, this.collisionState);
+      return new NextShape(this.grid, this.collisionState, this.databaseref);
     },
 
     getRandomShape: function() {
@@ -111,14 +137,12 @@ require('./grid');
         this.timer();
         console.log("game:unthis.paused");
         $("#pauseGame").css('visibility',"hidden");
-        themesong.play();
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
         console.log("game:this.paused");
         $("#pauseGame").css('visibility',"visible");
-        themesong.pause();
       }
     },
     initializeCollisionEvents: function() {
@@ -246,6 +270,29 @@ require('./grid');
         },60000);
       }
     },
+    FBRef: function() {
+
+
+
+
+
+
+
+
+
+      let database = firebase.database().ref('games');
+      let user = firebase.auth().currentUser.uid;
+      let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
+      let ref = firebase.database().ref(`games/${response}`);
+
+       ref.onDisconnect().remove();
+
+      console.log("what is response1",response);
+      return `games/${response}/grid`;
+    },
+
+
+
     bind: function() {
       var self = this;
 
@@ -406,35 +453,36 @@ require('./grid');
       this.paused = false;
       this.level=0;
       clearTimeout(this.time);
-      themesong.pause();
       gameover.play();
       $(this).off('keydown');
       $(this).off("keyup");
-      if(score>$('#highScore').html()){
-        let newhighscorename = prompt("Congratulations! Enter your name...");
-        console.log("name here",newhighscorename);
-        if (newhighscorename === '') {
-          newhighscorename = 'guest';
-        }else if (newhighscorename === null) {
-          newhighscorename = 'guest';
-        }
-        $.ajax({
-          url: `https://tetris-arena.firebaseio.com/highscores.json`,
-          method: "POST",
-          data : JSON.stringify({name:newhighscorename,score:score})
-        })
-        .done(function(response) {
-          console.log("response",response);
+      let ref = this.databaseref.replace("/grid","");
+      firebase.database().ref(ref).remove();
+      // if(score>$('#highScore').html()){
+      //   let newhighscorename = prompt("Congratulations! Enter your name...");
+      //   console.log("name here",newhighscorename);
+      //   if (newhighscorename === '') {
+      //     newhighscorename = 'guest';
+      //   }else if (newhighscorename === null) {
+      //     newhighscorename = 'guest';
+      //   }
+        // $.ajax({
+        //   url: `https://tetris-arena.firebaseio.com/highscores.json`,
+        //   method: "POST",
+        //   data : JSON.stringify({name:newhighscorename,score:score})
+        // })
+        // .done(function(response) {
+        //   console.log("response",response);
 
-        });
-      }
+        // });
+      // }
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
 
       // $(document).off('click');
-      if (score > localStorage.score) {
+      // if (score > localStorage.score) {
 
-        localStorage.score = score;
-      }
+      //   localStorage.score = score;
+      // }
       score = 0;
     },
 
@@ -448,12 +496,22 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
-      themesong.currentTime = 0;
-      themesong.play();
+
+      // this.grid.rows.forEach((item)=>{
+      //   item.forEach((insideitem)=>{
+      //     databaseref.child("poop").set({x:insideitem.x,y:insideitem.y}).then((response)=>{
+      //   console.log("response", response);
+      // });
+      //   });
+
+      // });
+
+      // database.on("value",(snapshot)=>{
+      //   console.log(snapshot.val());
+      // });
     }
   };
-  Tetris.$inject = ['$rootScope','firebaseInfo'];
-  angular.module('TetrisApp').controller('Tetris', Tetris);
-  global.Tetris = Tetris;
-}( window , window.Grid,window.Shape));
+
+  global.Tetris2 = Tetris2;
+}( window , window.Grid,window.Shape2));
 

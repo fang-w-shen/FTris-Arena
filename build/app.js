@@ -4,6 +4,19 @@ angular.module('TetrisApp', ['ngRoute']);
 
 
 angular.module('TetrisApp').config(function($routeProvider) {
+  let isAuth = ($location) => {
+        return new Promise((resolve,reject)=>{
+            let truth = firebase.auth().currentUser.uid;
+            if (truth){
+                resolve();
+            } else {
+
+              $location.url("/home");
+
+            }
+        });
+    };
+
   $routeProvider
     .when("/home", {
       templateUrl: "partials/home.html",
@@ -11,20 +24,25 @@ angular.module('TetrisApp').config(function($routeProvider) {
     }).when("/Tetris", {
       templateUrl: "partials/tetris.html",
       controller: 'TetrisCtrl'
+    }).when("/Tetris1v1", {
+      templateUrl: "partials/tetris1v1.html",
+      controller: 'Tetris1v1Ctrl'
+      // resolve: {isAuth}
     }).when("/register", {
       templateUrl: "partials/register.html",
-      controller: 'TetrisCtrl'
+      controller: 'Tetris1v1Ctrl'
     }).when("/login", {
       templateUrl: "partials/login.html",
-      controller: 'TetrisCtrl'
+      controller: 'Tetris1v1Ctrl'
     })
-    .otherwise("/home");
+    .otherwise("/login");
 });
 
 angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
   firebase.initializeApp(firebaseInfo);
-  firebase.auth().signOut();
+  // firebase.auth().signOut();
+
 });
 
 },{}],2:[function(require,module,exports){
@@ -122,6 +140,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
+    $(document).off("keydown");
+    $(document).off("keyup");
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
@@ -228,7 +248,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         });
         values = values.splice(0,3);
         $scope.highScorePlayers=values;
-        FirebaseFactory.setLowestHighScore($scope.highScorePlayers[2]);
       });
     }
     $scope.getHighScores();
@@ -246,6 +265,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../tetris');
   require('../scoregrid');
   var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
+    var themesong = document.getElementById("myAudio");
+    themesong.currentTime = 0;
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -260,49 +281,10 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         $(".button-collapse").sideNav();
         $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
-      $scope.userCredentials = {};
-      $scope.logInGoogle = logInGoogle;
-      $scope.logOutUser = logOutUser;
-      $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
-      $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
-      $scope.highScore = 0;
-      //////////////AUTHORIZATION METHODS//////////////////////
-      function logInGoogle() {
-        AuthFactory.logInGoogle()
-        .then(response => {
-          let user = response.user.uid;
-                // $(".progress").css("visibility","hidden");
-                $scope.isLoggedIn = true;
-                $location.url('/Tetris');
-                $scope.$apply();
-              })
-        .catch(error => console.log("google login error", error.message, error.code));
-      }
+      $scope.highScore = '';
 
-      function logOutUser() {
-        AuthFactory.logOut();
-        $scope.isLoggedIn = false;
-        $location.url('/home');
-      }
-
-      function registerWithEmailAndPassword(userCredentials) {
-        AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
-          console.log("response from register", response);
-          $scope.logInWithEmailAndPassword(userCredentials);
-        });
-      }
-
-
-      function logInWithEmailAndPassword(userCredentials){
-        AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
-          console.log("response from sign in", response);
-
-          $location.path("/Tetris");
-          $scope.$apply();
-        });
-      }
       //////////////INITIALIZING GAME//////////////////////
       function initializeGame() {
         var tetris = new Tetris({
@@ -356,21 +338,25 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
         $("#startGame").on("click",()=>{
-          $(document).off("keydown");
               // Launch fullscreen for browsers that support it!
               // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
               tetris.init();
+              $(window).off("keydown");
               $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
-                 $(window).off("keydown");
+                 $(document).off("keyup");
+                 $(document).off("keydown");
                  console.log("trying to restart game");
+                 themesong.pause();
                  tetris.endGame();
                  $route.reload();
                }
              });
               $('#menu-select').on("click",()=>{
               /////restart
-              // tetris.endGame();
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
               $route.reload();
             });
 
@@ -380,18 +366,27 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
 
-        $(document).on("keydown",(e)=>{
+        $(window).on("keydown",(e)=>{
 
           switch(e.keyCode) {
             case 13:
-            $(document).off("keydown");
             tetris.init();
+            $(window).off("keydown");
             $(document).on("keyup",(e)=>{
               if(e.keyCode === 82) { //R Restart Key
+                $(document).off("keyup");
                 $(document).off("keydown");
+                tetris.endGame();
                 $route.reload();
                 console.log("trying to restart game");
               }
+            });
+            $('#menu-select').on("click",()=>{
+              /////restart
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
+              $route.reload();
             });
             break;
 
@@ -412,7 +407,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         switch(e.keyCode) {
           case 27: /// ESC KEY
           tetris.endGame();
-            // $(document).off("keyup");
+            $(window).off("keydown");
             // $(document).off("keydown");
             $location.url('/home');
 
@@ -425,16 +420,22 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
     }
 
+
     if($location.url()==="/Tetris"){
       $("#pauseGame").css("visibility","hidden");
       initializeGame();
     }
 
     function getHighScoreToBeat() {
-      $scope.highScore = FirebaseFactory.getLowestHighScore();
+      let highscore = FirebaseFactory.getLowestHighScore().then((item)=>{
+
+        $scope.highScore = item;
+      });
+
     }
 
     getHighScoreToBeat();
+    console.log("localstorage", localStorage.score);
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');
@@ -448,7 +449,259 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
   })();
 
-},{"../scoregrid":9,"../tetris":11}],5:[function(require,module,exports){
+},{"../scoregrid":10,"../tetris":13}],5:[function(require,module,exports){
+(function() {
+  'use strict';
+  require('../tetris');
+  require('../scoregrid');
+  var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
+    var themesong = document.getElementById("myAudio");
+    themesong.currentTime = 0;
+    $("#pauseGame").css("visibility","hidden");
+
+    ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
+    if (firebase.auth().currentUser) {
+      var ref = firebase.database().ref(`users/${firebase.auth().currentUser.uid}`);
+      ref.update({
+       onlineState: true,
+       status: "I'm online.",
+       user: firebase.auth().currentUser.uid
+       });
+       ref.onDisconnect().update({
+        onlineState: false,
+        status: "I'm offline."
+      });
+
+    }
+
+  FirebaseFactory.getGameBoards().then((items)=>{
+
+
+    if(items){
+      let keys = Object.keys(items);
+      let values = Object.values(items);
+      console.log("item is", values);
+
+      $scope.board = values;
+    }
+  });
+  let gamesref = firebase.database().ref('games');
+  gamesref.on("value",(snapshot)=>{
+    if(snapshot.val()){
+     let values= Object.values(snapshot.val());
+     $scope.board = values;
+   }
+
+ });
+
+
+      //////////////WINDOW INITIALIZATION/////////////
+      var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
+      if (yourDeviceWidth.matches) {
+          // window width is at less than 500px
+          $('body').css("overflow-y","scroll");
+        }
+        else {
+          $('body').css("overflow-y","hidden");
+        }
+
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+        $("#sidenav-overlay").css("display",'none');
+      //////////////VARIABLE DECLARATIONS////////////
+      $scope.userCredentials = {};
+      $scope.gameCredentials = {};
+      $scope.logInGoogle = logInGoogle;
+      $scope.logOutUser = logOutUser;
+      $scope.registerWithEmailAndPassword = registerWithEmailAndPassword;
+      $scope.logInWithEmailAndPassword = logInWithEmailAndPassword;
+      $scope.isLoggedIn = firebase.auth().currentUser;
+      $scope.fullScreen = false;
+      $scope.initializeGame = initializeGame;
+      $scope.gameMade = false;
+      $scope.board = {};
+            //////////////AUTHORIZATION METHODS//////////////////////
+            function logInGoogle() {
+              AuthFactory.logInGoogle()
+              .then(response => {
+                let user = response.user.uid;
+                // $(".progress").css("visibility","hidden");
+                $scope.isLoggedIn = true;
+                $location.path("/Tetris1v1");
+                $route.reload();
+              })
+              .catch(error => console.log("google login error", error.message, error.code));
+            }
+
+            function logOutUser() {
+              AuthFactory.logOut();
+              $scope.isLoggedIn = false;
+              $location.url('/home');
+            }
+
+            function registerWithEmailAndPassword(userCredentials) {
+              AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
+                console.log("response from register", response);
+                $scope.logInWithEmailAndPassword(userCredentials);
+              });
+            }
+
+
+            function logInWithEmailAndPassword(userCredentials){
+              AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
+                console.log("response from sign in", response);
+
+                $location.path("/Tetris1v1");
+                $route.reload();
+              });
+            }
+      //////////////INITIALIZING GAME//////////////////////
+      function initializeGame(gameCredentials) {
+        $scope.gameMade = true;
+        var tetris = new Tetris2({
+          rows: 20,
+          cols: 10,
+          gamePlaceholder: '#tetris',
+          previewPlaceholder: '#preview',
+          opponentPlaceholder: '#tetris2',
+          difficulty:"easy",
+          gameBoardRef: gameCredentials
+        });
+
+
+
+
+        function exitFullScreen(element) {
+          if(element.exitFullscreen) {
+            element.exitFullscreen();
+          } else if(element.mozCancelFullScreen) {
+            element.mozCancelFullScreen();
+          } else if(element.webkitExitFullscreen) {
+            element.webkitExitFullscreen();
+          }
+        }
+        function launchFullScreen(element) {
+          if(element.requestFullScreen) {
+            element.requestFullScreen();
+          } else if(element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+          } else if(element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+          }
+        }
+        function bindFullScreenKey() {
+          $(document).on("keyup",(e)=>{
+            if (e.keyCode === 70) {
+              if(!$scope.fullScreen){
+                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+                    $scope.fullScreen = true;
+                    $scope.$apply();
+                  }else {
+                    exitFullScreen(document); // the whole page
+                    $scope.fullScreen = false;
+
+                  }
+                }
+
+              });
+        }
+
+        // tetris.init();
+        // tetris.grid.getCellAt(2,0).$el.css('background','red');
+
+
+        $("#startGame").on("click",()=>{
+          bindFullScreenKey();
+              // Launch fullscreen for browsers that support it!
+              // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+              tetris.init();
+              $(window).off("keydown");
+              $(document).on("keyup",(e)=>{
+                if(e.keyCode === 82) { //R Restart KEY
+               $(document).off("keyup");
+               $(document).off("keydown");
+               console.log("trying to restart game");
+               tetris.endGame();
+               $route.reload();
+             }
+           });
+$('#menu-select').on("click",()=>{
+              /////restart
+              $(document).off("keyup");
+$(document).off("keydown");
+tetris.endGame();
+$route.reload();
+});
+
+
+
+});
+
+
+
+$(window).on("keydown",(e)=>{
+
+  switch(e.keyCode) {
+    case 13:
+    bindFullScreenKey();
+    tetris.init();
+    $(window).off("keydown");
+    $(document).on("keyup",(e)=>{
+              if(e.keyCode === 82) { //R Restart Key
+                $(document).off("keyup");
+                $(document).off("keydown");
+                tetris.endGame();
+                $route.reload();
+                console.log("trying to restart game");
+              }
+            });
+    $('#menu-select').on("click",()=>{
+              /////restart
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
+              $route.reload();
+            });
+    break;
+
+  }
+});
+
+
+
+
+
+$("#endGame").on("click",()=>{
+  tetris.endGame();
+  $location.url("/home");
+  $route.reload();
+});
+      //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
+      $(document).on("keyup",(e)=>{
+        switch(e.keyCode) {
+          case 27: /// ESC KEY
+          tetris.endGame();
+          $(window).off("keydown");
+            // $(document).off("keydown");
+            $location.url('/home');
+
+            $('*').css("overflow","hidden !important");
+            $route.reload();
+            break;
+          }
+
+        });
+
+      }
+
+
+    };
+
+    Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+    angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
+  })();
+
+},{"../scoregrid":10,"../tetris":13}],6:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -479,12 +732,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   angular.module('TetrisApp').factory('AuthFactory', AuthFactory);
 })();
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function() {
   'use strict';
 
   var FirebaseFactory = function($q, $http, $rootScope,firebaseInfo) {
-    let lowestHighScore;
+    var lowestHighScore = '';
     return {
       getHighScores: function(){
         let scores;
@@ -499,24 +752,56 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           });
         });
       },
-      postNewHighScore: function(score){
-        return $q((resolve, reject) => {
-          let newObj = JSON.stringify(score);
-          $http.patch(`${firebaseInfo.databaseURL}/highscores/${id}.json`, newObj)
-          .then((data) => {
-            resolve(data);
+      getLowestHighScore: function(){
+
+
+        let scores;
+        return $q( (resolve, reject) => {
+          $http.get(`${firebaseInfo.databaseURL}/highscores.json`)
+          .then((itemObject) => {
+            scores = (itemObject.data);
+
+            let keys = Object.keys(scores);
+            let values = Object.values(scores);
+
+            values.sort((a,b)=>{
+
+              if (a.score < b.score){
+                return 1;
+              }
+              if (a.score > b.score){
+                return -1;
+              }
+              return 0;
+            });
+            values = values.splice(0,3);
+            lowestHighScore = values[2].score;
+            console.log("lowestHighScore", lowestHighScore);
+
+            resolve(lowestHighScore);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        });
+
+
+
+
+      },
+      getGameBoards: function(){
+        let boards;
+        return $q( (resolve, reject) => {
+          $http.get(`${firebaseInfo.databaseURL}/games.json`)
+          .then((itemObject) => {
+            boards = (itemObject.data);
+            resolve(boards);
           })
           .catch((error) => {
             reject(error);
           });
         });
       },
-      setLowestHighScore: function(score){
-        lowestHighScore = score;
-      },
-      getLowestHighScore: function(){
-        return lowestHighScore;
-      }
     };
   };
 
@@ -524,7 +809,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   angular.module('TetrisApp').factory('FirebaseFactory', FirebaseFactory);
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 (function ( global ) {
 
@@ -598,7 +883,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 }(window));
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 angular.module('TetrisApp').constant("firebaseInfo", {
     apiKey: "AIzaSyBNq9eV8vzdFJwUlxCzeAh3wsC5apGsdjY",
     authDomain: "tetris-arena.firebaseapp.com",
@@ -608,7 +893,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     messagingSenderId: "735100394750"
 });
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 (function instantiateLiveTime(){
     var time = new Date();
@@ -641,7 +926,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 })();
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function( global ){
   "use strict";
 
@@ -655,6 +940,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   'springgreen',
   'gold'
   ];
+
 
   var Shape = {};
 
@@ -741,9 +1027,19 @@ angular.module('TetrisApp').constant("firebaseInfo", {
       this.coords.forEach(function( coord ) {
         self.occupyCell(self.grid.getCellAt(coord.x + move.x, coord.y + move.y));
       });
+      // let eachrow = this.grid.grid.forEach((item)=>{
+      //   item.forEach((items)=>{
+      //     if (items.isSolid || items.isCurrentShape){
+      //       console.log("items", this);
+      //       // this.grid.opponent.getCellAt(items.x,items.y).$el.css('background','red');
+      //     }
+
+      //   });
+      // });
     } else if (onObstacle) {
       onObstacle.call(this);
     }
+
     // console.log("what is this.grid", this.grid);
 
   };
@@ -1260,7 +1556,571 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+(function( global ){
+  "use strict";
+
+  var colors = [
+  'aqua',
+  'deepskyblue',
+  'lawngreen',
+  'hotpink',
+  'lightseagreen',
+  'orange',
+  'springgreen',
+  'gold'
+  ];
+
+
+  var Shape2 = {};
+
+  function BaseShape() {
+    // this.getRandomColor();
+  }
+  BaseShape.prototype.constructor = BaseShape;
+
+  BaseShape.prototype.occupyCell = function( cell ) {
+    if (cell.isSolid) {
+      console.error('failed render');
+      this.collisionState.triggerEvent('failedRender', [cell]);
+      return false;
+    }
+    cell.$el.css('background', this.color);
+    cell.isCurrentShape = true;
+    this.cells.push(cell);
+    return this;
+  };
+
+  BaseShape.prototype.occupyCells = function() {
+    var self = this;
+    this.coords.forEach(function( coord ) {
+      self.occupyCell(self.grid.getCellAt(coord.x, coord.y));
+    });
+    return this;
+  };
+
+  BaseShape.prototype.freeCells = function() {
+    var self = this;
+    this.cells.forEach(function( cell ) {
+      self.freeCell(cell);
+    });
+    this.cells = [];
+    return this;
+  };
+
+  BaseShape.prototype.moveLeft = function() {
+    this.makeMove({x: -1, y: 0});
+  };
+
+  BaseShape.prototype.moveRight = function() {
+    this.makeMove({x: 1, y: 0});
+  };
+
+  BaseShape.prototype.moveDown = function() {
+    this.makeMove({x: 0, y: -1}, function() {
+      this.markAsSolid();
+      this.collisionState.triggerEvent('landed');
+    });
+  };
+
+  BaseShape.prototype.rotate = function() {
+    var data = this.getRotationData();
+    var coords = data[0];
+    var newRotationState = data[1];
+
+    var self = this;
+    var canRotate = coords.every(function( coord ) {
+      var newCell = self.grid.getCellAt(coord.x, coord.y);
+      return !(!newCell || newCell.isSolid);
+    });
+    if (canRotate) {
+      this.clearCoords();
+      this.freeCells();
+      coords.forEach(function( coord ) {
+        self.occupyCell(self.grid.getCellAt(coord.x, coord.y));
+      });
+
+      this.rotationState = newRotationState;
+    }
+  };
+
+  BaseShape.prototype.makeMove = function( move, onObstacle ) {
+    var self = this;
+    var canMakeMove = this.cells.every(function( cell ) {
+      var newCell = self.grid.getCellAt(cell.x + move.x, cell.y + move.y);
+      return !(!newCell || newCell.isSolid);
+    });
+    if (canMakeMove) {
+      this.clearCoords();
+      this.saveCoords();
+      this.freeCells();
+      this.coords.forEach(function( coord ) {
+        self.occupyCell(self.grid.getCellAt(coord.x + move.x, coord.y + move.y));
+      });
+      let solidgrids = [];
+      let eachrow = this.grid.grid.forEach((item)=>{
+        item.forEach((items)=>{
+          if (items.isSolid || items.isCurrentShape){
+            solidgrids.push({x:items.x,y:items.y});
+          }
+
+        });
+      });
+            this.databaseref.set(solidgrids);
+    } else if (onObstacle) {
+      onObstacle.call(this);
+    }
+
+    // console.log("what is this.grid", this.grid);
+
+  };
+
+  BaseShape.prototype.clearCoords = function() {
+    this.coords = [];
+  };
+
+  BaseShape.prototype.saveCoords = function() {
+    var self = this;
+    this.cells.forEach(function( cell ) {
+      self.coords.push({x: cell.x, y: cell.y});
+    });
+  };
+
+  BaseShape.prototype.freeCell = function( cell ) {
+    cell.$el.css('background', '#9ead86');
+    cell.isCurrentShape = false;
+    return this;
+  };
+
+  BaseShape.prototype.markAsSolid = function() {
+    this.cells.forEach(function( cell ) {
+      cell.isSolid = true;
+      cell.isCurrentShape = false;
+    });
+  };
+
+  // BaseShape.prototype.getRandomColor = function() {
+  //   let self = this;
+  //   this.color = colors[Math.floor(Math.random() * colors.length)];
+  //   return this.color;
+  // };
+  BaseShape.prototype.getRandomColors = function() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  BaseShape.prototype.onInit = function(grid, collisionState, databaseref ) {
+    this.rotationState = 1;
+    this.collisionState = collisionState;
+    this.grid = grid;
+    this.events = [];
+    this.coords = [];
+    this.cells = [];
+    this.setInitialCoordinates();
+    this.occupyCells();
+    this.databaseref = firebase.database().ref(databaseref);
+  };
+
+  function OShape( grid, collisionState, databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[0];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+
+  }
+  OShape.prototype = new BaseShape();
+  OShape.prototype.constructor = OShape;
+  OShape.prototype.setInitialCoordinates = function() {
+    var firstRow = this.grid.rowsCount - 1;
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn-1, y: firstRow});
+    this.coords.push({x: middleColumn-1, y: secondRow});
+    this.coords.push({x: middleColumn, y: firstRow});
+    this.coords.push({x: middleColumn, y: secondRow});
+  };
+  OShape.prototype.rotate = function() {
+  };
+
+  function TShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[1];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  TShape.prototype = new BaseShape();
+  TShape.prototype.constructor = TShape;
+  TShape.prototype.setInitialCoordinates = function() {
+    var firstRow = this.grid.rowsCount - 1;
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: firstRow});
+    this.coords.push({x: middleColumn - 1, y: secondRow});
+    this.coords.push({x: middleColumn + 1, y: secondRow});
+  };
+  TShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 2;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 4;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+  function SShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[2];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  SShape.prototype  = new BaseShape();
+  SShape.prototype.constructor = SShape;
+  SShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn - 1, y: secondRow});
+    this.coords.push({x: middleColumn - 1, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+  };
+  SShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 2;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x - 1, y: center.y});
+      newRotationState = 4;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+  function ZShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[3];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  ZShape.prototype  = new BaseShape();
+  ZShape.prototype.constructor = ZShape;
+  ZShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn - 1, y: secondRow});
+    this.coords.push({x: middleColumn - 1, y: secondRow - 1});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+  };
+  ZShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y + 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+  function LShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[4];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  LShape.prototype = new BaseShape();
+  LShape.prototype.constructor = LShape;
+  LShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10)-1;
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn + 1, y: secondRow - 1});
+  };
+  LShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 4;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 3;
+      break;
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      newRotationState = 2;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+  function JShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[5];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  JShape.prototype = new BaseShape();
+  JShape.prototype.constructor = JShape;
+  JShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn -1, y: secondRow - 1});
+  };
+  JShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x - 1, y: center.y + 1});
+      newRotationState = 2;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      newRotationState = 3;
+      break;
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      newRotationState = 4;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y - 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+  function IShape( grid, collisionState,databaseref) {
+    this.onInit(grid,collisionState,databaseref);
+    let self = this;
+    self.color = colors[6];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  IShape.prototype = new BaseShape();
+  IShape.prototype.constructor = IShape;
+  IShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10);
+    this.coords.push({x: middleColumn-2, y: secondRow+1});
+    this.coords.push({x: middleColumn-1, y: secondRow+1});
+    this.coords.push({x: middleColumn, y: secondRow+1});
+    this.coords.push({x: middleColumn+1, y: secondRow+1});
+  };
+  IShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 1:
+      center = this.cells[1];
+
+      coords.push({x: center.x+1, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      coords.push({x: center.x + 1, y: center.y-2});
+      newRotationState = 2;
+      break;
+      case 2:
+      center = this.cells[2];
+      coords.push({x: center.x-2, y: center.y+1});
+      coords.push({x: center.x-1, y: center.y+1});
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x+1, y: center.y+1});
+      newRotationState = 3;
+      break;
+      case 3:
+      center = this.cells[2];
+      coords.push({x: center.x, y: center.y+1});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y-1});
+      coords.push({x: center.x, y: center.y-2});
+      newRotationState = 4;
+      break;
+      case 4:
+      center = this.cells[1];
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x-1,y: center.y});
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x+1, y: center.y});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
+
+
+
+  // Pack all the shape classes in one object (namespace)
+  Shape2.Sq = OShape;
+  Shape2.T = TShape;
+  Shape2.S = SShape;
+  Shape2.Z = ZShape;
+  Shape2.L = LShape;
+  Shape2.J = JShape;
+  Shape2.I = IShape;
+
+  // Export the shape namespace to the global scope
+  global.Shape2 = Shape2;
+
+}( window ));
+
+},{}],13:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -1271,6 +2131,14 @@ require('./grid');
   var rowscleared = [];
   var score = 0;
   var time;
+  var themesong = document.getElementById("myAudio");
+  var tetris = document.getElementById("tetris");
+  var move = document.getElementById("move");
+  var drop = document.getElementById("drop");
+  var rotate = document.getElementById("rotate");
+  var gameover = document.getElementById("gameover");
+
+
   function CollisionState() {
     this.events = [];
   }
@@ -1330,8 +2198,9 @@ require('./grid');
 
 
        self.shape.moveDown();
-
      },speed);
+
+      // this.opponent.getCellAt(0,1).$el.css('background','red');
     },
 
     getNextShape: function() {
@@ -1365,12 +2234,14 @@ require('./grid');
         this.timer();
         console.log("game:unthis.paused");
         $("#pauseGame").css('visibility',"hidden");
+        themesong.play();
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
         console.log("game:this.paused");
         $("#pauseGame").css('visibility',"visible");
+        themesong.pause();
       }
     },
     initializeCollisionEvents: function() {
@@ -1396,6 +2267,7 @@ require('./grid');
           self.collapseRow(row);
           score++;
           $('#score').html(score);
+          tetris.play();
         }
       });
       if (rowsWereCollapsed) {
@@ -1509,8 +2381,8 @@ require('./grid');
             $('#control-b').attr("style",'');
           },200);
           self.clearInterval();
-
           if (!self.paused) {
+           drop.play();
            self.interval = setInterval(function() {
              self.shape.moveDown();
            }, 1);
@@ -1522,6 +2394,7 @@ require('./grid');
             $('.left').attr("style",'');
           },200);
           if (!self.paused) {
+            move.play();
             self.shape.moveLeft();
           }
           break;
@@ -1540,6 +2413,7 @@ require('./grid');
             self.shape.rotationState= self.shape.rotationState-2;
           }
           if (!self.paused) {
+            rotate.play();
             self.shape.rotate();
           }
           break;
@@ -1549,6 +2423,7 @@ require('./grid');
             $('#control-a').attr("style",'');
           },200);
           if (!self.paused) {
+            rotate.play();
             self.shape.rotate();
           }
           break;
@@ -1558,6 +2433,7 @@ require('./grid');
             $('#control-a').attr("style",'');
           },200);
           if (!self.paused) {
+            rotate.play();
             self.shape.rotate();
           }
           break;
@@ -1568,6 +2444,7 @@ require('./grid');
             $('.right').attr("style",'');
           },200);
           if (!self.paused) {
+            move.play();
             self.shape.moveRight();
           }
           break;
@@ -1577,6 +2454,7 @@ require('./grid');
             $('.down').attr("style",'');
           },200);
           if (!self.paused) {
+            move.play();
             self.shape.moveDown();
           }
           break;
@@ -1600,39 +2478,45 @@ require('./grid');
             self.clearInterval();
 
             if (!self.paused) {
-             self.interval = setInterval(function() {
-               self.shape.moveDown();
-             }, 1);
-           }
-           break;
-           case "d-left":
-           if (!self.paused) {
-            self.shape.moveLeft();
+              drop.play();
+              self.interval = setInterval(function() {
+                self.shape.moveDown();
+              }, 1);
+            }
+            break;
+            case "d-left":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveLeft();
+            }
+            break;
+            case "d-right":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveRight();
+            }
+            break;
+            case "d-down":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveDown();
+            }
+            break;
+            case "control-a":
+            if (!self.paused) {
+              rotate.play();
+              self.shape.rotate();
+            }
+            break;
+            case "d-up":
+            if (!self.paused) {
+              rotate.play();
+              self.shape.rotate();
+            }
+            break;
           }
-          break;
-          case "d-right":
-          if (!self.paused) {
-            self.shape.moveRight();
-          }
-          break;
-          case "d-down":
-          if (!self.paused) {
-            self.shape.moveDown();
-          }
-          break;
-          case "control-a":
-          if (!self.paused) {
-            self.shape.rotate();
-          }
-          break;
-          case "d-up":
-          if (!self.paused) {
-            self.shape.rotate();
-          }
-          break;
         }
-      }
-    });
+      });
 
 
     },
@@ -1641,15 +2525,22 @@ require('./grid');
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
-
       speed = 1065;
       this.paused = false;
       this.level=0;
       clearTimeout(this.time);
-      $(document).off('keydown');
-      // $(window).off("click");
+      themesong.pause();
+      gameover.play();
+      $(this).off('keydown');
+      $(this).off("keyup");
       if(score>$('#highScore').html()){
         let newhighscorename = prompt("Congratulations! Enter your name...");
+        console.log("name here",newhighscorename);
+        if (newhighscorename === '') {
+          newhighscorename = 'guest';
+        }else if (newhighscorename === null) {
+          newhighscorename = 'guest';
+        }
         $.ajax({
           url: `https://tetris-arena.firebaseio.com/highscores.json`,
           method: "POST",
@@ -1663,6 +2554,10 @@ require('./grid');
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
 
       // $(document).off('click');
+      if (score > localStorage.score) {
+
+        localStorage.score = score;
+      }
       score = 0;
     },
 
@@ -1674,7 +2569,10 @@ require('./grid');
       this.paused = false;
       $('#startGame').off("click");
       $('#startGame').off("keydown");
+      $('#startGame').off("keyup");
       this.timer();
+      themesong.currentTime = 0;
+      themesong.play();
     }
   };
   Tetris.$inject = ['$rootScope','firebaseInfo'];
@@ -1683,4 +2581,523 @@ require('./grid');
 }( window , window.Grid,window.Shape));
 
 
-},{"./grid":7,"./shapes":10}]},{},[1,2,3,4,5,6,7,8,9,10,11]);
+},{"./grid":8,"./shapes":11}],14:[function(require,module,exports){
+"use strict";
+require('./shapes');
+require('./grid');
+
+(function( global, Grid, Shape2) {
+  // let pauseGame = require('./canvas.js');
+  var speed = 1065;
+  var rowscleared = [];
+  var score = 0;
+  var time;
+  var themesong = document.getElementById("myAudio");
+  var tetris = document.getElementById("tetris");
+  var move = document.getElementById("move");
+  var drop = document.getElementById("drop");
+  var rotate = document.getElementById("rotate");
+  var gameover = document.getElementById("gameover");
+
+
+  function CollisionState() {
+    this.events = [];
+  }
+  CollisionState.prototype = {
+    triggerEvent: function( eventName, args ) {
+      for (var i = 0; i < this.events.length; i += 1) {
+        if (this.events[i].eventName === eventName) {
+          this.events[i].cb.apply(this, args);
+        }
+      }
+    },
+    on: function( eventName, cb ) {
+      this.events.push({ eventName: eventName, cb: cb });
+    }
+  };
+
+
+  var Tetris2 = function( options, $rootScope, firebaseInfo ) {
+    this.difficulty = options.difficulty;
+    this.rows = options.rows;
+    this.cols = options.cols;
+    this.gamePlaceholder = options.gamePlaceholder;
+    this.previewPlaceholder = options.previewPlaceholder;
+    this.opponentPlaceholder = options.opponentPlaceholder;
+    this.gameBoardRef = options.gameBoardRef;
+    this.databaseref = this.FBRef();
+    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I];
+    this.next = this.getRandomShape();
+    this.collisionState = new CollisionState();
+    this.startGame = false;
+    this.time = 0;
+    this.level = 0;
+    this.render();
+    this.initializeCollisionEvents();
+  };
+  Tetris2.prototype = {
+    render: function() {
+      this.grid = new Grid({
+        difficulty: this.difficulty,
+        rows: this.rows,
+        cols: this.cols,
+        render: {
+          boardplaceholder: this.gamePlaceholder
+        }
+      });
+      this.preview = new Grid({
+       rows: 4,
+       cols: 4,
+       render: {
+         boardplaceholder: this.previewPlaceholder
+       }
+     });
+      this.opponent = new Grid({
+        difficulty: this.difficulty,
+        rows: this.rows,
+        cols: this.cols,
+        render: {
+          boardplaceholder: this.opponentPlaceholder
+        }
+      });
+
+      return this;
+    },
+
+    createNewShape: function() {
+      var self = this;
+      this.shape = this.getNextShape();
+      this.interval = setInterval(()=>{
+
+
+       self.shape.moveDown();
+
+     },speed);
+
+
+      let selfref = firebase.database().ref(this.databaseref);
+      selfref.on("value",(snapshot)=>{
+        let eachrow = this.grid.grid.forEach((item)=>{
+          item.forEach((items,index)=>{
+            this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+          });
+        });
+        if (snapshot.val()) {
+          snapshot.val().forEach((item)=>{
+            this.opponent.getCellAt(item.x,item.y).$el.css('background','red');
+          });
+        }
+      });
+    },
+
+    getNextShape: function() {
+      var NextShape = this.next;
+      this.next = this.getRandomShape();
+      this.displayInPreview(this.next);
+      return new NextShape(this.grid, this.collisionState, this.databaseref);
+    },
+
+    getRandomShape: function() {
+      return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+    },
+
+    displayInPreview: function( ShapePreview ) {
+      this.preview.cells.forEach(function( cell ) {
+        cell.$el.css('background', '#9ead86');
+      });
+      this.shapePreview = new ShapePreview(this.preview);
+    },
+
+    clearInterval: function() {
+      clearInterval(this.interval);
+    },
+    pause: function() {
+      var self = this;
+      if (this.paused) {
+        this.interval = setInterval(function() {
+          self.shape.moveDown();
+        },speed);
+        this.paused = false;
+        this.timer();
+        console.log("game:unthis.paused");
+        $("#pauseGame").css('visibility',"hidden");
+      } else {
+        this.clearInterval();
+        this.paused = true;
+        clearTimeout(self.time);
+        console.log("game:this.paused");
+        $("#pauseGame").css('visibility',"visible");
+      }
+    },
+    initializeCollisionEvents: function() {
+      var self = this;
+      this.collisionState.on('landed', function() {
+        self.clearInterval();
+        if (!self.gameOver) {
+          self.collapseSolidRows();
+          self.createNewShape();
+        }
+      });
+      this.collisionState.on('failedRender', function() {
+        self.endGame();
+      });
+    },
+
+    collapseSolidRows: function() {
+      var rowsWereCollapsed = false;
+      var self = this;
+      this.grid.rows.forEach(function( row ) {
+        if (self.isSolidRow(row)) {
+          rowsWereCollapsed = true;
+          self.collapseRow(row);
+          score++;
+          $('#score').html(score);
+          tetris.play();
+        }
+      });
+      if (rowsWereCollapsed) {
+        this.moveDownRowsWithSolidCells();
+        this.collisionState.triggerEvent('rowsCollapsed');
+
+      }
+    },
+
+    isSolidRow: function( row ) {
+      return row.every(function( cell ){
+        return cell.isSolid;
+      });
+    },
+
+    collapseRow: function( row ) {
+      row.forEach(function( cell ) {
+        cell.isSolid = false;
+        cell.$el.css('background', '#9ead86');
+      });
+    },
+
+    moveDownRowsWithSolidCells: function() {
+      var self = this;
+      var currentRowIndex = -1;
+      // iterate all rows by starting from the lowest one
+      this.grid.rows.forEach(function( row ) {
+        currentRowIndex += 1;
+
+        // if the row is empty, we skip it, there's no need to move down an empty row
+        if (self.isEmptyRow(row)) {
+          return;
+        }
+
+        // we want to get the lowest empty row, because several rows may have been collapsed, in this case
+        // the next row with solid cells will need to travel all the way down to occupy the lowest empty row
+        var lowestEmptyRowIndex = self.getLowestEmptyRowIndex();
+        // if the current row doesn't have empty rows beneath it, it doesn't need to go down any further, so
+        // we skip it
+        if (lowestEmptyRowIndex > currentRowIndex) {
+          return;
+        }
+        self.moveRowDown(row, lowestEmptyRowIndex);
+      });
+    },
+
+    isEmptyRow: function( row ) {
+      return row.every(function( cell ) {
+        return !cell.isSolid;
+      });
+    },
+
+    getLowestEmptyRowIndex: function() {
+      var self = this;
+      var index = -1;
+      this.grid.rows.every(function( row ) {
+        index += 1;
+        return !self.isEmptyRow(row);
+      });
+      return index;
+    },
+    moveRowDown: function( row, lowestEmptyRowIndex ) {
+      var self = this;
+
+      row.forEach(function( cell ) {
+        var coords = {x: cell.x, y: cell.y};
+
+        var newCell = self.grid.getCellAt(coords.x, lowestEmptyRowIndex);
+        if (newCell) {
+          var wasSolid = cell.isSolid;
+          var previousBackgroundColor = cell.$el.css('background');
+          cell.$el.css('background', '#9ead86');
+          cell.isCurrentShape = false;
+          cell.isSolid = false;
+          if (wasSolid) {
+            newCell.$el.css('background', previousBackgroundColor);
+            newCell.isSolid = true;
+          } else {
+            newCell.$el.css('background', '#9ead86');
+            newCell.isSolid = false;
+          }
+        }
+      });
+
+
+    },
+    timer: function() {
+      if (speed >= 165 && !this.paused) {
+        this.time = setTimeout(()=>{
+
+
+          if(!this.paused) {
+            speed=speed-100;
+            this.level++;
+            $('#level').html(this.level);
+            console.log("level",this.level);
+            this.timer();
+          }
+        },60000);
+      }
+    },
+    FBRef: function() {
+
+
+
+
+
+
+
+
+
+      let database = firebase.database().ref('games');
+      let user = firebase.auth().currentUser.uid;
+      let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
+      let ref = firebase.database().ref(`games/${response}`);
+
+       ref.onDisconnect().remove();
+
+      console.log("what is response1",response);
+      return `games/${response}/grid`;
+    },
+
+
+
+    bind: function() {
+      var self = this;
+
+      ////////////////////////KEYBOARD EVENTS/////////////////////////////
+      $(document).on('keydown', function( e ) {
+        switch (e.keyCode) {
+          case 32: // Space move all the way down
+          $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('#control-b').attr("style",'');
+          },200);
+          self.clearInterval();
+          if (!self.paused) {
+           drop.play();
+           self.interval = setInterval(function() {
+             self.shape.moveDown();
+           }, 1);
+         }
+         break;
+          case 37: // Left arrow
+          $('.left').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('.left').attr("style",'');
+          },200);
+          if (!self.paused) {
+            move.play();
+            self.shape.moveLeft();
+          }
+          break;
+          case 90: // Z key rotate counterclockwise
+          $('.up').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('.up').attr("style",'');
+          },200);
+          if (self.shape.rotationState == 1) {
+            self.shape.rotationState =3;
+          }
+          else if (self.shape.rotationState== 2) {
+            self.shape.rotationState =4;
+          }
+          else {
+            self.shape.rotationState= self.shape.rotationState-2;
+          }
+          if (!self.paused) {
+            rotate.play();
+            self.shape.rotate();
+          }
+          break;
+          case 88: // X key rotate clockwise
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('#control-a').attr("style",'');
+          },200);
+          if (!self.paused) {
+            rotate.play();
+            self.shape.rotate();
+          }
+          break;
+          case 38: // Up arrow rotate right
+          $('#control-a').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('#control-a').attr("style",'');
+          },200);
+          if (!self.paused) {
+            rotate.play();
+            self.shape.rotate();
+          }
+          break;
+
+          case 39: // Right arrow
+          $('.right').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('.right').attr("style",'');
+          },200);
+          if (!self.paused) {
+            move.play();
+            self.shape.moveRight();
+          }
+          break;
+          case 40: // Down arrow
+          $('.down').attr("style",'box-shadow: 0 0 5px 5px #333;');
+          setTimeout(()=>{
+            $('.down').attr("style",'');
+          },200);
+          if (!self.paused) {
+            move.play();
+            self.shape.moveDown();
+          }
+          break;
+          case 80: // 'P'
+          self.pause();
+          break;
+
+          default:
+          // ..
+        }
+      });
+
+      ////////////////////////CLICK EVENTS/////////////////////////////
+
+      $(document).on('click', function( e ) {
+        // $(e.target).data.id is the id of the DOM element that is clicked
+        let domId = $(e.target).data('id');
+        if (self.startGame) {
+          switch (domId) {
+            case "control-b": // Space bar move all the way down
+            self.clearInterval();
+
+            if (!self.paused) {
+              drop.play();
+              self.interval = setInterval(function() {
+                self.shape.moveDown();
+              }, 1);
+            }
+            break;
+            case "d-left":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveLeft();
+            }
+            break;
+            case "d-right":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveRight();
+            }
+            break;
+            case "d-down":
+            if (!self.paused) {
+              move.play();
+              self.shape.moveDown();
+            }
+            break;
+            case "control-a":
+            if (!self.paused) {
+              rotate.play();
+              self.shape.rotate();
+            }
+            break;
+            case "d-up":
+            if (!self.paused) {
+              rotate.play();
+              self.shape.rotate();
+            }
+            break;
+          }
+        }
+      });
+
+
+    },
+    endGame: function () {
+      this.clearInterval();
+      this.gameOver = true;
+      this.shape = false;
+      this.startGame = false;
+      speed = 1065;
+      this.paused = false;
+      this.level=0;
+      clearTimeout(this.time);
+      gameover.play();
+      $(this).off('keydown');
+      $(this).off("keyup");
+      let ref = this.databaseref.replace("/grid","");
+      firebase.database().ref(ref).remove();
+      // if(score>$('#highScore').html()){
+      //   let newhighscorename = prompt("Congratulations! Enter your name...");
+      //   console.log("name here",newhighscorename);
+      //   if (newhighscorename === '') {
+      //     newhighscorename = 'guest';
+      //   }else if (newhighscorename === null) {
+      //     newhighscorename = 'guest';
+      //   }
+        // $.ajax({
+        //   url: `https://tetris-arena.firebaseio.com/highscores.json`,
+        //   method: "POST",
+        //   data : JSON.stringify({name:newhighscorename,score:score})
+        // })
+        // .done(function(response) {
+        //   console.log("response",response);
+
+        // });
+      // }
+      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+
+      // $(document).off('click');
+      // if (score > localStorage.score) {
+
+      //   localStorage.score = score;
+      // }
+      score = 0;
+    },
+
+    init: function() {
+
+      this.bind();
+      this.createNewShape();
+      this.startGame = true;
+      this.paused = false;
+      $('#startGame').off("click");
+      $('#startGame').off("keydown");
+      $('#startGame').off("keyup");
+      this.timer();
+
+      // this.grid.rows.forEach((item)=>{
+      //   item.forEach((insideitem)=>{
+      //     databaseref.child("poop").set({x:insideitem.x,y:insideitem.y}).then((response)=>{
+      //   console.log("response", response);
+      // });
+      //   });
+
+      // });
+
+      // database.on("value",(snapshot)=>{
+      //   console.log(snapshot.val());
+      // });
+    }
+  };
+
+  global.Tetris2 = Tetris2;
+}( window , window.Grid,window.Shape2));
+
+
+},{"./grid":8,"./shapes":11}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);

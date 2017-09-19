@@ -22,7 +22,8 @@ nav {
 
 .pauseGame {
   visibility: visible;
-  animation: blinker .9s linear infinite; }
+  animation: blinker .9s linear infinite;
+  margin-top: 6em; }
 
 .howtoclose {
   position: relative;
@@ -170,6 +171,11 @@ body {
 .toast {
   background: green; }
 
+#endGame {
+  position: relative;
+  top: -4em;
+  left: -6em; }
+
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #githubforkleft {
@@ -200,7 +206,10 @@ body {
   .blink_me {
     position: relative !important;
     margin-left: -1em !important;
-    font-size: 9px !important; } }
+    font-size: 9px !important; }
+
+  .howtoplaymodal {
+    margin-top: -1em !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1278px) {
   .blink_me {
     margin-left: -3rem !important;
@@ -215,7 +224,10 @@ body {
     font-size: 1.2em !important; }
 
   #githhubforkright {
-    visibility: hidden; } }
+    visibility: hidden; }
+
+  .howtoplaymodal {
+    margin-top: -1em !important; } }
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
@@ -232,7 +244,10 @@ body {
     top: 330px; }
 
   .modal-content {
-    margin-top: 5em !important; } }
+    margin-top: 3em !important; }
+
+  .howtoplaymodal {
+    margin-top: 1em !important; } }
 @media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
   .blink_me {
     padding-left: 3em; } }
@@ -283,6 +298,9 @@ body {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
+  #tetris2 {
+    display: none; }
+
   * {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -362,6 +380,12 @@ body {
 
   .d-pad {
     top: -.7em; }
+
+  #pauseGame {
+    margin-top: -1em; }
+
+  #time {
+    margin-top: -1em; }
 
   #endGame {
     position: absolute !important;
@@ -523,6 +547,11 @@ input {
 
 #tetrisScreen {
   margin-left: 2em; }
+
+#tetris2 {
+  position: absolute;
+  top: -36em;
+  right: 5em; }
 
 /*//////////////CONTROLLERS/////////////////////*/
 /* COLORS VARIABLES */

@@ -1,5 +1,42 @@
 <!-- <div ng-include="'partials/navbar.html'">
 </div> -->
+<div ng-if="!isLoggedIn" class="jumbotron col-4" style="float:left;height:100vh">
+  <h1 class="display-3" style="margin-top: -1em;">Sign In!</h1>
+  <hr class="my-4">
+  E-Mail:
+  <input type="text" id="email" name="NAME" ng-model="userCredentials.email"><br>
+  Password:
+  <input type="password" name="NAME" ng-model="userCredentials.password">
+  <p class="lead">
+    <button class="btn btn-lg" ng-click="logInWithEmailAndPassword(userCredentials)" role="button">Log In!</button>
+    <a ng-href="#!/register"><button class="btn btn-lg"  role="button">Register!</button></a>
+    <a><button class="btn btn-lg"  ng-click="logInGoogle()" role="button">Sign In Google!</button></a>
+</p>
+</div>
+
+<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-4" style="float:left;height:100vh">
+  <h1 class="display-3" style="margin-top: -1em;">Create Local Game!</h1>
+  <hr class="my-4">
+  Lobby Name:
+  <input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>
+  Password:
+  <input type="password" name="NAME" ng-model="gameCredentials.password">
+  <p class="lead">
+    <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
+</p>
+</div>
+<div class="jumbotron col-8" style="float:right;z-index:9;height:100vh">
+  <h1 class="display-3" style="margin-top: -1em;">Game Lobby</h1>
+  <hr class="my-4">
+
+  <p class="lead">
+<div class="chip" ng-repeat="item in board">
+    <div data-id="{{item.user}}">{{item.name}}</div>
+    <i class=" close fa fa-trophy" aria-hidden="true"></i>
+  </div>
+
+</p>
+</div>
 <div class="mobileDevices container" id="mobileDevice">
 
     <div id="tetrisScreen" class="row">
@@ -8,7 +45,6 @@
         <div class="right-column col-md-4 col-sm-3">
             <div id="next" class="grid">Next:</div>
             <div id="preview" class="grid"></div>
-            <div class="grid">Hi-Score: <div id="highScore"> {{highScore}}</div></div>
             <div class="grid">Score: <div id="score"> 0</div></div>
             <div class="grid" >Level: <div id="level"> 0</div></div>
             <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" ng-click="" style="float:left">pause</i></div><br>
@@ -42,3 +78,6 @@
 </div>
 <input type="button" id="endGame" class="btn btn-success" name="button" value="Exit/ Main Menu" style="position;absolute;width:135px;padding-left:2px">
 </div>
+<div class="col-12">
+    <div class="grid" id="tetris2" class="col-md-8">
+    </div>

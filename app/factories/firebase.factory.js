@@ -2,7 +2,7 @@
   'use strict';
 
   var FirebaseFactory = function($q, $http, $rootScope,firebaseInfo) {
-    let lowestHighScore;
+    var lowestHighScore = '';
     return {
       getHighScores: function(){
         let scores;
@@ -17,24 +17,56 @@
           });
         });
       },
-      postNewHighScore: function(score){
-        return $q((resolve, reject) => {
-          let newObj = JSON.stringify(score);
-          $http.patch(`${firebaseInfo.databaseURL}/highscores/${id}.json`, newObj)
-          .then((data) => {
-            resolve(data);
+      getLowestHighScore: function(){
+
+
+        let scores;
+        return $q( (resolve, reject) => {
+          $http.get(`${firebaseInfo.databaseURL}/highscores.json`)
+          .then((itemObject) => {
+            scores = (itemObject.data);
+
+            let keys = Object.keys(scores);
+            let values = Object.values(scores);
+
+            values.sort((a,b)=>{
+
+              if (a.score < b.score){
+                return 1;
+              }
+              if (a.score > b.score){
+                return -1;
+              }
+              return 0;
+            });
+            values = values.splice(0,3);
+            lowestHighScore = values[2].score;
+            console.log("lowestHighScore", lowestHighScore);
+
+            resolve(lowestHighScore);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        });
+
+
+
+
+      },
+      getGameBoards: function(){
+        let boards;
+        return $q( (resolve, reject) => {
+          $http.get(`${firebaseInfo.databaseURL}/games.json`)
+          .then((itemObject) => {
+            boards = (itemObject.data);
+            resolve(boards);
           })
           .catch((error) => {
             reject(error);
           });
         });
       },
-      setLowestHighScore: function(score){
-        lowestHighScore = score;
-      },
-      getLowestHighScore: function(){
-        return lowestHighScore;
-      }
     };
   };
 
