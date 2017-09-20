@@ -916,23 +916,22 @@ input {
   margin: 1px;
   /*vertical-align: top;*/ }
 
-.right-column {
-  margin-left: 4%; }
-  .right-column #score {
-    display: inline-block; }
-  .right-column #level {
-    display: inline-block; }
+.right-column #score {
+  display: inline-block; }
+.right-column #level {
+  display: inline-block; }
 
 .mobileDevices {
   width: 600px; }
 
 #tetrisScreen {
-  margin-left: 2em; }
+  margin-left: 2em;
+  width: 400px; }
 
 #tetris2 {
   position: absolute;
-  top: -36em;
-  right: 5em; }
+  left: 63%;
+  top: 4em; }
 
 /*//////////////CONTROLLERS/////////////////////*/
 /* COLORS VARIABLES */

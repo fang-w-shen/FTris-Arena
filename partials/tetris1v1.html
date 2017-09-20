@@ -25,14 +25,14 @@
     <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
 </p>
 </div>
-<div class="jumbotron col-8" style="float:right;z-index:9;height:100vh">
+<div ng-if="!gameMade" class="jumbotron col-8" style="float:right;z-index:9;height:100vh">
   <h1 class="display-3" style="margin-top: -1em;">Game Lobby</h1>
   <hr class="my-4">
 
   <p class="lead">
 <div class="chip" ng-repeat="item in board">
-    <div data-id="{{item.user}}">{{item.name}}</div>
-    <i class=" close fa fa-trophy" aria-hidden="true"></i>
+    <div data-id="{{item.user}}" ng-click="joinGame(item.user)">{{item.name}}<i class="fa fa-trophy" aria-hidden="true"></i></div>
+
   </div>
 
 </p>

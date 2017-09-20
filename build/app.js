@@ -490,25 +490,25 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         $scope.board = '';
         // $scope.$apply();
       }
-    let gamesref = firebase.database().ref('games');
-    gamesref.on("value",(snapshot)=>{
-      if(snapshot.val()){
-        let values= Object.values(snapshot.val());
-        $scope.board = values;
-        if(!$scope.$$phase) {
-          $scope.$apply();
+      let gamesref = firebase.database().ref('games');
+      gamesref.on("value",(snapshot)=>{
+        if(snapshot.val()){
+          let values= Object.values(snapshot.val());
+          $scope.board = values;
+          if(!$scope.$$phase) {
+            $scope.$apply();
+          }
+        }else {
+          $scope.board = '';
+          if(!$scope.$$phase) {
+            $scope.$apply();
+          }
         }
-      }else {
-        $scope.board = '';
-        if(!$scope.$$phase) {
-          $scope.$apply();
-        }
-      }
+
+      });
+
 
     });
-
-
-  });
 
 
 
@@ -535,6 +535,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
       $scope.initializeGame = initializeGame;
+      $scope.joinGame = joinGame;
       $scope.gameMade = false;
       $scope.board = {};
             //////////////AUTHORIZATION METHODS//////////////////////
@@ -575,6 +576,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
           $scope.gameMade = true;
+          if(!gameCredentials.password){
+            gameCredentials.password = '';
+          }
           var tetris = new Tetris2({
             rows: 20,
             cols: 10,
@@ -588,7 +592,124 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
 
-        function exitFullScreen(element) {
+          function exitFullScreen(element) {
+            if(element.exitFullscreen) {
+              element.exitFullscreen();
+            } else if(element.mozCancelFullScreen) {
+              element.mozCancelFullScreen();
+            } else if(element.webkitExitFullscreen) {
+              element.webkitExitFullscreen();
+            }
+          }
+          function launchFullScreen(element) {
+            if(element.requestFullScreen) {
+              element.requestFullScreen();
+            } else if(element.mozRequestFullScreen) {
+              element.mozRequestFullScreen();
+            } else if(element.webkitRequestFullScreen) {
+              element.webkitRequestFullScreen();
+            }
+          }
+          function bindFullScreenKey() {
+            $(document).on("keyup",(e)=>{
+              if (e.keyCode === 70) {
+                if(!$scope.fullScreen){
+                  $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
+                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+                    $scope.fullScreen = true;
+                    $scope.$apply();
+                  }else {
+                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
+                    exitFullScreen(document); // the whole page
+                    $scope.fullScreen = false;
+
+                  }
+                }
+
+              });
+          }
+
+
+
+          $("#startGame").on("click",()=>{
+            bindFullScreenKey();
+              // Launch fullscreen for browsers that support it!
+              // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+              tetris.init();
+              $(window).off("keydown");
+              $(document).on("keyup",(e)=>{
+                if(e.keyCode === 82) { //R Restart KEY
+                $(document).off("keyup");
+                $(document).off("keydown");
+                console.log("trying to restart game");
+                tetris.endGame();
+                $route.reload();
+              }
+            });
+      $('#menu-select').on("click",()=>{
+        $(document).off("keyup");
+      $(document).off("keydown");
+      tetris.endGame();
+      $route.reload();
+      });
+      });
+
+      $(window).on("keydown",(e)=>{
+
+        switch(e.keyCode) {
+          case 13:
+          bindFullScreenKey();
+          tetris.init();
+          $(window).off("keydown");
+          $(document).on("keyup",(e)=>{
+                            if(e.keyCode === 82) { //R Restart Key
+                              $(document).off("keyup");
+                              $(document).off("keydown");
+                              tetris.endGame();
+                              $route.reload();
+                              console.log("trying to restart game");
+                            }
+                          });
+          $('#menu-select').on("click",()=>{
+                            /////restart
+                            $(document).off("keyup");
+                            $(document).off("keydown");
+                            tetris.endGame();
+                            $route.reload();
+                          });
+          break;
+
+        }
+      });
+
+      $("#onoff").on("click",()=>{
+        tetris.endGame();
+        $location.url("/home");
+        $route.reload();
+      });
+      //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
+      $(document).on("keyup",(e)=>{
+        switch(e.keyCode) {
+          case 27: /// ESC KEY
+          tetris.endGame();
+          $(window).off("keydown");
+            // $(document).off("keydown");
+            $location.url('/home');
+
+            $('*').css("overflow","hidden !important");
+            $route.reload();
+            break;
+          }
+
+        });
+
+      }
+      //////////////////////////////////////////////////////////////////////
+      function joinGame(userId) {
+        let gameCredentials={};
+        FirebaseFactory.getGameBoards(userId).then((item)=>{
+          let password = prompt("Password");
+          function exitFullScreen(element) {
           if(element.exitFullscreen) {
             element.exitFullscreen();
           } else if(element.mozCancelFullScreen) {
@@ -610,12 +731,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $(document).on("keyup",(e)=>{
             if (e.keyCode === 70) {
               if(!$scope.fullScreen){
-                    $('.mobileDevice').css("height","0vh");
+                $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
                   }else {
-                    $('.mobileDevice').css("height","100vh");
+                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
                     exitFullScreen(document); // the whole page
                     $scope.fullScreen = false;
 
@@ -624,67 +745,49 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
               });
         }
+        if (password === item[Object.keys(item)[0]].password) {
+            console.log("what is this thing", Object.keys(item)[0]);
 
-        // tetris.init();
-        // tetris.grid.getCellAt(2,0).$el.css('background','red');
-
-
-        $("#startGame").on("click",()=>{
-          bindFullScreenKey();
+            gameCredentials.key = Object.keys(item)[0];
+            gameCredentials.user = item[Object.keys(item)[0]].user;
+            var tetris = new Tetris2({
+                            rows: 20,
+                            cols: 10,
+                            gamePlaceholder: '#tetris',
+                            previewPlaceholder: '#preview',
+                            opponentPlaceholder: '#tetris2',
+                            difficulty:"easy",
+                            gameBoardRef: gameCredentials
+                          });
+            tetris.init();
+            bindFullScreenKey();
               // Launch fullscreen for browsers that support it!
               // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-              tetris.init();
-              $(window).off("keydown");
+
+
               $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
-                $(document).off("keyup");
-                $(document).off("keydown");
-                console.log("trying to restart game");
-                tetris.endGame();
-                $route.reload();
-                }
-              });
-              $('#menu-select').on("click",()=>{
                   $(document).off("keyup");
                   $(document).off("keydown");
+                  console.log("trying to restart game");
                   tetris.endGame();
                   $route.reload();
-                  });
+                }
               });
 
-        $(window).on("keydown",(e)=>{
+              $('#menu-select').on("click",()=>{
+                $(document).off("keyup");
+                $(document).off("keydown");
+                tetris.endGame();
+                $route.reload();
+              });
 
-          switch(e.keyCode) {
-            case 13:
-            bindFullScreenKey();
-            tetris.init();
-            $(window).off("keydown");
-            $(document).on("keyup",(e)=>{
-                      if(e.keyCode === 82) { //R Restart Key
-                        $(document).off("keyup");
-                        $(document).off("keydown");
-                        tetris.endGame();
-                        $route.reload();
-                        console.log("trying to restart game");
-                      }
-                    });
-            $('#menu-select').on("click",()=>{
-                      /////restart
-                      $(document).off("keyup");
-                      $(document).off("keydown");
-                      tetris.endGame();
-                      $route.reload();
-                    });
-            break;
 
-          }
-        });
-
-        $("#onoff").on("click",()=>{
-          tetris.endGame();
-          $location.url("/home");
-          $route.reload();
-        });
+              $("#onoff").on("click",()=>{
+                tetris.endGame();
+                $location.url("/home");
+                $route.reload();
+              });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
@@ -701,8 +804,27 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
         });
 
-      }
 
+
+
+
+
+
+
+          }else {
+            alert("no");
+          }
+
+
+        });
+
+
+
+
+
+
+
+      }
 
     };
 
@@ -2682,9 +2804,15 @@ require('./grid');
        self.shape.moveDown();
 
      },speed);
+      let ref;
+      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+        ref = this.databaseref.replace("/grids","/grid");
 
-
-      let selfref = firebase.database().ref(this.databaseref);
+      }else {
+        ref = this.databaseref.replace("/grid","/grids");
+      }
+      console.log("what is the ref", ref);
+      let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
           item.forEach((items,index)=>{
@@ -2866,10 +2994,24 @@ require('./grid');
     FBRef: function() {
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
-      let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
-      let ref = firebase.database().ref(`games/${response}`);
-      ref.onDisconnect().remove();
-      return `games/${response}/grid`;
+
+      if (this.gameBoardRef.user === user) {
+        console.log("what is this.gameboardref", this.gameBoardRef);
+        let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
+        let ref = firebase.database().ref(`games/${response}`);
+
+     ref.on("value",(snapshot)=>{
+        console.log("hi");
+        alert("go");
+      });
+        ref.onDisconnect().remove();
+        return `games/${response}/grid`;
+      }else {
+         let response = this.gameBoardRef.key;
+        let ref = firebase.database().ref(`games/${response}`);
+        ref.onDisconnect().remove();
+        return `games/${response}/grids`;
+      }
     },
 
 

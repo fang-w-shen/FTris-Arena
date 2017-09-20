@@ -89,9 +89,15 @@ require('./grid');
        self.shape.moveDown();
 
      },speed);
+      let ref;
+      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+        ref = this.databaseref.replace("/grids","/grid");
 
-
-      let selfref = firebase.database().ref(this.databaseref);
+      }else {
+        ref = this.databaseref.replace("/grid","/grids");
+      }
+      console.log("what is the ref", ref);
+      let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
           item.forEach((items,index)=>{
@@ -273,10 +279,24 @@ require('./grid');
     FBRef: function() {
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
-      let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
-      let ref = firebase.database().ref(`games/${response}`);
-      ref.onDisconnect().remove();
-      return `games/${response}/grid`;
+
+      if (this.gameBoardRef.user === user) {
+        console.log("what is this.gameboardref", this.gameBoardRef);
+        let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
+        let ref = firebase.database().ref(`games/${response}`);
+
+     ref.on("value",(snapshot)=>{
+        console.log("hi");
+        alert("go");
+      });
+        ref.onDisconnect().remove();
+        return `games/${response}/grid`;
+      }else {
+         let response = this.gameBoardRef.key;
+        let ref = firebase.database().ref(`games/${response}`);
+        ref.onDisconnect().remove();
+        return `games/${response}/grids`;
+      }
     },
 
 
