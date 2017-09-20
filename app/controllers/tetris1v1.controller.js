@@ -125,6 +125,7 @@
           if(!gameCredentials.password){
             gameCredentials.password = '';
           }
+          gameCredentials.user = firebase.auth().currentUser.uid;
           var tetris = new Tetris2({
             rows: 20,
             cols: 10,
@@ -292,6 +293,7 @@
               });
         }
         if (password === item[Object.keys(item)[0]].password) {
+          $scope.gameMade = true;
             console.log("what is this thing", Object.keys(item)[0]);
 
             gameCredentials.key = Object.keys(item)[0];

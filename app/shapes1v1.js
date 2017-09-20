@@ -107,6 +107,8 @@
 
         });
       });
+      console.log("this.dataref from shapes", this.databaseref);
+
             this.databaseref.set(solidgrids);
     } else if (onObstacle) {
       onObstacle.call(this);

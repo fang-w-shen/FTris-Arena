@@ -96,7 +96,7 @@ require('./grid');
       }else {
         ref = this.databaseref.replace("/grid","/grids");
       }
-      console.log("what is the ref", ref);
+      console.log("what is the ref", this.gameBoardRef);
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
@@ -280,12 +280,12 @@ require('./grid');
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
 
-      if (this.gameBoardRef.user === user) {
         console.log("what is this.gameboardref", this.gameBoardRef);
+      if (this.gameBoardRef.user === user) {
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-     ref.on("value",(snapshot)=>{
+     ref.once("value",(snapshot)=>{
         console.log("hi");
         alert("go");
       });

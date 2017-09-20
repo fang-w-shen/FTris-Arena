@@ -579,6 +579,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           if(!gameCredentials.password){
             gameCredentials.password = '';
           }
+          gameCredentials.user = firebase.auth().currentUser.uid;
           var tetris = new Tetris2({
             rows: 20,
             cols: 10,
@@ -746,6 +747,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               });
         }
         if (password === item[Object.keys(item)[0]].password) {
+          $scope.gameMade = true;
             console.log("what is this thing", Object.keys(item)[0]);
 
             gameCredentials.key = Object.keys(item)[0];
@@ -1797,6 +1799,8 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
         });
       });
+      console.log("this.dataref from shapes", this.databaseref);
+
             this.databaseref.set(solidgrids);
     } else if (onObstacle) {
       onObstacle.call(this);
@@ -2811,7 +2815,7 @@ require('./grid');
       }else {
         ref = this.databaseref.replace("/grid","/grids");
       }
-      console.log("what is the ref", ref);
+      console.log("what is the ref", this.gameBoardRef);
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
@@ -2995,12 +2999,12 @@ require('./grid');
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
 
-      if (this.gameBoardRef.user === user) {
         console.log("what is this.gameboardref", this.gameBoardRef);
+      if (this.gameBoardRef.user === user) {
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-     ref.on("value",(snapshot)=>{
+     ref.once("value",(snapshot)=>{
         console.log("hi");
         alert("go");
       });
