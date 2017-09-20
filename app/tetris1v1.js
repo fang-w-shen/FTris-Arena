@@ -271,23 +271,11 @@ require('./grid');
       }
     },
     FBRef: function() {
-
-
-
-
-
-
-
-
-
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
       let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
       let ref = firebase.database().ref(`games/${response}`);
-
-       ref.onDisconnect().remove();
-
-      console.log("what is response1",response);
+      ref.onDisconnect().remove();
       return `games/${response}/grid`;
     },
 

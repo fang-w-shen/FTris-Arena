@@ -1,5 +1,296 @@
 /*//////////FONT FACE//////////////*/
 @import url(//fonts.googleapis.com/css?family=Press+Start+2P);
+#base {
+  border-radius: 15px;
+  border-bottom-right-radius: 20%;
+  position: absolute;
+  background-image: linear-gradient(#ff0084, #ff4e06, rgba(139, 246, 0, 0.85));
+  text-decoration: none;
+  color: #fff;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: 100;
+  top: 0;
+  height: 800px;
+  width: 450px; }
+
+.as {
+  width: 3px;
+  height: 25px;
+  background-color: #292b2c;
+  position: absolute;
+  margin: 0px 325px;
+  margin-left: 90%; }
+
+.l {
+  width: 60px;
+  height: 15px;
+  background-color: black;
+  border-radius: 30px;
+  position: absolute;
+  margin: 5px 35px; }
+
+.l:before {
+  content: ' ';
+  width: 10px;
+  height: 5px;
+  background-color: black;
+  position: absolute;
+  margin: -5px 5px; }
+
+.l:after {
+  content: ' ';
+  width: 2px;
+  height: 5px;
+  border-radius: 30%;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  margin: -5px 7px; }
+
+.fa-caret-left {
+  position: absolute;
+  margin-left: 4px;
+  color: RGBA(179, 178, 175, 1);
+  font-size: 14px; }
+
+.fa-caret-right {
+  position: absolute;
+  margin-left: 52px;
+  color: RGBA(179, 178, 175, 1);
+  font-size: 14px; }
+
+.onoff {
+  font-size: 9px;
+  color: RGBA(255, 255, 255, 1);
+  font-family: "Open Sans", sans-serif;
+  margin-left: 11px;
+  position: absolute; }
+
+/* #### */
+.screenbase {
+  background-color: black;
+  width: 400px;
+  height: 450px;
+  position: absolute;
+  border-radius: 10px;
+  border-bottom-right-radius: 60px;
+  margin-top: 45px;
+  margin-left: 25px; }
+
+.h4 {
+  position: absolute;
+  font-size: 8px;
+  margin-top: 7px;
+  margin-left: 126px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  color: white;
+  text-transform: uppercase; }
+
+.llu {
+  width: 100px;
+  height: 2px;
+  background-color: #75004b;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 15px; }
+
+.lld {
+  width: 100px;
+  height: 2px;
+  background-color: RGBA(13, 0, 75, 1);
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 15px; }
+
+.lru {
+  width: 110px;
+  height: 2px;
+  background-color: #75004b;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 270px; }
+
+.lrd {
+  width: 110px;
+  height: 2px;
+  background-color: #0d004b;
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 270px; }
+
+.battery {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  box-shadow: inset 2px 2px 0px 0px black;
+  border-radius: 50%;
+  margin-top: 100px;
+  margin-left: 15px; }
+
+.screens {
+  width: 220px;
+  height: 415px;
+  border-radius: 2px;
+  border: 2px solid black;
+  margin-top: -80px;
+  margin-left: 55px;
+  background-color: #495c1d;
+  position: absolute; }
+
+/* ##### */
+.cntrls {
+  width: 300px;
+  height: 240px;
+  margin-top: 275px;
+  margin-left: 20px;
+  position: absolute; }
+
+.gbnin {
+  font-size: 20px;
+  margin-top: 11em;
+  margin-left: .5em;
+  color: black; }
+
+.gbnin:before {
+  content: 'FTRIS-';
+  font-family: 'Droid Sans', sans-serif;
+  font-weight: bold;
+  font-size: 19px; }
+
+.gbnin:after {
+  content: 'GAME BOY';
+  font-family: 'Droid Sans', sans-serif;
+  font-style: italic;
+  font-size: 19px; }
+
+.h6 {
+  color: #1c0b77;
+  font-family: 'Droid Sans', sans-serif;
+  margin-top: -13px;
+  font-weight: bold;
+  font-size: 9px;
+  margin-left: 180px; }
+
+#speaker {
+  width: 90px;
+  height: 65px;
+  margin-top: -70px;
+  margin-left: 210px;
+  transform: rotate(-25deg); }
+
+i.shine {
+  /*   positioning */
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  /*   gradient   */
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(1%, rgba(255, 255, 255, 0.03)), color-stop(30%, rgba(255, 255, 255, 0.85)), color-stop(50%, rgba(255, 255, 255, 0.85)), color-stop(70%, rgba(255, 255, 255, 0.85)), color-stop(71%, rgba(255, 255, 255, 0.85)), color-stop(100%, rgba(255, 255, 255, 0)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+  /* IE6-9 */
+  /*  forming the shine element
+  play around with the width, skew and gradient to get different effects
+  */
+  width: 15%;
+  height: 100%;
+  transform: skew(-10deg, 0deg);
+  -webkit-transform: skew(-10deg, 0deg);
+  -moz-transform: skew(-10deg, 0deg);
+  -ms-transform: skew(-10deg, 0deg);
+  -o-transform: skew(-10deg, 0deg);
+  /*  animating it  */
+  animation: move 2s;
+  animation-iteration-count: 1;
+  animation-delay: 1s;
+  -webkit-animation: move 2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-delay: 1s;
+  -moz-transform: skew(-10deg, 0deg);
+  -moz-animation: move 2s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-delay: 1s;
+  -ms-transform: skew(-10deg, 0deg);
+  -ms-animation: move 2s;
+  -ms-animation-iteration-count: 1;
+  -ms-animation-delay: 1s;
+  -o-transform: skew(-10deg, 0deg);
+  -o-animation: move 2s;
+  -o-animation-iteration-count: 1;
+  -o-animation-delay: 1s; }
+
+/*  */
+@keyframes move {
+  0% {
+    left: 0;
+    opacity: 0; }
+  5% {
+    opacity: 0.0; }
+  48% {
+    opacity: 0.2; }
+  80% {
+    opacity: 0.0; }
+  100% {
+    left: 82%; } }
+@-webkit-keyframes move {
+  0% {
+    left: 0;
+    opacity: 0; }
+  5% {
+    opacity: 0.0; }
+  48% {
+    opacity: 0.2; }
+  80% {
+    opacity: 0.0; }
+  100% {
+    left: 82%; } }
+@-moz-keyframes move {
+  0% {
+    left: 0;
+    opacity: 0; }
+  5% {
+    opacity: 0.0; }
+  48% {
+    opacity: 0.2; }
+  80% {
+    opacity: 0.0; }
+  100% {
+    left: 88%; } }
+@-ms-keyframes move {
+  0% {
+    left: 0;
+    opacity: 0; }
+  5% {
+    opacity: 0.0; }
+  48% {
+    opacity: 0.2; }
+  80% {
+    opacity: 0.0; }
+  100% {
+    left: 82%; } }
+@-o-keyframes move {
+  0% {
+    left: 0;
+    opacity: 0; }
+  5% {
+    opacity: 0.0; }
+  48% {
+    opacity: 0.2; }
+  80% {
+    opacity: 0.0; }
+  100% {
+    left: 82%; } }
 /*NAV BAR*/
 .dropdown-toggle {
   background: black !important;
@@ -31,10 +322,16 @@ nav {
   right: 20px; }
 
 .mobileDevices {
-  margin-top: 1em; }
+  margin-top: 1em;
+  color: white;
+  position: absolute;
+  height: 80vh;
+  left: 33%; }
 
 #mobileDevice {
-  background: beige; }
+  background: beige;
+  height: 80vh;
+  width: 47vh; }
 
 .blink_me {
   font-family: 'Press Start 2P';
@@ -176,6 +473,11 @@ body {
   top: -4em;
   left: -6em; }
 
+#tetrisScreen {
+  position: relative;
+  left: 3.5em;
+  top: 3.5em; }
+
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #githubforkleft {
@@ -267,7 +569,10 @@ body {
     max-height: 99%;
     top: 160px;
     left: 80px;
-    margin-left: 10px; } }
+    margin-left: 10px; }
+
+  .control-buttons {
+    right: 0em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -320,8 +625,8 @@ body {
     font-size: 11px !important; }
 
   .mobileDevices {
-    overflow-y: scroll !important;
-    margin-top: -.5em; }
+    margin-top: -.5em;
+    left: 2em; }
 
   .overlay {
     position: relative;
@@ -353,24 +658,41 @@ body {
     width: 50%; }
 
   .grid {
-    margin-left: 1.5em !important; }
+    margin-left: 1.5em !important;
+    z-index: 8 !important; }
 
   .right-column {
+    margin-left: 2.5em !important;
+    margin-top: -2em;
     max-width: 110px;
     position: absolute !important;
     top: 1em !important;
     left: 25%;
-    margin-left: -1em; }
+    z-index: 8 !important; }
+    .right-column .grid {
+      margin-bottom: -15px;
+      margin-left: 10px !important; }
+    .right-column #preview {
+      margin-left: 20px !important; }
+    .right-column #next {
+      margin-bottom: 0px !important; }
+    .right-column #highScore {
+      margin-bottom: -2em; }
+    .right-column #time {
+      float: right;
+      margin-top: -2em;
+      margin-right: 2.5em; }
 
   #tetrisScreen {
     margin-left: 1.5em !important;
     margin-top: 1.5em;
     max-width: 99%; }
     #tetrisScreen #tetris {
-      margin-right: -2em !important; }
+      margin-top: 1em;
+      margin-left: -1em !important; }
 
   .control-buttons {
-    right: 2.8em !important;
+    margin-right: 90px !important;
     top: 2.2em !important; }
     .control-buttons .label {
       top: -7px !important; }
@@ -458,14 +780,23 @@ body {
     height: 220px !important; }
 
   .cell {
-    width: 12px !important;
-    height: 12px !important; }
+    width: 11px !important;
+    height: 11px !important; }
 
   #highScoreModal {
     height: 320px !important; }
 
   .howtoclose {
-    top: 1.3em; } }
+    top: 1.3em; }
+
+  #base {
+    width: 266px; }
+    #base .screens {
+      width: 210px;
+      margin-left: 5px;
+      height: 280px; }
+    #base .screenbase {
+      width: 220px; } }
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
     margin-left: 20px; }
@@ -512,7 +843,7 @@ canvas {
   /*border: 1px solid #ddd;*/
   /*display: inline-block;*/
   /*padding: 1px;*/
-  /*margin:;*/
+  margin-top: 2em;
   margin-left: 20px; }
 
 input {
@@ -528,8 +859,8 @@ input {
 
 .cell {
   border: 1px solid #ddd;
-  width: 23px;
-  height: 23px;
+  width: 18px;
+  height: 18px;
   background-color: #9ead86;
   /*display: inline-block;*/
   margin: 1px;
@@ -599,10 +930,11 @@ input {
       font-size: 40px; } }
 
 .system {
+  margin-left: .5em;
   float: left;
   padding: 1em;
   padding-bottom: 2em;
-  margin-top: -1em; }
+  margin-top: 1.8em; }
 
 .system .screen {
   width: 320px;
@@ -677,44 +1009,60 @@ input {
     color: #fff; }
 .system .control-buttons {
   position: absolute;
-  right: 0em;
+  right: 0em !important;
   top: 2em;
-  background: #afb2b6;
+  background: #f5f5f5;
   border-radius: 1em; }
 .system .control {
-  background: #79215b;
+  background: #292b2c;
   width: 1.5em;
   height: 1.5em;
   border-radius: 1.5em;
   float: left;
   margin: .25em;
-  border-top: 0.05em solid #de88c1;
-  border-bottom: 0.05em solid #290b1f; }
+  border-top: 0.05em solid #8d9294;
+  border-bottom: 0.05em solid black; }
   .system .control:hover, .system .control:active {
-    background: #8d266a; }
+    background: #353839; }
   .system .control .label {
     top: -1em;
     color: white;
     font-size: .9rem; }
 .system .menu-buttons {
   position: absolute;
-  background: #afb2b6;
+  background: #f5f5f5;
   top: 0em;
-  left: 0em;
+  left: -.2em;
   border-radius: 2em; }
 .system .menu {
-  background: #717b85;
+  background: #292b2c;
   width: 3.5em;
   height: .5em;
   border-radius: .4em;
   float: right;
   margin: .25em;
-  border-top: 0.05em solid #8c959d;
-  border-bottom: 0.05em solid #5a6269; }
+  border-top: 0.05em solid #424546;
+  border-bottom: 0.05em solid #101112; }
   .system .menu:hover, .system .menu:active {
-    background: #7e8891; }
+    background: #353839; }
   .system .menu .label {
     top: -2em;
+    color: white; }
+
+.grid {
+  z-index: 8 !important; }
+
+.right-column {
+  z-index: 8 !important; }
+  .right-column #score, .right-column #pauseGame, .right-column #time {
+    margin-top: -.5em; }
+  .right-column #preview {
+    margin-left: 2em;
+    margin-top: -.1em;
+    margin-bottom: -2em; }
+  .right-column #highScore {
+    margin-bottom: -1em; }
+  .right-column i.close {
     color: white; }
 
 /*# sourceMappingURL=main.css.map */

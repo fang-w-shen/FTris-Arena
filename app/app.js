@@ -3,18 +3,18 @@ angular.module('TetrisApp', ['ngRoute']);
 
 
 angular.module('TetrisApp').config(function($routeProvider) {
-  let isAuth = ($location) => {
-        return new Promise((resolve,reject)=>{
-            let truth = firebase.auth().currentUser.uid;
-            if (truth){
-                resolve();
-            } else {
+  // let isAuth = ($location) => {
+  //       return new Promise((resolve,reject)=>{
+  //           let truth = firebase.auth().currentUser.uid;
+  //           if (truth){
+  //               resolve();
+  //           } else {
 
-              $location.url("/home");
+  //             $location.url("/home");
 
-            }
-        });
-    };
+  //           }
+  //       });
+  //   };
 
   $routeProvider
     .when("/home", {

@@ -58,13 +58,15 @@
           $(document).on("keyup",(e)=>{
             if (e.keyCode === 70) {
               if(!$scope.fullScreen){
+                    $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
                   }else {
+                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
                     exitFullScreen(document); // the whole page
                     $scope.fullScreen = false;
-
+                    $scope.$apply();
                   }
                 }
 
@@ -135,7 +137,7 @@
 
 
 
-        $("#endGame").on("click",()=>{
+        $("#onoff").on("click",()=>{
           tetris.endGame();
           $location.url("/home");
           $route.reload();
