@@ -684,7 +684,7 @@ body {
       margin-right: 2.5em; }
 
   #tetrisScreen {
-    margin-top: 0;
+    margin-top: -1em !important;
     margin-left: 1em !important;
     max-width: 99%; }
     #tetrisScreen #tetris {
@@ -693,7 +693,7 @@ body {
 
   .control-buttons {
     margin-right: 90px !important;
-    top: 2.2em !important; }
+    top: 2.5em !important; }
     .control-buttons .label {
       top: -7px !important; }
 
@@ -715,26 +715,29 @@ body {
     top: 18em; }
 
   .system {
-    margin-top: 2em !important;
+    margin-top: 2.8em !important;
     margin-left: 1em !important; }
-    .system .d-pad .label {
-      display: none; }
-    .system .d-pad #d-up {
-      top: 1.5em;
-      width: 1.5em;
-      height: 1.5em; }
-    .system .d-pad #d-left {
-      width: 1.5em;
-      height: 1.5em;
-      left: -.5em; }
-    .system .d-pad #d-right {
-      width: 1.5em;
-      height: 1.5em;
-      right: -1em; }
-    .system .d-pad #d-down {
-      width: 1.5em;
-      height: 1.5em;
-      top: 4.5em; }
+    .system .d-pad {
+      top: -.2em !important;
+      right: .2em !important; }
+      .system .d-pad .label {
+        display: none; }
+      .system .d-pad #d-up {
+        top: 1.5em;
+        width: 1.5em;
+        height: 1.5em; }
+      .system .d-pad #d-left {
+        width: 1.5em;
+        height: 1.5em;
+        left: -.5em; }
+      .system .d-pad #d-right {
+        width: 1.5em;
+        height: 1.5em;
+        right: -1em; }
+      .system .d-pad #d-down {
+        width: 1.5em;
+        height: 1.5em;
+        top: 4.5em; }
 
   .letters {
     display: none; }
@@ -780,8 +783,8 @@ body {
     height: 220px !important; }
 
   .cell {
-    width: 11px !important;
-    height: 11px !important; }
+    width: 10px !important;
+    height: 10px !important; }
 
   #highScoreModal {
     height: 320px !important; }
@@ -789,16 +792,61 @@ body {
   .howtoclose {
     top: 1.3em; }
 
+  .battery {
+    margin-top: 50px;
+    margin-left: 5px; }
+
   #base {
-    width: 266px; }
+    width: 303px;
+    margin-left: -.7em !important; }
     #base .screens {
-      width: 210px;
-      margin-left: 5px;
-      height: 270px; }
+      width: 138px;
+      margin-left: 22px;
+      top: 3.9em;
+      height: 254px; }
     #base .screenbase {
-      width: 220px;
+      width: 250px;
       margin-top: 1em;
-      height: 335px; } }
+      height: 274px; }
+
+  .llu {
+    width: 25px;
+    height: 2px;
+    background-color: #75004b;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11px; }
+
+  .lld {
+    width: 25px;
+    height: 2px;
+    background-color: RGBA(13, 0, 75, 1);
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 11px; }
+
+  .h4 {
+    margin-left: 40px; }
+
+  .lru {
+    width: 25px;
+    height: 2px;
+    background-color: #75004b;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 185px; }
+
+  .lrd {
+    width: 25px;
+    height: 2px;
+    background-color: #0d004b;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 185px; }
+
+  .gbnin {
+    margin-top: .9em;
+    color: black; } }
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
     margin-left: 20px; }
