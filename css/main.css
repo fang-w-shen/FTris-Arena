@@ -625,8 +625,8 @@ body {
     font-size: 11px !important; }
 
   .mobileDevices {
-    margin-top: -.5em;
-    left: 2em; }
+    left: 2em;
+    margin-top: 2px !important; }
 
   .overlay {
     position: relative;
@@ -684,8 +684,8 @@ body {
       margin-right: 2.5em; }
 
   #tetrisScreen {
-    margin-left: 1.5em !important;
-    margin-top: 1.5em;
+    margin-top: 0;
+    margin-left: 1em !important;
     max-width: 99%; }
     #tetrisScreen #tetris {
       margin-top: 1em;
@@ -715,8 +715,8 @@ body {
     top: 18em; }
 
   .system {
-    margin-left: 1.5em;
-    margin-top: 0em !important; }
+    margin-top: 2em !important;
+    margin-left: 1em !important; }
     .system .d-pad .label {
       display: none; }
     .system .d-pad #d-up {
@@ -794,9 +794,11 @@ body {
     #base .screens {
       width: 210px;
       margin-left: 5px;
-      height: 280px; }
+      height: 270px; }
     #base .screenbase {
-      width: 220px; } }
+      width: 220px;
+      margin-top: 1em;
+      height: 335px; } }
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
     margin-left: 20px; }
