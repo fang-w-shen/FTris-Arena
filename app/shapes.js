@@ -3,10 +3,10 @@
 
   var colors = [
   'aqua',
-  'deepskyblue',
+  '#f9f816',
   'lawngreen',
-  'hotpink',
-  'lightseagreen',
+  'rgb(252, 34, 109)',
+  '#1a33e1',
   'orange',
   'springgreen',
   'gold'

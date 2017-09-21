@@ -999,10 +999,10 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   var colors = [
   'aqua',
-  'deepskyblue',
+  '#f9f816',
   'lawngreen',
-  'hotpink',
-  'lightseagreen',
+  'rgb(252, 34, 109)',
+  '#1a33e1',
   'orange',
   'springgreen',
   'gold'
@@ -1629,10 +1629,10 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
   var colors = [
   'aqua',
-  'deepskyblue',
+  '#f9f816',
   'lawngreen',
-  'hotpink',
-  'lightseagreen',
+  'rgb(252, 34, 109)',
+  '#1a33e1',
   'orange',
   'springgreen',
   'gold'
@@ -2591,6 +2591,9 @@ require('./grid');
     },
     endGame: function () {
       this.clearInterval();
+      if (score !== 0) {
+        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+      }
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
@@ -2620,7 +2623,7 @@ require('./grid');
 
         });
       }
-      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+
 
       // $(document).off('click');
       if (score > localStorage.score) {
@@ -2754,12 +2757,12 @@ require('./grid');
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
           item.forEach((items,index)=>{
-            this.opponent.getCellAt(items.x,items.y).$el.css('background','black');
+            this.opponent.getCellAt(items.x,items.y).$el.css('background','#9ead86');
           });
         });
         if (snapshot.val()) {
           snapshot.val().forEach((item)=>{
-            this.opponent.getCellAt(item.x,item.y).$el.css('background','white');
+            this.opponent.getCellAt(item.x,item.y).$el.css('background','black');
           });
         }
       });
@@ -2942,7 +2945,7 @@ require('./grid');
         opponentref.on("value",(snapshot)=>{
           console.log("snapshot", snapshot.val());
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-              this.init();
+            this.init();
 
           }
         });
@@ -3114,6 +3117,9 @@ require('./grid');
     endGame: function () {
 
       this.clearInterval();
+      if (score !== 0) {
+        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+      }
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
@@ -3128,7 +3134,6 @@ require('./grid');
       console.log("whats the firebaseref here",this.databaseref);
 
 
-      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
       score = 0;
       let ref = this.databaseref;
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {

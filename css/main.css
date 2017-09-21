@@ -478,6 +478,11 @@ body {
   left: 3.5em;
   top: 3.5em; }
 
+span.badge {
+  margin-top: .3em;
+  color: white;
+  background: green; }
+
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #githubforkleft {

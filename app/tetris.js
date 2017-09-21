@@ -399,6 +399,9 @@ require('./grid');
     },
     endGame: function () {
       this.clearInterval();
+      if (score !== 0) {
+        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+      }
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
@@ -428,7 +431,7 @@ require('./grid');
 
         });
       }
-      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+
 
       // $(document).off('click');
       if (score > localStorage.score) {
