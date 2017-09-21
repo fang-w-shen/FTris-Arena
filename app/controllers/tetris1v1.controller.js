@@ -240,7 +240,7 @@
               gameBoardRef: gameCredentials
             });
             setTimeout(()=>{
-              alert("go");
+              console.log("go");
               tetris.init();
               $scope.bindFullScreenKey();
             },3000);

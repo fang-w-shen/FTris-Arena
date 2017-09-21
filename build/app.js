@@ -694,7 +694,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               gameBoardRef: gameCredentials
             });
             setTimeout(()=>{
-              alert("go");
+              console.log("go");
               tetris.init();
               $scope.bindFullScreenKey();
             },3000);
@@ -2736,10 +2736,10 @@ require('./grid');
      },speed);
       let ref;
       if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace(/grids/,"/grid");
+        ref = this.databaseref.replace("grids","/grid");
 
       }else if (this.databaseref) {
-        ref = this.databaseref.replace(/grid/,"/grids");
+        ref = this.databaseref.replace("grid","/grids");
       }
       console.log("what is the ref", ref);
       let selfref = firebase.database().ref(ref);
@@ -2934,11 +2934,8 @@ require('./grid');
         let opponentref = firebase.database().ref(`games/${response}/grids`);
         opponentref.on("value",(snapshot)=>{
           console.log("snapshot", snapshot.val());
-          if (snapshot.val() && this.startGame === false) {
-            setTimeout(()=>{
-              alert("go");
+          if (snapshot.val() && (this.startGame === false)) {
               this.init();
-            },3000);
 
           }
         });
@@ -3119,14 +3116,15 @@ require('./grid');
       gameover.play();
       $(this).off('keydown');
       $(this).off("keyup");
-      let ref = this.gameBoardRef.key;
+      let ref = this.databaseref;
+      console.log("whats the gameref here",this.gameBoardRef);
+      console.log("whats the firebaseref here",this.databaseref);
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
-        firebase.database().ref(ref).remove();
+        firebase.database().ref(ref.replace(/grids/,"")).remove();
 
       }else {
-        firebase.database().ref(this.databaseref.replace(/grids/,"")).remove();
+        firebase.database().ref(ref.replace(/grid/,"")).remove();
       }
-      console.log("whats the ref here",this.databaseref);
 
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
       score = 0;

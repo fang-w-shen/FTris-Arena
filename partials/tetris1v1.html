@@ -1,6 +1,6 @@
 <!-- <div ng-include="'partials/navbar.html'">
 </div> -->
-<div ng-if="!isLoggedIn" class="jumbotron col-4" style="float:left;height:100vh">
+<div ng-if="!isLoggedIn" class="jumbotron col-4" style="float:left;height:100vh;z-index:9">
   <h1 class="display-3" style="margin-top: -1em;">Sign In!</h1>
   <hr class="my-4">
   E-Mail:
@@ -14,7 +14,7 @@
 </p>
 </div>
 
-<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-4" style="float:left;height:100vh">
+<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-4" style="float:left;height:100vh;z-index:9">
   <h1 class="display-3" style="margin-top: -1em;">Create Local Game!</h1>
   <hr class="my-4">
   Lobby Name:
