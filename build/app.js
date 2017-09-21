@@ -694,8 +694,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               gameBoardRef: gameCredentials
             });
             setTimeout(()=>{
-              console.log("go");
               tetris.init();
+              console.log("go");
               $scope.bindFullScreenKey();
             },3000);
 
@@ -2736,22 +2736,22 @@ require('./grid');
      },speed);
       let ref;
       if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace("grids","/grid");
+        ref = this.databaseref.replace("/grids","/grid");
 
       }else if (this.databaseref) {
-        ref = this.databaseref.replace("grid","/grids");
+        ref = this.databaseref.replace("/grid","/grids");
       }
       console.log("what is the ref", ref);
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
           item.forEach((items,index)=>{
-            this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+            this.opponent.getCellAt(items.x,items.y).$el.css('background','black');
           });
         });
         if (snapshot.val()) {
           snapshot.val().forEach((item)=>{
-            this.opponent.getCellAt(item.x,item.y).$el.css('background','red');
+            this.opponent.getCellAt(item.x,item.y).$el.css('background','white');
           });
         }
       });
@@ -2930,11 +2930,10 @@ require('./grid');
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-
         let opponentref = firebase.database().ref(`games/${response}/grids`);
         opponentref.on("value",(snapshot)=>{
           console.log("snapshot", snapshot.val());
-          if (snapshot.val() && (this.startGame === false)) {
+          if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
               this.init();
 
           }
@@ -3105,6 +3104,7 @@ require('./grid');
 
     },
     endGame: function () {
+
       this.clearInterval();
       this.gameOver = true;
       this.shape = false;
@@ -3116,18 +3116,19 @@ require('./grid');
       gameover.play();
       $(this).off('keydown');
       $(this).off("keyup");
-      let ref = this.databaseref;
       console.log("whats the gameref here",this.gameBoardRef);
       console.log("whats the firebaseref here",this.databaseref);
+
+
+      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+      score = 0;
+      let ref = this.databaseref;
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
         firebase.database().ref(ref.replace(/grids/,"")).remove();
 
       }else {
         firebase.database().ref(ref.replace(/grid/,"")).remove();
       }
-
-      Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
-      score = 0;
     },
 
     init: function() {
