@@ -91,12 +91,12 @@ require('./grid');
      },speed);
       let ref;
       if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace("/grids","/grid");
+        ref = this.databaseref.replace(/grids/,"/grid");
 
-      }else {
-        ref = this.databaseref.replace("/grid","/grids");
+      }else if (this.databaseref) {
+        ref = this.databaseref.replace(/grid/,"/grids");
       }
-      console.log("what is the ref", this.gameBoardRef);
+      console.log("what is the ref", ref);
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
@@ -280,29 +280,39 @@ require('./grid');
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
 
-        console.log("what is this.gameboardref", this.gameBoardRef);
+      console.log("what is this.gameboardref", this.gameBoardRef);
       if (this.gameBoardRef.user === user) {
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-     ref.once("value",(snapshot)=>{
-        console.log("hi");
-        alert("go");
-      });
+
+        let opponentref = firebase.database().ref(`games/${response}/grids`);
+        opponentref.on("value",(snapshot)=>{
+          console.log("snapshot", snapshot.val());
+          if (snapshot.val() && this.startGame === false) {
+            setTimeout(()=>{
+              alert("go");
+              this.init();
+            },3000);
+
+          }
+        });
+
+
         ref.onDisconnect().remove();
         return `games/${response}/grid`;
       }else {
-         let response = this.gameBoardRef.key;
-        let ref = firebase.database().ref(`games/${response}`);
-        ref.onDisconnect().remove();
-        return `games/${response}/grids`;
-      }
-    },
+       let response = this.gameBoardRef.key;
+       let ref = firebase.database().ref(`games/${response}`);
+       ref.onDisconnect().remove();
+       return `games/${response}/grids`;
+     }
+   },
 
 
 
-    bind: function() {
-      var self = this;
+   bind: function() {
+    var self = this;
 
       ////////////////////////KEYBOARD EVENTS/////////////////////////////
       $(document).on('keydown', function( e ) {
@@ -464,33 +474,16 @@ require('./grid');
       gameover.play();
       $(this).off('keydown');
       $(this).off("keyup");
-      let ref = this.databaseref.replace("/grid","");
-      firebase.database().ref(ref).remove();
-      // if(score>$('#highScore').html()){
-      //   let newhighscorename = prompt("Congratulations! Enter your name...");
-      //   console.log("name here",newhighscorename);
-      //   if (newhighscorename === '') {
-      //     newhighscorename = 'guest';
-      //   }else if (newhighscorename === null) {
-      //     newhighscorename = 'guest';
-      //   }
-        // $.ajax({
-        //   url: `https://tetris-arena.firebaseio.com/highscores.json`,
-        //   method: "POST",
-        //   data : JSON.stringify({name:newhighscorename,score:score})
-        // })
-        // .done(function(response) {
-        //   console.log("response",response);
+      let ref = this.gameBoardRef.key;
+      if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
+        firebase.database().ref(ref).remove();
 
-        // });
-      // }
+      }else {
+        firebase.database().ref(this.databaseref.replace(/grids/,"")).remove();
+      }
+      console.log("whats the ref here",this.databaseref);
+
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
-
-      // $(document).off('click');
-      // if (score > localStorage.score) {
-
-      //   localStorage.score = score;
-      // }
       score = 0;
     },
 
@@ -504,19 +497,6 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
-
-      // this.grid.rows.forEach((item)=>{
-      //   item.forEach((insideitem)=>{
-      //     databaseref.child("poop").set({x:insideitem.x,y:insideitem.y}).then((response)=>{
-      //   console.log("response", response);
-      // });
-      //   });
-
-      // });
-
-      // database.on("value",(snapshot)=>{
-      //   console.log(snapshot.val());
-      // });
     }
   };
 

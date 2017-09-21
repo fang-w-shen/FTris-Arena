@@ -151,7 +151,7 @@
             // $(document).off("keydown");
             $location.url('/home');
 
-            $('*').css("overflow","hidden !important");
+            $('*').css("overflow","none !important");
             $route.reload();
             break;
           }

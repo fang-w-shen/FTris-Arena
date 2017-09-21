@@ -413,7 +413,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             // $(document).off("keydown");
             $location.url('/home');
 
-            $('*').css("overflow","hidden !important");
+            $('*').css("overflow","none !important");
             $route.reload();
             break;
           }
@@ -538,6 +538,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.joinGame = joinGame;
       $scope.gameMade = false;
       $scope.board = {};
+      $scope.bindFullScreenKey = bindFullScreenKey;
             //////////////AUTHORIZATION METHODS//////////////////////
             function logInGoogle() {
               AuthFactory.logInGoogle()
@@ -573,6 +574,42 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 $route.reload();
               });
             }
+            function exitFullScreen(element) {
+              if(element.exitFullscreen) {
+                element.exitFullscreen();
+              } else if(element.mozCancelFullScreen) {
+                element.mozCancelFullScreen();
+              } else if(element.webkitExitFullscreen) {
+                element.webkitExitFullscreen();
+              }
+            }
+            function launchFullScreen(element) {
+              if(element.requestFullScreen) {
+                element.requestFullScreen();
+              } else if(element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+              } else if(element.webkitRequestFullScreen) {
+                element.webkitRequestFullScreen();
+              }
+            }
+            function bindFullScreenKey() {
+              $(document).on("keyup",(e)=>{
+                if (e.keyCode === 70) {
+                  if(!$scope.fullScreen){
+                    $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
+                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
+                    $scope.fullScreen = true;
+                    $scope.$apply();
+                  }else {
+                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
+                    exitFullScreen(document); // the whole page
+                    $scope.fullScreen = false;
+
+                  }
+                }
+
+              });
+            }
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
           $scope.gameMade = true;
@@ -591,183 +628,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           });
 
 
+          $scope.bindFullScreenKey();
 
 
-          function exitFullScreen(element) {
-            if(element.exitFullscreen) {
-              element.exitFullscreen();
-            } else if(element.mozCancelFullScreen) {
-              element.mozCancelFullScreen();
-            } else if(element.webkitExitFullscreen) {
-              element.webkitExitFullscreen();
-            }
-          }
-          function launchFullScreen(element) {
-            if(element.requestFullScreen) {
-              element.requestFullScreen();
-            } else if(element.mozRequestFullScreen) {
-              element.mozRequestFullScreen();
-            } else if(element.webkitRequestFullScreen) {
-              element.webkitRequestFullScreen();
-            }
-          }
-          function bindFullScreenKey() {
-            $(document).on("keyup",(e)=>{
-              if (e.keyCode === 70) {
-                if(!$scope.fullScreen){
-                  $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
-                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-                    $scope.fullScreen = true;
-                    $scope.$apply();
-                  }else {
-                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
-                    exitFullScreen(document); // the whole page
-                    $scope.fullScreen = false;
-
-                  }
-                }
-
-              });
-          }
-
-
-
-          $("#startGame").on("click",()=>{
-            bindFullScreenKey();
-              // Launch fullscreen for browsers that support it!
-              // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-              tetris.init();
-              $(window).off("keydown");
-              $(document).on("keyup",(e)=>{
-                if(e.keyCode === 82) { //R Restart KEY
-                $(document).off("keyup");
-                $(document).off("keydown");
-                console.log("trying to restart game");
-                tetris.endGame();
-                $route.reload();
-              }
-            });
-      $('#menu-select').on("click",()=>{
-        $(document).off("keyup");
-      $(document).off("keydown");
-      tetris.endGame();
-      $route.reload();
-      });
-      });
-
-      $(window).on("keydown",(e)=>{
-
-        switch(e.keyCode) {
-          case 13:
-          bindFullScreenKey();
-          tetris.init();
           $(window).off("keydown");
           $(document).on("keyup",(e)=>{
-                            if(e.keyCode === 82) { //R Restart Key
-                              $(document).off("keyup");
-                              $(document).off("keydown");
-                              tetris.endGame();
-                              $route.reload();
-                              console.log("trying to restart game");
-                            }
-                          });
-          $('#menu-select').on("click",()=>{
-                            /////restart
-                            $(document).off("keyup");
-                            $(document).off("keydown");
-                            tetris.endGame();
-                            $route.reload();
-                          });
-          break;
-
-        }
-      });
-
-      $("#onoff").on("click",()=>{
-        tetris.endGame();
-        $location.url("/home");
-        $route.reload();
-      });
-      //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
-      $(document).on("keyup",(e)=>{
-        switch(e.keyCode) {
-          case 27: /// ESC KEY
-          tetris.endGame();
-          $(window).off("keydown");
-            // $(document).off("keydown");
-            $location.url('/home');
-
-            $('*').css("overflow","hidden !important");
-            $route.reload();
-            break;
-          }
-
-        });
-
-      }
-      //////////////////////////////////////////////////////////////////////
-      function joinGame(userId) {
-        let gameCredentials={};
-        FirebaseFactory.getGameBoards(userId).then((item)=>{
-          let password = prompt("Password");
-          function exitFullScreen(element) {
-          if(element.exitFullscreen) {
-            element.exitFullscreen();
-          } else if(element.mozCancelFullScreen) {
-            element.mozCancelFullScreen();
-          } else if(element.webkitExitFullscreen) {
-            element.webkitExitFullscreen();
-          }
-        }
-        function launchFullScreen(element) {
-          if(element.requestFullScreen) {
-            element.requestFullScreen();
-          } else if(element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-          } else if(element.webkitRequestFullScreen) {
-            element.webkitRequestFullScreen();
-          }
-        }
-        function bindFullScreenKey() {
-          $(document).on("keyup",(e)=>{
-            if (e.keyCode === 70) {
-              if(!$scope.fullScreen){
-                $('.mobileDevices').css({height:'0vh',position:'absolute',top:'10%'});
-                    launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-                    $scope.fullScreen = true;
-                    $scope.$apply();
-                  }else {
-                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
-                    exitFullScreen(document); // the whole page
-                    $scope.fullScreen = false;
-
-                  }
-                }
-
-              });
-        }
-        if (password === item[Object.keys(item)[0]].password) {
-          $scope.gameMade = true;
-            console.log("what is this thing", Object.keys(item)[0]);
-
-            gameCredentials.key = Object.keys(item)[0];
-            gameCredentials.user = item[Object.keys(item)[0]].user;
-            var tetris = new Tetris2({
-                            rows: 20,
-                            cols: 10,
-                            gamePlaceholder: '#tetris',
-                            previewPlaceholder: '#preview',
-                            opponentPlaceholder: '#tetris2',
-                            difficulty:"easy",
-                            gameBoardRef: gameCredentials
-                          });
-            tetris.init();
-            bindFullScreenKey();
-              // Launch fullscreen for browsers that support it!
-              // launchFullScreen(document.getElementById("mobileDevice")); // the whole page
-
-
-              $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
                   $(document).off("keyup");
                   $(document).off("keydown");
@@ -776,13 +641,13 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                   $route.reload();
                 }
               });
-
               $('#menu-select').on("click",()=>{
                 $(document).off("keyup");
                 $(document).off("keydown");
                 tetris.endGame();
                 $route.reload();
               });
+
 
 
               $("#onoff").on("click",()=>{
@@ -799,22 +664,83 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             // $(document).off("keydown");
             $location.url('/home');
 
-            $('*').css("overflow","hidden !important");
+            $('*').css("overflow","none !important");
             $route.reload();
             break;
           }
 
         });
 
+      }
+      //////////////////////////////////////////////////////////////////////
+      function joinGame(userId) {
+        let gameCredentials={};
+        FirebaseFactory.getGameBoards(userId).then((item)=>{
+          let password = prompt("Password");
+
+          if (password === item[Object.keys(item)[0]].password) {
+            $scope.gameMade = true;
+            console.log("what is this thing", Object.keys(item)[0]);
+
+            gameCredentials.key = Object.keys(item)[0];
+            gameCredentials.user = item[Object.keys(item)[0]].user;
+            var tetris = new Tetris2({
+              rows: 20,
+              cols: 10,
+              gamePlaceholder: '#tetris',
+              previewPlaceholder: '#preview',
+              opponentPlaceholder: '#tetris2',
+              difficulty:"easy",
+              gameBoardRef: gameCredentials
+            });
+            setTimeout(()=>{
+              alert("go");
+              tetris.init();
+              $scope.bindFullScreenKey();
+            },3000);
 
 
 
 
+            $(document).on("keyup",(e)=>{
+                if(e.keyCode === 82) { //R Restart KEY
+                  $(document).off("keyup");
+                  $(document).off("keydown");
+                  console.log("trying to restart game");
+                  tetris.endGame();
+                  $route.reload();
+                }
+              });
+
+            $('#menu-select').on("click",()=>{
+              $(document).off("keyup");
+              $(document).off("keydown");
+              tetris.endGame();
+              $route.reload();
+            });
 
 
+            $("#onoff").on("click",()=>{
+              tetris.endGame();
+              $location.url("/home");
+              $route.reload();
+            });
+            $(document).on("keyup",(e)=>{
+              switch(e.keyCode) {
+                  case 27: /// ESC KEY
+                  tetris.endGame();
+                  $(window).off("keydown");
+                    // $(document).off("keydown");
+                    $location.url('/home');
 
-          }else {
-            alert("no");
+                    $('*').css("overflow","hidden !important");
+                    $route.reload();
+                    break;
+                  }
+
+                });
+          } else {
+            alert("Wrong Password!");
           }
 
 
@@ -2810,12 +2736,12 @@ require('./grid');
      },speed);
       let ref;
       if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace("/grids","/grid");
+        ref = this.databaseref.replace(/grids/,"/grid");
 
-      }else {
-        ref = this.databaseref.replace("/grid","/grids");
+      }else if (this.databaseref) {
+        ref = this.databaseref.replace(/grid/,"/grids");
       }
-      console.log("what is the ref", this.gameBoardRef);
+      console.log("what is the ref", ref);
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
         let eachrow = this.grid.grid.forEach((item)=>{
@@ -2999,29 +2925,39 @@ require('./grid');
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
 
-        console.log("what is this.gameboardref", this.gameBoardRef);
+      console.log("what is this.gameboardref", this.gameBoardRef);
       if (this.gameBoardRef.user === user) {
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-     ref.once("value",(snapshot)=>{
-        console.log("hi");
-        alert("go");
-      });
+
+        let opponentref = firebase.database().ref(`games/${response}/grids`);
+        opponentref.on("value",(snapshot)=>{
+          console.log("snapshot", snapshot.val());
+          if (snapshot.val() && this.startGame === false) {
+            setTimeout(()=>{
+              alert("go");
+              this.init();
+            },3000);
+
+          }
+        });
+
+
         ref.onDisconnect().remove();
         return `games/${response}/grid`;
       }else {
-         let response = this.gameBoardRef.key;
-        let ref = firebase.database().ref(`games/${response}`);
-        ref.onDisconnect().remove();
-        return `games/${response}/grids`;
-      }
-    },
+       let response = this.gameBoardRef.key;
+       let ref = firebase.database().ref(`games/${response}`);
+       ref.onDisconnect().remove();
+       return `games/${response}/grids`;
+     }
+   },
 
 
 
-    bind: function() {
-      var self = this;
+   bind: function() {
+    var self = this;
 
       ////////////////////////KEYBOARD EVENTS/////////////////////////////
       $(document).on('keydown', function( e ) {
@@ -3183,33 +3119,16 @@ require('./grid');
       gameover.play();
       $(this).off('keydown');
       $(this).off("keyup");
-      let ref = this.databaseref.replace("/grid","");
-      firebase.database().ref(ref).remove();
-      // if(score>$('#highScore').html()){
-      //   let newhighscorename = prompt("Congratulations! Enter your name...");
-      //   console.log("name here",newhighscorename);
-      //   if (newhighscorename === '') {
-      //     newhighscorename = 'guest';
-      //   }else if (newhighscorename === null) {
-      //     newhighscorename = 'guest';
-      //   }
-        // $.ajax({
-        //   url: `https://tetris-arena.firebaseio.com/highscores.json`,
-        //   method: "POST",
-        //   data : JSON.stringify({name:newhighscorename,score:score})
-        // })
-        // .done(function(response) {
-        //   console.log("response",response);
+      let ref = this.gameBoardRef.key;
+      if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
+        firebase.database().ref(ref).remove();
 
-        // });
-      // }
+      }else {
+        firebase.database().ref(this.databaseref.replace(/grids/,"")).remove();
+      }
+      console.log("whats the ref here",this.databaseref);
+
       Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
-
-      // $(document).off('click');
-      // if (score > localStorage.score) {
-
-      //   localStorage.score = score;
-      // }
       score = 0;
     },
 
@@ -3223,19 +3142,6 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
-
-      // this.grid.rows.forEach((item)=>{
-      //   item.forEach((insideitem)=>{
-      //     databaseref.child("poop").set({x:insideitem.x,y:insideitem.y}).then((response)=>{
-      //   console.log("response", response);
-      // });
-      //   });
-
-      // });
-
-      // database.on("value",(snapshot)=>{
-      //   console.log(snapshot.val());
-      // });
     }
   };
 
