@@ -492,7 +492,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       }
       let gamesref = firebase.database().ref('games');
       gamesref.on("value",(snapshot)=>{
-        if(snapshot.val()){
+        if(snapshot.val() && Object.values(snapshot.val())[0].user){
+          console.log("snapshot.val()", snapshot.val());
+
           let values= Object.values(snapshot.val());
           $scope.board = values;
           if(!$scope.$$phase) {
@@ -612,6 +614,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             }
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
+
+          if (gameCredentials.name === undefined || gameCredentials.name ==='') {
+            console.log("gotta have a name");
+            return false;
+
+          }
           $scope.gameMade = true;
           if(!gameCredentials.password){
             gameCredentials.password = '';
