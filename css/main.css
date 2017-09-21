@@ -811,7 +811,7 @@ body {
 
   #base {
     width: 303px;
-    height: 460px;
+    height: 457px;
     margin-left: -.7em !important; }
     #base .screens {
       width: 138px;
@@ -822,6 +822,10 @@ body {
       width: 250px;
       margin-top: 1em;
       height: 274px; }
+    #base .h6 {
+      position: absolute;
+      top: -27.5em !important;
+      left: 6.5em !important; }
 
   .llu {
     width: 25px;
@@ -859,16 +863,23 @@ body {
     margin-left: 185px; }
 
   .gbnin {
+    left: 3.3em;
     top: -24.8em;
-    left: 3.5em;
     position: absolute;
     color: black; }
 
   .llu, .lld, .lru, .lrd {
-    left: .2em; }
+    left: .2em;
+    width: 40px; }
+
+  .llu, .lld {
+    left: -.2em; }
+
+  .lru, .lrd {
+    left: .4em; }
 
   .h4 {
-    left: .8em; } }
+    left: 1.3em; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
@@ -894,9 +905,11 @@ body {
     position: absolute;
     margin-right: 1.7em !important;
     right: -.4em !important; }
+    .control-buttons .label {
+      top: -.9em !important; }
 
   #base {
-    height: 570px !important;
+    height: 550px !important;
     width: 350px !important; }
 
   .screenbase {
@@ -924,7 +937,8 @@ body {
     left: 0 !important; }
 
   .h6 {
-    margin-top: 8.7em !important; }
+    margin-top: 36em !important;
+    margin-left: 14em !important; }
 
   .llu, .lld, .lru, .lrd {
     left: .5em;
