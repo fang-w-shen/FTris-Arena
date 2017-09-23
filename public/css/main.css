@@ -64,7 +64,8 @@
   color: RGBA(255, 255, 255, 1);
   font-family: "Open Sans", sans-serif;
   margin-left: 11px;
-  position: absolute; }
+  position: absolute;
+  cursor: pointer; }
 
 /* #### */
 .screenbase {
@@ -615,7 +616,11 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   #tetris2 {
-    display: none; }
+    top: 10.1em !important;
+    left: 55% !important; }
+    #tetris2 .cell {
+      width: 4px !important;
+      height: 4px !important; }
 
   * {
     padding-right: 0 !important;
@@ -682,7 +687,7 @@ span.badge {
     left: 25%;
     z-index: 8 !important; }
     .right-column .grid {
-      margin-bottom: -15px;
+      margin-bottom: -30px;
       margin-left: 10px !important; }
     .right-column #preview {
       margin-left: 20px !important; }
@@ -690,10 +695,8 @@ span.badge {
       margin-bottom: 0px !important; }
     .right-column #highScore {
       margin-bottom: -2em; }
-    .right-column #time {
-      float: right;
-      margin-top: -2em;
-      margin-right: 2.5em; }
+    .right-column #level {
+      margin-bottom: 1em; }
 
   #tetrisScreen {
     margin-top: -1em !important;
@@ -722,7 +725,9 @@ span.badge {
       margin-top: .8em; }
 
   #pauseGame {
-    margin-top: -1em; }
+    margin-top: -1em;
+    margin-left: .2em !important;
+    margin-bottom: .1em; }
 
   #time {
     margin-top: -1em; }
@@ -824,7 +829,7 @@ span.badge {
       top: 3.9em;
       height: 254px; }
     #base .screenbase {
-      width: 250px;
+      width: 260px;
       margin-top: 1em;
       height: 274px; }
     #base .h6 {
@@ -914,7 +919,7 @@ span.badge {
       top: -.9em !important; }
 
   #base {
-    height: 550px !important;
+    height: 580px !important;
     width: 350px !important; }
 
   .screenbase {
@@ -956,7 +961,20 @@ span.badge {
     margin-left: 206px; }
 
   .h4 {
-    left: 4em; } }
+    left: 4em; }
+
+  #tetris2 {
+    margin-left: 2.3em !important;
+    margin-top: 5em !important; } }
+@media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
+  #tetris2 {
+    margin-left: .7em !important; } }
+@media only screen and (min-device-width: 412px) and (max-device-width: 767px) {
+  #tetris2 {
+    margin-left: .7em !important; }
+
+  .right-column {
+    margin-left: 3.6em !important; } }
 /*Tetris Page*/
 * {
   margin: 0;
@@ -1052,15 +1070,18 @@ input {
     .system {
       font-size: 32px; }
       .system .control-buttons {
-        right: 1.5em !important; } }
+        right: 1.7em !important; } }
   @media screen and (min-width: 380px) {
     .system {
       font-size: 34px; } }
-  @media screen and (min-width: 412px) {
+  @media only screen and (min-width: 411px) {
     .system {
       font-size: 36px; }
       .system .control-buttons {
-        right: .5em !important; } }
+        margin-right: .8em !important; }
+      .system #tetris2 {
+        position: absolute;
+        top: 15em !important; } }
   @media screen and (min-width: 420px) {
     .system {
       font-size: 38px; } }

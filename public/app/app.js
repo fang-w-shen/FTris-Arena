@@ -23,7 +23,7 @@ angular.module('TetrisApp').config(function($routeProvider) {
     }).when("/Tetris", {
       templateUrl: "partials/tetris.html",
       controller: 'TetrisCtrl'
-    }).when("/Tetris1v1", {
+    }).when("/FTris1on1", {
       templateUrl: "partials/tetris1v1.html",
       controller: 'Tetris1v1Ctrl'
       // resolve: {isAuth}
@@ -34,7 +34,7 @@ angular.module('TetrisApp').config(function($routeProvider) {
       templateUrl: "partials/login.html",
       controller: 'Tetris1v1Ctrl'
     })
-    .otherwise("/login");
+    .otherwise("/FTris1on1");
 });
 
 angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {

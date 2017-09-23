@@ -22,7 +22,7 @@
 
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
-      console.error('failed render');
+      // console.error('failed render');
       this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
@@ -112,7 +112,6 @@
     }
 
     // console.log("what is this.grid", this.grid);
-
   };
 
   BaseShape.prototype.clearCoords = function() {

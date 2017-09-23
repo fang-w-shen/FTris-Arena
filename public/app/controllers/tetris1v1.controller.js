@@ -28,7 +28,6 @@
       if(items){
         let keys = Object.keys(items);
         let values = Object.values(items);
-        console.log("item is", values);
 
         $scope.board = values;
         // $scope.$apply();
@@ -39,7 +38,6 @@
       let gamesref = firebase.database().ref('games');
       gamesref.on("value",(snapshot)=>{
         if(snapshot.val() && Object.values(snapshot.val())[0].user){
-          console.log("snapshot.val()", snapshot.val());
 
           let values= Object.values(snapshot.val());
           $scope.board = values;
@@ -64,6 +62,7 @@
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
           // window width is at less than 500px
+          $("#time").css("visibility","hidden");
           $('body').css("overflow-y","scroll");
         }
         else {
@@ -108,7 +107,6 @@
 
             function registerWithEmailAndPassword(userCredentials) {
               AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
-                console.log("response from register", response);
                 $scope.logInWithEmailAndPassword(userCredentials);
               });
             }
@@ -116,9 +114,8 @@
 
             function logInWithEmailAndPassword(userCredentials){
               AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
-                console.log("response from sign in", response);
 
-                $location.path("/Tetris1v1");
+                $location.path("/FTris1on1");
                 $route.reload();
               });
             }
@@ -164,7 +161,6 @@
         function initializeGame(gameCredentials) {
 
           if (gameCredentials.name === undefined || gameCredentials.name ==='') {
-            console.log("gotta have a name");
             return false;
 
           }
@@ -192,7 +188,6 @@
                 if(e.keyCode === 82) { //R Restart KEY
                   $(document).off("keyup");
                   $(document).off("keydown");
-                  console.log("trying to restart game");
                   tetris.endGame();
                   $route.reload();
                 }
@@ -236,7 +231,6 @@
 
           if (password === item[Object.keys(item)[0]].password) {
             $scope.gameMade = true;
-            console.log("what is this thing", Object.keys(item)[0]);
 
             gameCredentials.key = Object.keys(item)[0];
             gameCredentials.user = item[Object.keys(item)[0]].user;
@@ -251,7 +245,6 @@
             });
             setTimeout(()=>{
               tetris.init();
-              console.log("go");
               $scope.bindFullScreenKey();
             },3000);
 
@@ -262,7 +255,6 @@
                 if(e.keyCode === 82) { //R Restart KEY
                   $(document).off("keyup");
                   $(document).off("keydown");
-                  console.log("trying to restart game");
                   tetris.endGame();
                   $route.reload();
                 }
@@ -298,16 +290,7 @@
           } else {
             alert("Wrong Password!");
           }
-
-
         });
-
-
-
-
-
-
-
       }
 
     };

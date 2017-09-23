@@ -3,3 +3,6 @@ lib/node_modules
 sass
 css/main.css.map
 .editorconfig
+.firebaserc
+../database.rules.json
+../firebase.json

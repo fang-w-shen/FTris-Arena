@@ -41,8 +41,6 @@
             });
             values = values.splice(0,3);
             lowestHighScore = values[2].score;
-            console.log("lowestHighScore", lowestHighScore);
-
             resolve(lowestHighScore);
           })
           .catch((error) => {

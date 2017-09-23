@@ -88,7 +88,6 @@
                 if(e.keyCode === 82) { //R Restart KEY
                  $(document).off("keyup");
                  $(document).off("keydown");
-                 console.log("trying to restart game");
                  themesong.pause();
                  tetris.endGame();
                  $route.reload();
@@ -120,7 +119,6 @@
                 $(document).off("keydown");
                 tetris.endGame();
                 $route.reload();
-                console.log("trying to restart game");
               }
             });
             $('#menu-select').on("click",()=>{
@@ -177,7 +175,6 @@
     }
 
     getHighScoreToBeat();
-    console.log("localstorage", localStorage.score);
 
       // $(window).on("click",()=>{
       //   $(".drag-target").css("display",'none');

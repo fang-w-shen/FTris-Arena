@@ -22,7 +22,6 @@
 
   BaseShape.prototype.occupyCell = function( cell ) {
     if (cell.isSolid) {
-      console.error('failed render');
       this.collisionState.triggerEvent('failedRender', [cell]);
       return false;
     }
@@ -107,7 +106,6 @@
 
         });
       });
-      console.log("this.dataref from shapes", this.databaseref);
 
             this.databaseref.set(solidgrids);
     } else if (onObstacle) {
