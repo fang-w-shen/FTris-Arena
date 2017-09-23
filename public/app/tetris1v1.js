@@ -103,7 +103,7 @@ require('./grid');
          let eachrow = this.grid.cells.forEach((item)=>{
           // item.forEach((items,index)=>{
 
-            self.opponent.getCellAt(item.x,item .y).$el.css('background','white');
+            self.opponent.getCellAt(item.x,item.y).$el.css('background','white');
 
           // });
         });
