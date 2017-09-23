@@ -40,7 +40,7 @@
               return 0;
             });
             values = values.splice(0,3);
-            lowestHighScore = values[2].score;
+            lowestHighScore = values[0].score;
             resolve(lowestHighScore);
           })
           .catch((error) => {

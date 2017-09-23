@@ -98,23 +98,17 @@ require('./grid');
       }
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
-
-
-         let eachrow = this.grid.cells.forEach((item)=>{
-          // item.forEach((items,index)=>{
-
-            self.opponent.getCellAt(item.x,item.y).$el.css('background','white');
-
-          // });
+        let eachrow = this.grid.rows.forEach((item)=>{
+          item.forEach((items,index)=>{
+            self.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+          });
         });
-
-
-       if (snapshot.val()) {
-        snapshot.val().forEach((item)=>{
-          self.opponent.getCellAt(item.x,item.y).$el.css('background','black');
-        });
-      }
-    });
+        if (snapshot.val()) {
+          snapshot.val().forEach((item)=>{
+            self.opponent.getCellAt(item.x,item.y).$el.css('background','black');
+          });
+        }
+      });
     },
 
     getNextShape: function() {
@@ -130,7 +124,7 @@ require('./grid');
 
     displayInPreview: function( ShapePreview ) {
       this.preview.cells.forEach(function( cell ) {
-        cell.$el.css('background', '#9ead86');
+        cell.$el.css('background', '#6a7941');
       });
       this.shapePreview = new ShapePreview(this.preview);
     },
@@ -196,7 +190,7 @@ require('./grid');
     collapseRow: function( row ) {
       row.forEach(function( cell ) {
         cell.isSolid = false;
-        cell.$el.css('background', '#9ead86');
+        cell.$el.css('background', '#6a7941');
       });
     },
 
@@ -249,14 +243,14 @@ require('./grid');
         if (newCell) {
           var wasSolid = cell.isSolid;
           var previousBackgroundColor = cell.$el.css('background');
-          cell.$el.css('background', '#9ead86');
+          cell.$el.css('background', '#6a7941');
           cell.isCurrentShape = false;
           cell.isSolid = false;
           if (wasSolid) {
             newCell.$el.css('background', previousBackgroundColor);
             newCell.isSolid = true;
           } else {
-            newCell.$el.css('background', '#9ead86');
+            newCell.$el.css('background', '#6a7941');
             newCell.isSolid = false;
           }
         }

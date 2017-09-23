@@ -93,7 +93,7 @@ require('./grid');
 
     displayInPreview: function( ShapePreview ) {
       this.preview.cells.forEach(function( cell ) {
-        cell.$el.css('background', '#9ead86');
+        cell.$el.css('background', '#6a7941');
       });
       this.shapePreview = new ShapePreview(this.preview);
     },
@@ -161,7 +161,7 @@ require('./grid');
     collapseRow: function( row ) {
       row.forEach(function( cell ) {
         cell.isSolid = false;
-        cell.$el.css('background', '#9ead86');
+        cell.$el.css('background', '#6a7941');
       });
     },
 
@@ -214,14 +214,14 @@ require('./grid');
         if (newCell) {
           var wasSolid = cell.isSolid;
           var previousBackgroundColor = cell.$el.css('background');
-          cell.$el.css('background', '#9ead86');
+          cell.$el.css('background', '#6a7941');
           cell.isCurrentShape = false;
           cell.isSolid = false;
           if (wasSolid) {
             newCell.$el.css('background', previousBackgroundColor);
             newCell.isSolid = true;
           } else {
-            newCell.$el.css('background', '#9ead86');
+            newCell.$el.css('background', '#6a7941');
             newCell.isSolid = false;
           }
         }

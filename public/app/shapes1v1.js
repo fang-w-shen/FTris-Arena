@@ -128,7 +128,7 @@
   };
 
   BaseShape.prototype.freeCell = function( cell ) {
-    cell.$el.css('background', '#9ead86');
+    cell.$el.css('background', '#6a7941');
     cell.isCurrentShape = false;
     return this;
   };

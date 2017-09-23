@@ -591,9 +591,6 @@ span.badge {
       width: 8px !important;
       height: 8px !important; }
 
-  #time {
-    display: none; }
-
   .grid {
     margin-bottom: -2em; }
 
@@ -1035,7 +1032,7 @@ input {
   border: 1px solid #ddd;
   width: 18px;
   height: 18px;
-  background-color: #9ead86;
+  background-color: #6a7941;
   /*display: inline-block;*/
   margin: 1px;
   /*vertical-align: top;*/ }
