@@ -100,18 +100,18 @@ require('./grid');
       selfref.on("value",(snapshot)=>{
 
 
-         let eachrow = this.grid.grid.forEach((item)=>{
-          item.forEach((items,index)=>{
+         let eachrow = this.grid.cells.forEach((item)=>{
+          // item.forEach((items,index)=>{
 
-            this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+            self.opponent.getCellAt(item.x,item .y).$el.css('background','white');
 
-          });
+          // });
         });
 
 
        if (snapshot.val()) {
         snapshot.val().forEach((item)=>{
-          this.opponent.getCellAt(item.x,item.y).$el.css('background','black');
+          self.opponent.getCellAt(item.x,item.y).$el.css('background','black');
         });
       }
     });
