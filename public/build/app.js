@@ -2728,22 +2728,23 @@ require('./grid');
       }
       let selfref = firebase.database().ref(ref);
       selfref.on("value",(snapshot)=>{
-        let eachrow = this.grid.grid.forEach((item)=>{
+
+
+         let eachrow = this.grid.grid.forEach((item)=>{
           item.forEach((items,index)=>{
 
-            if (window.matchMedia( "(max-width: 570px)" ).matches) {
-              this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
-            }else {
-              this.opponent.getCellAt(items.x,items.y).$el.css('background','#9ead86');
-            }
+            this.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+
           });
         });
-        if (snapshot.val()) {
-          snapshot.val().forEach((item)=>{
-            this.opponent.getCellAt(item.x,item.y).$el.css('background','black');
-          });
-        }
-      });
+
+
+       if (snapshot.val()) {
+        snapshot.val().forEach((item)=>{
+          this.opponent.getCellAt(item.x,item.y).$el.css('background','black');
+        });
+      }
+    });
     },
 
     getNextShape: function() {

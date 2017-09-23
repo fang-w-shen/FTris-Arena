@@ -563,7 +563,7 @@ span.badge {
   #githubforkright {
     display: none !important; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD 1024PX////////*/
-@media only screen and (min-device-width: 1024px) and (orientation: portrait) {
+@media only screen and (min-device-width: 1024px) {
   #githubforkright {
     visibility: hidden; }
 
@@ -581,7 +581,24 @@ span.badge {
     right: 0em !important; }
 
   .mobileDevices {
-    left: 18em !important; } }
+    left: 18em !important; }
+
+  #tetris2 {
+    position: relative;
+    left: 38.5em !important;
+    top: 18em !important; }
+    #tetris2 .cell {
+      width: 8px !important;
+      height: 8px !important; }
+
+  #time {
+    display: none; }
+
+  .grid {
+    margin-bottom: -2em; }
+
+  #next {
+    margin-bottom: 1em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -596,7 +613,6 @@ span.badge {
 
   .mobileDevices {
     left: 10em !important; } }
-/*///////MEDIA FOR IPHONE6////////*/
 /*///////MEDIA FOR PHONES+IPAD-PRO LANDSCAPE////////*/
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
   #githubforkleft {
