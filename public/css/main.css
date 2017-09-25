@@ -361,7 +361,8 @@ body {
   border-radius: 2%; }
 
 .highscoremodal {
-  margin-top: 0px !important; }
+  margin-top: 0px !important;
+  padding: 20px !important; }
 
 .modal-body {
   padding: 0 !important;
@@ -714,7 +715,7 @@ span.badge {
     position: relative !important;
     background-repeat: no-repeat;
     background-size: 91%;
-    max-width: 91%;
+    max-width: 102%;
     top: 200px !important;
     left: 2em !important; }
 
@@ -963,7 +964,7 @@ span.badge {
     left: 1.3em; }
 
   .movie {
-    margin-left: -3em !important;
+    margin-left: -4em !important;
     font-size: 17px !important; }
 
   .job {
@@ -971,6 +972,10 @@ span.badge {
 
   .name {
     font-size: 13px !important; } }
+@media only screen and (min-device-width: 300px) {
+  .overlay {
+    width: 330px;
+    left: 8.5px !important; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
@@ -983,7 +988,7 @@ span.badge {
     position: absolute;
     background-repeat: no-repeat;
     background-size: 91%;
-    max-width: 91%;
+    width: 104%;
     max-height: 99%;
     top: 160px;
     left: 70px;
