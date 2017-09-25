@@ -390,9 +390,8 @@ body {
   background: rgba(255, 255, 255, 0.4); }
 
 .overlay {
-  margin-top: 1em;
   display: none;
-  height: 95vh;
+  height: 100vh;
   max-height: 100vh;
   background-image: URL("../images/background.png");
   opacity: 1;
@@ -478,6 +477,7 @@ span.badge {
   background: green; }
 
 .wrapper {
+  z-index: -1;
   position: absolute;
   color: black !important;
   top: 100%;
@@ -618,7 +618,7 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 160px;
+    top: 20px !important;
     left: 80px;
     margin-left: 10px; }
 
@@ -627,7 +627,7 @@ span.badge {
 
   .mobileDevices {
     left: 34% !important;
-    top: 7.5%; }
+    top: 2%; }
 
   #tetris2 {
     margin-top: 2.5em;
@@ -711,14 +711,12 @@ span.badge {
     margin-top: 2px !important; }
 
   .overlay {
-    position: relative;
+    position: relative !important;
     background-repeat: no-repeat;
     background-size: 91%;
     max-width: 91%;
-    height: 5000px;
-    top: 160px;
-    left: 30.5px;
-    right: 2px; }
+    top: 200px !important;
+    left: 2em !important; }
 
   #githubforkleft {
     display: none; }
@@ -848,9 +846,11 @@ span.badge {
       border-bottom: none !important;
       margin-bottom: -5px; }
     .modal-open .fa-bars {
-      margin-top: 1em; }
+      margin-top: .5em;
+      margin-right: .5em; }
     .modal-open .howtofabar {
-      margin-top: -2em; }
+      margin-top: -2.8em;
+      margin-right: -1em; }
 
   .modal-content {
     margin-top: -6px !important;
@@ -963,7 +963,7 @@ span.badge {
     left: 1.3em; }
 
   .movie {
-    margin-left: -5em !important;
+    margin-left: -3em !important;
     font-size: 17px !important; }
 
   .job {
@@ -1062,12 +1062,7 @@ span.badge {
   padding: 0; }
 
 body, html {
-  height: 100%;
-  background-color: "brown";
-  opacity: .9;
-  /*MIDLINE: URL('http://geekandsundry.com/wp-content/uploads/2015/04/tumblr_static_video_20games_20tetris_20blocks_20retro_20games_201280x800_20wallpaper_www_wall321_com_13-970x545.jpg');*/
-  background-position: 50% -30px;
-  background-repeat: no-repeat; }
+  height: 100%; }
 
 canvas {
   position: absolute;
@@ -1312,7 +1307,7 @@ input {
     color: white; }
 
 .frame {
-  margin-top: 8.5% !important;
+  margin-top: 6.5% !important;
   background-color: #ddc;
   border: solid 5vmin #eee;
   border-bottom-color: rgba(150, 104, 53, 0.79);
@@ -1330,9 +1325,12 @@ input {
   position: relative;
   left: -7em;
   text-align: center; }
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1115px) {
     .frame {
       display: none; } }
+  @media screen and (min-width: 1300px) {
+    .frame {
+      width: 460px; } }
   .frame:before {
     border-radius: 2px;
     bottom: -2vmin;
@@ -1351,5 +1349,8 @@ input {
     position: absolute;
     right: -2.5vmin;
     top: -2.5vmin; }
+
+.l {
+  z-index: 99; }
 
 /*# sourceMappingURL=main.css.map */

@@ -175,7 +175,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     document.getElementById("playButton").addEventListener("click",()=>{
 
       $('body').css("overflow-y","hidden !important");
-      $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+      $('.colorTheme').css("transition","all 1.5s").css("transform","scale(5)");
       setTimeout(()=>{
 
         $window.location.href = "#!/Tetris";
@@ -214,7 +214,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         case 13:
         if(document.getElementById("play").checked){
           $('body').css("overflow-y","scroll !important");
-          $('.overlay').css("transition","all 1.5s").css("transform","scale(5)");
+          $('.colorTheme').css("transition","all 1.5s").css("transform","scale(5)");
           setTimeout(()=>{
 
             $window.location.href = "#!/Tetris";
