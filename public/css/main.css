@@ -617,10 +617,10 @@ span.badge {
     position: relative;
     background-repeat: no-repeat;
     background-size: 91%;
-    max-width: 91%;
+    max-width: 102%;
     max-height: 99%;
     top: 20px !important;
-    left: 80px;
+    left: 10px;
     margin-left: 10px; }
 
   .control-buttons {
@@ -878,6 +878,9 @@ span.badge {
 
   #highScoreModal {
     height: 320px !important; }
+    #highScoreModal button {
+      margin-top: -1em;
+      margin-right: -1em; }
 
   .highscoremodal {
     margin-top: -5px !important;
@@ -964,7 +967,7 @@ span.badge {
     left: 1.3em; }
 
   .movie {
-    margin-left: -4em !important;
+    margin-left: -3.8em !important;
     font-size: 17px !important; }
 
   .job {
@@ -972,7 +975,7 @@ span.badge {
 
   .name {
     font-size: 13px !important; } }
-@media only screen and (min-device-width: 300px) {
+@media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   .overlay {
     width: 330px;
     left: 8.5px !important; } }
