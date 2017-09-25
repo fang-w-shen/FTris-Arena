@@ -58,14 +58,12 @@
           $(document).on("keyup",(e)=>{
             if (e.keyCode === 70) {
               if(!$scope.fullScreen){
-                    $('.mobileDevices').css({height:'0vh',position:'absolute',top:'9.5%'});
-                    $("#base").css('height', '81vh');
+                    $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
                   }else {
-                    $('.mobileDevices').css({height:'80vh',left:'33%',top:'0'});
-                    $("#base").css('height', '95vh');
+                    $('.mobileDevices').css({height:'80vh'});
                     exitFullScreen(document); // the whole page
                     $scope.fullScreen = false;
                     $scope.$apply();

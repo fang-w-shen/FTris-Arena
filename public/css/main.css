@@ -11,7 +11,7 @@
   font-family: sans-serif;
   font-weight: 100;
   top: 0;
-  height: 95vh;
+  height: 750px;
   width: 450px; }
 
 .as {
@@ -173,13 +173,6 @@
   font-size: 9px;
   margin-left: 180px; }
 
-#speaker {
-  width: 90px;
-  height: 65px;
-  margin-top: -70px;
-  margin-left: 210px;
-  transform: rotate(-25deg); }
-
 i.shine {
   /*   positioning */
   position: absolute;
@@ -327,7 +320,7 @@ nav {
   color: white;
   position: absolute;
   height: 80vh;
-  left: 33%; }
+  left: 40%; }
 
 #mobileDevice {
   background: beige;
@@ -365,7 +358,7 @@ body {
 .modal-content {
   padding: 0 !important;
   margin-top: -20px;
-  border-radius: 5%; }
+  border-radius: 2%; }
 
 .highscoremodal {
   margin-top: 0px !important; }
@@ -484,6 +477,35 @@ span.badge {
   color: white;
   background: green; }
 
+.wrapper {
+  position: absolute;
+  color: black !important;
+  top: 100%;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  font-family: 'Press Start 2P';
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  animation: 20s credits linear infinite; }
+  .wrapper .movie {
+    margin-bottom: 50px;
+    font-size: 50px;
+    width: 600px;
+    margin-left: -2em; }
+  .wrapper .job {
+    margin-bottom: 5px;
+    font-size: 16px; }
+  .wrapper .name {
+    margin-bottom: 50px;
+    font-size: 23px; }
+
+@keyframes credits {
+  0% {
+    top: 60vh; }
+  100% {
+    top: -55vh; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #githubforkleft {
@@ -518,10 +540,33 @@ span.badge {
 
   .howtoplaymodal {
     margin-top: -1em !important; } }
-@media only screen and (min-device-width: 1023px) and (max-device-width: 1278px) {
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
     margin-left: -3rem !important;
-    font-size: 1em !important; } }
+    font-size: 1em !important; }
+
+  .screenbase {
+    margin-top: 21px !important;
+    height: 430px !important; }
+
+  #tetris {
+    margin-top: -.5em; }
+
+  #base {
+    height: 750px !important; }
+
+  .gbnin {
+    margin-top: 8.5em !important; }
+
+  .screens {
+    margin-top: -93px !important;
+    height: 410px !important; }
+
+  .system {
+    margin-top: 1.7em !important; }
+
+  .right-column {
+    margin-top: -3em !important; } }
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: -3em !important;
@@ -563,7 +608,7 @@ span.badge {
   #githubforkright {
     display: none !important; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD 1024PX////////*/
-@media only screen and (min-device-width: 1024px) {
+@media only screen and (min-device-width: 767px) {
   #githubforkright {
     visibility: hidden; }
 
@@ -578,15 +623,17 @@ span.badge {
     margin-left: 10px; }
 
   .control-buttons {
-    right: 0em !important; }
+    right: -.7em !important; }
 
   .mobileDevices {
-    left: 18em !important; }
+    left: 34% !important;
+    top: 7.5%; }
 
   #tetris2 {
-    position: relative;
-    left: 38.5em !important;
-    top: 18em !important; }
+    margin-top: 2.5em;
+    position: relative !important;
+    left: .4em !important;
+    top: 0 !important; }
     #tetris2 .cell {
       width: 8px !important;
       height: 8px !important; }
@@ -595,7 +642,13 @@ span.badge {
     margin-bottom: -2em; }
 
   #next {
-    margin-bottom: 1em !important; } }
+    margin-bottom: 1em !important; }
+
+  #pauseGame {
+    margin-top: 10px !important; }
+
+  .devname {
+    text-align: right !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -629,8 +682,8 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   #tetris2 {
-    top: 10.1em !important;
-    left: 55% !important; }
+    top: 8.1em !important;
+    left: 10% !important; }
     #tetris2 .cell {
       width: 4px !important;
       height: 4px !important; }
@@ -825,6 +878,11 @@ span.badge {
   #highScoreModal {
     height: 320px !important; }
 
+  .highscoremodal {
+    margin-top: -5px !important;
+    margin-bottom: 10px !important;
+    height: 311px !important; }
+
   .howtoclose {
     top: 1.3em; }
 
@@ -902,7 +960,17 @@ span.badge {
     left: .4em; }
 
   .h4 {
-    left: 1.3em; } }
+    left: 1.3em; }
+
+  .movie {
+    margin-left: -5em !important;
+    font-size: 17px !important; }
+
+  .job {
+    font-size: 9px !important; }
+
+  .name {
+    font-size: 13px !important; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
@@ -977,7 +1045,7 @@ span.badge {
     left: 4em; }
 
   #tetris2 {
-    margin-left: 2.3em !important;
+    margin-left: .8em !important;
     margin-top: 5em !important; } }
 @media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
   #tetris2 {
@@ -1101,6 +1169,10 @@ input {
   @media screen and (min-width: 440px) {
     .system {
       font-size: 40px; } }
+  @media only screen and (min-device-width: 1024px) {
+    .system .control-buttons {
+      position: absolute !important;
+      margin-right: 0em !important; } }
 
 .system {
   margin-left: .5em;
@@ -1114,7 +1186,8 @@ input {
   max-width: 100%; }
 .system .controls {
   position: relative;
-  padding-bottom: 1em; }
+  padding-bottom: 1em;
+  cursor: pointer; }
 .system .button {
   cursor: pointer;
   box-shadow: 0 0 3px 1px #555;
@@ -1237,5 +1310,46 @@ input {
     margin-bottom: -1em; }
   .right-column i.close {
     color: white; }
+
+.frame {
+  margin-top: 8.5% !important;
+  background-color: #ddc;
+  border: solid 5vmin #eee;
+  border-bottom-color: rgba(150, 104, 53, 0.79);
+  border-left-color: rgba(150, 104, 53, 0.79);
+  border-radius: 2px;
+  border-right-color: rgba(150, 104, 53, 0.79);
+  border-top-color: rgba(150, 104, 53, 0.79);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25) inset, 0 5px 10px 5px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 10vh 10vw;
+  height: 80%;
+  padding-left: 2vmin;
+  padding-right: 2vmin;
+  position: relative;
+  left: -7em;
+  text-align: center; }
+  @media screen and (max-width: 1024px) {
+    .frame {
+      display: none; } }
+  .frame:before {
+    border-radius: 2px;
+    bottom: -2vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25) inset;
+    content: "";
+    left: -2vmin;
+    position: absolute;
+    right: -2vmin;
+    top: -2vmin; }
+  .frame:after {
+    border-radius: 2px;
+    bottom: -2.5vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+    content: "";
+    left: -2.5vmin;
+    position: absolute;
+    right: -2.5vmin;
+    top: -2.5vmin; }
 
 /*# sourceMappingURL=main.css.map */

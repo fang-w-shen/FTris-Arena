@@ -1,77 +1,110 @@
 <!-- <div ng-include="'partials/navbar.html'">
 </div> -->
-<div class="mobileDevices container" id="mobileDevice" style="height:80vh;">
+<div class="row justify-content-between">
+    <div class="frame ">
+        <div class="" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content howtoplaymodal">
 
-    <div id="tetrisScreen" class="row">
-        <div class="grid" id="tetris" class="col-md-8 col-sm-7">
-        </div>
-        <div class="right-column col-md-4 col-sm-3">
-            <div id="next" class="grid">Next:</div>
-            <div id="preview" class="grid"></div>
-            <div class="grid">Hi-Score: <div id="highScore"> {{highScore}}</div></div>
-            <div class="grid">Score: <div id="score"> 0</div></div>
-            <div class="grid" >Level: <div id="level"> 0</div></div>
-            <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" ng-click="" style="float:left">pause</i></div><br>
-            <br><div id="time" class="grid"></div>
+                    <div class="">
+                        <button type="button" class="close howtofabar" data-dismiss="modal" aria-label="Close" style="color:black">
+                            <i class="fa fa-bars howtoclose" aria-hidden="true"></i>
+                        </button>
+                        <table class="table table-condensed">
+                            <tr><th>Button</th><th>Move</th></tr>
+                            <tbody>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons">W</i></kbd></th><td>Rotate Block</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons s">S</i></kbd></th><td>Move Down</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons a">A</i></kbd></th><td>Move Left</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons d">D</i></kbd></th><td>Move Right</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">Spacebar</kbd></th><td>Drop Block</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">P</kbd></th><td>Pause Game</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">F</kbd></th><td>Toggle Full Screen</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">Esc</kbd></th><td>Exit Game/ Back</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-
-        </div>
-    </div>
-<div id="base">
-  <div class="power"></div>
-  <div class="as"></div>
-  <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">OFF • ON</div><i class="fa fa-caret-right"></i></div>
-
-
-  <div class="screenbase">
-      <div class="llu"></div>
-      <div class="lld"></div>
-      <h4 class="h4">Dot matrix with stereo sound</h4>
-      <div class="lru"></div>
-      <div class="lrd"></div>
-
-    <div class="battery"></div>
-
-    <div class="screens">
-
-        <div class="screenoff">
-
-
-
+                </div>
+            </div>
         </div>
     </div>
-  </div>
 
 
-  <div class="cntrls">
-    <div class="gbnin"></div>
-   <h6 class="h6">TM</h6>
 
-  </div>
+    <div class="mobileDevices container" id="mobileDevice" style="height:80vh;">
+
+        <div id="tetrisScreen" class="row">
+            <div class="grid" id="tetris" class="col-md-8 col-sm-7">
+            </div>
+            <div class="right-column col-md-4 col-sm-3">
+                <div id="next" class="grid">Next:</div>
+                <div id="preview" class="grid"></div>
+                <div class="grid">Hi-Score: <div id="highScore"> {{highScore}}</div></div>
+                <div class="grid">Score: <div id="score"> 0</div></div>
+                <div class="grid" >Level: <div id="level"> 0</div></div>
+                <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" ng-click="" style="float:left">pause</i></div><br>
+                <br><div id="time" class="grid"></div>
+
+
+            </div>
+        </div>
+        <div id="base">
+            <div class="power"></div>
+            <div class="as"></div>
+            <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">OFF • ON</div><i class="fa fa-caret-right"></i></div>
+
+
+            <div class="screenbase">
+                <div class="llu"></div>
+                <div class="lld"></div>
+                <h4 class="h4">Dot matrix with stereo sound</h4>
+                <div class="lru"></div>
+                <div class="lrd"></div>
+
+                <div class="battery"></div>
+
+                <div class="screens">
+
+                    <div class="screenoff">
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="cntrls">
+                <div class="gbnin"></div>
+                <h6 class="h6">TM</h6>
+
+            </div>
+
+        </div>
+        <div class="system">
+
+            <div class=" screen"></div>
+            <div class="controls">
+                <div class="menu-buttons">
+
+                    <div id="menu-select" class="button menu select" data-id="menu-select" ><span class="label" data-id="menu-select" >Reset</span></div>
+                    <div id="startGame" class="button menu start"  data-id="startGame" ><span class="label"  data-id="startGame" style="z-index:5 !important">Start</span></div>
+
+                </div>
+                <div class="d-pad">
+                    <div id="d-up" class="button d up" data-id="d-up"><p class="labelfont" data-id="d-up">Spin</p><span class="label" data-id="d-up">&#9650</span></div>
+                    <div id="d-right" class="button d right" data-id="d-right"><p class="labelfont" data-id="d-right">Right</p><span class="label">&#9654</span></div>
+                    <div id="d-down" class="button d down" data-id="d-down"><p class="labelfont" data-id="d-down">Down</p><span class="label">&#9660</span></div>
+                    <div id="d-left" class="button d left" data-id="d-left"><p class="labelfont" data-id="d-left">Left</p><span class="label">&#9664</span></div>
+                </div>
+                <div class="control-buttons">
+                    <div id="control-a" class="button control a" data-id="control-a"><span class="label" data-id="control-a">Rotate</span></div>
+                    <div id="control-b" class="button control b" data-id="control-b"><span class="label" data-id="control-b">Drop</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i class='shine'></i>
 
 </div>
-    <div class="system">
-
-      <div class=" screen"></div>
-      <div class="controls">
-        <div class="menu-buttons">
-
-          <div id="menu-select" class="button menu select" data-id="menu-select" ><span class="label" data-id="menu-select" >Reset</span></div>
-          <div id="startGame" class="button menu start"  data-id="startGame" ><span class="label"  data-id="startGame" style="z-index:5 !important">Start</span></div>
-
-      </div>
-      <div class="d-pad">
-          <div id="d-up" class="button d up" data-id="d-up"><p class="labelfont" data-id="d-up">Spin</p><span class="label" data-id="d-up">&#9650</span></div>
-          <div id="d-right" class="button d right" data-id="d-right"><p class="labelfont" data-id="d-right">Right</p><span class="label">&#9654</span></div>
-          <div id="d-down" class="button d down" data-id="d-down"><p class="labelfont" data-id="d-down">Down</p><span class="label">&#9660</span></div>
-          <div id="d-left" class="button d left" data-id="d-left"><p class="labelfont" data-id="d-left">Left</p><span class="label">&#9664</span></div>
-      </div>
-      <div class="control-buttons">
-          <div id="control-a" class="button control a" data-id="control-a"><span class="label" data-id="control-a">Rotate</span></div>
-          <div id="control-b" class="button control b" data-id="control-b"><span class="label" data-id="control-b">Drop</span></div>
-      </div>
-  </div>
-</div>
-</div>
-<i class='shine'></i>
-

@@ -4,6 +4,7 @@
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
     $(document).off("keydown");
+    $(window).off("keydown");
     $(document).off("keyup");
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];

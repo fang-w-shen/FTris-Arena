@@ -89,26 +89,7 @@ require('./grid');
        self.shape.moveDown();
 
      },speed);
-      let ref;
-      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace("/grids","/grid");
 
-      }else if (this.databaseref) {
-        ref = this.databaseref.replace("/grid","/grids");
-      }
-      let selfref = firebase.database().ref(ref);
-      selfref.on("value",(snapshot)=>{
-        let eachrow = this.grid.rows.forEach((item)=>{
-          item.forEach((items,index)=>{
-            self.opponent.getCellAt(items.x,items.y).$el.css('background','white');
-          });
-        });
-        if (snapshot.val()) {
-          snapshot.val().forEach((item)=>{
-            self.opponent.getCellAt(item.x,item.y).$el.css('background','black');
-          });
-        }
-      });
     },
 
     getNextShape: function() {
@@ -288,8 +269,8 @@ require('./grid');
           }
         });
 
-        setTimeout(()=>{
-          if(!this.startGame) {
+        this.gametimeout = setTimeout(()=>{
+          if(!this.startGame && !this.gameOver) {
             this.endGame();
             alert("Game Timed Out");
             location.href = '#!/home';
@@ -310,7 +291,26 @@ require('./grid');
 
    bind: function() {
     var self = this;
+    let ref;
+    if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+      ref = this.databaseref.replace("/grids","/grid");
 
+    }else if (this.databaseref) {
+      ref = this.databaseref.replace("/grid","/grids");
+    }
+    let selfref = firebase.database().ref(ref);
+    selfref.on("value",(snapshot)=>{
+      let eachrow = this.grid.rows.forEach((item)=>{
+        item.forEach((items,index)=>{
+          self.opponent.getCellAt(items.x,items.y).$el.css('background','white');
+        });
+      });
+      if (snapshot.val()) {
+        snapshot.val().forEach((item)=>{
+          self.opponent.getCellAt(item.x,item.y).$el.css('background','black');
+        });
+      }
+    });
       ////////////////////////KEYBOARD EVENTS/////////////////////////////
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
@@ -466,6 +466,7 @@ require('./grid');
         Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
         gameover.play();
       }
+      this.gametimeout = false;
       this.gameOver = true;
       this.shape = false;
       this.startGame = false;
