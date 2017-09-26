@@ -155,6 +155,19 @@
 
               });
             }
+            $(document).on("keyup",(e)=>{
+              switch(e.keyCode) {
+              case 27: /// ESC KEY
+              $(window).off("keydown");
+                // $(document).off("keydown");
+                $location.url('/home');
+
+                $('*').css("overflow","none !important");
+                $route.reload();
+                break;
+              }
+
+            });
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
 
@@ -190,20 +203,20 @@
                   $route.reload();
                 }
               });
-              $('#menu-select').on("click",()=>{
-                $(document).off("keyup");
-                $(document).off("keydown");
-                tetris.endGame();
-                $route.reload();
-              });
+          $('#menu-select').on("click",()=>{
+            $(document).off("keyup");
+            $(document).off("keydown");
+            tetris.endGame();
+            $route.reload();
+          });
 
 
 
-              $("#onoff").on("click",()=>{
-                tetris.endGame();
-                $location.url("/home");
-                $route.reload();
-              });
+          $("#onoff").on("click",()=>{
+            tetris.endGame();
+            $location.url("/home");
+            $route.reload();
+          });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
@@ -220,7 +233,7 @@
 
         });
 
-      }
+    }
       //////////////////////////////////////////////////////////////////////
       function joinGame(userId) {
         let gameCredentials={};

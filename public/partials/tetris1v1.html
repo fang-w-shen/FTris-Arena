@@ -1,6 +1,7 @@
 <div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
-<div ng-if="!isLoggedIn" class="jumbotron col-4" style="float:left;height:100vh;z-index:9;background-color: #283338;color:white">
+<div class="row">
+<div ng-if="!isLoggedIn" class="jumbotron col-12 col-md-6" style="float:left;height:100vh;z-index:0;background-color: #283338;color:white">
   <h1 class="display-3" style="margin-top: -1em;font-size:4em">Sign In!</h1>
   <hr class="my-4">
   E-Mail:
@@ -14,7 +15,7 @@
 </p>
 </div>
 
-<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-4" style="float:left;height:100vh;z-index:9;background-color: #283338;color:white">
+<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12 col-md-6" style="float:left;height:100vh;z-index:0;background-color: #283338;color:white">
   <h1 class="display-3" style="margin-top: -1em;font-size:4em">Create Game!</h1>
   <hr class="my-4">
   Lobby Name:
@@ -25,7 +26,7 @@
     <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
 </p>
 </div>
-<div ng-if="!gameMade" class="jumbotron col-8" style="float:right;z-index:9;height:100vh;background-color: #283338;color:white">
+<div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-6" style="float:right;z-index:9;height:100vh;background-color: #283338;color:white">
   <h1 class="display-3" style="margin-top: -1em;font-size:4em">Game Lobby</h1>
   <hr class="my-4">
 
@@ -38,7 +39,8 @@
 
 </p>
 </div>
-<div class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
+</div>
+<div ng-show="gameMade" class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
 
     <div id="tetrisScreen" class="row">
         <div class="grid" id="tetris" class="col-md-8 col-sm-7" style="z-index:8 !important">
@@ -58,7 +60,7 @@
     <div id="base">
       <div class="power"></div>
       <div class="as"></div>
-      <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">OFF • ON</div><i class="fa fa-caret-right"></i></div>
+      <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">ESC•OFF</div><i class="fa fa-caret-right"></i></div>
 
 
       <div class="screenbase">

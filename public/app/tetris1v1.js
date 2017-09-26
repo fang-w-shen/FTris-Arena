@@ -151,7 +151,7 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
-          $('#score').html(score);
+          $('#score').html(score*1000);
           tetris.play();
         }
       });

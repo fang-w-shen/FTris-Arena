@@ -141,7 +141,7 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
-          $('#score').html(score);
+          $('#score').html(score*1000);
           tetris.play();
         }
       });
@@ -410,6 +410,7 @@ require('./grid');
       themesong.pause();
       $(this).off('keydown');
       $(this).off("keyup");
+      score = score*1000;
       if(score>$('#highScore').html()){
         let newhighscorename = prompt("Congratulations! Enter your name...");
         if (newhighscorename === '') {

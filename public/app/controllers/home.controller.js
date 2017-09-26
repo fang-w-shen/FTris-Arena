@@ -29,6 +29,10 @@
 
       } else if (document.getElementById("highScores").checked) {
         document.getElementById("highScores").focus();
+      }
+      else if (document.getElementById("multiplay").checked) {
+        document.getElementById("multiplay").focus();
+
       } else if (document.getElementById("howToPlay").checked) {
         document.getElementById("howToPlay").focus();
       }
@@ -44,14 +48,25 @@
         $window.location.href = "#!/Tetris";
       },1000);
     });
+    document.getElementById("multiButton").addEventListener("click",()=>{
+
+      $('body').css("overflow-y","hidden !important");
+      $('.colorTheme').css("transition","all 1.5s").css("transform","scale(5)");
+      setTimeout(()=>{
+
+        $window.location.href = "#!/FTris1on1";
+      },1000);
+    });
     document.getElementById("highScoresButton").addEventListener("click",()=>{
       $("#playButton").css("background-color","rgba(255,255,255,0)");
       $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
+      $("#multiButton").css("background-color","rgba(255,255,255,0)");
       $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
     });
     document.getElementById("howToPlay").addEventListener("click",()=>{
       $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
       $("#playButton").css("background-color","rgba(255,255,255,0)");
+      $("#multiButton").css("background-color","rgba(255,255,255,0)");
       $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
     });
     //////////////KEYBOARD EVENTS///////////////
@@ -60,18 +75,26 @@
         return false;
       }
       if(document.getElementById("play").checked === true) {
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0.4)");
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#multiButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#playButton").css("background-color","rgba(255,255,255,0.4)").addClass('hoverclass');
 
-      } else if (document.getElementById("highScores").checked) {
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)");
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)");
+      } else if (document.getElementById("multiplay").checked) {
+        $("#playButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#multiButton").css("background-color","rgba(255,255,255,0.4)").addClass('hoverclass');
+      }else if (document.getElementById("highScores").checked) {
+        $("#playButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#multiButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0.4)").addClass('hoverclass');
       } else if (document.getElementById("howToPlay").checked) {
-        $("#highScoresButton").css("background-color","rgba(255,255,255,0)");
-        $("#playButton").css("background-color","rgba(255,255,255,0)");
-        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)");
+        $("#highScoresButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#playButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#multiButton").css("background-color","rgba(255,255,255,0)").removeClass('hoverclass');
+        $("#howToPlayButton").css("background-color","rgba(255,255,255,0.4)").addClass('hoverclass');
       }
       switch(e.keyCode) {
         case 13:
@@ -82,7 +105,14 @@
 
             $window.location.href = "#!/Tetris";
           },1000);
-        } else if(document.getElementById("highScores").checked) {
+        }else if(document.getElementById("multiplay").checked){
+          $('body').css("overflow-y","scroll !important");
+          $('.colorTheme').css("transition","all 1.5s").css("transform","scale(5)");
+          setTimeout(()=>{
+
+            $window.location.href = "#!/FTris1on1";
+          },1000);
+        }else if(document.getElementById("highScores").checked) {
           $("#highScoreModal").modal("toggle");
           document.getElementById("highScores").focus();
         } else if(document.getElementById("howToPlay").checked) {

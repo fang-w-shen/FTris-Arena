@@ -2,89 +2,93 @@
 
     <div class="overlay hidden"></div>
 </div>
-    <form class="example overlayCModal">
-        <fieldset>
-            <legend class="text-center" style="color:white">Options</legend>
-            <div>
-                <input class="btn btn-primary btn-lg btn-block" type="radio" id="play" name="tetris" checked focused>
-                <label id="playButton" for="play">PLAY</label>
-            </div>
-            <div>
-                <input type="radio" id="highScores" name="tetris" >
-                <label id="highScoresButton" for="highScores" data-toggle="modal" data-target="#highScoreModal">HIGH SCORES</label>
-            </div>
-            <div>
-                <input type="radio" id="howToPlay" name="tetris">
-                <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal">CREDITS</label>
-            </div>
-        </fieldset>
-        <span class="blink_me text-center row">PRESS ENTER TO PLAY</span>
-    </form>
+<form class="example overlayCModal">
+    <fieldset>
+        <legend class="text-center" style="color:black">OPTIONS</legend>
+        <div>
+            <input class="btn btn-primary btn-lg btn-block" type="radio" id="play" name="tetris" checked focused>
+            <label id="playButton" for="play" class="text-center">SINGLE PLAYER</label>
+        </div>
+        <div>
+            <input class="btn btn-primary btn-lg btn-block" type="radio" id="multiplay" name="tetris">
+            <label id="multiButton" for="multiplay" class="text-center">MULTIPLAYER</label>
+        </div>
+        <div>
+            <input type="radio" id="highScores" name="tetris" >
+            <label id="highScoresButton" for="highScores" data-toggle="modal" data-target="#highScoreModal" class="text-center">HIGH SCORES</label>
+        </div>
+        <div>
+            <input type="radio" id="howToPlay" name="tetris">
+            <label for="howToPlay" id="howToPlayButton" data-toggle="modal" data-target="#howToPlayModal" class="text-center">CREDITS</label>
+        </div>
+    </fieldset>
+    <span class="blink_me text-center row">PRESS ENTER TO PLAY</span>
+</form>
 
-    <div>
+<div>
 
-        <!-- High Score Modal-->
-        <div class="modal fade bd-example-modal-lg" id="highScoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content highscoremodal">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">High Scores</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul class="collection">
-                            <li class="collection-item avatar">
-                                <i class="fa fa-trophy fa-3x" aria-hidden="true" style="color:gold"></i>
-                                <span class="title">Champion</span>
-                                <p>Player: {{highScorePlayers[0].name}} <br>
-                                    Score: {{highScorePlayers[0].score}}
-                                </p>
-                                <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
-                            </li>
-                            <li class="collection-item avatar">
-                                <i class="material-icons">looks_two</i>
-                                <span class="title"></span>
-                                <p>Player: {{highScorePlayers[1].name}}<br>
-                                    Score: {{highScorePlayers[1].score}}
-                                </p>
-                                <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
-                            </li>
-                            <li class="collection-item avatar">
-                                <i class="material-icons">looks_3</i>
-                                <span class="title"></span>
-                                <p>Player: {{highScorePlayers[2].name}}<br>
-                                    Score: {{highScorePlayers[2].score}}
-                                </p>
-                                <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- High Score Modal-->
+    <div class="modal fade bd-example-modal-lg" id="highScoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content highscoremodal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">High Scores</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                            <i class="fa fa-trophy fa-3x" aria-hidden="true" style="color:gold"></i>
+                            <span class="title">Champion</span>
+                            <p>Player: {{highScorePlayers[0].name}} <br>
+                                Score: {{highScorePlayers[0].score}}
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons">looks_two</i>
+                            <span class="title"></span>
+                            <p>Player: {{highScorePlayers[1].name}}<br>
+                                Score: {{highScorePlayers[1].score}}
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons">looks_3</i>
+                            <span class="title"></span>
+                            <p>Player: {{highScorePlayers[2].name}}<br>
+                                Score: {{highScorePlayers[2].score}}
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons" style="color:gold">grade</i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- Credits Modal-->
-        <div class="modal  fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content howtoplaymodal" style=" border: none; background: rgba(20, 254, 192, 0); ">
+    <!-- Credits Modal-->
+    <div class="modal  fade bd-example-modal-lg" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content howtoplaymodal" style=" border: none; background: rgba(20, 254, 192, 0); ">
 
-                    <div class="modal-body">
-                        <button type="button" class="close howtofabar" data-dismiss="modal" aria-label="Close" style="color:black;z-index:999">
-                            <i class="fa fa-bars howtoclose" aria-hidden="true"></i>
-                        </button>
-                        <div class='wrapper'>
-                            <div class='movie'>FTris-Arena</div>
-                            <div class='job'>Developed By</div>
-                            <div class='name'>Fang-Wen Shen</div>
-                            <div class='job'>Original Game Designed By</div>
-                            <div class='name devname'>Alexey Pajitnov <br>Vladimir Pokhilko</div>
-                            <div class='job'>Music By</div>
-                            <div class='name'>Hirokazu Tanaka</div>
-                        </div>
+                <div class="modal-body">
+                    <button type="button" class="close howtofabar" data-dismiss="modal" aria-label="Close" style="color:black;z-index:999">
+                        <i class="fa fa-bars howtoclose" aria-hidden="true"></i>
+                    </button>
+                    <div class='wrapper'>
+                        <div class='movie'>FTris-Arena</div>
+                        <div class='job'>Developed By</div>
+                        <div class='name'>Fang W. Shen</div>
+                        <div class='job'>Original Game Designed By</div>
+                        <div class='name devname'>Alexey Pajitnov <br>Vladimir Pokhilko</div>
+                        <div class='job'>Music By</div>
+                        <div class='name'>Hirokazu Tanaka</div>
                     </div>
-
                 </div>
+
             </div>
+        </div>

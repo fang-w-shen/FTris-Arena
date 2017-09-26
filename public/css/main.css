@@ -298,8 +298,11 @@ img {
   margin-bottom: 10px; }
 
 nav {
-  margin-bottom: 2em;
   background-color: black; }
+
+/*1v1*/
+.jumbotron {
+  border-radius: 0 !important; }
 
 /*Home Page*/
 .blinks {
@@ -408,9 +411,9 @@ body {
   list-style-type: none;
   position: fixed;
   top: 35%;
-  left: 37.5%;
+  left: 35.5%;
   background: rgba(0, 0, 0, 0) !important;
-  width: 25%;
+  width: 27%;
   height: 25%;
   border-radius: 5px;
   padding-right: 0 !important;
@@ -420,18 +423,21 @@ body {
     padding-right: 0 !important; }
   .overlayCModal label {
     width: 100%;
+    padding-right: 2em !important;
     font-weight: bolder;
     font-size: 500px;
-    color: rgba(0, 0, 0, 0.87);
-    font-family: 'Press Start 2P';
-    padding-right: 0px !important; }
+    color: black;
+    font-family: 'Press Start 2P'; }
   .overlayCModal label:hover {
     background-color: rgba(255, 255, 255, 0.4) !important;
     padding-right: 0 !important; }
-  .overlayCModal fieldset {
-    border: 10px solid white;
-    padding-bottom: 4rem;
+  .overlayCModal .hoverclass {
     padding-right: 0 !important; }
+  .overlayCModal fieldset {
+    border: 15px solid white;
+    padding-bottom: 4rem;
+    padding-right: 0 !important;
+    border-radius: 10%; }
   .overlayCModal legend {
     padding-right: 0 !important;
     font-family: 'Press Start 2P'; }
@@ -504,17 +510,17 @@ span.badge {
 
 @keyframes credits {
   0% {
-    top: 60vh; }
+    top: 56vh; }
   100% {
-    top: -55vh; } }
+    top: -58vh; } }
+@media only screen and (min-device-width: 767px) {
+  @keyframes credits {
+    0% {
+      top: 69vh; }
+    100% {
+      top: -70vh; } } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  #githubforkleft {
-    visibility: hidden; }
-
-  #githubforkright {
-    visibility: visible; }
-
   img {
     margin-left: 60%; }
 
@@ -528,9 +534,6 @@ span.badge {
     left: 30px; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD////////*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1022px) {
-  #githubforkright {
-    visibility: hidden; }
-
   .letters {
     display: show; }
 
@@ -577,15 +580,12 @@ span.badge {
     margin-left: -2.3rem !important;
     font-size: 1.2em !important; }
 
-  #githhubforkright {
-    visibility: hidden; }
-
   .howtoplaymodal {
     margin-top: -1em !important; } }
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -2.8em !important;
+    margin-left: -1.5em !important;
     font-size: 1.4em !important; }
 
   .overlay {
@@ -605,14 +605,8 @@ span.badge {
 @media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
   .blink_me {
     padding-left: 3em; } }
-@media screen and (min-device-width: 700px) {
-  #githubforkright {
-    display: none !important; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD 1024PX////////*/
 @media only screen and (min-device-width: 767px) {
-  #githubforkright {
-    visibility: hidden; }
-
   .overlay {
     position: relative;
     background-repeat: no-repeat;
@@ -649,7 +643,10 @@ span.badge {
     margin-top: 10px !important; }
 
   .devname {
-    text-align: right !important; } }
+    text-align: right !important; }
+
+  .overlayCModal label {
+    font-size: 1em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -664,11 +661,14 @@ span.badge {
 
   .mobileDevices {
     left: 10em !important; } }
+@media only screen and (min-device-width: 1279px) {
+  .overlayCModal label {
+    font-size: 1em !important; } }
+@media only screen and (min-device-width: 1500px) {
+  .overlayCModal label {
+    font-size: 1.5em !important; } }
 /*///////MEDIA FOR PHONES+IPAD-PRO LANDSCAPE////////*/
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-  #githubforkleft {
-    visibility: hidden; }
-
   body {
     position: default !important; }
 
@@ -719,9 +719,6 @@ span.badge {
     top: 200px !important;
     left: 2em !important; }
 
-  #githubforkleft {
-    display: none; }
-
   h1 {
     padding-top: 1em !important; }
 
@@ -731,10 +728,17 @@ span.badge {
     height: 100vh; }
 
   .overlayCModal {
-    width: 200px;
-    left: 20%; }
+    width: 54% !important;
+    left: 17%; }
     .overlayCModal fieldset {
       padding-bottom: 0em !important; }
+    .overlayCModal label {
+      padding: 0 !important;
+      padding-left: 1.8em !important; }
+    .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
+      padding-left: .5em !important; }
+    .overlayCModal #highScoresButton {
+      padding-left: .7em !important; }
 
   .side-nav {
     width: 50%; }
