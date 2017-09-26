@@ -567,11 +567,15 @@ span.badge {
 
   .blink_me {
     position: relative !important;
-    margin-left: 1em !important;
-    font-size: 9px !important; }
+    margin-left: -.5em !important;
+    font-size: 16px !important; }
 
   .howtoplaymodal {
-    margin-top: -1em !important; } }
+    margin-top: -1em !important; }
+
+  .overlay {
+    top: 5em !important;
+    left: 9% !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
     margin-left: 0rem !important;
@@ -678,8 +682,11 @@ span.badge {
   #pauseGame {
     margin-top: 10px !important; }
 
-  .overlayCModal label {
-    font-size: 1em !important; } }
+  .overlayCModal {
+    left: 30% !important; }
+    .overlayCModal label {
+      font-size: 1em !important;
+      padding-left: 1em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -771,8 +778,8 @@ span.badge {
     height: 100vh; }
 
   .overlayCModal {
-    width: 68% !important;
-    left: 15%; }
+    width: 70% !important;
+    left: 14%; }
     .overlayCModal fieldset {
       padding-bottom: 0em !important; }
     .overlayCModal label {
