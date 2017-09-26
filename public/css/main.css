@@ -414,7 +414,8 @@ body {
   background-image: URL("../images/background.png");
   opacity: 1;
   background-size: cover;
-  left: 0px; }
+  left: 0px;
+  overflow: none; }
   .overlay h1 {
     padding-top: 2em;
     color: white;
@@ -549,7 +550,7 @@ span.badge {
 
   .overlayCModal {
     left: 31.5%;
-    width: 38%; }
+    width: 40%; }
 
   .mobileDevices {
     margin-top: -1em; } }
@@ -595,8 +596,8 @@ span.badge {
 
   .overlayCModal {
     width: 29% !important; } }
-@media only screen and (min-device-width: 767px) and (max-device-width: 1444px) and (orientation: portrait) {
-  .jumbotron {
+@media only screen and (min-device-width: 300px) and (max-device-width: 1444px) and (orientation: portrait) {
+  .register {
     height: 100vh !important; } }
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
   .blink_me {
@@ -760,7 +761,7 @@ span.badge {
       padding-bottom: 0em !important; }
     .overlayCModal label {
       padding: 0 !important;
-      padding-left: 1.5em !important; }
+      padding-left: 1.8em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {

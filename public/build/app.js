@@ -486,7 +486,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-
+    var themesong = document.getElementById("myAudio");
     $("#pauseGame").css("visibility","hidden");
 
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
@@ -648,10 +648,10 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               });
             }
             function activatedropdown() {
-               $('.button-collapse').sideNav('destroy');
-            }
-            $(document).on("keyup",(e)=>{
-              switch(e.keyCode) {
+             $('.button-collapse').sideNav('destroy');
+           }
+           $(document).on("keyup",(e)=>{
+            switch(e.keyCode) {
               case 27: /// ESC KEY
               $(window).off("keydown");
                 // $(document).off("keydown");
@@ -751,6 +751,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             });
             setTimeout(()=>{
               tetris.init();
+              themesong.currentTime = 0;
+              themesong.play();
               $scope.bindFullScreenKey();
             },3000);
 
@@ -2951,7 +2953,8 @@ require('./grid');
         opponentref.on("value",(snapshot)=>{
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
             this.init();
-
+            themesong.currentTime = 0;
+            themesong.play();
           }
         });
 
@@ -3185,8 +3188,6 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
-      themesong.currentTime = 0;
-      themesong.play();
     }
   };
 

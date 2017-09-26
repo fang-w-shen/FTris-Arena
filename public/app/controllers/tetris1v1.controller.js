@@ -3,7 +3,7 @@
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-
+    var themesong = document.getElementById("myAudio");
     $("#pauseGame").css("visibility","hidden");
 
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
@@ -165,10 +165,10 @@
               });
             }
             function activatedropdown() {
-               $('.button-collapse').sideNav('destroy');
-            }
-            $(document).on("keyup",(e)=>{
-              switch(e.keyCode) {
+             $('.button-collapse').sideNav('destroy');
+           }
+           $(document).on("keyup",(e)=>{
+            switch(e.keyCode) {
               case 27: /// ESC KEY
               $(window).off("keydown");
                 // $(document).off("keydown");
@@ -268,6 +268,8 @@
             });
             setTimeout(()=>{
               tetris.init();
+              themesong.currentTime = 0;
+              themesong.play();
               $scope.bindFullScreenKey();
             },3000);
 

@@ -267,7 +267,8 @@ require('./grid');
         opponentref.on("value",(snapshot)=>{
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
             this.init();
-
+            themesong.currentTime = 0;
+            themesong.play();
           }
         });
 
@@ -501,8 +502,6 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
-      themesong.currentTime = 0;
-      themesong.play();
     }
   };
 
