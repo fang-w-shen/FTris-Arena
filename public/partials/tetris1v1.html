@@ -1,8 +1,8 @@
-<div ng-if="!gameMade" ng-include="'partials/navbar.html'" style="height:10%">
+<div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
-<div class="row" ng-if="!isLoggedIn" style="height:90%">
+<div class="row " ng-if="!isLoggedIn" style="height:90%">
 
-    <div class="jumbotron col-12">
+    <div class="jumbotron col-12 bigone">
       <h1 class="display-3">Sign In!</h1>
       <hr class="my-4">
       E-Mail:
@@ -19,8 +19,8 @@
 
 
 </div>
-<div class="row no-gutters" style="height:90%">
-    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-5" style="z-index:9;">
+<div class="row scrollable no-gutters" style="height:90%">
+    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-5 bigone" style="z-index:9;">
       <h1 class="display-3" style="margin:0;font-size:4em">Directions</h1>
       <hr class="my-4">
 
@@ -41,8 +41,8 @@
 
     </p>
 </div>
-<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="height:50%;z-index:0;">
-  <h1 class="display-3" style="margin-top: -1em;font-size:4em">Create Game!</h1>
+<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="z-index:0;float:right;padding-top:0">
+  <h1 class="display-3" style="font-size:4em">Create Game!</h1>
   <hr class="my-4">
   Lobby Name:
   <input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>

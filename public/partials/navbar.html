@@ -5,7 +5,7 @@
 
       <ul class="right hide-on-med-and-down" >
 
-        <li><a href="#!/register" ng-if="!isLoggedIn"> Register</a></li>
+        <li><a href="#!/register" ng-if="!isLoggedIn"><button class="btn btn-sm" > Register</button></a></li>
         <li><a href="#!/home" ng-if="isLoggedIn">Main Menu</a></li>
         <li><a href="#!/Tetris" ng-if="isLoggedIn">Tetris</a></li>
         <div class="btn-group">
@@ -22,7 +22,6 @@
           </div>
         </div>
         <li><a href="#!/home" ng-if="isLoggedIn" ng-click="logOutUser()">Logout</a></li>
-        <!-- Bootstrap dependencies -->
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="#!/home"  ng-click="activatedropdown();">Main Menu</a></li>

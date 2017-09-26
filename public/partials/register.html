@@ -1,18 +1,21 @@
-<div ng-include="'partials/navbar.html'" style="height:10%">
+<div ng-include="'partials/navbar.html'">
 </div>
-<div class="jumbotron register"  style="height:90%">
-  <h1 class="display-3">Register</h1>
-  <hr class="my-4">
-  E-Mail:
-  <input type="text" name="NAME" ng-model="userCredentials.email"><br>
-  Password:
-  <input type="password" name="NAME" ng-model="userCredentials.password">
-  <p class="lead">
-    <button class="btn btn-lg" ng-click="registerWithEmailAndPassword(userCredentials)" href="#!/notes" role="button">Register!</button>
-  </p>
+<div class="row" style="height:90%">
+
+    <div class="jumbotron col-12 bigone">
+        <h1 class="display-3">Register</h1>
+        <hr class="my-4">
+        E-Mail:
+        <input type="text" name="NAME" ng-model="userCredentials.email"><br>
+        Password:
+        <input type="password" name="NAME" ng-model="userCredentials.password">
+        <p class="lead">
+            <button class="btn btn-lg" ng-click="registerWithEmailAndPassword(userCredentials)" href="#!/notes" role="button">Register!</button>
+        </p>
+    </div>
 </div>
 <script>
-$(".dropdown-button").dropdown();
-$(".button-collapse").sideNav();
-$('.button-collapse').sideNav('hide');
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    $('.button-collapse').sideNav('hide');
 </script>
