@@ -567,18 +567,18 @@ span.badge {
 
   .blink_me {
     position: relative !important;
-    margin-left: -.5em !important;
+    margin-left: -2.5em !important;
     font-size: 16px !important; }
 
   .howtoplaymodal {
     margin-top: -1em !important; }
 
   .overlay {
-    top: 5em !important;
+    top: 20em !important;
     left: 9% !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
-    margin-left: 0rem !important;
+    margin-left: -2rem !important;
     font-size: 1em !important; }
 
   .screenbase {
@@ -750,7 +750,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 6% !important;
+    left: 7% !important;
     font-size: 9px; }
 
   label {
@@ -778,8 +778,8 @@ span.badge {
     height: 100vh; }
 
   .overlayCModal {
-    width: 70% !important;
-    left: 14%; }
+    width: 72% !important;
+    left: 13.5%; }
     .overlayCModal fieldset {
       padding-bottom: 0em !important; }
     .overlayCModal label {
