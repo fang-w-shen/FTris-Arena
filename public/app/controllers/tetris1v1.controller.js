@@ -3,8 +3,7 @@
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-    var themesong = document.getElementById("myAudio");
-    themesong.currentTime = 0;
+
     $("#pauseGame").css("visibility","hidden");
 
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
@@ -59,19 +58,15 @@
 
 
       //////////////WINDOW INITIALIZATION/////////////
-      var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
+      var yourDeviceWidth = window.matchMedia( "(max-width: 1024px)" );
       if (yourDeviceWidth.matches) {
-          // window width is at less than 500px
-          $("#time").css("visibility","hidden");
-          $('body').css("overflow-y","scroll");
-        }
-        else {
-          $('body').css("overflow-y","hidden");
-        }
+        $("#time").css("visibility","hidden");
+        $('body').css("overflow-y","scroll");
+      }
+      else {
+        $('body').css("overflow-y","hidden");
+      }
 
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
-        $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
       $scope.userCredentials = {};
       $scope.gameCredentials = {};
@@ -86,6 +81,8 @@
       $scope.gameMade = false;
       $scope.board = {};
       $scope.bindFullScreenKey = bindFullScreenKey;
+      $scope.activatedropdown = activatedropdown;
+
             //////////////AUTHORIZATION METHODS//////////////////////
             function logInGoogle() {
               AuthFactory.logInGoogle()
@@ -93,32 +90,44 @@
                 let user = response.user.uid;
                 // $(".progress").css("visibility","hidden");
                 $scope.isLoggedIn = true;
-                // $location.path("/Tetris1v1");
+                Materialize.toast('Signed In!',4000);
+                $location.path("/FTris1on1");
                 $route.reload();
               })
-              .catch(error => console.log("google login error", error.message, error.code));
+              .catch((error) => {
+                console.log("google login error", error.message, error.code);
+                Materialize.toast("Sign In Failed! "+error.message,4000);
+              });
             }
 
             function logOutUser() {
               AuthFactory.logOut();
               $scope.isLoggedIn = false;
+              Materialize.toast('Signed Out!',4000);
               $location.url('/home');
             }
 
             function registerWithEmailAndPassword(userCredentials) {
               AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
                 $scope.logInWithEmailAndPassword(userCredentials);
+                Materialize.toast("Registered!",4000);
+              }).catch((error) => {
+                Materialize.toast("Registration Failed! "+error.message,4000);
+                console.log("registration error", error.message, error.code);
               });
             }
 
 
             function logInWithEmailAndPassword(userCredentials){
               AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
-
+                Materialize.toast("Signed In!",4000);
                 $location.path("/FTris1on1");
                 $route.reload();
+              }).catch(function(error) {
+                Materialize.toast("Sign In Failed! "+error.message,4000);
               });
             }
+            ////////////////ACTIVATION METHODS///////////
             function exitFullScreen(element) {
               if(element.exitFullscreen) {
                 element.exitFullscreen();
@@ -139,7 +148,7 @@
             }
             function bindFullScreenKey() {
               $(document).on("keyup",(e)=>{
-                if (e.keyCode === 70) {
+                if (e.keyCode === 69) {
                   if(!$scope.fullScreen){
                     $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
@@ -154,6 +163,9 @@
                 }
 
               });
+            }
+            function activatedropdown() {
+               $('.button-collapse').sideNav('destroy');
             }
             $(document).on("keyup",(e)=>{
               switch(e.keyCode) {

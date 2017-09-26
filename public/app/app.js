@@ -30,11 +30,8 @@ angular.module('TetrisApp').config(function($routeProvider) {
     }).when("/register", {
       templateUrl: "partials/register.html",
       controller: 'Tetris1v1Ctrl'
-    }).when("/login", {
-      templateUrl: "partials/login.html",
-      controller: 'Tetris1v1Ctrl'
     })
-    .otherwise("/FTris1on1");
+    .otherwise("/home");
 });
 
 angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {

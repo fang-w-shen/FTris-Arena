@@ -121,12 +121,14 @@ require('./grid');
         },speed);
         this.paused = false;
         this.timer();
+        themesong.play();
         $("#pauseGame").css('visibility',"hidden");
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
         $("#pauseGame").css('visibility',"visible");
+        themesong.pause();
       }
     },
     initializeCollisionEvents: function() {
@@ -460,7 +462,8 @@ require('./grid');
 
     },
     endGame: function () {
-
+      themesong.pause();
+      themesong.currentTime = 0;
       this.clearInterval();
       if (score !== 0) {
         Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
@@ -489,7 +492,7 @@ require('./grid');
     },
 
     init: function() {
-
+      themesong.play();
       this.bind();
       this.createNewShape();
       this.startGame = true;

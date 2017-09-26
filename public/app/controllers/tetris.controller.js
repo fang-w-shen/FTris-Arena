@@ -15,9 +15,9 @@
           $('body').css("overflow-y","hidden");
         }
 
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
-        $("#sidenav-overlay").css("display",'none');
+        // $(".dropdown-button").dropdown();
+        // $(".button-collapse").sideNav();
+        // $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
@@ -56,7 +56,7 @@
         }
         function bindFullScreenKey() {
           $(document).on("keyup",(e)=>{
-            if (e.keyCode === 70) {
+            if (e.keyCode ===69) {
               if(!$scope.fullScreen){
                     $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
@@ -155,12 +155,12 @@
           }
 
         });
-
     }
 
 
     if($location.url()==="/Tetris"){
       $("#pauseGame").css("visibility","hidden");
+      $(".button-collapse").sideNav('destroy');
       initializeGame();
     }
 

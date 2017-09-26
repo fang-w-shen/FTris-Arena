@@ -13,6 +13,9 @@
   top: 0;
   height: 750px;
   width: 450px; }
+  @media only screen and (min-device-width: 1023px) {
+    #base {
+      height: 735px !important; } }
 
 .as {
   width: 3px;
@@ -287,8 +290,11 @@ i.shine {
     left: 82%; } }
 /*NAV BAR*/
 .dropdown-toggle {
-  background: black !important;
+  background: #1f60b4;
   margin-bottom: 3px; }
+
+.btn:hover {
+  background: black; }
 
 .brand-logo {
   margin-left: -100px; }
@@ -298,11 +304,20 @@ img {
   margin-bottom: 10px; }
 
 nav {
-  background-color: black; }
+  background-color: #1f60b4; }
 
 /*1v1*/
 .jumbotron {
-  border-radius: 0 !important; }
+  border-radius: 0 !important;
+  background: black;
+  padding-left: 20% !important;
+  padding-right: 20% !important;
+  padding-bottom: 20% !important;
+  color: wheat;
+  margin-bottom: 0 !important; }
+  @media only screen and (max-device-width: 700px) {
+    .jumbotron h1 {
+      font-size: 2em !important; } }
 
 /*Home Page*/
 .blinks {
@@ -326,7 +341,6 @@ nav {
   left: 40%; }
 
 #mobileDevice {
-  background: beige;
   height: 80vh;
   width: 47vh; }
 
@@ -520,7 +534,7 @@ span.badge {
     100% {
       top: -70vh; } } }
 /*///////MEDIA FOR IPAD PRO////////*/
-@media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   img {
     margin-left: 60%; }
 
@@ -530,23 +544,30 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 160px;
-    left: 30px; } }
+    top: 200px !important;
+    left: 30px; }
+
+  .overlayCModal {
+    left: 31.5%;
+    width: 38%; }
+
+  .mobileDevices {
+    margin-top: -1em; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD////////*/
-@media only screen and (min-device-width: 768px) and (max-device-width: 1022px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .letters {
     display: show; }
 
   .blink_me {
     position: relative !important;
-    margin-left: -1em !important;
+    margin-left: 1em !important;
     font-size: 9px !important; }
 
   .howtoplaymodal {
     margin-top: -1em !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
-    margin-left: -3rem !important;
+    margin-left: 0rem !important;
     font-size: 1em !important; }
 
   .screenbase {
@@ -585,7 +606,7 @@ span.badge {
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -1.5em !important;
+    margin-left: -2.2em !important;
     font-size: 1.4em !important; }
 
   .overlay {
@@ -613,7 +634,6 @@ span.badge {
     background-size: 91%;
     max-width: 102%;
     max-height: 99%;
-    top: 20px !important;
     left: 10px;
     margin-left: 10px; }
 
@@ -642,9 +662,6 @@ span.badge {
   #pauseGame {
     margin-top: 10px !important; }
 
-  .devname {
-    text-align: right !important; }
-
   .overlayCModal label {
     font-size: 1em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
@@ -663,7 +680,10 @@ span.badge {
     left: 10em !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
-    font-size: 1em !important; } }
+    font-size: 1em !important; }
+
+  .devname {
+    text-align: right !important; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.5em !important; } }
@@ -729,16 +749,16 @@ span.badge {
 
   .overlayCModal {
     width: 66% !important;
-    left: 17%; }
+    left: 16%; }
     .overlayCModal fieldset {
       padding-bottom: 0em !important; }
     .overlayCModal label {
       padding: 0 !important;
-      padding-left: 1.8em !important; }
+      padding-left: .8em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
-      padding-left: .5em !important; }
+      padding-left: .1em !important; }
     .overlayCModal #highScoresButton {
-      padding-left: .7em !important; }
+      padding-left: .5em !important; }
 
   .side-nav {
     width: 50%; }
@@ -1364,5 +1384,8 @@ input {
 
 .l {
   z-index: 99; }
+
+#sidenav-overlay {
+  z-index: 1; }
 
 /*# sourceMappingURL=main.css.map */

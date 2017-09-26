@@ -1,21 +1,47 @@
-<div ng-if="!gameMade" ng-include="'partials/navbar.html'">
+<div ng-if="!gameMade" ng-include="'partials/navbar.html'" style="height:10%">
 </div>
-<div class="row">
-<div ng-if="!isLoggedIn" class="jumbotron col-12 col-md-6" style="float:left;height:100vh;z-index:0;background-color: #283338;color:white">
-  <h1 class="display-3" style="margin-top: -1em;font-size:4em">Sign In!</h1>
-  <hr class="my-4">
-  E-Mail:
-  <input type="text" id="email" name="NAME" ng-model="userCredentials.email"><br>
-  Password:
-  <input type="password" name="NAME" ng-model="userCredentials.password">
-  <p class="lead">
-    <button class="btn btn-lg" ng-click="logInWithEmailAndPassword(userCredentials)" role="button">Log In!</button>
-    <a ng-href="#!/register"><button class="btn btn-lg"  role="button">Register!</button></a>
-    <a><button class="btn btn-lg"  ng-click="logInGoogle()" role="button">Sign In Google!</button></a>
-</p>
+<div class="row" ng-if="!isLoggedIn" style="height:90%">
+
+    <div class="jumbotron col-12">
+      <h1 class="display-3">Sign In!</h1>
+      <hr class="my-4">
+      E-Mail:
+      <input type="text" id="email" name="NAME" ng-model="userCredentials.email">
+      <br>
+      Password:
+      <input type="password" name="NAME" ng-model="userCredentials.password">
+      <p class="lead">
+        <button class="btn btn-lg" ng-click="logInWithEmailAndPassword(userCredentials)" href="#" role="button">Log In!</button>
+        <a ng-href="#!/register"><button class="btn btn-lg"  role="button">Register!</button></a>
+        <a><button class="btn btn-lg"  ng-click="logInGoogle()" role="button">Sign In Google!</button></a>
+    </p>
 </div>
 
-<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12 col-md-6" style="float:left;height:100vh;z-index:0;background-color: #283338;color:white">
+
+</div>
+<div class="row no-gutters" style="height:90%">
+    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-5" style="z-index:9;">
+      <h1 class="display-3" style="margin:0;font-size:4em">Directions</h1>
+      <hr class="my-4">
+
+      <p>Directions</p>
+  </div>
+
+  <div class="col-md-7 row col-12">
+    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12" style="z-index:9;height:50%;float:right">
+      <h1 class="display-3" style="margin:0;font-size:4em">Game Lobby</h1>
+      <hr class="my-4">
+
+      <p class="lead">
+        <div class="chip" ng-repeat="item in board" style="background-color:#d9534f">
+
+            <div ><span class="badge badge-success" data-id="{{item.user}}" ng-click="joinGame(item.user)" style="cursor:pointer;"">Join Game</span><i class="fa fa-trophy" aria-hidden="true"></i>{{item.name}}</div>
+
+        </div>
+
+    </p>
+</div>
+<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="height:50%;z-index:0;">
   <h1 class="display-3" style="margin-top: -1em;font-size:4em">Create Game!</h1>
   <hr class="my-4">
   Lobby Name:
@@ -26,19 +52,13 @@
     <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
 </p>
 </div>
-<div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-6" style="float:right;z-index:9;height:100vh;background-color: #283338;color:white">
-  <h1 class="display-3" style="margin-top: -1em;font-size:4em">Game Lobby</h1>
-  <hr class="my-4">
 
-  <p class="lead">
-    <div class="chip" ng-repeat="item in board" style="background-color:#d9534f">
-
-        <div ><span class="badge badge-success" data-id="{{item.user}}" ng-click="joinGame(item.user)" style="cursor:pointer;"">Join Game</span><i class="fa fa-trophy" aria-hidden="true"></i>{{item.name}}</div>
-
-    </div>
-
-</p>
 </div>
+</div>
+
+
+
+
 </div>
 <div ng-show="gameMade" class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
 

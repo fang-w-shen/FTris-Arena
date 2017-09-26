@@ -31,11 +31,8 @@ angular.module('TetrisApp').config(function($routeProvider) {
     }).when("/register", {
       templateUrl: "partials/register.html",
       controller: 'Tetris1v1Ctrl'
-    }).when("/login", {
-      templateUrl: "partials/login.html",
-      controller: 'Tetris1v1Ctrl'
     })
-    .otherwise("/FTris1on1");
+    .otherwise("/home");
 });
 
 angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
@@ -140,6 +137,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
+    $('body').css("overflow","none");
     $(document).off("keydown");
     $(window).off("keydown");
     $(document).off("keyup");
@@ -308,9 +306,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $('body').css("overflow-y","hidden");
         }
 
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
-        $("#sidenav-overlay").css("display",'none');
+        // $(".dropdown-button").dropdown();
+        // $(".button-collapse").sideNav();
+        // $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
       $scope.isLoggedIn = firebase.auth().currentUser;
       $scope.fullScreen = false;
@@ -349,7 +347,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         }
         function bindFullScreenKey() {
           $(document).on("keyup",(e)=>{
-            if (e.keyCode === 70) {
+            if (e.keyCode ===69) {
               if(!$scope.fullScreen){
                     $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
@@ -448,12 +446,12 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           }
 
         });
-
     }
 
 
     if($location.url()==="/Tetris"){
       $("#pauseGame").css("visibility","hidden");
+      $(".button-collapse").sideNav('destroy');
       initializeGame();
     }
 
@@ -485,8 +483,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-    var themesong = document.getElementById("myAudio");
-    themesong.currentTime = 0;
+
     $("#pauseGame").css("visibility","hidden");
 
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
@@ -541,19 +538,15 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
       //////////////WINDOW INITIALIZATION/////////////
-      var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
+      var yourDeviceWidth = window.matchMedia( "(max-width: 1024px)" );
       if (yourDeviceWidth.matches) {
-          // window width is at less than 500px
-          $("#time").css("visibility","hidden");
-          $('body').css("overflow-y","scroll");
-        }
-        else {
-          $('body').css("overflow-y","hidden");
-        }
+        $("#time").css("visibility","hidden");
+        $('body').css("overflow-y","scroll");
+      }
+      else {
+        $('body').css("overflow-y","hidden");
+      }
 
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
-        $("#sidenav-overlay").css("display",'none');
       //////////////VARIABLE DECLARATIONS////////////
       $scope.userCredentials = {};
       $scope.gameCredentials = {};
@@ -568,6 +561,8 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       $scope.gameMade = false;
       $scope.board = {};
       $scope.bindFullScreenKey = bindFullScreenKey;
+      $scope.activatedropdown = activatedropdown;
+
             //////////////AUTHORIZATION METHODS//////////////////////
             function logInGoogle() {
               AuthFactory.logInGoogle()
@@ -575,32 +570,44 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 let user = response.user.uid;
                 // $(".progress").css("visibility","hidden");
                 $scope.isLoggedIn = true;
-                // $location.path("/Tetris1v1");
+                Materialize.toast('Signed In!',4000);
+                $location.path("/FTris1on1");
                 $route.reload();
               })
-              .catch(error => console.log("google login error", error.message, error.code));
+              .catch((error) => {
+                console.log("google login error", error.message, error.code);
+                Materialize.toast("Sign In Failed! "+error.message,4000);
+              });
             }
 
             function logOutUser() {
               AuthFactory.logOut();
               $scope.isLoggedIn = false;
+              Materialize.toast('Signed Out!',4000);
               $location.url('/home');
             }
 
             function registerWithEmailAndPassword(userCredentials) {
               AuthFactory.registerWithEmailAndPassword(userCredentials).then(response=>{
                 $scope.logInWithEmailAndPassword(userCredentials);
+                Materialize.toast("Registered!",4000);
+              }).catch((error) => {
+                Materialize.toast("Registration Failed! "+error.message,4000);
+                console.log("registration error", error.message, error.code);
               });
             }
 
 
             function logInWithEmailAndPassword(userCredentials){
               AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
-
+                Materialize.toast("Signed In!",4000);
                 $location.path("/FTris1on1");
                 $route.reload();
+              }).catch(function(error) {
+                Materialize.toast("Sign In Failed! "+error.message,4000);
               });
             }
+            ////////////////ACTIVATION METHODS///////////
             function exitFullScreen(element) {
               if(element.exitFullscreen) {
                 element.exitFullscreen();
@@ -621,7 +628,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             }
             function bindFullScreenKey() {
               $(document).on("keyup",(e)=>{
-                if (e.keyCode === 70) {
+                if (e.keyCode === 69) {
                   if(!$scope.fullScreen){
                     $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
@@ -636,6 +643,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 }
 
               });
+            }
+            function activatedropdown() {
+               $('.button-collapse').sideNav('destroy');
             }
             $(document).on("keyup",(e)=>{
               switch(e.keyCode) {
@@ -2792,12 +2802,14 @@ require('./grid');
         },speed);
         this.paused = false;
         this.timer();
+        themesong.play();
         $("#pauseGame").css('visibility',"hidden");
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
         $("#pauseGame").css('visibility',"visible");
+        themesong.pause();
       }
     },
     initializeCollisionEvents: function() {
@@ -3131,7 +3143,8 @@ require('./grid');
 
     },
     endGame: function () {
-
+      themesong.pause();
+      themesong.currentTime = 0;
       this.clearInterval();
       if (score !== 0) {
         Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
@@ -3160,7 +3173,7 @@ require('./grid');
     },
 
     init: function() {
-
+      themesong.play();
       this.bind();
       this.createNewShape();
       this.startGame = true;
