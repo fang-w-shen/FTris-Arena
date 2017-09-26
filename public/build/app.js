@@ -138,6 +138,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
     $('body').css("overflow","none");
+    $('body').css("height","100vh");
+    $('.overlay').css("height","100vh");
+    $('.overlay').css("overflow","none");
     $(document).off("keydown");
     $(window).off("keydown");
     $(document).off("keyup");
@@ -3173,7 +3176,7 @@ require('./grid');
     },
 
     init: function() {
-      themesong.play();
+
       this.bind();
       this.createNewShape();
       this.startGame = true;
@@ -3182,6 +3185,8 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
+      themesong.currentTime = 0;
+      themesong.play();
     }
   };
 

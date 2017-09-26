@@ -492,7 +492,7 @@ require('./grid');
     },
 
     init: function() {
-      themesong.play();
+
       this.bind();
       this.createNewShape();
       this.startGame = true;
@@ -501,6 +501,8 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
+      themesong.currentTime = 0;
+      themesong.play();
     }
   };
 

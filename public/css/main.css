@@ -591,7 +591,13 @@ span.badge {
     margin-top: 1.7em !important; }
 
   .right-column {
-    margin-top: -3em !important; } }
+    margin-top: -3em !important; }
+
+  .overlayCModal {
+    width: 29% !important; } }
+@media only screen and (min-device-width: 767px) and (max-device-width: 1444px) and (orientation: portrait) {
+  .jumbotron {
+    height: 100vh !important; } }
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: -3em !important;
@@ -720,7 +726,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 4.5% !important;
+    left: 5% !important;
     font-size: 9px; }
 
   label {
@@ -754,7 +760,7 @@ span.badge {
       padding-bottom: 0em !important; }
     .overlayCModal label {
       padding: 0 !important;
-      padding-left: .8em !important; }
+      padding-left: 1.5em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {

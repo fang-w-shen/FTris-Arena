@@ -4,6 +4,9 @@
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
     $('body').css("overflow","hidden");
     $('body').css("overflow","none");
+    $('body').css("height","100vh");
+    $('.overlay').css("height","100vh");
+    $('.overlay').css("overflow","none");
     $(document).off("keydown");
     $(window).off("keydown");
     $(document).off("keyup");
