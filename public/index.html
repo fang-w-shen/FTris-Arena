@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="TetrisApp">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <title>Tetris Arena</title>
-    </head>
-    <body style="height:100%;width:100%" style="overflow:hidden !important">
-        <div class="body" style="overflow:hidden !important">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <title>Tetris Arena</title>
+</head>
+<body style="height:100%;width:100%" style="overflow:hidden !important">
+    <div class="body" style="overflow:hidden !important">
         <div id="ngview" style="height:100vh;overflow:none" ng-view></div>
         <!-- <canvas id="myCanvas"></canvas> -->
-        </div>
+    </div>
+    <div class="progress">
+        <div class="indeterminate" style="color:green"></div>
+    </div>
+    <audio id="myAudio" src="sound/theme.mp3" loop></audio>
+    <audio id="move" src="sound/move.mp3" ></audio>
+    <audio id="drop" src="sound/drop.mp3" ></audio>
+    <audio id="rotate" src="sound/rotate.mp3" ></audio>
+    <audio id="tetris" src="sound/tetris.mp3" ></audio>
+    <audio id="gameover" src="sound/gameover.mp3"></audio>
 
-        <audio id="myAudio" src="sound/theme.mp3" loop></audio>
-        <audio id="move" src="sound/move.mp3" ></audio>
-        <audio id="drop" src="sound/drop.mp3" ></audio>
-        <audio id="rotate" src="sound/rotate.mp3" ></audio>
-        <audio id="tetris" src="sound/tetris.mp3" ></audio>
-        <audio id="gameover" src="sound/gameover.mp3"></audio>
-
-        <!-- Firebase Dependencies -->
-        <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
-        <!-- JQUERY -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <!-- Materialize Dependency -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.js"></script>
-        <!-- Bootstrap Dependencies -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <!-- Angular Dependencies -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-        <script src="https://code.angularjs.org/1.6.6/angular-route.min.js"></script>
-        <!-- Main app -->
-        <script src="build/app.js"></script>
-    </body>
+    <!-- Firebase Dependencies -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Materialize Dependency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.js"></script>
+    <!-- Bootstrap Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- Angular Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.6/angular-route.min.js"></script>
+    <!-- Main app -->
+    <script src="build/app.js"></script>
+</body>
 </html>

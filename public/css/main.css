@@ -567,7 +567,7 @@ span.badge {
 
   .blink_me {
     position: relative !important;
-    margin-left: -3.5em !important;
+    margin-left: -1em !important;
     font-size: 16px !important; }
 
   .howtoplaymodal {
@@ -699,8 +699,8 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 160px !important;
-    left: 70px !important;
+    top: 158px !important;
+    left: 91px !important;
     margin-left: 6px; }
 
   .mobileDevices {
@@ -754,7 +754,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 8.5% !important;
+    left: 9% !important;
     font-size: 9px; }
 
   label {
@@ -1046,7 +1046,7 @@ span.badge {
     margin-left: -5.8em !important; }
 
   .blink_me {
-    left: 14.4% !important; }
+    left: 15.2% !important; }
 
   .right-column {
     margin-left: 4em !important; }
