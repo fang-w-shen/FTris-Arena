@@ -670,7 +670,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 29.9% !important; }
+    left: 30.3% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -705,7 +705,7 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 200px !important;
+    top: 220px !important;
     left: 69px !important;
     margin-left: 6px; }
 
@@ -721,7 +721,10 @@ span.badge {
     max-height: 99%;
     top: 77px !important;
     left: 89px !important;
-    margin-left: 6px; } }
+    margin-left: 6px; }
+
+  .overlayCModal {
+    left: 29.9% !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
@@ -787,7 +790,7 @@ span.badge {
     background-repeat: no-repeat;
     background-size: 91%;
     max-width: 102%;
-    top: 150px !important;
+    top: 148px !important;
     left: 2em !important; }
 
   h1 {
@@ -1135,7 +1138,12 @@ span.badge {
     margin-top: 5em !important; }
 
   label#playButton {
-    padding-left: .1em !important; } }
+    padding-left: .1em !important; }
+
+  .overlayCModal div {
+    padding-left: 1em !important; }
+  .overlayCModal label {
+    margin-left: -1em !important; } }
 @media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
   #tetris2 {
     margin-left: .7em !important; } }
