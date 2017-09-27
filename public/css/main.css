@@ -720,7 +720,10 @@ span.badge {
     margin-left: 63% !important; }
 
   .control-buttons {
-    right: -.7em !important; } }
+    right: -.7em !important; }
+
+  #tetris2 {
+    margin-top: 3.5em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   .overlay {
@@ -740,11 +743,14 @@ span.badge {
     margin-left: 14% !important; }
 
   .mobileDevices {
-    margin-top: 1em !important;
+    margin-top: .1em !important;
     left: 18em !important; }
 
   #base {
-    height: 691px !important; } }
+    height: 731px !important; }
+
+  #tetris2 {
+    margin-top: 3.1em !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
