@@ -543,7 +543,7 @@ span.badge {
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   img {
-    margin-left: 60%; }
+    margin-left: 17%; }
 
   .overlay {
     position: relative;
@@ -578,7 +578,7 @@ span.badge {
     left: 9% !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
-    margin-left: -1.5rem !important;
+    margin-left: -.5rem !important;
     font-size: 1em !important; }
 
   .screenbase {
@@ -635,8 +635,8 @@ span.badge {
     max-width: 102%;
     max-height: 99%;
     margin-left: 10px;
-    top: 11em !important;
-    left: 2.5em !important; }
+    top: 9em !important;
+    left: 3.5em !important; }
 
   .control-buttons {
     right: -.7em !important; }
@@ -664,7 +664,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 33.3% !important; }
+    left: 33% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -754,7 +754,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 10.5% !important;
+    left: 10% !important;
     font-size: 9px; }
 
   label {
