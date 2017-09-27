@@ -578,7 +578,7 @@ span.badge {
     left: 87px !important; } }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .blink_me {
-    margin-left: -3.2em !important; } }
+    margin-left: -3.3em !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
     margin-left: -2.5rem !important;
@@ -1064,7 +1064,7 @@ span.badge {
     margin-left: -5.8em !important; }
 
   .blink_me {
-    left: 15% !important; }
+    left: 14% !important; }
 
   .right-column {
     margin-left: 4em !important; }
@@ -1142,7 +1142,7 @@ span.badge {
 
   .overlayCModal div {
     position: relative;
-    left: 11px !important; }
+    left: 10.5px !important; }
   .overlayCModal label {
     margin-left: -1.2em !important; } }
 @media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
