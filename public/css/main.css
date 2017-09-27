@@ -703,11 +703,11 @@ span.badge {
     position: relative;
     background-repeat: no-repeat;
     background-size: 91%;
-    max-width: 91%;
+    max-width: 92%;
     max-height: 99%;
     top: 220px !important;
     left: 69px !important;
-    margin-left: 6px; }
+    margin-left: 4px; }
 
   .mobileDevices {
     left: 10em !important; } }
@@ -813,7 +813,7 @@ span.badge {
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {
-      padding-left: .5em !important; }
+      padding-left: .1em !important; }
 
   .side-nav {
     width: 50%; }
@@ -1076,7 +1076,7 @@ span.badge {
     width: 104%;
     max-height: 99%;
     top: 170px !important;
-    left: 70px; }
+    left: 10px !important; }
 
   .howtoplaymodal {
     margin-top: 40px !important; }
