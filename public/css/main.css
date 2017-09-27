@@ -664,7 +664,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 34% !important; }
+    left: 33.3% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -678,7 +678,9 @@ span.badge {
     background-size: 92%;
     margin-left: 4em !important;
     width: 100% !important;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    top: 2em !important;
+    left: 0em !important; }
 
   .overlayCModal {
     top: 330px;
@@ -697,8 +699,8 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 160px;
-    left: 70px;
+    top: 160px !important;
+    left: 70px !important;
     margin-left: 6px; }
 
   .mobileDevices {
@@ -752,7 +754,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 12% !important;
+    left: 10.5% !important;
     font-size: 9px; }
 
   label {
