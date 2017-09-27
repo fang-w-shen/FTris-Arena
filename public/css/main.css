@@ -706,7 +706,7 @@ span.badge {
     max-width: 91%;
     max-height: 99%;
     top: 158px !important;
-    left: 91px !important;
+    left: 67px !important;
     margin-left: 6px; }
 
   .mobileDevices {
@@ -760,7 +760,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 9.2% !important;
+    left: 9.6% !important;
     font-size: 9px; }
 
   label {
@@ -788,7 +788,7 @@ span.badge {
     height: 100vh; }
 
   .overlayCModal {
-    width: 70% !important;
+    width: 71.5% !important;
     left: 13.5% !important; }
     .overlayCModal fieldset {
       padding-bottom: 0em !important; }
@@ -1123,7 +1123,10 @@ span.badge {
 
   #tetris2 {
     margin-left: .8em !important;
-    margin-top: 5em !important; } }
+    margin-top: 5em !important; }
+
+  label#playButton {
+    padding-left: .1em !important; } }
 @media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
   #tetris2 {
     margin-left: .7em !important; } }
