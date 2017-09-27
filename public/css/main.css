@@ -710,7 +710,10 @@ span.badge {
     margin-left: 4px; }
 
   .mobileDevices {
-    left: 10em !important; } }
+    left: 10em !important; }
+
+  img {
+    margin-left: 47% !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (orientation: landscape) {
   .overlay {
@@ -720,7 +723,7 @@ span.badge {
     max-width: 91%;
     max-height: 99%;
     top: 77px !important;
-    left: 89px !important;
+    left: 90px !important;
     margin-left: 6px; }
 
   .overlayCModal {
@@ -1076,7 +1079,7 @@ span.badge {
     width: 104%;
     max-height: 99%;
     top: 170px !important;
-    left: 10px !important; }
+    left: 14px !important; }
 
   .howtoplaymodal {
     margin-top: 40px !important; }
