@@ -754,7 +754,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 10% !important;
+    left: 9.6% !important;
     font-size: 9px; }
 
   label {
@@ -1040,13 +1040,13 @@ span.badge {
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
-    margin-left: 13px; }
+    margin-left: 11px; }
 
   .movie {
     margin-left: -5.8em !important; }
 
   .blink_me {
-    left: 20.5% !important; }
+    left: 18% !important; }
 
   .right-column {
     margin-left: 4em !important; }
