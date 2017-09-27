@@ -670,7 +670,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 30% !important; }
+    left: 29.7% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -705,7 +705,7 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 180px !important;
+    top: 190px !important;
     left: 69px !important;
     margin-left: 6px; }
 
@@ -806,7 +806,7 @@ span.badge {
     .overlayCModal label {
       padding: 0 !important;
       padding-left: .5em !important;
-      margin-left: -.1em !important; }
+      margin-left: -.2em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {
@@ -1058,7 +1058,7 @@ span.badge {
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
-    margin-left: 9px; }
+    margin-left: 5px; }
 
   .movie {
     margin-left: -5.8em !important; }
