@@ -263,11 +263,10 @@ require('./grid');
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-        this.opponentref = firebase.database().ref(`games/${response}`);
+        self.opponentref = firebase.database().ref(`games/${response}`);
         $('#progressbar').show();
-        this.opponentref.on("value",(snapshot)=>{
+        self.opponentref.on("value",(snapshot)=>{
           if(snapshot.val()!==null && (self.startGame === false)) {
-            console.log("whats the snapshot", snapshot.val());
             self.startGame = true;
             let timeleft = 5;
             self.downloadTimer = setInterval(function(){
