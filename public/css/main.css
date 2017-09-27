@@ -674,15 +674,15 @@ span.badge {
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
-@media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
+@media only screen and (min-device-width: 1500px) and (max-device-width: 1800px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -2.2em !important;
+    margin-left: -2.3em !important;
     font-size: 1.4em !important; }
 
   .overlay {
     background-size: 92%;
-    margin-left: 4em !important;
+    margin-left: 2.8em !important;
     width: 100% !important;
     background-repeat: no-repeat;
     top: 2em !important;
@@ -696,7 +696,11 @@ span.badge {
     margin-top: 3em !important; }
 
   .howtoplaymodal {
-    margin-top: 1em !important; } }
+    margin-top: 1em !important; }
+
+  .howtoclose {
+    position: relative !important;
+    right: -61px !important; } }
 /*///////MEDIA FOR IPAD 767PX PORTRAIT FORREAL////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -710,10 +714,13 @@ span.badge {
     margin-left: 4px; }
 
   .mobileDevices {
-    left: 10em !important; }
+    left: 17em !important; }
 
   img {
-    margin-left: 63% !important; } }
+    margin-left: 63% !important; }
+
+  .control-buttons {
+    right: -.7em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (orientation: landscape) {
   .overlay {
@@ -1358,6 +1365,9 @@ input {
   top: 2em;
   background: #f5f5f5;
   border-radius: 1em; }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1000px) {
+    .system .control-buttons {
+      right: -.8em !important; } }
 .system .control {
   background: #292b2c;
   width: 1.5em;
