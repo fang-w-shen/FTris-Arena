@@ -714,7 +714,7 @@ span.badge {
     margin-left: 4px; }
 
   .mobileDevices {
-    left: 17em !important; }
+    left: 11em !important; }
 
   img {
     margin-left: 63% !important; }
@@ -722,7 +722,7 @@ span.badge {
   .control-buttons {
     right: -.7em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
-@media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (orientation: landscape) {
+@media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   .overlay {
     position: relative;
     background-repeat: no-repeat;
@@ -737,7 +737,10 @@ span.badge {
     left: 29.9% !important; }
 
   img {
-    margin-left: 14% !important; } }
+    margin-left: 14% !important; }
+
+  .mobileDevices {
+    left: 17em !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
