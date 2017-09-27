@@ -583,9 +583,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
             function logOutUser() {
               AuthFactory.logOut();
+              $location.url('/home');
               $scope.isLoggedIn = false;
               Materialize.toast('Signed Out!',4000);
-              $location.url('/home');
             }
 
             function registerWithEmailAndPassword(userCredentials) {
@@ -747,9 +747,19 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               difficulty:"easy",
               gameBoardRef: gameCredentials
             });
-            let database = firebase.database().ref('games/'+gameCredentials.key+'/grids');
+            let database = firebase.database().ref('games/'+gameCredentials.key);
 
             database.set(1);
+            $('#progressbar').show();
+            var timeleft = 5;
+            var downloadTimer = setInterval(function(){
+              document.getElementById("progressBar").value = --timeleft;
+              if(timeleft <= 0) {
+                clearInterval(downloadTimer);
+                $('#progressbar').hide();
+              }
+
+            },1000);
             setTimeout(()=>{
              setTimeout(()=>{
                tetris.init();
@@ -803,13 +813,13 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             alert("Wrong Password!");
           }
         });
-      }
+}
 
-    };
+};
 
-    Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
-    angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
-  })();
+Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
+})();
 
 },{"../scoregrid":10,"../tetris":13}],6:[function(require,module,exports){
 (function() {
@@ -2959,9 +2969,20 @@ require('./grid');
         let ref = firebase.database().ref(`games/${response}`);
 
         let opponentref = firebase.database().ref(`games/${response}/grids`);
+        $('#progressbar').show();
         opponentref.on("value",(snapshot)=>{
+          if (!this.startGame && !this.gameOver && snapshot.val()) {
+            var timeleft = 5;
+            var downloadTimer = setInterval(function(){
+              document.getElementById("progressBar").value = --timeleft;
+              if(timeleft <= 0) {
+                clearInterval(downloadTimer);
+                $('#progressbar').hide();
+              }
+
+            },1000);
+          }
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-            alert("Game Starting");
             setTimeout(()=>{
               this.init();
               themesong.currentTime = 0;
@@ -2975,6 +2996,7 @@ require('./grid');
         this.gametimeout = setTimeout(()=>{
           if(!this.startGame && !this.gameOver) {
             this.endGame();
+            $('#progressbar').hide();
             alert("Game Timed Out");
             location.href = '#!/home';
           }
@@ -3166,6 +3188,9 @@ require('./grid');
 
     },
     endGame: function () {
+      if($('#progressbar')){
+        $('#progressbar').hide();
+      }
       themesong.pause();
       themesong.currentTime = 0;
       this.clearInterval();

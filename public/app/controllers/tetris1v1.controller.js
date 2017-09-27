@@ -101,9 +101,9 @@
 
             function logOutUser() {
               AuthFactory.logOut();
+              $location.url('/home');
               $scope.isLoggedIn = false;
               Materialize.toast('Signed Out!',4000);
-              $location.url('/home');
             }
 
             function registerWithEmailAndPassword(userCredentials) {
@@ -265,9 +265,19 @@
               difficulty:"easy",
               gameBoardRef: gameCredentials
             });
-            let database = firebase.database().ref('games/'+gameCredentials.key+'/grids');
+            let database = firebase.database().ref('games/'+gameCredentials.key);
 
             database.set(1);
+            $('#progressbar').show();
+            var timeleft = 5;
+            var downloadTimer = setInterval(function(){
+              document.getElementById("progressBar").value = --timeleft;
+              if(timeleft <= 0) {
+                clearInterval(downloadTimer);
+                $('#progressbar').hide();
+              }
+
+            },1000);
             setTimeout(()=>{
              setTimeout(()=>{
                tetris.init();
@@ -321,10 +331,10 @@
             alert("Wrong Password!");
           }
         });
-      }
+}
 
-    };
+};
 
-    Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
-    angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
-  })();
+Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
+})();

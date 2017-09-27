@@ -305,6 +305,9 @@ i.shine {
 .brand-logo {
   margin-left: -100px; }
 
+.invis {
+  display: none; }
+
 img {
   height: 55px;
   margin-bottom: 10px; }
@@ -324,6 +327,13 @@ nav {
   @media only screen and (max-device-width: 700px) {
     .jumbotron h1 {
       font-size: 2em !important; } }
+
+#progressbar {
+  position: absolute;
+  z-index: 10000;
+  font-weight: bolder;
+  color: white;
+  text-align: center; }
 
 /*Home Page*/
 .blinks {
@@ -639,6 +649,11 @@ span.badge {
     padding-left: 3em; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD PORTRAIT////////*/
 @media only screen and (min-device-width: 767px) {
+  #progressbar {
+    top: 20%;
+    font-size: 25px;
+    left: 32%; }
+
   .right-column i.close {
     margin-left: -.2em; }
 
@@ -681,11 +696,13 @@ span.badge {
     left: 30.3% !important; }
     .overlayCModal label {
       font-size: 1em !important;
-      padding-left: 1em !important; } }
+      padding-left: 1em !important; }
+    .overlayCModal fieldset {
+      height: 245px; } }
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1800px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -2.3em !important;
+    margin-left: -1.4em !important;
     font-size: 1.4em !important; }
 
   .overlay {
@@ -698,7 +715,7 @@ span.badge {
 
   .overlayCModal {
     top: 330px;
-    left: 36% !important; }
+    left: 35.5% !important; }
 
   .modal-content {
     margin-top: 3em !important; }
@@ -735,6 +752,9 @@ span.badge {
     margin-top: 3.4em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
+  #progressbar {
+    left: 34%; }
+
   .overlay {
     position: relative;
     background-repeat: no-repeat;
@@ -769,7 +789,10 @@ span.badge {
     padding-left: 1.6em !important; }
 
   .devname {
-    text-align: right !important; } }
+    text-align: right !important; }
+
+  #progressbar {
+    left: 39%; } }
 @media only screen and (min-device-width: 1000px) and (orientation: portrait) {
   .jumbotron {
     height: 100vh; } }
@@ -791,6 +814,11 @@ span.badge {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
+  #progressbar {
+    top: 14%;
+    left: 11.5%;
+    font-size: 25px !important; }
+
   .scrollable {
     overflow-y: scroll !important; }
 
@@ -804,6 +832,9 @@ span.badge {
     #tetris2 .cell {
       width: 4px !important;
       height: 4px !important; }
+
+  .signinjumbo {
+    padding: 2.3em !important; }
 
   * {
     padding-right: 0 !important;
@@ -1505,5 +1536,35 @@ input {
 
 [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after {
   border: 2px solid rgba(0, 0, 0, 0.85); }
+
+progress {
+  height: 14px;
+  margin: 50px auto;
+  display: block;
+  /* Important Thing */
+  -webkit-appearance: none;
+  border: none; }
+
+/* All good till now. Now we'll style the background */
+progress::-webkit-progress-bar {
+  border-radius: 50px;
+  background: -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%), -webkit-linear-gradient(top, white, white), -webkit-linear-gradient(left, white, black); }
+
+/* Now the value part */
+progress::-webkit-progress-value {
+  border-radius: 50px;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  background: -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%), -webkit-linear-gradient(top, green, white), -webkit-linear-gradient(left, #ba7448, #c4672d);
+  /* Looks great, now animating it */
+  background-size: 25px 14px, 100% 100%, 100% 100%;
+  -webkit-animation: move 5s linear 0 infinite; }
+
+/* That's it! Now let's try creating a new stripe pattern and animate it using animation and keyframes properties  */
+@-webkit-keyframes move {
+  0% {
+    background-position: 0px 0px, 0 0, 0 0; }
+  100% {
+    background-position: -100px 0px, 0 0, 0 0; } }
+/* Prefix-free was creating issues with the animation */
 
 /*# sourceMappingURL=main.css.map */

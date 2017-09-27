@@ -1,5 +1,52 @@
 <div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
+<div id="progressbar" class="invis">
+  Game Starting In....
+  <br>
+  <progress value="5" max="5" id="progressBar"></progress>
+  <br>
+  <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+              <div class="circle"></div>
+          </div><div class="gap-patch">
+              <div class="circle"></div>
+          </div><div class="circle-clipper right">
+              <div class="circle"></div>
+          </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+              <div class="circle"></div>
+          </div><div class="gap-patch">
+              <div class="circle"></div>
+          </div><div class="circle-clipper right">
+              <div class="circle"></div>
+          </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+              <div class="circle"></div>
+          </div><div class="gap-patch">
+              <div class="circle"></div>
+          </div><div class="circle-clipper right">
+              <div class="circle"></div>
+          </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+              <div class="circle"></div>
+          </div><div class="gap-patch">
+              <div class="circle"></div>
+          </div><div class="circle-clipper right">
+              <div class="circle"></div>
+          </div>
+      </div>
+  </div>
+</div>
 <div ng-show="gameMade" class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
 
     <div id="tetrisScreen" class="row">
@@ -78,7 +125,7 @@
 
 <div class="row " ng-if="!isLoggedIn" style="height:90%">
 
-    <div class="jumbotron col-12 bigone">
+    <div class="jumbotron col-12 bigone signinjumbo">
       <h1 class="display-3">Sign In!</h1>
       <hr class="my-4">
       E-Mail:

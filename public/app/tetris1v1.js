@@ -264,9 +264,20 @@ require('./grid');
         let ref = firebase.database().ref(`games/${response}`);
 
         let opponentref = firebase.database().ref(`games/${response}/grids`);
+        $('#progressbar').show();
         opponentref.on("value",(snapshot)=>{
+          if (!this.startGame && !this.gameOver && snapshot.val()) {
+            var timeleft = 5;
+            var downloadTimer = setInterval(function(){
+              document.getElementById("progressBar").value = --timeleft;
+              if(timeleft <= 0) {
+                clearInterval(downloadTimer);
+                $('#progressbar').hide();
+              }
+
+            },1000);
+          }
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-            alert("Game Starting");
             setTimeout(()=>{
               this.init();
               themesong.currentTime = 0;
@@ -280,6 +291,7 @@ require('./grid');
         this.gametimeout = setTimeout(()=>{
           if(!this.startGame && !this.gameOver) {
             this.endGame();
+            $('#progressbar').hide();
             alert("Game Timed Out");
             location.href = '#!/home';
           }
@@ -471,6 +483,9 @@ require('./grid');
 
     },
     endGame: function () {
+      if($('#progressbar')){
+        $('#progressbar').hide();
+      }
       themesong.pause();
       themesong.currentTime = 0;
       this.clearInterval();
