@@ -35,9 +35,16 @@
       }
       let gamesref = firebase.database().ref('games');
       gamesref.on("value",(snapshot)=>{
-        if(snapshot.val() && Object.values(snapshot.val())[0].user){
+        if(snapshot.val()){
+          let values = [];
+          let thesnapshot = Object.values(snapshot.val());
+          thesnapshot.forEach((item)=>{
+            if(item.user) {
+              values.push(item);
+            }
+          });
+          console.log("whats the snap", values);
 
-          let values= Object.values(snapshot.val());
           $scope.board = values;
           if(!$scope.$$phase) {
             $scope.$apply();
