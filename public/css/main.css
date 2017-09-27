@@ -560,7 +560,7 @@ span.badge {
 
   .mobileDevices {
     margin-top: -1em; } }
-/*///////MEDIA FOR SCREENS ABOVE IPAD////////*/
+/*///////MEDIA FOR SCREENS ABOVE IPAD LANDSCAPE////////*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .letters {
     display: show; }
@@ -632,7 +632,7 @@ span.badge {
 @media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
   .blink_me {
     padding-left: 3em; } }
-/*///////MEDIA FOR SCREENS ABOVE IPAD 1024PX////////*/
+/*///////MEDIA FOR SCREENS ABOVE IPAD PORTRAIT////////*/
 @media only screen and (min-device-width: 767px) {
   .overlay {
     position: relative;
@@ -641,7 +641,7 @@ span.badge {
     max-width: 102%;
     max-height: 99%;
     margin-left: 10px;
-    top: 7em !important;
+    top: 6em !important;
     left: 5.5em !important; }
 
   .control-buttons {
@@ -670,7 +670,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 30.5% !important; }
+    left: 30% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -697,7 +697,7 @@ span.badge {
 
   .howtoplaymodal {
     margin-top: 1em !important; } }
-/*///////MEDIA FOR IPAD 767PX////////*/
+/*///////MEDIA FOR IPAD 767PX PORTRAIT////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
     position: relative;
@@ -705,12 +705,23 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 158px !important;
-    left: 67px !important;
+    top: 165px !important;
+    left: 69px !important;
     margin-left: 6px; }
 
   .mobileDevices {
     left: 10em !important; } }
+/*IPAD ORIENTATION LANDSCAPE*/
+@media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (orientation: landscape) {
+  .overlay {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 91%;
+    max-width: 91%;
+    max-height: 99%;
+    top: 165px !important;
+    left: 87px !important;
+    margin-left: 6px; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
@@ -794,7 +805,7 @@ span.badge {
       padding-bottom: 0em !important; }
     .overlayCModal label {
       padding: 0 !important;
-      padding-left: 1.5em !important; }
+      padding-left: -.5em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {
