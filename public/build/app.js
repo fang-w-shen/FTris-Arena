@@ -545,8 +545,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       if (yourDeviceWidth.matches) {
         $("#time").css("visibility","hidden");
         $('body').css("overflow-y","scroll !important");
-        console.log("hi");
-
       }
       else {
         $('body').css("overflow-y","hidden");

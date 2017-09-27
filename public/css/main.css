@@ -740,7 +740,11 @@ span.badge {
     margin-left: 14% !important; }
 
   .mobileDevices {
-    left: 17em !important; } }
+    margin-top: 1em !important;
+    left: 18em !important; }
+
+  #base {
+    height: 691px !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
@@ -773,7 +777,7 @@ span.badge {
     overflow-y: scroll !important; }
 
   #tetris2 {
-    top: 8.1em !important;
+    top: 8.5em !important;
     left: 10% !important; }
     #tetris2 .cell {
       width: 4px !important;
