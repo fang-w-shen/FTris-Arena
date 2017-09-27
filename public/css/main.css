@@ -697,7 +697,7 @@ span.badge {
 
   .howtoplaymodal {
     margin-top: 1em !important; } }
-/*///////MEDIA FOR IPAD 767PX PORTRAIT////////*/
+/*///////MEDIA FOR IPAD 767PX PORTRAIT FORREAL////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
     position: relative;
@@ -705,13 +705,13 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 165px !important;
+    top: 180px !important;
     left: 69px !important;
     margin-left: 6px; }
 
   .mobileDevices {
     left: 10em !important; } }
-/*IPAD ORIENTATION LANDSCAPE*/
+/*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) and (orientation: landscape) {
   .overlay {
     position: relative;
@@ -719,8 +719,8 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 165px !important;
-    left: 87px !important;
+    top: 77px !important;
+    left: 89px !important;
     margin-left: 6px; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
@@ -805,7 +805,8 @@ span.badge {
       padding-bottom: 0em !important; }
     .overlayCModal label {
       padding: 0 !important;
-      padding-left: -.5em !important; }
+      padding-left: .5em !important;
+      margin-left: -.1em !important; }
     .overlayCModal #multiButton, .overlayCModal #howToPlayButton {
       padding-left: .1em !important; }
     .overlayCModal #highScoresButton {
