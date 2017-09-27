@@ -145,14 +145,14 @@
   //   this.color = colors[Math.floor(Math.random() * colors.length)];
   //   return this.color;
   // };
-  BaseShape.prototype.getRandomColors = function() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
+  // BaseShape.prototype.getRandomColors = function() {
+  //   var letters = '0123456789ABCDEF';
+  //   var color = '#';
+  //   for (var i = 0; i < 6; i++) {
+  //     color += letters[Math.floor(Math.random() * 16)];
+  //   }
+  //   return color;
+  // };
 
   BaseShape.prototype.onInit = function(grid, collisionState, databaseref ) {
     this.rotationState = 1;

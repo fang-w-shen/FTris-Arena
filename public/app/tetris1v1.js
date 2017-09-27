@@ -122,13 +122,13 @@ require('./grid');
         this.paused = false;
         this.timer();
         themesong.play();
-        $("#pauseGame").css('visibility',"hidden");
+        $('#pauser').removeClass('blinks');
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
-        $("#pauseGame").css('visibility',"visible");
         themesong.pause();
+        $('#pauser').addClass('blinks');
       }
     },
     initializeCollisionEvents: function() {
@@ -266,9 +266,14 @@ require('./grid');
         let opponentref = firebase.database().ref(`games/${response}/grids`);
         opponentref.on("value",(snapshot)=>{
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-            this.init();
-            themesong.currentTime = 0;
-            themesong.play();
+            alert("Game Starting");
+            setTimeout(()=>{
+              this.init();
+              themesong.currentTime = 0;
+              themesong.play();
+            },5000);
+
+
           }
         });
 
@@ -455,6 +460,9 @@ require('./grid');
               rotate.play();
               self.shape.rotate();
             }
+            break;
+            case "pauser":
+            self.pause();
             break;
           }
         }

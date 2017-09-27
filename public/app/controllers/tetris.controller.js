@@ -159,7 +159,6 @@
 
 
     if($location.url()==="/Tetris"){
-      $("#pauseGame").css("visibility","hidden");
       $(".button-collapse").sideNav('destroy');
       initializeGame();
     }

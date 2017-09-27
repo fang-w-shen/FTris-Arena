@@ -453,7 +453,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
     if($location.url()==="/Tetris"){
-      $("#pauseGame").css("visibility","hidden");
       $(".button-collapse").sideNav('destroy');
       initializeGame();
     }
@@ -487,7 +486,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
-    $("#pauseGame").css("visibility","hidden");
 
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
     if (firebase.auth().currentUser) {
@@ -749,12 +747,18 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               difficulty:"easy",
               gameBoardRef: gameCredentials
             });
+            let database = firebase.database().ref('games/'+gameCredentials.key+'/grids');
+
+            database.set(1);
             setTimeout(()=>{
-              tetris.init();
-              themesong.currentTime = 0;
-              themesong.play();
-              $scope.bindFullScreenKey();
-            },3000);
+             setTimeout(()=>{
+               tetris.init();
+               themesong.currentTime = 0;
+               themesong.play();
+               $scope.bindFullScreenKey();
+             },506);
+           },5000);
+
 
 
 
@@ -1807,14 +1811,14 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   //   this.color = colors[Math.floor(Math.random() * colors.length)];
   //   return this.color;
   // };
-  BaseShape.prototype.getRandomColors = function() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
+  // BaseShape.prototype.getRandomColors = function() {
+  //   var letters = '0123456789ABCDEF';
+  //   var color = '#';
+  //   for (var i = 0; i < 6; i++) {
+  //     color += letters[Math.floor(Math.random() * 16)];
+  //   }
+  //   return color;
+  // };
 
   BaseShape.prototype.onInit = function(grid, collisionState, databaseref ) {
     this.rotationState = 1;
@@ -2335,14 +2339,16 @@ require('./grid');
         },speed);
         this.paused = false;
         this.timer();
-        $("#pauseGame").css('visibility',"hidden");
         themesong.play();
+        $('#pauser').removeClass('blinks');
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
-        $("#pauseGame").css('visibility',"visible");
         themesong.pause();
+        $('#pauser').addClass('blinks');
+
+
       }
     },
     initializeCollisionEvents: function() {
@@ -2614,6 +2620,9 @@ require('./grid');
               self.shape.rotate();
             }
             break;
+            case "pauser":
+            self.pause();
+            break;
           }
         }
       });
@@ -2808,13 +2817,13 @@ require('./grid');
         this.paused = false;
         this.timer();
         themesong.play();
-        $("#pauseGame").css('visibility',"hidden");
+        $('#pauser').removeClass('blinks');
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
-        $("#pauseGame").css('visibility',"visible");
         themesong.pause();
+        $('#pauser').addClass('blinks');
       }
     },
     initializeCollisionEvents: function() {
@@ -2952,9 +2961,14 @@ require('./grid');
         let opponentref = firebase.database().ref(`games/${response}/grids`);
         opponentref.on("value",(snapshot)=>{
           if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-            this.init();
-            themesong.currentTime = 0;
-            themesong.play();
+            alert("Game Starting");
+            setTimeout(()=>{
+              this.init();
+              themesong.currentTime = 0;
+              themesong.play();
+            },5000);
+
+
           }
         });
 
@@ -3141,6 +3155,9 @@ require('./grid');
               rotate.play();
               self.shape.rotate();
             }
+            break;
+            case "pauser":
+            self.pause();
             break;
           }
         }

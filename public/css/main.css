@@ -330,9 +330,13 @@ nav {
   animation: blinker .9s linear infinite; }
 
 .pauseGame {
-  visibility: visible;
-  animation: blinker .9s linear infinite;
   margin-top: 6em; }
+
+.right-column i.close {
+  color: white;
+  opacity: .9;
+  float: left;
+  margin-left: .1em; }
 
 .howtoclose {
   position: relative;
@@ -372,6 +376,7 @@ body {
 
 .table td, .table th {
   border-top: none !important;
+  padding: .3rem !important;
   padding-top: 8px !important; }
 
 .modal {
@@ -634,6 +639,9 @@ span.badge {
     padding-left: 3em; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD PORTRAIT////////*/
 @media only screen and (min-device-width: 767px) {
+  .right-column i.close {
+    margin-left: -.2em; }
+
   .overlay {
     position: relative;
     background-repeat: no-repeat;
@@ -686,11 +694,11 @@ span.badge {
     width: 100% !important;
     background-repeat: no-repeat;
     top: 2em !important;
-    left: 0em !important; }
+    left: 1em !important; }
 
   .overlayCModal {
     top: 330px;
-    left: 35% !important; }
+    left: 36% !important; }
 
   .modal-content {
     margin-top: 3em !important; }
@@ -723,7 +731,8 @@ span.badge {
     right: -.7em !important; }
 
   #tetris2 {
-    margin-top: 3.5em !important; } }
+    margin-left: 1.5em;
+    margin-top: 3.4em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   .overlay {
@@ -750,7 +759,10 @@ span.badge {
     height: 731px !important; }
 
   #tetris2 {
-    margin-top: 3.1em !important; } }
+    margin-top: 3.1em !important; }
+
+  .right-column {
+    margin-left: -.3em; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
@@ -782,8 +794,12 @@ span.badge {
   .scrollable {
     overflow-y: scroll !important; }
 
+  #pauser {
+    font-size: 20px;
+    margin-left: 3px !important; }
+
   #tetris2 {
-    top: 8.5em !important;
+    top: 9em !important;
     left: 10% !important; }
     #tetris2 .cell {
       width: 4px !important;
@@ -850,7 +866,7 @@ span.badge {
 
   .right-column {
     margin-left: 2.5em !important;
-    margin-top: -2em;
+    margin-top: -2.5em !important;
     max-width: 110px;
     position: absolute !important;
     top: 1em !important;
@@ -1093,7 +1109,7 @@ span.badge {
     left: 14% !important; }
 
   .right-column {
-    margin-left: 4em !important; }
+    margin-left: 3em !important; }
 
   .overlay {
     position: absolute;
@@ -1179,7 +1195,7 @@ span.badge {
     margin-left: .7em !important; }
 
   .right-column {
-    margin-left: 3.6em !important; } }
+    margin-left: 3em !important; } }
 /*Tetris Page*/
 * {
   margin: 0;
@@ -1434,7 +1450,7 @@ input {
     color: white; }
 
 .frame {
-  margin-top: 6.5% !important;
+  margin-top: 2.5% !important;
   background-color: #ddc;
   border: solid 5vmin #eee;
   border-bottom-color: rgba(150, 104, 53, 0.79);
@@ -1450,7 +1466,7 @@ input {
   padding-left: 2vmin;
   padding-right: 2vmin;
   position: relative;
-  left: -7em;
+  left: -8em;
   text-align: center; }
   @media screen and (max-width: 1115px) {
     .frame {
@@ -1480,7 +1496,14 @@ input {
 .l {
   z-index: 99; }
 
+/*OVERRIDING BOOTSTRAP/MATERIALIZE*/
 #sidenav-overlay {
   z-index: 1; }
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
+  background-color: #00ff71; }
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after {
+  border: 2px solid rgba(0, 0, 0, 0.85); }
 
 /*# sourceMappingURL=main.css.map */

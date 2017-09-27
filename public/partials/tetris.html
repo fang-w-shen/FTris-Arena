@@ -1,7 +1,7 @@
 <!-- <div ng-include="'partials/navbar.html'">
 </div> -->
 <div class="row justify-content-between">
-    <div class="frame ">
+    <div class="frame col-3.5">
         <div class="" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content howtoplaymodal" style="background: wheat;">
@@ -9,23 +9,27 @@
                     <div class="">
 
                         <table class="table table-condensed">
-                            <tr><th>Button</th><th>Move</th></tr>
+                            <tr><th>KEYBOARD & D-PAD</th><th>ACTION</th></tr>
                             <tbody>
-                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons">W</i></kbd></th><td>Rotate Block</td></tr>
-                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons a">A</i></kbd></th><td>Move Left</td></tr>
-                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons s">S</i></kbd></th><td>Move Down</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material"> ENTER </kbd> <kbd class="material"> START </kbd></th><td>START GAME</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">P</i></kbd> <kbd class="letters"><i class="material-icons">pause</i></kbd></th><td>PAUSE GAME</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">R</i></kbd> <kbd class="material"> RESET </kbd></th><td>RESET GAME</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">ESC</kbd><kbd class="material">OFF</kbd></th><td>EXIT GAME</td></tr>
+                            </tbody>
+                            <tr><th>GAMEPLAY</th><th>MOVE</th></tr>
+                            <tbody>
+                                <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">E</i></kbd></th><td>TOGGLE FULLSCREEN</td></tr>
+                                <tr><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">Z</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons d">X</i></kbd></th><td>ROTATE LEFT/RIGHT</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd><kbd class="material"> SPIN </kbd></th><td>ROTATE BLOCK</td></tr>
 
-                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons d">D</i></kbd></th><td>Move Right</td></tr>
-                                <tr class="browser-buttons"><th><kbd class="material">SPACEBAR</kbd></th><td>Drop Block</td></tr>
-                                <tr class="browser-buttons"><th><kbd class="material material-icons letters">E</kbd></th><td>Toggle Full Screen</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd><kbd class="material"> LEFT </kbd></th><td>MOVE LEFT</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd><kbd class="material"> DOWN </kbd></th><td>MOVE DOWN</td></tr>
 
-                                <tr class="browser-buttons"><th><kbd class="material material-icons letters">P</kbd></th><td>Pause Game</td></tr>
-                                <tr class="browser-buttons"><th><kbd class="material material-icons letters">R</kbd></th><td>Reset</td></tr>
-                                <tr class="browser-buttons"><th><kbd class="material">ESC</kbd><kbd class="material">OFF</kbd></th><td>Exit Game/ Back</td></tr>
+                                <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd><kbd class="material"> RIGHT </kbd></th><td>MOVE RIGHT</td></tr>
+                                <tr class="browser-buttons"><th><kbd class="material">SPACEBAR</kbd><kbd class="material">DROP</kbd></th><td>DROP BLOCK</td></tr>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -44,7 +48,7 @@
                 <div class="grid">Hi-Score: <div id="highScore"> {{highScore}}</div></div>
                 <div class="grid">Score: <div id="score"> 0</div></div>
                 <div class="grid" >Level: <div id="level"> 0</div></div>
-                <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" ng-click="" style="float:left">pause</i></div><br>
+                <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" id="pauser" data-id="pauser" ng-click="" style="float:left">pause</i></div><br>
                 <br><div id="time" class="grid"></div>
 
 

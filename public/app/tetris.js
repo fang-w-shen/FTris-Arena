@@ -109,14 +109,16 @@ require('./grid');
         },speed);
         this.paused = false;
         this.timer();
-        $("#pauseGame").css('visibility',"hidden");
         themesong.play();
+        $('#pauser').removeClass('blinks');
       } else {
         this.clearInterval();
         this.paused = true;
         clearTimeout(self.time);
-        $("#pauseGame").css('visibility',"visible");
         themesong.pause();
+        $('#pauser').addClass('blinks');
+
+
       }
     },
     initializeCollisionEvents: function() {
@@ -387,6 +389,9 @@ require('./grid');
               rotate.play();
               self.shape.rotate();
             }
+            break;
+            case "pauser":
+            self.pause();
             break;
           }
         }
