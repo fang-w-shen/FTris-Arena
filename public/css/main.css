@@ -330,7 +330,7 @@ nav {
 
 #progressbar {
   position: absolute;
-  z-index: 10000;
+  z-index: 10;
   font-weight: bolder;
   color: white;
   text-align: center; }
@@ -702,7 +702,7 @@ span.badge {
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1800px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -1.4em !important;
+    margin-left: -2em !important;
     font-size: 1.4em !important; }
 
   .overlay {

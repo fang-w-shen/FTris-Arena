@@ -2971,17 +2971,17 @@ require('./grid');
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-        let opponentref = firebase.database().ref(`games/${response}`);
+        this.opponentref = firebase.database().ref(`games/${response}`);
         $('#progressbar').show();
-        opponentref.on("value",(snapshot)=>{
-          if(snapshot.val()!==null && (this.startGame === false)) {
+        this.opponentref.on("value",(snapshot)=>{
+          if(snapshot.val()!==null && (self.startGame === false)) {
             console.log("whats the snapshot", snapshot.val());
-            this.startGame = true;
+            self.startGame = true;
             let timeleft = 5;
-            let downloadTimer = setInterval(function(){
+            self.downloadTimer = setInterval(function(){
               document.getElementById("progressBar").value = --timeleft;
               if(timeleft <= 0) {
-                clearInterval(downloadTimer);
+                clearInterval(self.downloadTimer);
                 $('#progressbar').hide();
                 self.init();
                 themesong.currentTime = 0;
@@ -3192,6 +3192,12 @@ require('./grid');
       if($('#progressbar')){
         $('#progressbar').hide();
       }
+      if (this.opponentref){
+
+        this.opponentref.off("value");
+      }
+      clearInterval(this.downloadTimer);
+      document.getElementById("progressBar").value = 5;
       themesong.pause();
       themesong.currentTime = 0;
       this.clearInterval();
