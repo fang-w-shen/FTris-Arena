@@ -567,15 +567,15 @@ span.badge {
 
   .blink_me {
     position: relative !important;
-    margin-left: -3em !important;
+    margin-left: -1.2em !important;
     font-size: 16px !important; }
 
   .howtoplaymodal {
     margin-top: -1em !important; }
 
   .overlay {
-    top: 20em !important;
-    left: 9% !important; } }
+    top: 140px !important;
+    left: 87px !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
     margin-left: -.5rem !important;
@@ -664,7 +664,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 33% !important; }
+    left: 30.5% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -1040,7 +1040,13 @@ span.badge {
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
   .overlayCModal {
-    margin-left: 20px; }
+    margin-left: 13px; }
+
+  .movie {
+    margin-left: -5.8em !important; }
+
+  .blink_me {
+    left: 20.5% !important; }
 
   .right-column {
     margin-left: 4em !important; }
