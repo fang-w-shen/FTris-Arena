@@ -670,7 +670,7 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 29.7% !important; }
+    left: 29.9% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
@@ -705,7 +705,7 @@ span.badge {
     background-size: 91%;
     max-width: 91%;
     max-height: 99%;
-    top: 190px !important;
+    top: 200px !important;
     left: 69px !important;
     margin-left: 6px; }
 
@@ -1057,9 +1057,6 @@ span.badge {
     left: 8.5px !important; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
-  .overlayCModal {
-    margin-left: 5px; }
-
   .movie {
     margin-left: -5.8em !important; }
 
