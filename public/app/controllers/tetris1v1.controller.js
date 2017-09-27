@@ -252,10 +252,13 @@
           let password = prompt("Password");
 
           if (password === item[Object.keys(item)[0]].password) {
+
             $scope.gameMade = true;
 
             gameCredentials.key = Object.keys(item)[0];
             gameCredentials.user = item[Object.keys(item)[0]].user;
+            let database = firebase.database().ref('games/'+gameCredentials.key);
+            database.set(1);
             var tetris = new Tetris2({
               rows: 20,
               cols: 10,
@@ -265,9 +268,7 @@
               difficulty:"easy",
               gameBoardRef: gameCredentials
             });
-            let database = firebase.database().ref('games/'+gameCredentials.key);
 
-            database.set(1);
             $('#progressbar').show();
             var timeleft = 5;
             var downloadTimer = setInterval(function(){
@@ -275,17 +276,19 @@
               if(timeleft <= 0) {
                 clearInterval(downloadTimer);
                 $('#progressbar').hide();
+                themesong.currentTime = 0;
+               themesong.play();
+               $scope.bindFullScreenKey();
+               tetris.init();
               }
 
             },1000);
-            setTimeout(()=>{
-             setTimeout(()=>{
-               tetris.init();
-               themesong.currentTime = 0;
-               themesong.play();
-               $scope.bindFullScreenKey();
-             },506);
-           },5000);
+           //  setTimeout(()=>{
+           //   setTimeout(()=>{
+           //     tetris.init();
+
+           //   },506);
+           // },5000);
 
 
 

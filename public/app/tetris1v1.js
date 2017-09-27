@@ -258,34 +258,32 @@ require('./grid');
     FBRef: function() {
       let database = firebase.database().ref('games');
       let user = firebase.auth().currentUser.uid;
-
+      let self = this;
       if (this.gameBoardRef.user === user) {
         let response = database.push({user:user,name:this.gameBoardRef.name,password:this.gameBoardRef.password}).getKey();
         let ref = firebase.database().ref(`games/${response}`);
 
-        let opponentref = firebase.database().ref(`games/${response}/grids`);
+        let opponentref = firebase.database().ref(`games/${response}`);
         $('#progressbar').show();
         opponentref.on("value",(snapshot)=>{
-          if (!this.startGame && !this.gameOver && snapshot.val()) {
-            var timeleft = 5;
-            var downloadTimer = setInterval(function(){
+          if(snapshot.val()!==null && (this.startGame === false)) {
+            console.log("whats the snapshot", snapshot.val());
+            this.startGame = true;
+            let timeleft = 5;
+            let downloadTimer = setInterval(function(){
               document.getElementById("progressBar").value = --timeleft;
               if(timeleft <= 0) {
                 clearInterval(downloadTimer);
                 $('#progressbar').hide();
+                self.init();
+                themesong.currentTime = 0;
+                themesong.play();
               }
 
             },1000);
-          }
-          if (snapshot.val() && (this.startGame === false) && (this.gameOver !== true)) {
-            setTimeout(()=>{
-              this.init();
-              themesong.currentTime = 0;
-              themesong.play();
-            },5000);
-
 
           }
+
         });
 
         this.gametimeout = setTimeout(()=>{
