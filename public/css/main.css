@@ -623,26 +623,6 @@ span.badge {
 
   .howtoplaymodal {
     margin-top: -1em !important; } }
-@media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
-  .blink_me {
-    margin-top: 1em !important;
-    margin-left: -2.2em !important;
-    font-size: 1.4em !important; }
-
-  .overlay {
-    background-size: 92%;
-    margin-left: 4em !important;
-    width: 100% !important;
-    background-repeat: no-repeat; }
-
-  .overlayCModal {
-    top: 330px; }
-
-  .modal-content {
-    margin-top: 3em !important; }
-
-  .howtoplaymodal {
-    margin-top: 1em !important; } }
 @media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
   .blink_me {
     padding-left: 3em; } }
@@ -655,7 +635,7 @@ span.badge {
     max-width: 102%;
     max-height: 99%;
     margin-left: 10px;
-    top: 5em !important;
+    top: 11em !important;
     left: 2.5em !important; }
 
   .control-buttons {
@@ -684,10 +664,31 @@ span.badge {
     margin-top: 10px !important; }
 
   .overlayCModal {
-    left: 30% !important; }
+    left: 34% !important; }
     .overlayCModal label {
       font-size: 1em !important;
       padding-left: 1em !important; } }
+@media only screen and (min-device-width: 1500px) and (max-device-width: 1645px) {
+  .blink_me {
+    margin-top: 1em !important;
+    margin-left: -2.2em !important;
+    font-size: 1.4em !important; }
+
+  .overlay {
+    background-size: 92%;
+    margin-left: 4em !important;
+    width: 100% !important;
+    background-repeat: no-repeat; }
+
+  .overlayCModal {
+    top: 330px;
+    left: 35% !important; }
+
+  .modal-content {
+    margin-top: 3em !important; }
+
+  .howtoplaymodal {
+    margin-top: 1em !important; } }
 /*///////MEDIA FOR IPAD 767PX////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -751,7 +752,7 @@ span.badge {
   .blink_me {
     color: yellow;
     font-weight: bolder;
-    left: 15% !important;
+    left: 12% !important;
     font-size: 9px; }
 
   label {
@@ -767,7 +768,7 @@ span.badge {
     background-repeat: no-repeat;
     background-size: 91%;
     max-width: 102%;
-    top: 200px !important;
+    top: 150px !important;
     left: 2em !important; }
 
   h1 {
