@@ -445,7 +445,7 @@ body {
 
 .modal-open .modal {
   overflow: hidden !important;
-  height: 800px;
+  height: 530px;
   padding-right: 0 !important;
   background: rgba(20, 254, 192, 0.76);
   border-radius: 5%; }
@@ -629,7 +629,7 @@ span.badge {
     margin-left: -3.3em !important; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
-    margin-left: -2.5rem !important;
+    margin-left: -1.7rem !important;
     font-size: 1em !important; }
 
   .overlay {
@@ -732,11 +732,11 @@ span.badge {
       padding-left: 1em !important; }
     .overlayCModal fieldset {
       height: 245px; } }
-@media only screen and (min-device-width: 1500px) and (max-device-width: 1800px) {
+@media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-top: 1em !important;
     margin-left: -2.3em !important;
-    font-size: 1.4em !important; }
+    font-size: 1.38em !important; }
 
   .overlay {
     background-size: 92%;
@@ -744,7 +744,7 @@ span.badge {
     width: 100% !important;
     background-repeat: no-repeat;
     top: 2em !important;
-    left: 1em !important; }
+    left: .7em !important; }
 
   .overlayCModal {
     top: 330px;
@@ -816,6 +816,12 @@ span.badge {
 
   .right-column {
     margin-left: -.3em; } }
+@media only screen and (min-device-width: 1000px) and (orientation: portrait) {
+  .jumbotron {
+    height: 100vh; } }
+@media only screen and (min-device-width: 1500px) {
+  .overlayCModal label {
+    font-size: 1.4em !important; } }
 @media only screen and (min-device-width: 1279px) {
   .overlayCModal label {
     font-size: 1em !important;
@@ -828,19 +834,34 @@ span.badge {
     left: 39%; }
 
   .mobileDevices {
-    margin-top: 8vh !important; } }
-@media only screen and (min-device-width: 1000px) and (orientation: portrait) {
-  .jumbotron {
-    height: 100vh; } }
-@media only screen and (min-device-width: 1020px) and (max-device-width: 1499px) {
+    margin-top: 8vh !important; }
+
+  .blink_me {
+    font-size: 1.37em !important;
+    margin-left: -3em !important; }
+
+  .overlay {
+    left: 0em !important; } }
+@media only screen and (min-device-width: 1020px) and (max-device-width: 1500px) {
   .overlayCModal {
     left: 37% !important; }
+    .overlayCModal label {
+      font-size: 1.0em !important; }
 
   .overlay {
     left: 5.1em !important; } }
 @media only screen and (min-device-width: 1500px) {
-  .overlayCModal label {
-    font-size: 1.5em !important; } }
+  .blink_me {
+    margin-left: -2.1em !important; }
+
+  .overlay {
+    left: .5em !important; } }
+@media only screen and (min-device-width: 1280px) {
+  .blink_me {
+    margin-left: -3.2em !important; } }
+@media only screen and (min-device-width: 1440px) {
+  .blink_me {
+    margin-left: -2.65em !important; } }
 /*///////MEDIA FOR PHONES+IPAD-PRO LANDSCAPE////////*/
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
   body {
@@ -1631,5 +1652,8 @@ progress::-webkit-progress-value {
   100% {
     background-position: -100px 0px, 0 0, 0 0; } }
 /* Prefix-free was creating issues with the animation */
+@media screen and (min-width: 1500px) {
+  .blink_me {
+    margin-left: -2em !important; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -278,7 +278,6 @@ require('./grid');
                 themesong.currentTime = 0;
                 themesong.play();
               }
-
             },1000);
 
           }
