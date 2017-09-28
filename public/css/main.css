@@ -361,6 +361,10 @@ nav {
     .jumbotron h1 {
       font-size: 2em !important; } }
 
+@media only screen and (min-device-width: 800px) {
+  .no-gutters {
+    overflow-y: hidden !important; } }
+
 #progressbar {
   position: absolute;
   z-index: 10;
@@ -903,8 +907,8 @@ span.badge {
 
   .signinjumbo, .jumbotron {
     padding: 1.3em !important;
-    padding-left: 12% !important;
-    padding-right: 12% !important; }
+    padding-left: 11% !important;
+    padding-right: 11% !important; }
 
   * {
     padding-right: 0 !important;
