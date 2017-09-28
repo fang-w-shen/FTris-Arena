@@ -896,8 +896,15 @@ span.badge {
       width: 4px !important;
       height: 4px !important; }
 
-  .signinjumbo {
-    padding: 1.3em !important; }
+  p.leads {
+    position: relative;
+    top: -14em;
+    left: 11em; }
+
+  .signinjumbo, .jumbotron {
+    padding: 1.3em !important;
+    padding-left: 12% !important;
+    padding-right: 12% !important; }
 
   * {
     padding-right: 0 !important;
@@ -1654,6 +1661,18 @@ progress::-webkit-progress-value {
 /* Prefix-free was creating issues with the animation */
 @media screen and (min-width: 1500px) {
   .blink_me {
-    margin-left: -2em !important; } }
+    margin-left: -2em !important; }
+
+  .right-column {
+    margin-left: -.8em !important;
+    margin-top: -0.4em !important; }
+
+  #tetris2 {
+    position: absolute !important;
+    margin-top: 15.5em !important;
+    margin-left: 2.6em !important; }
+
+  #next {
+    margin-bottom: 0em !important; } }
 
 /*# sourceMappingURL=main.css.map */
