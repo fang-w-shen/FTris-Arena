@@ -661,7 +661,7 @@ span.badge {
     margin-top: -.5em; }
 
   #base {
-    height: 750px !important; }
+    height: 685px !important; }
 
   .gbnin {
     margin-top: 8.5em !important; }
@@ -682,6 +682,10 @@ span.badge {
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .bigone {
     height: 100vh !important; }
+
+  .directions {
+    padding-right: 11em !important;
+    padding-left: 7.5em !important; }
 
   .register {
     margin-top: -1em; } }
@@ -892,7 +896,8 @@ span.badge {
     left: 4.1em !important; }
 
   .mobileDevices {
-    margin-top: 0em !important; }
+    margin-top: 0em !important;
+    left: 28em !important; }
 
   .containermetal2 {
     top: 77vh !important; } }
@@ -907,7 +912,10 @@ span.badge {
     margin-left: -3em !important; }
 
   .leads {
-    top: 2.4em; } }
+    top: 2.4em; }
+
+  .frame1 {
+    left: -9em !important; } }
 @media only screen and (min-device-width: 1440px) {
   .blink_me {
     margin-left: -2.65em !important; } }
