@@ -705,7 +705,10 @@ span.badge {
     right: 8em !important; }
 
   .screenbase {
-    width: 408px !important; } }
+    width: 408px !important; }
+
+  .overlay {
+    top: 3em !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
     margin-left: -2.3rem !important;
