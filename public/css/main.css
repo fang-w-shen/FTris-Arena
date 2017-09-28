@@ -354,7 +354,6 @@ nav {
   background: black;
   padding-left: 4% !important;
   padding-right: 20% !important;
-  padding-bottom: 20% !important;
   color: wheat;
   margin-bottom: 0 !important; }
   .jumbotron .bigone {
@@ -679,6 +678,12 @@ span.badge {
 
   .overlayCModal {
     width: 29% !important; } }
+@media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
+  .bigone {
+    height: 100vh !important; }
+
+  .register {
+    margin-top: -1em; } }
 @media only screen and (min-device-width: 1240px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: -2em !important;
@@ -869,7 +874,10 @@ span.badge {
     margin-left: -3em !important; }
 
   .overlay {
-    left: 0em !important; } }
+    left: 0em !important; }
+
+  .frame {
+    top: -29px !important; } }
 @media only screen and (min-device-width: 1020px) and (max-device-width: 1499px) {
   .overlayCModal {
     left: 36% !important; }
@@ -892,7 +900,10 @@ span.badge {
     left: .5em !important; } }
 @media only screen and (min-device-width: 1280px) {
   .blink_me {
-    margin-left: -3.2em !important; } }
+    margin-left: -3em !important; }
+
+  .leads {
+    top: 6em; } }
 @media only screen and (min-device-width: 1440px) {
   .blink_me {
     margin-left: -2.65em !important; } }
@@ -1649,13 +1660,14 @@ input {
 
 .frame2 {
   position: absolute;
-  left: 58vw !important;
-  top: 7.5vh !important; }
+  left: 58.5vw !important;
+  top: 42.5vh !important; }
 
 .frame3 {
+  height: 200px;
   position: absolute;
-  left: 58vw !important;
-  bottom: 4vw !important; }
+  left: 58.5vw !important;
+  top: 1vw !important; }
 
 .l {
   z-index: 99; }
