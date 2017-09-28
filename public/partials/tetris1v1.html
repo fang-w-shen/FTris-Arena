@@ -163,19 +163,19 @@
         </div>
 
     </p>
-</div>
-<div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="z-index:0;float:right;padding-top:0">
-  <h1 class="display-3" style="font-size:4em">Create Game!</h1>
+    </div>
+    <div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="z-index:0;float:right;">
+      <h1 class="display-3" style="font-size:4em">Create Game!</h1>
 
-  <hr class="my-4" style="background:white">
-  Lobby Name:
-  <input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>
-  Password:
-  <input type="password" name="NAME" ng-model="gameCredentials.password">
-  <p class="lead leads">
-    <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
-</p>
-</div>
+      <hr class="my-4" style="background:white">
+      Lobby Name:
+      <input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>
+      Password:
+      <input type="password" name="NAME" ng-model="gameCredentials.password">
+      <p class="lead leads">
+        <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
+    </p>
+    </div>
 
 </div>
 </div>
