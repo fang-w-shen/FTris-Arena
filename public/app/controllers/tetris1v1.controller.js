@@ -43,7 +43,6 @@
               values.push(item);
             }
           });
-          console.log("whats the snap", values);
 
           $scope.board = values;
           if(!$scope.$$phase) {
@@ -255,10 +254,10 @@
       //////////////////////////////////////////////////////////////////////
       function joinGame(userId) {
         let gameCredentials={};
-        FirebaseFactory.getGameBoards(userId).then((item)=>{
+        FirebaseFactory.getGameBoard(userId).then((item)=>{
           let password = prompt("Password");
 
-          if (password === item[Object.keys(item)[0]].password) {
+          if (password === item.password) {
 
             $scope.gameMade = true;
 

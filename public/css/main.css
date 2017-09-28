@@ -1480,9 +1480,15 @@ input {
   .right-column i.close {
     color: white; }
 
+@media only screen and (max-width: 737px) and (orientation: landscape) {
+  .body::after {
+    content: "Landscape Mode on IPhones Is Currently Unavailable. Revert Back To Portrait To Continue..."; }
+
+  #ngview {
+    display: none; } }
 .frame {
   margin-top: 2.5% !important;
-  background-color: #ddc;
+  background-color: beige;
   border: solid 5vmin #eee;
   border-bottom-color: rgba(150, 104, 53, 0.79);
   border-left-color: rgba(150, 104, 53, 0.79);
@@ -1499,7 +1505,10 @@ input {
   position: relative;
   left: -8em;
   text-align: center; }
-  @media screen and (max-width: 1115px) {
+  @media screen and (max-width: 1025px) and (orientation: landscape) {
+    .frame {
+      display: none; } }
+  @media only screen and (orientation: portrait) {
     .frame {
       display: none; } }
   @media screen and (min-width: 1300px) {

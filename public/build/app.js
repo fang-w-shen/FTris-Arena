@@ -525,7 +525,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               values.push(item);
             }
           });
-          console.log("whats the snap", values);
 
           $scope.board = values;
           if(!$scope.$$phase) {
@@ -737,10 +736,10 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
       //////////////////////////////////////////////////////////////////////
       function joinGame(userId) {
         let gameCredentials={};
-        FirebaseFactory.getGameBoards(userId).then((item)=>{
+        FirebaseFactory.getGameBoard(userId).then((item)=>{
           let password = prompt("Password");
 
-          if (password === item[Object.keys(item)[0]].password) {
+          if (password === item.password) {
 
             $scope.gameMade = true;
 
@@ -930,6 +929,20 @@ angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
           });
         });
       },
+      getGameBoard: function(userId){
+        let boards;
+        return $q( (resolve, reject) => {
+          $http.get(`https://tetris-arena.firebaseio.com/games.json?equalTo="${userId}"&orderBy="user"`)
+          .then((itemObject) => {
+            boards = (itemObject.data);
+
+            resolve(boards);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        });
+      }
     };
   };
 
