@@ -355,7 +355,8 @@ nav {
   padding-left: 4% !important;
   padding-right: 20% !important;
   color: wheat;
-  margin-bottom: 0 !important; }
+  margin-bottom: 0 !important;
+  padding-top: 0 !important; }
   .jumbotron .bigone {
     padding-right: 0 !important; }
   @media only screen and (max-device-width: 700px) {
@@ -697,7 +698,10 @@ span.badge {
     left: 41% !important; }
 
   .leads {
-    right: 8em !important; } }
+    right: 8em !important; }
+
+  .screenbase {
+    width: 408px !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
     margin-left: -2.3rem !important;
@@ -898,12 +902,12 @@ span.badge {
 
   .overlay {
     left: .5em !important; } }
-@media only screen and (min-device-width: 1280px) {
+@media only screen and (min-device-width: 1279px) {
   .blink_me {
     margin-left: -3em !important; }
 
   .leads {
-    top: 6em; } }
+    top: 2.4em; } }
 @media only screen and (min-device-width: 1440px) {
   .blink_me {
     margin-left: -2.65em !important; } }
