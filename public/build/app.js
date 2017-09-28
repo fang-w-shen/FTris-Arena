@@ -935,7 +935,6 @@ angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
           $http.get(`https://tetris-arena.firebaseio.com/games.json?equalTo="${userId}"&orderBy="user"`)
           .then((itemObject) => {
             boards = (itemObject.data);
-
             resolve(boards);
           })
           .catch((error) => {
@@ -2665,7 +2664,7 @@ require('./grid');
     endGame: function () {
       this.clearInterval();
       if (score !== 0) {
-        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+        Materialize.toast('Game Over<br> Your score was...'+' '+Number(score)*1000, 4000);
         gameover.play();
       }
       this.gameOver = true;
@@ -3220,7 +3219,7 @@ require('./grid');
       themesong.currentTime = 0;
       this.clearInterval();
       if (score !== 0) {
-        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+        Materialize.toast('Game Over<br> Your score was...'+' '+Number(score)*1000, 4000);
         gameover.play();
       }
       this.gametimeout = false;

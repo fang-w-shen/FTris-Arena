@@ -139,18 +139,18 @@
         <a><button class="btn btn-lg"  ng-click="logInGoogle()" role="button">Google Sign In</button></a>
     </p>
 </div>
-
-
 </div>
+
+
 <div class="row no-gutters" style="height:100%;overflow-y: scroll; overflow-x: hidden !important;">
-    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-5 bigone" style="z-index:9;">
+    <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 col-md-5 bigone directions" style="z-index:9;">
       <h1 class="display-3" style="margin:0;font-size:4em">Directions</h1>
       <hr class="my-4" style="background:white">
 
       <p>Make A Game Session or Join One!</p>
   </div>
 
-  <div class="col-md-7 row col-12">
+  <div class="col-md-7 row col-12" style="height:100vh">
     <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12" style="z-index:9;float:right">
       <h1 class="display-3" style="margin:0;font-size:4em">Game Lobby</h1>
       <hr class="my-4" style="background:white">
@@ -167,12 +167,12 @@
 <div ng-if="isLoggedIn && !gameMade" class="jumbotron col-12" style="z-index:0;float:right;padding-top:0">
   <h1 class="display-3" style="font-size:4em">Create Game!</h1>
 
-<hr class="my-4" style="background:white">
-Lobby Name:
-<input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>
-Password:
-<input type="password" name="NAME" ng-model="gameCredentials.password">
-<p class="lead leads">
+  <hr class="my-4" style="background:white">
+  Lobby Name:
+  <input type="text" id="email" name="NAME" ng-model="gameCredentials.name"><br>
+  Password:
+  <input type="password" name="NAME" ng-model="gameCredentials.password">
+  <p class="lead leads">
     <button class="btn btn-lg" ng-click="initializeGame(gameCredentials)" role="button">Create!</button>
 </p>
 </div>
@@ -181,8 +181,5 @@ Password:
 </div>
 
 
-
-
-</div>
 
 

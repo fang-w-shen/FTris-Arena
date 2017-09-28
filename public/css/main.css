@@ -352,14 +352,23 @@ nav {
 .jumbotron {
   border-radius: 0 !important;
   background: black;
-  padding-left: 20% !important;
+  padding-left: 4% !important;
   padding-right: 20% !important;
   padding-bottom: 20% !important;
   color: wheat;
   margin-bottom: 0 !important; }
+  .jumbotron .bigone {
+    padding-right: 0 !important; }
   @media only screen and (max-device-width: 700px) {
     .jumbotron h1 {
       font-size: 2em !important; } }
+
+.registerjumbo, .signinjumbo {
+  padding-left: 16% !important;
+  padding-right: 16% !important; }
+
+.directions {
+  padding-right: 7em !important; }
 
 @media only screen and (min-device-width: 800px) {
   .no-gutters {
@@ -631,6 +640,11 @@ span.badge {
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .blink_me {
     margin-left: -3.3em !important; } }
+@media only screen and (min-device-width: 1030px) {
+  .leads {
+    position: absolute;
+    top: 3em;
+    right: 10em; } }
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) {
   .blink_me {
     margin-left: -1.7rem !important;
@@ -660,7 +674,8 @@ span.badge {
     margin-top: 1.7em !important; }
 
   .right-column {
-    margin-top: -3em !important; }
+    margin-top: -3em !important;
+    margin-left: -.5em !important; }
 
   .overlayCModal {
     width: 29% !important; } }
@@ -670,10 +685,20 @@ span.badge {
 
   .register {
     margin-top: -1em; } }
-@media only screen and (min-device-width: 1279px) and (max-device-width: 1399px) {
+@media only screen and (min-device-width: 1240px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: -2em !important;
-    font-size: 1.2em !important; } }
+    font-size: 1.2em !important; }
+
+  #tetris2 {
+    margin-left: 1.5em;
+    margin-top: 3.3em !important; }
+
+  #progressbar {
+    left: 41% !important; }
+
+  .leads {
+    right: 8em !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
     margin-left: -2.3rem !important;
@@ -846,14 +871,20 @@ span.badge {
 
   .overlay {
     left: 0em !important; } }
-@media only screen and (min-device-width: 1020px) and (max-device-width: 1500px) {
+@media only screen and (min-device-width: 1020px) and (max-device-width: 1499px) {
   .overlayCModal {
-    left: 37% !important; }
+    left: 36% !important; }
     .overlayCModal label {
       font-size: 1.0em !important; }
 
   .overlay {
-    left: 5.1em !important; } }
+    left: 4.1em !important; }
+
+  .mobileDevices {
+    margin-top: 0em !important; }
+
+  .containermetal2 {
+    top: 77vh !important; } }
 @media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-left: -2.1em !important; }
@@ -1207,6 +1238,9 @@ span.badge {
     left: 8.5px !important; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
+  p.leads {
+    left: 17rem; }
+
   .movie {
     margin-left: -5.8em !important; }
 
@@ -1295,6 +1329,9 @@ span.badge {
 @media only screen and (min-device-width: 411px) and (max-device-width: 412px) {
   #tetris2 {
     margin-left: .7em !important; } }
+@media only screen and (min-device-width: 412px) and (max-device-width: 415px) {
+  p.leads {
+    left: 19rem; } }
 @media only screen and (min-device-width: 412px) and (max-device-width: 767px) {
   #tetris2 {
     margin-left: .7em !important; }
@@ -1587,7 +1624,7 @@ input {
       display: none; } }
   @media screen and (min-width: 1300px) {
     .frame {
-      width: 388px; } }
+      width: 371px; } }
   .frame table, .frame tbody {
     border: none !important; }
   .frame .modal-content {

@@ -492,7 +492,7 @@ require('./grid');
       themesong.currentTime = 0;
       this.clearInterval();
       if (score !== 0) {
-        Materialize.toast('Game Over<br> Your score was...'+' '+score, 4000);
+        Materialize.toast('Game Over<br> Your score was...'+' '+Number(score)*1000, 4000);
         gameover.play();
       }
       this.gametimeout = false;

@@ -71,7 +71,6 @@
           $http.get(`https://tetris-arena.firebaseio.com/games.json?equalTo="${userId}"&orderBy="user"`)
           .then((itemObject) => {
             boards = (itemObject.data);
-
             resolve(boards);
           })
           .catch((error) => {
