@@ -735,7 +735,7 @@ span.badge {
 @media only screen and (min-device-width: 1500px) and (max-device-width: 1800px) {
   .blink_me {
     margin-top: 1em !important;
-    margin-left: -2em !important;
+    margin-left: -2.3em !important;
     font-size: 1.4em !important; }
 
   .overlay {
@@ -832,6 +832,12 @@ span.badge {
 @media only screen and (min-device-width: 1000px) and (orientation: portrait) {
   .jumbotron {
     height: 100vh; } }
+@media only screen and (min-device-width: 1020px) and (max-device-width: 1499px) {
+  .overlayCModal {
+    left: 37% !important; }
+
+  .overlay {
+    left: 5.1em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.5em !important; } }
