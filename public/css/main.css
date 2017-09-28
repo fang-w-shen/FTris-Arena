@@ -787,7 +787,12 @@ span.badge {
 
   .howtoclose {
     position: relative !important;
-    right: -61px !important; } }
+    right: -61px !important; }
+
+  .leads {
+    position: absolute;
+    top: 6em;
+    right: 10em; } }
 /*///////MEDIA FOR IPAD 767PX PORTRAIT FORREAL////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
