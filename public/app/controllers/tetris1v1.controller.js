@@ -257,7 +257,7 @@
         FirebaseFactory.getGameBoard(userId).then((item)=>{
           let password = prompt("Password");
 
-          if (password === item.password) {
+          if (password === Object.values(item)[0].password) {
 
             $scope.gameMade = true;
 
