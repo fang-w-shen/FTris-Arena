@@ -705,10 +705,7 @@ span.badge {
     right: 8em !important; }
 
   .screenbase {
-    width: 408px !important; }
-
-  .overlay {
-    top: 3em !important; } }
+    width: 408px !important; } }
 @media only screen and (min-device-width: 1400px) and (max-device-width: 1499px) {
   .blink_me {
     margin-left: -2.3rem !important;
@@ -896,11 +893,12 @@ span.badge {
       font-size: 1.0em !important; }
 
   .overlay {
-    left: 4.1em !important; }
+    left: 3.5em !important;
+    top: 3em !important; }
 
   .mobileDevices {
     margin-top: 0em !important;
-    left: 28em !important; }
+    left: 29em !important; }
 
   .containermetal2 {
     top: 77vh !important; } }
@@ -909,7 +907,13 @@ span.badge {
     margin-left: -2.1em !important; }
 
   .overlay {
-    left: .5em !important; } }
+    left: .5em !important; }
+
+  .mobileDevices {
+    margin-top: 2vh !important; }
+
+  .frame {
+    width: 390px; } }
 @media only screen and (min-device-width: 1279px) {
   .blink_me {
     margin-left: -3em !important; }
