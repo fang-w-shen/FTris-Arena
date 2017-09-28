@@ -679,12 +679,6 @@ span.badge {
 
   .overlayCModal {
     width: 29% !important; } }
-@media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
-  .bigone {
-    height: 100vh !important; }
-
-  .register {
-    margin-top: -1em; } }
 @media only screen and (min-device-width: 1240px) and (max-device-width: 1399px) {
   .blink_me {
     margin-left: -2em !important;
