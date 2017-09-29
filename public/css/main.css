@@ -394,7 +394,8 @@ nav {
   padding-right: .5em;
   height: 40px;
   margin-bottom: .4em;
-  margin-left: .9em;
+  margin-left: .3em;
+  margin-right: 0.6em;
   max-width: 129px;
   background-color: #3ca3d6; }
   .waves-effect .fa-trophy {
@@ -1694,7 +1695,8 @@ input {
     left: -2vmin;
     position: absolute;
     right: -2vmin;
-    top: -2vmin; }
+    top: -2vmin;
+    z-index: -1; }
   .frame:after {
     border-radius: 2px;
     bottom: -2.5vmin;
@@ -1703,7 +1705,8 @@ input {
     left: -2.5vmin;
     position: absolute;
     right: -2.5vmin;
-    top: -2.5vmin; }
+    top: -2.5vmin;
+    z-index: -1; }
 
 .frame2 {
   position: absolute;
@@ -1728,6 +1731,15 @@ input {
 
 [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after {
   border: 2px solid rgba(0, 0, 0, 0.85); }
+
+.switch label .lever {
+  background-color: #e20f0f; }
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #38ff44; }
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #021d1a; }
 
 progress {
   height: 14px;
@@ -1778,5 +1790,9 @@ progress::-webkit-progress-value {
 
 [class*="col-md-5"] {
   margin-bottom: -99999px; }
+
+@media only screen and (min-device-width: 766px) and (max-device-width: 780px) and (orientation: portrait) {
+  .creategame {
+    height: 100vh !important; } }
 
 /*# sourceMappingURL=main.css.map */
