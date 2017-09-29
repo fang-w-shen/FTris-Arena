@@ -389,6 +389,21 @@ nav {
 .pauseGame {
   margin-top: 6em; }
 
+.waves-effect {
+  padding-left: .5em;
+  padding-right: .5em;
+  height: 40px;
+  margin-bottom: .4em;
+  margin-left: .9em;
+  background-color: #3ca3d6; }
+  .waves-effect .fa-trophy {
+    margin-top: -.3em;
+    margin-bottom: -1.5em;
+    font-size: 1em !important;
+    text-align: left; }
+  .waves-effect input {
+    font-size: 0.8em; }
+
 .right-column i.close {
   color: white;
   opacity: .9;
@@ -596,7 +611,7 @@ span.badge {
     top: 56vh; }
   100% {
     top: -58vh; } }
-@media only screen and (min-device-width: 767px) {
+@media only screen and (min-device-width: 768px) {
   @keyframes credits {
     0% {
       top: 69vh; }
@@ -946,8 +961,8 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   .waves-effect {
-    width: 108px !important;
-    max-width: 108px !important; }
+    width: 107px !important;
+    max-width: 107px !important; }
 
   #progressbar {
     top: 14%;
@@ -1753,21 +1768,6 @@ progress::-webkit-progress-value {
 
   #next {
     margin-bottom: 0em !important; } }
-.waves-effect {
-  padding-left: .5em;
-  padding-right: .5em;
-  height: 40px;
-  margin-bottom: .4em;
-  margin-left: .9em;
-  background-color: #3ca3d6; }
-  .waves-effect .fa-trophy {
-    margin-top: -.3em;
-    margin-bottom: -1.5em;
-    font-size: 1em !important;
-    text-align: left; }
-  .waves-effect input {
-    font-size: 0.8em; }
-
 .col-md-5 {
   overflow: hidden; }
 
