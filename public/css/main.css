@@ -367,8 +367,9 @@ nav {
   padding-left: 16% !important;
   padding-right: 16% !important; }
 
-.directions {
-  padding-right: 7em !important; }
+.gamelobby {
+  padding-right: 0 !important;
+  padding-left: 9% !important; }
 
 @media only screen and (min-device-width: 800px) {
   .no-gutters {
@@ -600,7 +601,9 @@ span.badge {
     0% {
       top: 69vh; }
     100% {
-      top: -70vh; } } }
+      top: -70vh; } }
+  .waves-effect {
+    max-width: 125.5px; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   img {
@@ -1752,5 +1755,20 @@ progress::-webkit-progress-value {
 
   #next {
     margin-bottom: 0em !important; } }
+.waves-effect {
+  padding-left: .5em;
+  padding-right: .5em;
+  height: 40px;
+  max-width: 105.5px;
+  margin-bottom: .4em;
+  margin-left: .9em;
+  background-color: #3ca3d6; }
+  .waves-effect .fa-trophy {
+    margin-top: -.3em;
+    margin-bottom: -1.5em;
+    font-size: 1em !important;
+    text-align: left; }
+  .waves-effect input {
+    font-size: 0.8em; }
 
 /*# sourceMappingURL=main.css.map */

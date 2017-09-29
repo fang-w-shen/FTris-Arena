@@ -735,9 +735,14 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     }
       //////////////////////////////////////////////////////////////////////
       function joinGame(userId) {
+        $('.waves-effect input').val('Please wait ...');
+        $('.waves-effect')
+        .attr('disabled',true);
+
         let gameCredentials={};
         FirebaseFactory.getGameBoard(userId).then((item)=>{
           let password = prompt("Password");
+
 
           if (password === Object.values(item)[0].password) {
 
@@ -765,9 +770,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 clearInterval(downloadTimer);
                 $('#progressbar').hide();
                 themesong.currentTime = 0;
-               themesong.play();
-               $scope.bindFullScreenKey();
-               tetris.init();
+                themesong.play();
+                $scope.bindFullScreenKey();
+                tetris.init();
               }
 
             },1000);
@@ -782,7 +787,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
 
-            $(document).on("keyup",(e)=>{
+           $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
                   $(document).off("keyup");
                   $(document).off("keydown");
@@ -791,21 +796,21 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                 }
               });
 
-            $('#menu-select').on("click",()=>{
-              $(document).off("keyup");
-              $(document).off("keydown");
-              tetris.endGame();
-              $route.reload();
-            });
+           $('#menu-select').on("click",()=>{
+            $(document).off("keyup");
+            $(document).off("keydown");
+            tetris.endGame();
+            $route.reload();
+          });
 
 
-            $("#onoff").on("click",()=>{
-              tetris.endGame();
-              $location.url("/home");
-              $route.reload();
-            });
-            $(document).on("keyup",(e)=>{
-              switch(e.keyCode) {
+           $("#onoff").on("click",()=>{
+            tetris.endGame();
+            $location.url("/home");
+            $route.reload();
+          });
+           $(document).on("keyup",(e)=>{
+            switch(e.keyCode) {
                   case 27: /// ESC KEY
                   tetris.endGame();
                   $(window).off("keydown");
@@ -818,17 +823,23 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                   }
 
                 });
-          } else {
-            alert("Wrong Password!");
-          }
-        });
-}
+         } else {
+          alert("Wrong Password!");
+          setTimeout(()=>{
+           $('.waves-effect').attr('disabled',false);
+           $('.waves-effect input').val('Join Game');
 
-};
+         },10);
+        }
 
-Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
-angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
-})();
+      });
+      }
+
+    };
+
+    Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+    angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
+  })();
 
 },{"../scoregrid":10,"../tetris":13}],6:[function(require,module,exports){
 (function() {
