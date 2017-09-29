@@ -603,8 +603,8 @@ span.badge {
     100% {
       top: -70vh; } }
   .waves-effect {
-    width: 127.5px !important;
-    max-width: 127.5px !important; } }
+    width: 129px !important;
+    max-width: 129px !important; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .display-3 {
@@ -1757,7 +1757,6 @@ progress::-webkit-progress-value {
   padding-left: .5em;
   padding-right: .5em;
   height: 40px;
-  max-width: 127px;
   margin-bottom: .4em;
   margin-left: .9em;
   background-color: #3ca3d6; }
