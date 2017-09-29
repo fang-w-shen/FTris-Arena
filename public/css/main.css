@@ -606,6 +606,9 @@ span.badge {
     max-width: 125.5px; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .display-3 {
+    font-size: 3rem; }
+
   img {
     margin-left: 17%; }
 
@@ -683,12 +686,9 @@ span.badge {
   .overlayCModal {
     width: 29% !important; } }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
-  .bigone {
-    height: 100vh !important; }
-
-  .directions {
+  .directions, .creategame {
     padding-right: 6em !important;
-    padding-left: 7.5em !important; }
+    padding-left: 1.5em !important; }
 
   .register {
     margin-top: -1em; } }
@@ -829,11 +829,7 @@ span.badge {
     margin-top: 3.4em !important; }
 
   .col-md-7 {
-    height: 100vh !important; }
-
-  .directions {
-    padding-right: 5em !important;
-    padding-left: 5.5em !important; } }
+    height: 100vh !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   #progressbar {
@@ -867,9 +863,6 @@ span.badge {
 
   .right-column {
     margin-left: -.3em; } }
-@media only screen and (min-device-width: 1000px) and (orientation: portrait) {
-  .jumbotron {
-    height: 100vh; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.4em !important; } }
