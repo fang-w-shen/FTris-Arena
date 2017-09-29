@@ -619,8 +619,8 @@ span.badge {
     100% {
       top: -70vh; } }
   .waves-effect {
-    width: 129px !important;
-    max-width: 129px !important; } }
+    width: 134px !important;
+    max-width: 134px !important; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .display-3 {
@@ -704,8 +704,8 @@ span.badge {
     width: 29% !important; }
 
   .waves-effect {
-    width: 130px !important;
-    max-width: 130px !important; } }
+    width: 131px !important;
+    max-width: 131px !important; } }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .directions, .creategame {
     padding-right: 6em !important;
