@@ -390,8 +390,8 @@ nav {
   margin-top: 6em; }
 
 .waves-effect {
-  padding-left: .1em;
-  padding-right: .1em;
+  padding-left: .5em;
+  padding-right: .5em;
   height: 40px;
   margin-bottom: .4em;
   margin-left: .9em;
@@ -619,8 +619,8 @@ span.badge {
     100% {
       top: -70vh; } }
   .waves-effect {
-    width: 134px !important;
-    max-width: 134px !important; } }
+    width: 129px !important;
+    max-width: 129px !important; } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .display-3 {
@@ -704,8 +704,8 @@ span.badge {
     width: 29% !important; }
 
   .waves-effect {
-    width: 131px !important;
-    max-width: 131px !important; } }
+    width: 134px !important;
+    max-width: 134px !important; } }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .directions, .creategame {
     padding-right: 6em !important;
@@ -966,8 +966,8 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   .waves-effect {
-    width: 108px !important;
-    max-width: 108px !important; }
+    width: 111px !important;
+    max-width: 111px !important; }
 
   #progressbar {
     top: 14%;
