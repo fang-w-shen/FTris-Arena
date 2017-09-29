@@ -684,7 +684,7 @@ span.badge {
     height: 100vh !important; }
 
   .directions {
-    padding-right: 11em !important;
+    padding-right: 6em !important;
     padding-left: 7.5em !important; }
 
   .register {
@@ -823,7 +823,14 @@ span.badge {
 
   #tetris2 {
     margin-left: 1.5em;
-    margin-top: 3.4em !important; } }
+    margin-top: 3.4em !important; }
+
+  .col-md-7 {
+    height: 100vh !important; }
+
+  .directions {
+    padding-right: 5em !important;
+    padding-left: 5.5em !important; } }
 /*IPAD ORIENTATION LANDSCAPE FORREAL*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   #progressbar {
@@ -913,7 +920,7 @@ span.badge {
     margin-top: 2vh !important; }
 
   .frame {
-    width: 390px; } }
+    width: 400px; } }
 @media only screen and (min-device-width: 1279px) {
   .blink_me {
     margin-left: -3em !important; }
