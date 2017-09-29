@@ -943,7 +943,7 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   .waves-effect {
-    max-width: 105.5px !important; }
+    max-width: 106px !important; }
 
   #progressbar {
     top: 14%;
@@ -1753,7 +1753,7 @@ progress::-webkit-progress-value {
   padding-left: .5em;
   padding-right: .5em;
   height: 40px;
-  max-width: 127px;
+  max-width: 128px;
   margin-bottom: .4em;
   margin-left: .9em;
   background-color: #3ca3d6; }
