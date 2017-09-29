@@ -395,6 +395,7 @@ nav {
   height: 40px;
   margin-bottom: .4em;
   margin-left: .9em;
+  max-width: 129px;
   background-color: #3ca3d6; }
   .waves-effect .fa-trophy {
     margin-top: -.3em;
@@ -700,7 +701,11 @@ span.badge {
     margin-left: -.5em !important; }
 
   .overlayCModal {
-    width: 29% !important; } }
+    width: 29% !important; }
+
+  .waves-effect {
+    width: 130px !important;
+    max-width: 130px !important; } }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .directions, .creategame {
     padding-right: 6em !important;
@@ -961,8 +966,8 @@ span.badge {
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
   .waves-effect {
-    width: 107px !important;
-    max-width: 107px !important; }
+    width: 108px !important;
+    max-width: 108px !important; }
 
   #progressbar {
     top: 14%;
