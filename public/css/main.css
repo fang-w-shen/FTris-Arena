@@ -601,9 +601,7 @@ span.badge {
     0% {
       top: 69vh; }
     100% {
-      top: -70vh; } }
-  .waves-effect {
-    max-width: 125.5px; } }
+      top: -70vh; } } }
 /*///////MEDIA FOR IPAD PRO////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .display-3 {
@@ -944,6 +942,9 @@ span.badge {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
+  .waves-effect {
+    max-width: 105.5px !important; }
+
   #progressbar {
     top: 14%;
     left: 11.5%;
