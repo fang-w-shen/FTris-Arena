@@ -369,7 +369,7 @@ nav {
 
 .gamelobby {
   padding-right: 0 !important;
-  padding-left: 9% !important; }
+  padding-left: 8% !important; }
 
 @media only screen and (min-device-width: 800px) {
   .no-gutters {
@@ -935,7 +935,7 @@ span.badge {
     left: .5em !important; }
 
   .mobileDevices {
-    margin-top: 2vh !important; }
+    margin-top: 3vh !important; }
 
   .frame {
     width: 400px; } }
@@ -944,7 +944,7 @@ span.badge {
     margin-left: -3em !important; }
 
   .leads {
-    top: 2.4em; }
+    top: 2.8em; }
 
   .frame1 {
     left: -9em !important; } }
@@ -1710,11 +1710,12 @@ input {
 
 .frame2 {
   position: absolute;
+  height: 220px;
   left: 58.5vw !important;
   top: 42.5vh !important; }
 
 .frame3 {
-  height: 200px;
+  height: 220px;
   position: absolute;
   left: 58.5vw !important;
   top: 1vw !important; }
@@ -1793,6 +1794,17 @@ progress::-webkit-progress-value {
 
 @media only screen and (min-device-width: 766px) and (max-device-width: 780px) and (orientation: portrait) {
   .creategame {
-    height: 100vh !important; } }
+    height: 90vh !important;
+    overflow-y: hidden !important; }
+
+  .signinjumbo {
+    height: 100vh !important; }
+
+  .gamelobby {
+    padding-left: 4% !important; }
+
+  .directions, .creategame {
+    padding-right: 3em !important;
+    padding-left: 3.5em !important; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -166,7 +166,12 @@
   function OShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[0];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[0];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -189,7 +194,12 @@
   function TShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[1];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[1];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -249,7 +259,12 @@
   function SShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[2];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[2];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -308,7 +323,12 @@
   function ZShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[3];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[3];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -367,7 +387,12 @@
   function LShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[4];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[4];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -426,7 +451,12 @@
   function JShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[5];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[5];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -485,7 +515,12 @@
   function IShape( grid, collisionState) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[6];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[6];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -545,7 +580,12 @@
   function FShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[7];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[7];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });

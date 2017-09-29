@@ -4,6 +4,7 @@
   require('../scoregrid');
   var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     themesong.currentTime = 0;
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
@@ -58,7 +59,7 @@
           $(document).on("keyup",(e)=>{
             if (e.keyCode ===69) {
               if(!$scope.fullScreen){
-                    $('.mobileDevices').css({height:'0vh'});
+                $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
@@ -75,7 +76,52 @@
         bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
+        $('.lever').on("click",(e)=>{
+          let checkstate = e.target.parentNode.querySelector("input[type=checkbox]").checked;
 
+          if (e.target.id==='difficulty') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            }
+
+          }
+          else if (e.target.id==='blockcolor') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            }
+
+          }
+          else if (e.target.id==='music') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+              document.querySelectorAll("audio")[0].muted = true;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+              document.querySelectorAll("audio")[0].muted = false;
+            }
+          }
+          else if (e.target.id==='sound') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+              document.querySelectorAll("audio").forEach((item,index)=>{
+                if(index>0){
+                  item.muted = true;
+                }
+              });
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+              document.querySelectorAll("audio").forEach((item,index)=>{
+                if(index>0){
+                  item.muted = false;
+                }
+              });
+            }
+          }
+        });
 
         $("#startGame").on("click",()=>{
               // Launch fullscreen for browsers that support it!
@@ -145,7 +191,7 @@
         switch(e.keyCode) {
           case 27: /// ESC KEY
           tetris.endGame();
-            $(window).off("keydown");
+          $(window).off("keydown");
             // $(document).off("keydown");
             $location.url('/home');
 

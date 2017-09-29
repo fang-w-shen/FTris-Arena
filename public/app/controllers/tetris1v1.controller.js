@@ -4,7 +4,7 @@
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
-
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
     if (firebase.auth().currentUser) {
       var ref = firebase.database().ref(`users/${firebase.auth().currentUser.uid}`);
@@ -185,6 +185,7 @@
               }
 
             });
+
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
 

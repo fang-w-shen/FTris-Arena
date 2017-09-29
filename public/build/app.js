@@ -144,6 +144,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     $(document).off("keydown");
     $(window).off("keydown");
     $(document).off("keyup");
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
@@ -298,6 +299,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../scoregrid');
   var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     themesong.currentTime = 0;
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
@@ -352,7 +354,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $(document).on("keyup",(e)=>{
             if (e.keyCode ===69) {
               if(!$scope.fullScreen){
-                    $('.mobileDevices').css({height:'0vh'});
+                $('.mobileDevices').css({height:'0vh'});
                     launchFullScreen(document.getElementById("mobileDevice")); // the whole page
                     $scope.fullScreen = true;
                     $scope.$apply();
@@ -369,7 +371,52 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         bindFullScreenKey();
         // tetris.init();
         // tetris.grid.getCellAt(2,0).$el.css('background','red');
+        $('.lever').on("click",(e)=>{
+          let checkstate = e.target.parentNode.querySelector("input[type=checkbox]").checked;
 
+          if (e.target.id==='difficulty') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            }
+
+          }
+          else if (e.target.id==='blockcolor') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            }
+
+          }
+          else if (e.target.id==='music') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+              document.querySelectorAll("audio")[0].muted = true;
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+              document.querySelectorAll("audio")[0].muted = false;
+            }
+          }
+          else if (e.target.id==='sound') {
+            if(checkstate) {
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+              document.querySelectorAll("audio").forEach((item,index)=>{
+                if(index>0){
+                  item.muted = true;
+                }
+              });
+            }else{
+              e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+              document.querySelectorAll("audio").forEach((item,index)=>{
+                if(index>0){
+                  item.muted = false;
+                }
+              });
+            }
+          }
+        });
 
         $("#startGame").on("click",()=>{
               // Launch fullscreen for browsers that support it!
@@ -439,7 +486,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         switch(e.keyCode) {
           case 27: /// ESC KEY
           tetris.endGame();
-            $(window).off("keydown");
+          $(window).off("keydown");
             // $(document).off("keydown");
             $location.url('/home');
 
@@ -486,7 +533,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
-
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
     if (firebase.auth().currentUser) {
       var ref = firebase.database().ref(`users/${firebase.auth().currentUser.uid}`);
@@ -667,6 +714,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
               }
 
             });
+
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
 
@@ -1246,7 +1294,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function OShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[0];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[0];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1269,7 +1322,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function TShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[1];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[1];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1329,7 +1387,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function SShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[2];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[2];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1388,7 +1451,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function ZShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[3];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[3];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1447,7 +1515,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function LShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[4];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[4];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1506,7 +1579,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function JShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[5];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[5];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1565,7 +1643,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function IShape( grid, collisionState) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[6];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[6];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -1625,7 +1708,12 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   function FShape( grid, collisionState ) {
     this.onInit(grid,collisionState);
     let self = this;
-    self.color = colors[7];
+    let checkstate = $('#blockcolor').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+    if(checkstate) {
+      self.color = colors[7];
+    }else{
+      self.color = 'black';
+    }
     this.cells.forEach(function( cell ) {
       cell.$el.css('background', self.color);
     });
@@ -2287,7 +2375,7 @@ require('./grid');
   var drop = document.getElementById("drop");
   var rotate = document.getElementById("rotate");
   var gameover = document.getElementById("gameover");
-
+  document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
 
   function CollisionState() {
     this.events = [];
@@ -2310,7 +2398,7 @@ require('./grid');
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
+    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I,Shape.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -2361,7 +2449,17 @@ require('./grid');
     },
 
     getRandomShape: function() {
-      return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      let checkstate = $('#difficulty').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+
+
+      if(checkstate) {
+        return this.shapes[Math.floor(Math.random() * 7)];
+
+      }else{
+        return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      }
+
+
     },
 
     displayInPreview: function( ShapePreview ) {

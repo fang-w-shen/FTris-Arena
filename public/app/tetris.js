@@ -14,7 +14,7 @@ require('./grid');
   var drop = document.getElementById("drop");
   var rotate = document.getElementById("rotate");
   var gameover = document.getElementById("gameover");
-
+  document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
 
   function CollisionState() {
     this.events = [];
@@ -37,7 +37,7 @@ require('./grid');
     this.cols = options.cols;
     this.gamePlaceholder = options.gamePlaceholder;
     this.previewPlaceholder = options.previewPlaceholder;
-    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I];
+    this.shapes = [Shape.Sq,Shape.T,Shape.S,Shape.Z,Shape.L,Shape.J,Shape.I,Shape.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -88,7 +88,17 @@ require('./grid');
     },
 
     getRandomShape: function() {
-      return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      let checkstate = $('#difficulty').parent().parent()[0].querySelector("input[type=checkbox]").checked;
+
+
+      if(checkstate) {
+        return this.shapes[Math.floor(Math.random() * 7)];
+
+      }else{
+        return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      }
+
+
     },
 
     displayInPreview: function( ShapePreview ) {

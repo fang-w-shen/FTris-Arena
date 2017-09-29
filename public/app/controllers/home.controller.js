@@ -10,6 +10,7 @@
     $(document).off("keydown");
     $(window).off("keydown");
     $(document).off("keyup");
+    document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
     //////////////HOME ANIMATION EVENTS///////////////
