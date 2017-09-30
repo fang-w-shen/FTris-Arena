@@ -1075,7 +1075,7 @@ span.badge {
     margin-left: -.3em; }
 
   .space {
-    margin-left: -40em !important; } }
+    margin-left: -60em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.4em !important; } }
@@ -1965,6 +1965,6 @@ progress::-webkit-progress-value {
     padding-left: 3.5em !important; }
 
   .space {
-    margin-left: -40em !important; } }
+    margin-left: -60em !important; } }
 
 /*# sourceMappingURL=main.css.map */

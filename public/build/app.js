@@ -752,26 +752,29 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           if(!gameCredentials.password){
             gameCredentials.password = '';
           }
-          setTimeout(()=>{
+          var spaceDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+          if (spaceDeviceWidth.matches) {
+           setTimeout(()=>{
             $('.space1').fadeIn();
           },2000);
-          gameCredentials.user = firebase.auth().currentUser.uid;
-          var tetris = new Tetris2({
-            rows: 20,
-            cols: 10,
-            gamePlaceholder: '#tetris',
-            previewPlaceholder: '#preview',
-            opponentPlaceholder: '#tetris2',
-            difficulty:"easy",
-            gameBoardRef: gameCredentials
-          });
+         }
+         gameCredentials.user = firebase.auth().currentUser.uid;
+         var tetris = new Tetris2({
+          rows: 20,
+          cols: 10,
+          gamePlaceholder: '#tetris',
+          previewPlaceholder: '#preview',
+          opponentPlaceholder: '#tetris2',
+          difficulty:"easy",
+          gameBoardRef: gameCredentials
+        });
 
 
-          $scope.bindFullScreenKey();
+         $scope.bindFullScreenKey();
 
 
-          $(window).off("keydown");
-          $(document).on("keyup",(e)=>{
+         $(window).off("keydown");
+         $(document).on("keyup",(e)=>{
                 if(e.keyCode === 82) { //R Restart KEY
                   $(document).off("keyup");
                   $(document).off("keydown");
@@ -779,20 +782,20 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
                   $route.reload();
                 }
               });
-          $('#menu-select').on("click",()=>{
-            $(document).off("keyup");
-            $(document).off("keydown");
-            tetris.endGame();
-            $route.reload();
-          });
+         $('#menu-select').on("click",()=>{
+          $(document).off("keyup");
+          $(document).off("keydown");
+          tetris.endGame();
+          $route.reload();
+        });
 
 
 
-          $("#onoff").on("click",()=>{
-            tetris.endGame();
-            $location.url("/home");
-            $route.reload();
-          });
+         $("#onoff").on("click",()=>{
+          tetris.endGame();
+          $location.url("/home");
+          $route.reload();
+        });
       //////////////EVENT LISTENTER TO EXIT TO HOME///////////////////
       $(document).on("keyup",(e)=>{
         switch(e.keyCode) {
@@ -854,37 +857,40 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           if (password === Object.values(item)[0].password) {
 
             $scope.gameMade = true;
-            setTimeout(()=>{
+            var spaceDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+            if (spaceDeviceWidth.matches) {
+             setTimeout(()=>{
               $('.space1').fadeIn();
             },2000);
-            gameCredentials.key = Object.keys(item)[0];
-            gameCredentials.user = item[Object.keys(item)[0]].user;
-            let database = firebase.database().ref('games/'+gameCredentials.key);
-            database.set(1);
-            var tetris = new Tetris2({
-              rows: 20,
-              cols: 10,
-              gamePlaceholder: '#tetris',
-              previewPlaceholder: '#preview',
-              opponentPlaceholder: '#tetris2',
-              difficulty:"easy",
-              gameBoardRef: gameCredentials
-            });
+           }
+           gameCredentials.key = Object.keys(item)[0];
+           gameCredentials.user = item[Object.keys(item)[0]].user;
+           let database = firebase.database().ref('games/'+gameCredentials.key);
+           database.set(1);
+           var tetris = new Tetris2({
+            rows: 20,
+            cols: 10,
+            gamePlaceholder: '#tetris',
+            previewPlaceholder: '#preview',
+            opponentPlaceholder: '#tetris2',
+            difficulty:"easy",
+            gameBoardRef: gameCredentials
+          });
 
-            $('#progressbar').show();
-            var timeleft = 5;
-            var downloadTimer = setInterval(function(){
-              document.getElementById("progressBar").value = --timeleft;
-              if(timeleft <= 0) {
-                clearInterval(downloadTimer);
-                $('#progressbar').hide();
-                themesong.currentTime = 0;
-                themesong.play();
-                $scope.bindFullScreenKey();
-                tetris.init();
-              }
+           $('#progressbar').show();
+           var timeleft = 5;
+           var downloadTimer = setInterval(function(){
+            document.getElementById("progressBar").value = --timeleft;
+            if(timeleft <= 0) {
+              clearInterval(downloadTimer);
+              $('#progressbar').hide();
+              themesong.currentTime = 0;
+              themesong.play();
+              $scope.bindFullScreenKey();
+              tetris.init();
+            }
 
-            },1000);
+          },1000);
            //  setTimeout(()=>{
            //   setTimeout(()=>{
            //     tetris.init();
