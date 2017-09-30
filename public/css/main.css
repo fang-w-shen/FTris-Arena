@@ -1960,9 +1960,5 @@ progress::-webkit-progress-value {
   .directions, .creategame {
     padding-right: 3em !important;
     padding-left: 3.5em !important; } }
-@media only screen and (max-device-width: 1024px) {
-  .space1 {
-    overflow: hidden !important;
-    left: -15em !important; } }
 
 /*# sourceMappingURL=main.css.map */
