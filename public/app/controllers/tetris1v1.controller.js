@@ -186,6 +186,7 @@
 
             });
 
+
         //////////////INITIALIZING GAME//////////////////////
         function initializeGame(gameCredentials) {
 
@@ -250,6 +251,36 @@
           }
 
         });
+      $('.lever').on("click",(e)=>{
+        let checkstate = e.target.parentNode.querySelector("input[type=checkbox]").checked;
+        if (e.target.id==='music') {
+          if(checkstate) {
+            e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            document.querySelectorAll("audio")[0].muted = true;
+          }else{
+            e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            document.querySelectorAll("audio")[0].muted = false;
+          }
+        }
+        else if (e.target.id==='sound') {
+          if(checkstate) {
+            e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+            document.querySelectorAll("audio").forEach((item,index)=>{
+              if(index>0){
+                item.muted = true;
+              }
+            });
+          }else{
+            e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+            document.querySelectorAll("audio").forEach((item,index)=>{
+              if(index>0){
+                item.muted = false;
+              }
+            });
+          }
+        }
+
+      });
 
     }
       //////////////////////////////////////////////////////////////////////

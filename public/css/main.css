@@ -324,12 +324,12 @@ i.shine {
 .frame {
   padding-top: 1em;
   margin-top: 13.5vh !important;
-  background-color: white;
+  background-color: rgba(255, 234, 202, 0.99);
   border: solid 3vmin #eee;
   border-bottom-color: black;
-  border-left-color: white;
+  border-left-color: #464a4c;
   border-radius: 2px;
-  border-right-color: white;
+  border-right-color: #464a4c;
   border-top-color: black;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25) inset, 0 5px 10px 5px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -352,7 +352,8 @@ i.shine {
   .frame table, .frame tbody {
     border: none !important; }
   .frame .modal-content {
-    border: none !important; }
+    border: none !important;
+    background: rgba(255, 234, 202, 0.99); }
   .frame:before {
     border-radius: 2px;
     bottom: -2vmin;
@@ -387,6 +388,37 @@ i.shine {
   left: 58.5vw !important;
   top: -2.5vw !important;
   width: 290px; }
+
+.space {
+  position: absolute;
+  height: 100%;
+  width: 2000px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background: #222222;
+  left: -175px !important;
+  z-index: -10; }
+
+svg {
+  position: absolute;
+  height: 100%; }
+
+.lines {
+  opacity: 0.05; }
+
+.line {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #4C3A90; }
+
+.lights {
+  opacity: 0.9; }
+
+.light {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #7A6BB5; }
 
 /*NAV BAR*/
 .btn-sm {
@@ -579,7 +611,7 @@ nav {
     opacity: 0; } }
 body {
   overflow: hidden;
-  background: beige; }
+  background: #292b2c; }
 
 .colorTheme {
   background-color: black; }
@@ -852,7 +884,17 @@ span.badge {
     margin-left: 12.7em !important; }
 
   .containermetalbr {
-    margin-left: 4.2em; } }
+    margin-left: 4.2em; }
+
+  .containermetal3 {
+    margin-left: -8.9em; } }
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1444px) and (max-device-height: 600px) {
+  /*  *{
+      font-size:.7rem;
+    }
+    #base {
+      height: 565px !important;
+      }*/ }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .directions, .creategame {
     padding-right: 6em !important;
@@ -1043,7 +1085,7 @@ span.badge {
     text-align: right !important; }
 
   #progressbar {
-    left: 39%; }
+    left: 40%; }
 
   .mobileDevices {
     margin-top: 8vh !important; }
@@ -1140,6 +1182,9 @@ span.badge {
       padding-bottom: 0em !important; } }
 /*///////MEDIA FOR IPHONE5 PORTRAIT////////*/
 @media only screen and (min-device-width: 300px) and (max-device-width: 767px) {
+  .space {
+    left: -10px !important; }
+
   .waves-effect {
     width: 111px !important;
     max-width: 111px !important; }

@@ -47,54 +47,101 @@
       </div>
   </div>
 </div>
+
+
+   <div ng-if="gameMade" class="frame frame1 col-3.5">
+    <div class='containermetal'>
+      <div class='metal'></div>
+  </div>
+  <div class='containermetal2'>
+      <div class='metal'></div>
+  </div>
+  <div class='containermetal3'>
+      <div class='metal'></div>
+  </div>
+  <div class='containermetal4'>
+      <div class='metal'></div>
+  </div>
+  <div class="" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content howtoplaymodal" style="border-radius: 0 !important;">
+
+            <div class="">
+
+                <table class="table table-condensed">
+                    <tr><th>KEYBOARD & D-PAD</th><th>ACTION</th></tr>
+                    <tbody>
+                        <tr class="browser-buttons"><th><kbd class="material"> ENTER </kbd> <kbd class="material"> START </kbd></th><td>START GAME</td></tr>
+                        <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">P</i></kbd> <kbd class="letters"><i class="material-icons">pause</i></kbd></th><td>PAUSE GAME</td></tr>
+                        <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">R</i></kbd> <kbd class="material"> RESET </kbd></th><td>RESET GAME</td></tr>
+                        <tr class="browser-buttons"><th><kbd class="material">ESC</kbd><kbd class="material">OFF</kbd></th><td>EXIT GAME</td></tr>
+                    </tbody>
+                    <tr><th>GAMEPLAY</th><th>MOVE</th></tr>
+                    <tbody>
+                        <tr class="browser-buttons"><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">E</i></kbd></th><td>TOGGLE FULLSCREEN</td></tr>
+                        <tr><th><kbd class="letters" style="visiblity:invisible"><i class="material-icons d">Z</i></kbd> <kbd class="letters" style="visiblity:invisible"><i class="material-icons d">X</i></kbd></th><td>ROTATE LEFT/RIGHT</td></tr>
+                        <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_up</i></kbd><kbd class="material"> SPIN </kbd></th><td>ROTATE BLOCK</td></tr>
+
+                        <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_left</i></kbd><kbd class="material"> LEFT </kbd></th><td>MOVE LEFT</td></tr>
+                        <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_down</i></kbd><kbd class="material"> DOWN </kbd></th><td>MOVE DOWN</td></tr>
+
+                        <tr><th><kbd class="material"><i class="material-icons">keyboard_arrow_right</i></kbd><kbd class="material"> RIGHT </kbd></th><td>MOVE RIGHT</td></tr>
+                        <tr class="browser-buttons"><th><kbd class="material">SPACEBAR</kbd><kbd class="material">DROP</kbd></th><td>DROP BLOCK</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <div ng-show="gameMade" class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
 
-    <div id="tetrisScreen" class="row">
-        <div class="grid" id="tetris" class="col-md-8 col-sm-7" style="z-index:8 !important">
+<div id="tetrisScreen" class="row">
+    <div class="grid" id="tetris" class="col-md-8 col-sm-7" style="z-index:8 !important">
+    </div>
+    <div class="right-column col-md-4 col-sm-3" style="z-index:8 !important">
+        <div id="next" class="grid">Next:</div>
+        <div id="preview" class="grid"></div>
+        <div class="grid">Score: <div id="score"> 0</div></div>
+        <div class="grid" >Level: <div id="level"> 0</div></div>
+        <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" id="pauser" data-id="pauser" ng-click="" style="float:left">pause</i></div><br>
+        <div class="">
+            <div class="grid" id="tetris2" class="col-md-8"></div>
         </div>
-        <div class="right-column col-md-4 col-sm-3" style="z-index:8 !important">
-            <div id="next" class="grid">Next:</div>
-            <div id="preview" class="grid"></div>
-            <div class="grid">Score: <div id="score"> 0</div></div>
-            <div class="grid" >Level: <div id="level"> 0</div></div>
-            <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" id="pauser" data-id="pauser" ng-click="" style="float:left">pause</i></div><br>
-            <div class="">
-                <div class="grid" id="tetris2" class="col-md-8"></div>
-            </div>
+
+    </div>
+</div>
+<div id="base">
+  <div class="power"></div>
+  <div class="as"></div>
+  <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">ESC•OFF</div><i class="fa fa-caret-right"></i></div>
+
+
+  <div class="screenbase">
+      <div class="llu"></div>
+      <div class="lld"></div>
+      <h4 class="h4">Dot matrix with stereo sound</h4>
+      <div class="lru"></div>
+      <div class="lrd"></div>
+
+      <div class="battery"></div>
+
+      <div class="screens">
+
+        <div class="screenoff">
+
+
 
         </div>
     </div>
-    <div id="base">
-      <div class="power"></div>
-      <div class="as"></div>
-      <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">ESC•OFF</div><i class="fa fa-caret-right"></i></div>
+</div>
 
 
-      <div class="screenbase">
-          <div class="llu"></div>
-          <div class="lld"></div>
-          <h4 class="h4">Dot matrix with stereo sound</h4>
-          <div class="lru"></div>
-          <div class="lrd"></div>
+<div class="cntrls">
+    <div class="gbnin"></div>
+    <h6 class="h6">TM</h6>
 
-          <div class="battery"></div>
-
-          <div class="screens">
-
-            <div class="screenoff">
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="cntrls">
-        <div class="gbnin"></div>
-        <h6 class="h6">TM</h6>
-
-    </div>
+</div>
 
 </div>
 
@@ -120,6 +167,9 @@
   </div>
 </div>
 </div>
+
+
+
 
 </div>
 
@@ -190,3 +240,21 @@
 
 
 
+<div ng-show="gameMade" class="frame frame2">
+  <div class='containermetaltr'>
+      <div class='metal'></div>
+  </div>
+  <div class='containermetalrt'>
+      <div class='metal'></div>
+  </div>
+  <h6>SOUNDS & EFFECTS</h6>
+  <label>Music</label>
+  <div>
+    <div class = "switch" ><label>Off<input type = "checkbox" checked>
+      <span class = "lever" id="music"></span>On</label></div>
+      <label>Effects</label>
+      <div class = "switch" ><label>Off<input type = "checkbox" checked>
+          <span class = "lever" id="sound"></span>On</label></div>
+      </div>
+
+  </div>

@@ -13,6 +13,19 @@
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
+    function space(thing, from, to) {
+      TweenMax.fromTo(thing, Math.floor(Math.random() * 100), { y: from }, { y: to,
+        onComplete: space,
+        onCompleteParams: [thing, from, to],
+        ease: Linear.easeNone });
+    }
+
+    var itemsDown = [".light4", ".light5", ".light6", ".light7", ".light8", ".light11", ".light12", ".light13", ".light14", ".light15", ".light16"].forEach(function (e) {
+      return space(e, -1080, 1080);
+    });
+    var itemsUp = [".light1", ".light2", ".light3", ".light9", ".light10", ".light17"].forEach(function (e) {
+      return space(e, 1080, -1080);
+    });
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
     $('.overlay').css("display","block").css("opacity","0");
