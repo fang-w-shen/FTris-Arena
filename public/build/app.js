@@ -329,7 +329,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           $('body').css("overflow-y","hidden");
 
         }
-        var spacerDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+        var spaceDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
         if (spaceDeviceWidth.matches) {
          setTimeout(()=>{
           $('.space1').fadeIn();
