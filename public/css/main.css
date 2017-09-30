@@ -321,6 +321,73 @@ i.shine {
     background: linear-gradient(to bottom, #8f8d8d 0%, #e8e8e8 8%, #dedede 34%, #8a8a8a 62%, #292727 66%, #6b6868 77%, #999696 91%, #575454 100%);
     margin-left: 5px; }
 
+.frame {
+  padding-top: 1em;
+  margin-top: 13.5vh !important;
+  background-color: white;
+  border: solid 3vmin #eee;
+  border-bottom-color: black;
+  border-left-color: white;
+  border-radius: 2px;
+  border-right-color: white;
+  border-top-color: black;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25) inset, 0 5px 10px 5px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 10vh 13.5vw;
+  padding-left: 1vmin;
+  padding-right: 1vmin;
+  position: relative;
+  left: -8em;
+  text-align: center; }
+  @media screen and (max-width: 1025px) and (orientation: landscape) {
+    .frame {
+      display: none; } }
+  @media only screen and (orientation: portrait) {
+    .frame {
+      display: none; } }
+  @media screen and (min-width: 1300px) {
+    .frame {
+      width: 371px; } }
+  .frame table, .frame tbody {
+    border: none !important; }
+  .frame .modal-content {
+    border: none !important; }
+  .frame:before {
+    border-radius: 2px;
+    bottom: -2vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25) inset;
+    content: "";
+    left: -2vmin;
+    position: absolute;
+    right: -2vmin;
+    top: -2vmin;
+    z-index: -1; }
+  .frame:after {
+    border-radius: 2px;
+    bottom: -2.5vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+    content: "";
+    left: -2.5vmin;
+    position: absolute;
+    right: -2.5vmin;
+    top: -2.5vmin;
+    z-index: -1; }
+
+.frame2 {
+  position: absolute;
+  height: 220px;
+  left: 58.5vw !important;
+  top: 47.5vh !important;
+  width: 290px; }
+
+.frame3 {
+  height: 220px;
+  position: absolute;
+  left: 58.5vw !important;
+  top: -2.5vw !important;
+  width: 290px; }
+
 /*NAV BAR*/
 .btn-sm {
   background: #1f60b4;
@@ -349,6 +416,75 @@ nav {
   background-color: #1f60b4; }
 
 /*1v1*/
+/*metal bars */
+.containermetal {
+  position: absolute;
+  top: 7.3em; }
+
+.containermetal2 {
+  position: absolute;
+  top: 32.5em !important; }
+  .containermetal2 .metal {
+    width: 400px; }
+
+.containermetal3 {
+  transform: rotate(45deg);
+  position: absolute;
+  z-index: -1 !important;
+  top: -11em;
+  margin-left: -6.9em;
+  width: 307px; }
+  .containermetal3 .metal {
+    width: 500px; }
+
+.containermetal4 {
+  transform: rotate(-45deg);
+  position: absolute;
+  z-index: -9 !important;
+  bottom: -14em;
+  margin-left: -19.4em; }
+  .containermetal4 .metal {
+    width: 700px; }
+
+.containermetaltr {
+  transform: rotate(45deg);
+  position: absolute;
+  z-index: -1 !important;
+  top: 18em;
+  margin-left: 2.9em;
+  width: 394px; }
+  .containermetaltr .metal {
+    width: 600px; }
+
+.containermetalbr {
+  transform: rotate(-45deg);
+  position: absolute;
+  z-index: -9 !important;
+  top: -6em;
+  margin-left: 7em;
+  width: 320px; }
+  .containermetalbr .metal {
+    width: 400px; }
+
+.containermetalrt {
+  position: absolute;
+  z-index: -9 !important;
+  top: 5em;
+  margin-left: 7em;
+  width: 320px; }
+  .containermetalrt .metal {
+    width: 500px; }
+
+.containermetalrb {
+  position: absolute;
+  z-index: -9 !important;
+  top: 5em;
+  margin-left: 7em;
+  width: 320px; }
+  .containermetalrb .metal {
+    width: 500px; }
+
+/*jumbo*/
 .jumbotron {
   border-radius: 0 !important;
   background: black;
@@ -706,7 +842,17 @@ span.badge {
 
   .waves-effect {
     width: 134px !important;
-    max-width: 134px !important; } }
+    max-width: 134px !important; }
+
+  .frame2 {
+    margin-top: 30.5em !important;
+    margin-left: 12.7em !important; }
+
+  .frame3 {
+    margin-left: 12.7em !important; }
+
+  .containermetalbr {
+    margin-left: 4.2em; } }
 @media only screen and (min-device-width: 700px) and (max-device-width: 1444px) {
   .directions, .creategame {
     padding-right: 6em !important;
@@ -923,10 +1069,7 @@ span.badge {
 
   .mobileDevices {
     margin-top: 0em !important;
-    left: 29em !important; }
-
-  .containermetal2 {
-    top: 77vh !important; } }
+    left: 29em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-left: -2.1em !important; }
@@ -935,10 +1078,41 @@ span.badge {
     left: .5em !important; }
 
   .mobileDevices {
-    margin-top: 3vh !important; }
+    margin-top: 3vh !important;
+    margin-left: 1.1em; }
 
   .frame {
-    width: 400px; } }
+    width: 450px !important; }
+    .frame h6 {
+      font-size: 1.2rem;
+      padding-top: 1em; }
+    .frame label {
+      font-size: 1.1rem; }
+
+  .frame1 {
+    height: 660px; }
+
+  .frame3 {
+    left: 53.7vw !important;
+    top: -1.8vw !important;
+    height: 280px; }
+
+  .frame2 {
+    left: 53.7vw !important;
+    margin-top: 32.4em !important;
+    height: 280px; }
+
+  .containermetal2 {
+    top: 34.6em !important; }
+
+  .containermetalrt {
+    top: 7em; }
+
+  .containermetalrb {
+    top: 7em; }
+
+  .containermetal {
+    top: 9.4em; } }
 @media only screen and (min-device-width: 1279px) {
   .blink_me {
     margin-left: -3em !important; }
@@ -1655,71 +1829,6 @@ input {
 
   #ngview {
     display: none; } }
-.frame {
-  padding-top: 1em;
-  margin-top: 13.5vh !important;
-  background-color: white;
-  border: solid 3vmin #eee;
-  border-bottom-color: black;
-  border-left-color: white;
-  border-radius: 2px;
-  border-right-color: white;
-  border-top-color: black;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25) inset, 0 5px 10px 5px rgba(0, 0, 0, 0.25);
-  box-sizing: border-box;
-  display: inline-block;
-  margin: 10vh 13.5vw;
-  padding-left: 1vmin;
-  padding-right: 1vmin;
-  position: relative;
-  left: -8em;
-  text-align: center; }
-  @media screen and (max-width: 1025px) and (orientation: landscape) {
-    .frame {
-      display: none; } }
-  @media only screen and (orientation: portrait) {
-    .frame {
-      display: none; } }
-  @media screen and (min-width: 1300px) {
-    .frame {
-      width: 371px; } }
-  .frame table, .frame tbody {
-    border: none !important; }
-  .frame .modal-content {
-    border: none !important; }
-  .frame:before {
-    border-radius: 2px;
-    bottom: -2vmin;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25) inset;
-    content: "";
-    left: -2vmin;
-    position: absolute;
-    right: -2vmin;
-    top: -2vmin;
-    z-index: -1; }
-  .frame:after {
-    border-radius: 2px;
-    bottom: -2.5vmin;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-    content: "";
-    left: -2.5vmin;
-    position: absolute;
-    right: -2.5vmin;
-    top: -2.5vmin;
-    z-index: -1; }
-
-.frame2 {
-  position: absolute;
-  height: 220px;
-  left: 58.5vw !important;
-  top: 42.5vh !important; }
-
-.frame3 {
-  height: 220px;
-  position: absolute;
-  left: 58.5vw !important;
-  top: 1vw !important; }
-
 .l {
   z-index: 99; }
 
@@ -1794,7 +1903,7 @@ progress::-webkit-progress-value {
 
 @media only screen and (min-device-width: 766px) and (max-device-width: 780px) and (orientation: portrait) {
   .creategame {
-    height: 90vh !important;
+    height: 80vh !important;
     overflow-y: hidden !important; }
 
   .signinjumbo {
