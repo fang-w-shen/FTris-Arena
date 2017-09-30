@@ -215,7 +215,7 @@
           gameBoardRef: gameCredentials
         });
 
-
+         $('.silplate').css('visibility','hidden');
          $scope.bindFullScreenKey();
 
 
@@ -322,7 +322,7 @@
             difficulty:"easy",
             gameBoardRef: gameCredentials
           });
-
+           $('.silplate').css('visibility','hidden');
            $('#progressbar').show();
            var timeleft = 5;
            var downloadTimer = setInterval(function(){

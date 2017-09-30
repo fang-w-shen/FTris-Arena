@@ -7,6 +7,7 @@ require('./grid');
   var speed = 1065;
   var rowscleared = [];
   var score = 0;
+  var fkeyscore = 0;
   var time;
   var themesong = document.getElementById("myAudio");
   var tetris = document.getElementById("tetris");
@@ -42,7 +43,7 @@ require('./grid');
     this.opponentPlaceholder = options.opponentPlaceholder;
     this.gameBoardRef = options.gameBoardRef;
     this.databaseref = this.FBRef();
-    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I];
+    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I,Shape2.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -100,7 +101,24 @@ require('./grid');
     },
 
     getRandomShape: function() {
-      return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      let ref;
+      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+        ref = this.databaseref.replace("/grids","/myscore");
+
+      }else if (this.databaseref) {
+        ref = this.databaseref.replace("/grid","/opponentscore");
+      }
+      console.log("ref",ref);
+      let selfref = firebase.database().ref(ref);
+      selfref.on("value",(snapshot)=>{
+        console.log("hi");
+        if (snapshot.val()){
+          if (snapshot.val().length >1) {
+            return this.shapes[7];
+          }
+        }
+      });
+      return this.shapes[Math.floor(Math.random() * 7)];
     },
 
     displayInPreview: function( ShapePreview ) {
@@ -153,6 +171,10 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
+          fkeyscore ++;
+          if (fkeyscore >2){
+            $('.silplate').css('visibility','visible');
+          }
           $('#score').html(score*1000);
           tetris.play();
         }
@@ -330,6 +352,32 @@ require('./grid');
       ////////////////////////KEYBOARD EVENTS/////////////////////////////
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
+          case 70: // F KEY
+          let ref;
+          if (firebase.auth().currentUser.uid !== self.gameBoardRef.user) {
+            ref = self.databaseref.replace("/grids","");
+            if (fkeyscore > 2) {
+              let scoreref = firebase.database().ref(ref);
+              scoreref.child("opponentscore").set({score:score});
+
+              $('.silplate').css('visibility','hidden');
+              fkeyscore = 0;
+            }
+          }else if (self.databaseref) {
+            ref = self.databaseref.replace("/grid","");
+            if (fkeyscore > 2) {
+              let scoreref = firebase.database().ref(ref);
+              scoreref.child("myscore").set({score:score});
+
+              $('.silplate').css('visibility','hidden');
+              fkeyscore = 0;
+            }
+          }
+          console.log("ref", ref);
+
+
+
+          break;
           case 32: // Space move all the way down
           $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
           setTimeout(()=>{
@@ -429,6 +477,29 @@ require('./grid');
         let domId = $(e.target).data('id');
         if (self.startGame) {
           switch (domId) {
+            case "fkey": // FKEY
+            let ref;
+            if (firebase.auth().currentUser.uid !== self.gameBoardRef.user) {
+              ref = self.databaseref.replace("/grids","");
+              if (fkeyscore > 2) {
+                let scoreref = firebase.database().ref(ref);
+                scoreref.child("opponentscore").set({score:score});
+
+                $('.silplate').css('visibility','hidden');
+                fkeyscore = 0;
+              }
+            }else if (self.databaseref) {
+              ref = self.databaseref.replace("/grid","");
+              if (fkeyscore > 2) {
+                let scoreref = firebase.database().ref(ref);
+                scoreref.child("myscore").set({score:score});
+
+                $('.silplate').css('visibility','hidden');
+                fkeyscore = 0;
+              }
+            }
+
+            break;
             case "control-b": // Space bar move all the way down
             self.clearInterval();
 
@@ -508,6 +579,7 @@ require('./grid');
 
 
       score = 0;
+      fkeyscore = 0;
       let ref = this.databaseref;
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
         firebase.database().ref(ref.replace(/grids/,"")).remove();

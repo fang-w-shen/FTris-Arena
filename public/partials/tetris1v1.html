@@ -20,8 +20,8 @@
       <rect class="line" x="328.7" width="1.8" height="1080"></rect>
       <rect class="line" x="300.8" width="4.6" height="1080"></rect>
       <rect class="line" x="1666.4" width="0.9" height="1080"></rect>
-    </g>
-    <g class="lights">
+  </g>
+  <g class="lights">
       <path class="light1 light" d="M619.5,298.4H615v19.5h4.5V298.4z M619.5,674.8H615v9.8h4.5V674.8z M619.5,135.1H615v5.6h4.5V135.1z         M619.5,55.5H615v68.7h4.5V55.5z"></path>
       <path class="light2 light" d="M1258.2,531.9h-4.5v8.1h4.5V531.9z M1258.2,497.9h-4.5v17.9h4.5V497.9z M1258.2,0h-4.5v25.3h4.5V0z         M1258.2,252.2h-4.5v42.4h4.5V252.2z"></path>
       <path class="light3 light" d="M875.1,123.8h-1.8v4h1.8V123.8z M875.1,289.4h-1.8v24.1h1.8V289.4z M875.1,0h-1.8v31.4h1.8V0z M875.1,50.2         h-1.8v11.5h1.8V50.2z"></path>
@@ -39,8 +39,8 @@
       <path class="light15 light" d="M1234.3,898.1h-0.9v-4.9h0.9V898.1z M1234.3,762.5h-0.9v-29.5h0.9V762.5z M1234.3,614.4h-0.9v-46.4h0.9V614.4z         "></path>
       <path class="light16 light" d="M457.7,1010.8h-1.8v-18.1h1.8V1010.8z M457.7,507.5h-1.8V398h1.8V507.5z"></path>
       <path class="light17 light" d="M330.5,170.7h-1.8v13.7h1.8V170.7z M330.5,435.1h-1.8v6.8h1.8V435.1z M330.5,55.9h-1.8v4h1.8V55.9z M330.5,0         h-1.8v48.3h1.8V0z"></path>
-    </g>
-  </svg>
+  </g>
+</svg>
 </div>
 <div id="progressbar" class="invis">
   Game Starting In....
@@ -91,7 +91,7 @@
 </div>
 
 
-   <div ng-if="gameMade" class="frame frame1 col-3.5">
+<div ng-if="gameMade" class="frame frame1 col-3.5">
     <div class='containermetal'>
       <div class='metal'></div>
   </div>
@@ -138,52 +138,53 @@
 </div>
 <div ng-show="gameMade" class="mobileDevices container" id="mobileDevice"  style="height:80vh;">
 
-<div id="tetrisScreen" class="row">
-    <div class="grid" id="tetris" class="col-md-8 col-sm-7" style="z-index:8 !important">
-    </div>
-    <div class="right-column col-md-4 col-sm-3" style="z-index:8 !important">
-        <div id="next" class="grid">Next:</div>
-        <div id="preview" class="grid"></div>
-        <div class="grid">Score: <div id="score"> 0</div></div>
-        <div class="grid" >Level: <div id="level"> 0</div></div>
-        <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" id="pauser" data-id="pauser" ng-click="" style="float:left">pause</i></div><br>
-        <div class="">
-            <div class="grid" id="tetris2" class="col-md-8"></div>
+    <div id="tetrisScreen" class="row">
+        <div class="grid" id="tetris" class="col-md-8 col-sm-7" style="z-index:8 !important">
         </div>
-
-    </div>
-</div>
-<div id="base">
-  <div class="power"></div>
-  <div class="as"></div>
-  <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">ESC•OFF</div><i class="fa fa-caret-right"></i></div>
-
-
-  <div class="screenbase">
-      <div class="llu"></div>
-      <div class="lld"></div>
-      <h4 class="h4">Dot matrix with stereo sound</h4>
-      <div class="lru"></div>
-      <div class="lrd"></div>
-
-      <div class="battery"></div>
-
-      <div class="screens">
-
-        <div class="screenoff">
-
-
+        <div class="right-column col-md-4 col-sm-3" style="z-index:8 !important">
+            <div id="next" class="grid">Next:</div>
+            <div id="preview" class="grid"></div>
+            <div class="grid">Score: <div id="score"> 0</div></div>
+            <div class="grid" >Level: <div id="level"> 0</div></div>
+            <br><div id="pauseGame" class="grid pauseGame" ><i class="close material-icons small" id="pauser" data-id="pauser" ng-click="" style="float:left">pause</i></div><br>
+            <div class="">
+                <div class="grid" id="tetris2" class="col-md-8"></div>
+            </div>
 
         </div>
     </div>
-</div>
+    <div id="base">
+        <span class="silplate pt3" data-key="F" data-id="fkey"></span>
+        <div class="power"></div>
+        <div class="as"></div>
+        <div class="l"><i class="fa fa-caret-left"></i> <div class="onoff" id="onoff">ESC•OFF</div><i class="fa fa-caret-right"></i></div>
 
 
-<div class="cntrls">
-    <div class="gbnin"></div>
-    <h6 class="h6">TM</h6>
+        <div class="screenbase">
+          <div class="llu"></div>
+          <div class="lld"></div>
+          <h4 class="h4">Dot matrix with stereo sound</h4>
+          <div class="lru"></div>
+          <div class="lrd"></div>
 
-</div>
+          <div class="battery"></div>
+
+          <div class="screens">
+
+            <div class="screenoff">
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cntrls">
+        <div class="gbnin"></div>
+        <h6 class="h6">TM</h6>
+
+    </div>
 
 </div>
 

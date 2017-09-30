@@ -107,7 +107,7 @@
         });
       });
 
-            this.databaseref.set(solidgrids);
+      this.databaseref.set(solidgrids);
     } else if (onObstacle) {
       onObstacle.call(this);
     }
@@ -545,7 +545,74 @@
     return [coords, newRotationState];
   };
 
-
+  function FShape( grid, collisionState ) {
+    this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[7];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  FShape.prototype = new BaseShape();
+  FShape.prototype.constructor = FShape;
+  FShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10)-1;
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn, y: secondRow - 2});
+    this.coords.push({x: middleColumn + 1, y: secondRow - 1});
+    this.coords.push({x: middleColumn + 1, y: secondRow + 1});
+  };
+  FShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x - 2, y: center.y});
+      coords.push({x: center.x - 2, y: center.y+1});
+      newRotationState = 4;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x - 1, y: center.y - 2});
+      newRotationState = 3;
+      break;
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      newRotationState = 2;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
 
   // Pack all the shape classes in one object (namespace)
   Shape2.Sq = OShape;
@@ -555,7 +622,7 @@
   Shape2.L = LShape;
   Shape2.J = JShape;
   Shape2.I = IShape;
-
+  Shape2.F = FShape;
   // Export the shape namespace to the global scope
   global.Shape2 = Shape2;
 

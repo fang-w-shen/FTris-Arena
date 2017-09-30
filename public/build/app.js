@@ -769,7 +769,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           gameBoardRef: gameCredentials
         });
 
-
+         $('.silplate').css('visibility','hidden');
          $scope.bindFullScreenKey();
 
 
@@ -876,7 +876,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             difficulty:"easy",
             gameBoardRef: gameCredentials
           });
-
+           $('.silplate').css('visibility','hidden');
            $('#progressbar').show();
            var timeleft = 5;
            var downloadTimer = setInterval(function(){
@@ -2000,7 +2000,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
         });
       });
 
-            this.databaseref.set(solidgrids);
+      this.databaseref.set(solidgrids);
     } else if (onObstacle) {
       onObstacle.call(this);
     }
@@ -2438,7 +2438,74 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     return [coords, newRotationState];
   };
 
-
+  function FShape( grid, collisionState ) {
+    this.onInit(grid,collisionState);
+    let self = this;
+    self.color = colors[7];
+    this.cells.forEach(function( cell ) {
+      cell.$el.css('background', self.color);
+    });
+  }
+  FShape.prototype = new BaseShape();
+  FShape.prototype.constructor = FShape;
+  FShape.prototype.setInitialCoordinates = function() {
+    var secondRow = this.grid.rowsCount - 2;
+    var middleColumn = parseInt(this.grid.colsCount / 2, 10)-1;
+    this.coords.push({x: middleColumn, y: secondRow});
+    this.coords.push({x: middleColumn, y: secondRow + 1});
+    this.coords.push({x: middleColumn, y: secondRow - 1});
+    this.coords.push({x: middleColumn, y: secondRow - 2});
+    this.coords.push({x: middleColumn + 1, y: secondRow - 1});
+    this.coords.push({x: middleColumn + 1, y: secondRow + 1});
+  };
+  FShape.prototype.getRotationData = function() {
+    var center;
+    var coords = [];
+    var newRotationState;
+    switch (this.rotationState) {
+      case 3:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x - 2, y: center.y});
+      coords.push({x: center.x - 2, y: center.y+1});
+      newRotationState = 4;
+      break;
+      case 2:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x - 1, y: center.y});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x - 1, y: center.y - 2});
+      newRotationState = 3;
+      break;
+      case 1:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x-1, y: center.y});
+      coords.push({x: center.x + 1, y: center.y});
+      coords.push({x: center.x-1, y: center.y - 1});
+      coords.push({x: center.x-2, y: center.y});
+      coords.push({x: center.x + 1, y: center.y-1});
+      newRotationState = 2;
+      break;
+      case 4:
+      center = this.cells[0];
+      coords.push({x: center.x, y: center.y});
+      coords.push({x: center.x, y: center.y + 1});
+      coords.push({x: center.x, y: center.y - 1});
+      coords.push({x: center.x + 1, y: center.y - 1});
+      coords.push({x: center.x, y: center.y - 2});
+      coords.push({x: center.x + 1, y: center.y + 1});
+      newRotationState = 1;
+      break;
+    }
+    return [coords, newRotationState];
+  };
 
   // Pack all the shape classes in one object (namespace)
   Shape2.Sq = OShape;
@@ -2448,7 +2515,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
   Shape2.L = LShape;
   Shape2.J = JShape;
   Shape2.I = IShape;
-
+  Shape2.F = FShape;
   // Export the shape namespace to the global scope
   global.Shape2 = Shape2;
 
@@ -2939,6 +3006,7 @@ require('./grid');
   var speed = 1065;
   var rowscleared = [];
   var score = 0;
+  var fkeyscore = 0;
   var time;
   var themesong = document.getElementById("myAudio");
   var tetris = document.getElementById("tetris");
@@ -2974,7 +3042,7 @@ require('./grid');
     this.opponentPlaceholder = options.opponentPlaceholder;
     this.gameBoardRef = options.gameBoardRef;
     this.databaseref = this.FBRef();
-    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I];
+    this.shapes = [Shape2.Sq,Shape2.T,Shape2.S,Shape2.Z,Shape2.L,Shape2.J,Shape2.I,Shape2.F];
     this.next = this.getRandomShape();
     this.collisionState = new CollisionState();
     this.startGame = false;
@@ -3032,7 +3100,24 @@ require('./grid');
     },
 
     getRandomShape: function() {
-      return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+      let ref;
+      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+        ref = this.databaseref.replace("/grids","/myscore");
+
+      }else if (this.databaseref) {
+        ref = this.databaseref.replace("/grid","/opponentscore");
+      }
+      console.log("ref",ref);
+      let selfref = firebase.database().ref(ref);
+      selfref.on("value",(snapshot)=>{
+        console.log("hi");
+        if (snapshot.val()){
+          if (snapshot.val().length >1) {
+            return this.shapes[7];
+          }
+        }
+      });
+      return this.shapes[Math.floor(Math.random() * 7)];
     },
 
     displayInPreview: function( ShapePreview ) {
@@ -3085,6 +3170,10 @@ require('./grid');
           rowsWereCollapsed = true;
           self.collapseRow(row);
           score++;
+          fkeyscore ++;
+          if (fkeyscore >2){
+            $('.silplate').css('visibility','visible');
+          }
           $('#score').html(score*1000);
           tetris.play();
         }
@@ -3262,6 +3351,32 @@ require('./grid');
       ////////////////////////KEYBOARD EVENTS/////////////////////////////
       $(document).on('keydown', function( e ) {
         switch (e.keyCode) {
+          case 70: // F KEY
+          let ref;
+          if (firebase.auth().currentUser.uid !== self.gameBoardRef.user) {
+            ref = self.databaseref.replace("/grids","");
+            if (fkeyscore > 2) {
+              let scoreref = firebase.database().ref(ref);
+              scoreref.child("opponentscore").set({score:score});
+
+              $('.silplate').css('visibility','hidden');
+              fkeyscore = 0;
+            }
+          }else if (self.databaseref) {
+            ref = self.databaseref.replace("/grid","");
+            if (fkeyscore > 2) {
+              let scoreref = firebase.database().ref(ref);
+              scoreref.child("myscore").set({score:score});
+
+              $('.silplate').css('visibility','hidden');
+              fkeyscore = 0;
+            }
+          }
+          console.log("ref", ref);
+
+
+
+          break;
           case 32: // Space move all the way down
           $('#control-b').attr("style",'box-shadow: 0 0 5px 5px #333;');
           setTimeout(()=>{
@@ -3361,6 +3476,29 @@ require('./grid');
         let domId = $(e.target).data('id');
         if (self.startGame) {
           switch (domId) {
+            case "fkey": // FKEY
+            let ref;
+            if (firebase.auth().currentUser.uid !== self.gameBoardRef.user) {
+              ref = self.databaseref.replace("/grids","");
+              if (fkeyscore > 2) {
+                let scoreref = firebase.database().ref(ref);
+                scoreref.child("opponentscore").set({score:score});
+
+                $('.silplate').css('visibility','hidden');
+                fkeyscore = 0;
+              }
+            }else if (self.databaseref) {
+              ref = self.databaseref.replace("/grid","");
+              if (fkeyscore > 2) {
+                let scoreref = firebase.database().ref(ref);
+                scoreref.child("myscore").set({score:score});
+
+                $('.silplate').css('visibility','hidden');
+                fkeyscore = 0;
+              }
+            }
+
+            break;
             case "control-b": // Space bar move all the way down
             self.clearInterval();
 
@@ -3440,6 +3578,7 @@ require('./grid');
 
 
       score = 0;
+      fkeyscore = 0;
       let ref = this.databaseref;
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
         firebase.database().ref(ref.replace(/grids/,"")).remove();
