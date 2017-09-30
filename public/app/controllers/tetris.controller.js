@@ -19,10 +19,15 @@
         }
         else {
           $('body').css("overflow-y","hidden");
-          setTimeout(()=>{
-            $('.space1').fadeIn();
-          },3000);
+
         }
+        var spacerDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+        if (spaceDeviceWidth.matches) {
+         setTimeout(()=>{
+          $('.space1').fadeIn();
+        },3000);
+       }
+
         // $(".dropdown-button").dropdown();
         // $(".button-collapse").sideNav();
         // $("#sidenav-overlay").css("display",'none');
