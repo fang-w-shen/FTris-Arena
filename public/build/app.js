@@ -318,9 +318,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 
 
 
-    setTimeout(()=>{
-      $('.space1').fadeIn();
-    },3000);
+
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -329,6 +327,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         }
         else {
           $('body').css("overflow-y","hidden");
+          setTimeout(()=>{
+            $('.space1').fadeIn();
+          },3000);
         }
         // $(".dropdown-button").dropdown();
         // $(".button-collapse").sideNav();

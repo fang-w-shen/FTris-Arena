@@ -10,9 +10,7 @@
 
 
 
-    setTimeout(()=>{
-      $('.space1').fadeIn();
-    },3000);
+
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -21,6 +19,9 @@
         }
         else {
           $('body').css("overflow-y","hidden");
+          setTimeout(()=>{
+            $('.space1').fadeIn();
+          },3000);
         }
         // $(".dropdown-button").dropdown();
         // $(".button-collapse").sideNav();
