@@ -400,6 +400,11 @@ i.shine {
   left: -175px !important;
   z-index: -10; }
 
+@media only screen and (max-device-width: 1024px) {
+  .space1 {
+    width: 600px;
+    left: 0em !important;
+    overflow: hidden !important; } }
 svg {
   position: absolute;
   height: 100%; }
