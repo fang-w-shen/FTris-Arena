@@ -198,7 +198,7 @@
           if(!gameCredentials.password){
             gameCredentials.password = '';
           }
-          var spaceDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+          var spaceDeviceWidth = window.matchMedia( "(min-width: 1036px)" );
           if (spaceDeviceWidth.matches) {
            setTimeout(()=>{
             $('.space1').fadeIn();
@@ -303,7 +303,7 @@
           if (password === Object.values(item)[0].password) {
 
             $scope.gameMade = true;
-            var spaceDeviceWidth = window.matchMedia( "(min-width: 1024px)" );
+            var spaceDeviceWidth = window.matchMedia( "(min-width: 1036px)" );
             if (spaceDeviceWidth.matches) {
              setTimeout(()=>{
               $('.space1').fadeIn();
