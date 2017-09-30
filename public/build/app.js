@@ -147,18 +147,18 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
-    function space(thing, from, to) {
+    function space1(thing, from, to) {
       TweenMax.fromTo(thing, Math.floor(Math.random() * 100), { y: from }, { y: to,
-        onComplete: space,
+        onComplete: space1,
         onCompleteParams: [thing, from, to],
         ease: Linear.easeNone });
     }
 
-    var itemsDown = [".light4", ".light5", ".light6", ".light7", ".light8", ".light11", ".light12", ".light13", ".light14", ".light15", ".light16"].forEach(function (e) {
-      return space(e, -1080, 1080);
+    var itemsDown = [".1light4", ".1light5", ".1light6", ".1light7", ".1light8", ".1light11", ".1light12", ".1light13", ".1light14", ".1light15", ".1light16"].forEach(function (e) {
+      return space1(e, -1080, 1080);
     });
-    var itemsUp = [".light1", ".light2", ".light3", ".light9", ".light10", ".light17"].forEach(function (e) {
-      return space(e, 1080, -1080);
+    var itemsUp = [".1light1", ".1light2", ".1light3", ".1light9", ".1light10", ".1light17"].forEach(function (e) {
+      return space1(e, 1080, -1080);
     });
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();
@@ -314,24 +314,18 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     var themesong = document.getElementById("myAudio");
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     themesong.currentTime = 0;
-
-
     function space(thing, from, to) {
-      TweenMax.fromTo(thing, Math.floor(Math.random() * (300 - 2 + 1) + 2) * 0.5 + 0.5, { y: from }, { y: to,
+      TweenMax.fromTo(thing, Math.floor(Math.random() * (400 - 2 + 1) + 2) * 0.5 + 0.5, { y: from }, { y: to,
         onComplete: space,
         onCompleteParams: [thing, from, to],
         ease: Linear.easeNone });
     }
 
-    var itemsDown = [".light4", ".light5", ".light6", ".light7", ".light8", ".light11", ".light12", ".light13", ".light14", ".light15", ".light16"].forEach(function (e) {
-      return space(e, -1080, 1080);
-    });
-    var itemsUp = [".light1", ".light2", ".light3", ".light9", ".light10", ".light17"].forEach(function (e) {
-      return space(e, 1080, -1080);
-    });
+
+
     setTimeout(()=>{
-      $('.space').fadeIn('slow');
-    },3500);
+      $('.space1').fadeIn();
+    },3000);
       //////////////WINDOW INITIALIZATION/////////////
       var yourDeviceWidth = window.matchMedia( "(max-width: 570px)" );
       if (yourDeviceWidth.matches) {
@@ -341,7 +335,17 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         else {
           $('body').css("overflow-y","hidden");
         }
+        var spaceDeviceWidth = window.matchMedia( "(max-width: 1024px)" );
+        if (spaceDeviceWidth.matches) {
 
+
+          var itemsDown = [".light4", ".light5", ".light6", ".light7", ".light8", ".light11", ".light12", ".light13", ".light14", ".light15", ".light16"].forEach(function (e) {
+            return space(e, -1080, 1080);
+          });
+          var itemsUp = [".light1", ".light2", ".light3", ".light9", ".light10", ".light17"].forEach(function (e) {
+            return space(e, 1080, -1080);
+          });
+        }
         // $(".dropdown-button").dropdown();
         // $(".button-collapse").sideNav();
         // $("#sidenav-overlay").css("display",'none');
@@ -758,6 +762,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           if(!gameCredentials.password){
             gameCredentials.password = '';
           }
+          setTimeout(()=>{
+            $('.space1').fadeIn();
+          },2000);
           gameCredentials.user = firebase.auth().currentUser.uid;
           var tetris = new Tetris2({
             rows: 20,
@@ -857,7 +864,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
           if (password === Object.values(item)[0].password) {
 
             $scope.gameMade = true;
-
+            setTimeout(()=>{
+              $('.space1').fadeIn();
+            },2000);
             gameCredentials.key = Object.keys(item)[0];
             gameCredentials.user = item[Object.keys(item)[0]].user;
             let database = firebase.database().ref('games/'+gameCredentials.key);
@@ -893,7 +902,36 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
            //   },506);
            // },5000);
 
+           $('.lever').on("click",(e)=>{
+            let checkstate = e.target.parentNode.querySelector("input[type=checkbox]").checked;
+            if (e.target.id==='music') {
+              if(checkstate) {
+                e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+                document.querySelectorAll("audio")[0].muted = true;
+              }else{
+                e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+                document.querySelectorAll("audio")[0].muted = false;
+              }
+            }
+            else if (e.target.id==='sound') {
+              if(checkstate) {
+                e.target.parentNode.querySelector("input[type=checkbox]").checked = false;
+                document.querySelectorAll("audio").forEach((item,index)=>{
+                  if(index>0){
+                    item.muted = true;
+                  }
+                });
+              }else{
+                e.target.parentNode.querySelector("input[type=checkbox]").checked = true;
+                document.querySelectorAll("audio").forEach((item,index)=>{
+                  if(index>0){
+                    item.muted = false;
+                  }
+                });
+              }
+            }
 
+          });
 
 
 
@@ -943,13 +981,13 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
         }
 
       });
-      }
+}
 
-    };
+};
 
-    Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
-    angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
-  })();
+Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$route',"FirebaseFactory"];
+angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
+})();
 
 },{"../scoregrid":10,"../tetris":13}],6:[function(require,module,exports){
 (function() {

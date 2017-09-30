@@ -13,18 +13,18 @@
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     $scope.getHighScores = getHighScores;
     $scope.highScorePlayers=[];
-    function space(thing, from, to) {
+    function space1(thing, from, to) {
       TweenMax.fromTo(thing, Math.floor(Math.random() * 100), { y: from }, { y: to,
-        onComplete: space,
+        onComplete: space1,
         onCompleteParams: [thing, from, to],
         ease: Linear.easeNone });
     }
 
-    var itemsDown = [".light4", ".light5", ".light6", ".light7", ".light8", ".light11", ".light12", ".light13", ".light14", ".light15", ".light16"].forEach(function (e) {
-      return space(e, -1080, 1080);
+    var itemsDown = [".1light4", ".1light5", ".1light6", ".1light7", ".1light8", ".1light11", ".1light12", ".1light13", ".1light14", ".1light15", ".1light16"].forEach(function (e) {
+      return space1(e, -1080, 1080);
     });
-    var itemsUp = [".light1", ".light2", ".light3", ".light9", ".light10", ".light17"].forEach(function (e) {
-      return space(e, 1080, -1080);
+    var itemsUp = [".1light1", ".1light2", ".1light3", ".1light9", ".1light10", ".1light17"].forEach(function (e) {
+      return space1(e, 1080, -1080);
     });
     //////////////HOME ANIMATION EVENTS///////////////
     document.getElementById("play").focus();

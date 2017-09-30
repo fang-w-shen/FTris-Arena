@@ -395,10 +395,14 @@ i.shine {
   width: 2000px;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: none;
   background: #222222;
   left: -175px !important;
   z-index: -10; }
+  @media only screen and (max-device-width: 1024px) {
+    .space {
+      left: -45em !important;
+      overflow: none !important; } }
 
 svg {
   position: absolute;
