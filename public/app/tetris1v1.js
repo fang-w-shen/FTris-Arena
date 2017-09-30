@@ -8,6 +8,8 @@ require('./grid');
   var rowscleared = [];
   var score = 0;
   var fkeyscore = 0;
+  var fshape = false;
+  var howmanyfshapes = 0;
   var time;
   var themesong = document.getElementById("myAudio");
   var tetris = document.getElementById("tetris");
@@ -101,24 +103,20 @@ require('./grid');
     },
 
     getRandomShape: function() {
-      let ref;
-      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
-        ref = this.databaseref.replace("/grids","/myscore");
 
-      }else if (this.databaseref) {
-        ref = this.databaseref.replace("/grid","/opponentscore");
-      }
-      console.log("ref",ref);
-      let selfref = firebase.database().ref(ref);
-      selfref.on("value",(snapshot)=>{
-        console.log("hi");
-        if (snapshot.val()){
-          if (snapshot.val().length >1) {
-            return this.shapes[7];
-          }
+      if (fshape) {
+        if (howmanyfshapes>0) {
+          howmanyfshapes --;
+          return this.shapes[7];
+
+        }else {
+          fshape = false;
+          return this.shapes[Math.floor(Math.random() * 7)];
         }
-      });
-      return this.shapes[Math.floor(Math.random() * 7)];
+      }else {
+
+        return this.shapes[Math.floor(Math.random() * 7)];
+      }
     },
 
     displayInPreview: function( ShapePreview ) {
@@ -373,7 +371,6 @@ require('./grid');
               fkeyscore = 0;
             }
           }
-          console.log("ref", ref);
 
 
 
@@ -577,9 +574,11 @@ require('./grid');
       $(this).off('keydown');
       $(this).off("keyup");
 
-
+      howmanyfshapes = 0;
       score = 0;
       fkeyscore = 0;
+      fshape = false;
+
       let ref = this.databaseref;
       if (this.gameBoardRef.user !== firebase.auth().currentUser.uid) {
         firebase.database().ref(ref.replace(/grids/,"")).remove();
@@ -599,6 +598,23 @@ require('./grid');
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");
       this.timer();
+      let ref;
+      if (firebase.auth().currentUser.uid !== this.gameBoardRef.user) {
+        ref = this.databaseref.replace("/grids","/myscore");
+
+      }else if (this.databaseref) {
+        ref = this.databaseref.replace("/grid","/opponentscore");
+      }
+      let selfref = firebase.database().ref(ref);
+      selfref.on("value",(snapshot)=>{
+        if (snapshot.val()){
+          if (snapshot.val().score > 2) {
+            fshape = true;
+            howmanyfshapes ++;
+          }
+
+        }
+      });
     }
   };
 

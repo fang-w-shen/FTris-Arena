@@ -427,7 +427,7 @@ svg {
   cursor: pointer;
   top: 9.1em;
   left: 14.5em;
-  z-index: 9;
+  z-index: 999;
   width: 1.2em;
   height: 1.3em;
   text-align: center;

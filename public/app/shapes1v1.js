@@ -545,8 +545,8 @@
     return [coords, newRotationState];
   };
 
-  function FShape( grid, collisionState ) {
-    this.onInit(grid,collisionState);
+  function FShape( grid, collisionState,databaseref ) {
+    this.onInit(grid,collisionState,databaseref);
     let self = this;
     self.color = colors[7];
     this.cells.forEach(function( cell ) {
