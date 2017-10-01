@@ -5,7 +5,6 @@ require('./grid');
 (function( global, Grid, Shape2) {
   // let pauseGame = require('./canvas.js');
   var speed = 1065;
-  var rowscleared = [];
   var score = 0;
   var fkeyscore = 0;
   var fshape = false;
@@ -17,7 +16,7 @@ require('./grid');
   var drop = document.getElementById("drop");
   var rotate = document.getElementById("rotate");
   var gameover = document.getElementById("gameover");
-
+  var line = document.getElementById("line");
 
   function CollisionState() {
     this.events = [];
@@ -371,7 +370,7 @@ require('./grid');
               fkeyscore = 0;
             }
           }
-
+          line.play();
 
 
           break;
@@ -495,7 +494,7 @@ require('./grid');
                 fkeyscore = 0;
               }
             }
-
+            line.play();
             break;
             case "control-b": // Space bar move all the way down
             self.clearInterval();
@@ -611,6 +610,7 @@ require('./grid');
           if (snapshot.val().score > 2) {
             fshape = true;
             howmanyfshapes ++;
+            line.play();
           }
 
         }

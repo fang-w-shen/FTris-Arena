@@ -122,7 +122,6 @@
               });
             }
 
-
             function logInWithEmailAndPassword(userCredentials){
               AuthFactory.logInWithEmailAndPassword(userCredentials).then(function(response){
                 Materialize.toast("Signed In!",4000);
