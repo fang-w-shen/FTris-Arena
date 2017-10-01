@@ -309,7 +309,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 (function() {
   'use strict';
   require('../tetris');
-  require('../scoregrid');
+  require('../time');
   var TetrisCtrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     var themesong = document.getElementById("myAudio");
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
@@ -551,11 +551,11 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
   })();
 
-},{"../scoregrid":10,"../tetris":13}],5:[function(require,module,exports){
+},{"../tetris":12,"../time":14}],5:[function(require,module,exports){
 (function() {
   'use strict';
   require('../tetris');
-  require('../scoregrid');
+  require('../time');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
@@ -981,7 +981,7 @@ Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$rou
 angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
 })();
 
-},{"../scoregrid":10,"../tetris":13}],6:[function(require,module,exports){
+},{"../tetris":12,"../time":14}],6:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -1185,39 +1185,6 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 });
 
 },{}],10:[function(require,module,exports){
-"use strict";
-(function instantiateLiveTime(){
-    var time = new Date();
-    var day = time.getDate();
-    var month = time.getMonth();
-    var year = time.getFullYear();
-    var hour = time.getHours();
-    var minute = time.getMinutes();
-    var sec = time.getSeconds();
-    hour = getNonMilitaryTime(hour);
-    minute = getTime(minute);
-    sec = getTime(sec);
-    $('#time').html(month+1+ "/" + day  + "/" + year + `<br>` + hour + ":" + minute + ":" + sec);
-    var newTime = setTimeout(instantiateLiveTime, 1000);
-    function getTime(i){
-        if(i < 10){
-            i ="0" +i;
-        }
-        return i;
-    }
-    function getNonMilitaryTime(i){
-        if (i===0){
-            i = 12;
-        }
-        else if(i > 12){
-            i =i-12;
-        }
-        return i;
-    }
-})();
-
-
-},{}],11:[function(require,module,exports){
 (function( global ){
   "use strict";
 
@@ -1886,7 +1853,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function( global ){
   "use strict";
 
@@ -2517,7 +2484,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -2992,7 +2959,7 @@ require('./grid');
 }( window , window.Grid,window.Shape));
 
 
-},{"./grid":8,"./shapes":11}],14:[function(require,module,exports){
+},{"./grid":8,"./shapes":10}],13:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -3618,4 +3585,40 @@ require('./grid');
 }( window , window.Grid,window.Shape2));
 
 
-},{"./grid":8,"./shapes":11}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+},{"./grid":8,"./shapes":10}],14:[function(require,module,exports){
+"use strict";
+(function instantiateLiveTime(){
+  var time = new Date();
+  var day = time.getDate();
+  var month = time.getMonth();
+  var year = time.getFullYear();
+  var hour = time.getHours();
+  var minute = time.getMinutes();
+  var sec = time.getSeconds();
+  var amORpm;
+  hour = getNonMilitaryTime(hour);
+  minute = getTime(minute);
+  sec = getTime(sec);
+  var newTime = setTimeout(instantiateLiveTime, 1000);
+  function getTime(i){
+    if(i < 10){
+      i ="0" +i;
+    }
+    return i;
+  }
+  function getNonMilitaryTime(i){
+    if (i===0){
+      i = 12;
+      amORpm = ' AM';
+    }
+    else if(i > 12){
+      i =i-12;
+      amORpm = ' PM';
+    }
+    return i;
+  }
+  $('#time').html(month+1+ "/" + day  + "/" + year + `<br>` + hour + ":" + minute + ":" + sec + amORpm);
+})();
+
+
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);

@@ -651,7 +651,8 @@ body {
 .modal-content {
   padding: 0 !important;
   margin-top: -20px;
-  border-radius: 2%; }
+  border-radius: 2%;
+  background-color: rgba(0, 0, 0, 0); }
 
 .highscoremodal {
   margin-top: 0px !important;
@@ -805,6 +806,9 @@ span.badge {
   100% {
     top: -58vh; } }
 @media only screen and (min-device-width: 768px) {
+  .directions p {
+    font-size: 1.2rem; }
+
   @keyframes credits {
     0% {
       top: 69vh; }
@@ -820,6 +824,9 @@ span.badge {
 
   img {
     margin-left: 17%; }
+
+  #fshape {
+    margin-left: -1px !important; }
 
   .overlay {
     position: relative;
@@ -1217,6 +1224,11 @@ span.badge {
     top: 8.6em;
     font-size: 0.7em !important;
     left: 12.7em; }
+
+  #fshape {
+    position: relative;
+    margin-top: 4px;
+    margin-left: auto; }
 
   .space {
     left: -10px !important; }

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   require('../tetris');
-  require('../scoregrid');
+  require('../time');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
