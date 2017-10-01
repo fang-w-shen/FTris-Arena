@@ -1,2 +1,2 @@
 # Tetris-Arena
-https://fang-w-shen.github.io/Tetris-Arena/#!/home
+https://tetris-arena.firebaseapp.com
