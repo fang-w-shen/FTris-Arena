@@ -1551,6 +1551,10 @@ span.badge {
     left: 8.5px !important; } }
 /*IPHONE6*/
 @media only screen and (min-device-width: 360px) and (max-device-width: 767px) {
+  .silplate:after {
+    top: 10.3em;
+    left: 11.8em; }
+
   p.leads {
     left: 17rem; }
 
