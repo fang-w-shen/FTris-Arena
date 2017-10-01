@@ -43,95 +43,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
 });
 
 },{}],2:[function(require,module,exports){
-// "use strict";
-//     var canvas = document.getElementById("myCanvas");
-//     var ctx = canvas.getContext("2d");
-//     var x = canvas.width/2;
-//     var y = canvas.height-30;
-//     var dx = -2;
-//     var dy = -2;
-
-//     var fontBase = 1000,
-//         fontSize = 70,
-//         ratio;
-
-//     var gamePaused = false;
-//     var game;
-//     var gamestatus='';
-//     var pause;
-
-//     function update() {
-//         canvas.width = window.innerWidth;
-//         canvas.height = window.innerHeight;
-//         ctx.font = getFont();
-//     }
-
-
-//     // window.onresize = update;
-
-//     function getFont() {
-//         var ratio = fontSize / fontBase;
-//         var size = canvas.width * ratio;
-
-//         return (size|0) + 'px sans-serif';
-//     }                    // default size for font
-
-
-//     function drawPause() {
-//         update();
-//         // ctx.beginPath();
-//         ctx.fillStyle = "white";
-
-//         ctx.fillText(gamestatus, 100, 100);
-//         // ctx.closePath();
-//     }
-
-
-//     function pauseGame(e) {
-//               if (!gamePaused) {
-//                 gamestatus='||  Paused';
-//                 pause = setInterval(()=>{
-//                         drawPause();
-//                     },450);
-//                 gamePaused = true;
-//                 $('#myCanvas').css("z-index",1);
-//                     game = setInterval(function() {
-//                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//                 },900);
-//               }
-//               else if (gamePaused) {
-//                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-//                 gamePaused = false;
-//                 gamestatus='';
-//                 $('#myCanvas').css("z-index",-1);
-//                 game = clearInterval(game);
-//                 pause = clearInterval(pause);
-//               }
-
-//     }
-
-
-
-//     function moverandomly() {
-//         x = Math.floor((Math.random() * 10) + 1);
-//         y = Math.floor((Math.random() * 20) + 1);
-//         dx = Math.floor((Math.random() * 10) + 1);
-//         dy = Math.floor((Math.random() * 20) + 1);
-
-//     }
-//     function getRandomColor() {
-//         var letters = '0123456789ABCDEF';
-//         var color = '#';
-//         for (var i = 0; i < 6; i++) {
-//           color += letters[Math.floor(Math.random() * 16)];
-//         }
-//         return color;
-//     }
-
-//     module.exports = pauseGame;
-
-},{}],3:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -305,7 +216,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   angular.module('TetrisApp').controller('HomeCtrl', HomeCtrl);
 })();
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function() {
   'use strict';
   require('../tetris');
@@ -551,7 +462,7 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
     angular.module('TetrisApp').controller('TetrisCtrl', TetrisCtrl);
   })();
 
-},{"../tetris":12,"../time":14}],5:[function(require,module,exports){
+},{"../tetris":11,"../time":13}],4:[function(require,module,exports){
 (function() {
   'use strict';
   require('../tetris');
@@ -981,7 +892,7 @@ Tetris1v1Ctrl.$inject = ['$rootScope', '$scope', 'AuthFactory','$location','$rou
 angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
 })();
 
-},{"../tetris":12,"../time":14}],6:[function(require,module,exports){
+},{"../tetris":11,"../time":13}],5:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -1012,7 +923,7 @@ angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
   angular.module('TetrisApp').factory('AuthFactory', AuthFactory);
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function() {
   'use strict';
 
@@ -1100,7 +1011,7 @@ angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
   angular.module('TetrisApp').factory('FirebaseFactory', FirebaseFactory);
 })();
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 (function ( global ) {
 
@@ -1174,7 +1085,7 @@ angular.module('TetrisApp').controller('Tetris1v1Ctrl', Tetris1v1Ctrl);
 
 }(window));
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 angular.module('TetrisApp').constant("firebaseInfo", {
     apiKey: "AIzaSyBNq9eV8vzdFJwUlxCzeAh3wsC5apGsdjY",
     authDomain: "tetris-arena.firebaseapp.com",
@@ -1184,7 +1095,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
     messagingSenderId: "735100394750"
 });
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function( global ){
   "use strict";
 
@@ -1853,7 +1764,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function( global ){
   "use strict";
 
@@ -2484,7 +2395,7 @@ angular.module('TetrisApp').constant("firebaseInfo", {
 
 }( window ));
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -2959,7 +2870,7 @@ require('./grid');
 }( window , window.Grid,window.Shape));
 
 
-},{"./grid":8,"./shapes":10}],13:[function(require,module,exports){
+},{"./grid":7,"./shapes":9}],12:[function(require,module,exports){
 "use strict";
 require('./shapes');
 require('./grid');
@@ -3585,7 +3496,7 @@ require('./grid');
 }( window , window.Grid,window.Shape2));
 
 
-},{"./grid":8,"./shapes":10}],14:[function(require,module,exports){
+},{"./grid":7,"./shapes":9}],13:[function(require,module,exports){
 "use strict";
 (function instantiateLiveTime(){
   var time = new Date();
@@ -3621,4 +3532,4 @@ require('./grid');
 })();
 
 
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13]);
