@@ -421,7 +421,7 @@ svg {
   fill: #7A6BB5; }
 
 .silplate:after {
-  content: attr(data-key);
+  content: 'F';
   position: absolute;
   display: block;
   cursor: pointer;
@@ -835,7 +835,10 @@ span.badge {
     width: 40%; }
 
   .mobileDevices {
-    margin-top: -1em; } }
+    margin-top: -1em; }
+
+  .silplate:after {
+    top: 9.4em; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD LANDSCAPE////////*/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .letters {
