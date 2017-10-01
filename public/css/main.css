@@ -634,7 +634,7 @@ nav {
     opacity: 0; } }
 body {
   overflow: hidden;
-  background: #292b2c; }
+  background: black; }
 
 .colorTheme {
   background-color: black; }
@@ -1002,7 +1002,10 @@ span.badge {
       font-size: 1em !important;
       padding-left: 1em !important; }
     .overlayCModal fieldset {
-      height: 245px; } }
+      height: 245px; }
+
+  #level, #score {
+    font-size: .9rem !important; } }
 @media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-top: 1em !important;
@@ -1066,9 +1069,6 @@ span.badge {
 @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) and (orientation: landscape) {
   #progressbar {
     left: 34%; }
-
-  #level, #score {
-    font-size: .9rem !important; }
 
   .overlay {
     position: relative;

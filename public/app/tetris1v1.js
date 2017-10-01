@@ -468,28 +468,7 @@ require('./grid');
       });
 
       ////////////////////////CLICK EVENTS/////////////////////////////
-      $('#fkey').on('touchEvent', ()=>{
-        let ref;
-        if (firebase.auth().currentUser.uid !== self.gameBoardRef.user) {
-          ref = self.databaseref.replace("/grids","");
-          if (fkeyscore > 2) {
-            let scoreref = firebase.database().ref(ref);
-            scoreref.child("opponentscore").set({score:score});
 
-            $('.silplate').css('visibility','hidden');
-            fkeyscore = 0;
-          }
-        }else if (self.databaseref) {
-          ref = self.databaseref.replace("/grid","");
-          if (fkeyscore > 2) {
-            let scoreref = firebase.database().ref(ref);
-            scoreref.child("myscore").set({score:score});
-
-            $('.silplate').css('visibility','hidden');
-            fkeyscore = 0;
-          }
-        }
-      });
       $(document).on('click', function( e ) {
         // $(e.target).data.id is the id of the DOM element that is clicked
         let domId = $(e.target).data('id');
