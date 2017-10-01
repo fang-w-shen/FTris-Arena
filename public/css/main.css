@@ -1097,7 +1097,7 @@ span.badge {
     height: 731px !important; }
 
   #tetris2 {
-    margin-top: 3.1em !important; }
+    top: 1.6em !important; }
 
   .right-column {
     margin-left: -.3em; }
@@ -1992,9 +1992,6 @@ progress::-webkit-progress-value {
 
   .gamelobby {
     padding-left: 4% !important; }
-
-  #tetris2 {
-    top: 1.6em !important; }
 
   .directions, .creategame {
     padding-right: 3em !important;
