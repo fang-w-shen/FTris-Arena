@@ -1,4 +1,3 @@
-
 <div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
 <div class="space space1" style="display:none">
@@ -242,22 +241,10 @@
       <h1 class="display-3" style="margin:0;">Game Lobby</h1>
       <hr class="my-4" style="background:white">
 
-
-
       <button class="btn waves-effect waves-light" ng-repeat="item in board" data-id="{{item.user}}" ng-click="joinGame(item.user)" >
         <i class="fa fa-trophy" aria-hidden="true" style="display:block;z-index:-1"> {{item.name}}</i> <input type="button"  type="submit" name="action" value="Join Game"><i class="material-icons right">send</i>
-
-
     </button>
-
-
-
-
-
-
-
 </div>
-
 
 <div class="col-md-7 row col-12" >
     <div ng-if="!gameMade" ng-show="isLoggedIn" class="jumbotron col-12 bigone directions" style="z-index:9;">
@@ -284,9 +271,6 @@
 </div>
 </div>
 
-
-
-
 <div ng-show="gameMade" class="frame frame2">
   <div class='containermetaltr'>
       <div class='metal'></div>
@@ -298,10 +282,12 @@
   <label>Music</label>
   <div>
     <div class = "switch" ><label>Off<input type = "checkbox" checked>
-      <span class = "lever" id="music"></span>On</label></div>
-      <label>Effects</label>
-      <div class = "switch" ><label>Off<input type = "checkbox" checked>
-          <span class = "lever" id="sound"></span>On</label></div>
-      </div>
-
+      <span class = "lever" id="music"></span>On</label>
   </div>
+  <label>Effects</label>
+  <div class = "switch" ><label>Off<input type = "checkbox" checked>
+      <span class = "lever" id="sound"></span>On</label>
+  </div>
+</div>
+
+</div>
