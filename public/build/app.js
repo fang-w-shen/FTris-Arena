@@ -557,7 +557,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-    var themesong = document.getElementById("myAudio");
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
     if (firebase.auth().currentUser) {
@@ -883,8 +882,6 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
             if(timeleft <= 0) {
               clearInterval(downloadTimer);
               $('#progressbar').hide();
-              themesong.currentTime = 0;
-              themesong.play();
               $scope.bindFullScreenKey();
               tetris.init();
             }
@@ -3292,8 +3289,7 @@ require('./grid');
                 clearInterval(self.downloadTimer);
                 $('#progressbar').hide();
                 self.init();
-                themesong.currentTime = 0;
-                themesong.play();
+
               }
             },1000);
 
@@ -3591,6 +3587,8 @@ require('./grid');
       this.createNewShape();
       this.startGame = true;
       this.paused = false;
+      themesong.currentTime = 0;
+      themesong.play();
       $('#startGame').off("click");
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");

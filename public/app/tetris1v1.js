@@ -294,8 +294,7 @@ require('./grid');
                 clearInterval(self.downloadTimer);
                 $('#progressbar').hide();
                 self.init();
-                themesong.currentTime = 0;
-                themesong.play();
+
               }
             },1000);
 
@@ -593,6 +592,8 @@ require('./grid');
       this.createNewShape();
       this.startGame = true;
       this.paused = false;
+      themesong.currentTime = 0;
+      themesong.play();
       $('#startGame').off("click");
       $('#startGame').off("keydown");
       $('#startGame').off("keyup");

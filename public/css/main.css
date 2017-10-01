@@ -1002,10 +1002,7 @@ span.badge {
       font-size: 1em !important;
       padding-left: 1em !important; }
     .overlayCModal fieldset {
-      height: 245px; }
-
-  #level, #score {
-    font-size: .9rem !important; } }
+      height: 245px; } }
 @media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-top: 1em !important;
@@ -1072,6 +1069,9 @@ span.badge {
 
   #next {
     margin-bottom: 0em !important; }
+
+  .silplate:after {
+    top: 7.3em; }
 
   .overlay {
     position: relative;
@@ -1992,6 +1992,9 @@ progress::-webkit-progress-value {
 
   .gamelobby {
     padding-left: 4% !important; }
+
+  #tetris2 {
+    top: 1.6em !important; }
 
   .directions, .creategame {
     padding-right: 3em !important;

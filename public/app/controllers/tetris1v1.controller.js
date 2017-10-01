@@ -3,7 +3,6 @@
   require('../tetris');
   require('../scoregrid');
   var Tetris1v1Ctrl = function($rootScope, $scope, AuthFactory, $location, $route, FirebaseFactory) {
-    var themesong = document.getElementById("myAudio");
     document.querySelectorAll("audio").forEach((item)=>{item.muted = false;});
     ///////////////////////////////////SETTING UP GAME LOBBY//////////////////////////////////////////////////
     if (firebase.auth().currentUser) {
@@ -329,8 +328,6 @@
             if(timeleft <= 0) {
               clearInterval(downloadTimer);
               $('#progressbar').hide();
-              themesong.currentTime = 0;
-              themesong.play();
               $scope.bindFullScreenKey();
               tetris.init();
             }
