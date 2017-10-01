@@ -1070,6 +1070,9 @@ span.badge {
   #progressbar {
     left: 34%; }
 
+  #next {
+    margin-bottom: 0em !important; }
+
   .overlay {
     position: relative;
     background-repeat: no-repeat;
