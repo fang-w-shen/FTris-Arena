@@ -2022,5 +2022,12 @@ progress::-webkit-progress-value {
 
   .space {
     margin-left: -60em !important; } }
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 /*# sourceMappingURL=main.css.map */
