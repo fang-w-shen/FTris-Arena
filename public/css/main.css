@@ -1111,9 +1111,6 @@ span.badge {
 
   .space {
     margin-left: -60em !important; } }
-@media only screen and (min-device-width: 1440px) {
-  .mobileDevices {
-    margin-left: 3.5em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.4em !important; } }
@@ -1153,6 +1150,13 @@ span.badge {
   .mobileDevices {
     margin-top: 0em !important;
     left: 29em !important; } }
+@media only screen and (min-device-width: 1440px) {
+  .mobileDevices {
+    margin-left: 3.5em !important;
+    margin-top: 2em !important; }
+
+  .frame2 {
+    margin-top: 32.5em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .blink_me {
     margin-left: -2.1em !important; }
