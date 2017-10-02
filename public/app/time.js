@@ -7,7 +7,7 @@
   var hour = time.getHours();
   var minute = time.getMinutes();
   var sec = time.getSeconds();
-  var amORpm;
+  var amORpm = getamORpm(hour);
   hour = getNonMilitaryTime(hour);
   minute = getTime(minute);
   sec = getTime(sec);
@@ -21,13 +21,19 @@
   function getNonMilitaryTime(i){
     if (i===0){
       i = 12;
-      amORpm = ' AM';
     }
     else if(i > 12){
       i =i-12;
-      amORpm = ' PM';
     }
     return i;
+  }
+  function getamORpm(i) {
+    if (i<12){
+      return ' AM';
+    }
+    else {
+      return ' PM';
+    }
   }
   $('#time').html(month+1+ "/" + day  + "/" + year + `<br>` + hour + ":" + minute + ":" + sec + amORpm);
 })();
