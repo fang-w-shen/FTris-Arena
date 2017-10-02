@@ -2808,9 +2808,8 @@ require('./grid');
       }).mouseup(()=>{
         clearInterval(settime);
       });
-      var othertime;
       document.addEventListener("touchstart", function( e ) {
-        othertime = setInterval(()=>{
+        settime = setInterval(()=>{
          let domId = $(e.target).data('id');
          if (self.startGame) {
           switch (domId) {
@@ -2864,7 +2863,7 @@ require('./grid');
 
       });
       document.addEventListener("touchend",()=>{
-        clearInterval(othertime);
+        clearInterval(settime);
       });
       $(document).click( function( e ) {
 
@@ -3509,9 +3508,8 @@ require('./grid');
       }).mouseup(()=>{
         clearInterval(settime);
       });
-      var othertime;
       document.addEventListener("touchstart", function( e ) {
-        othertime = setInterval(()=>{
+        settime = setInterval(()=>{
          let domId = $(e.target).data('id');
          if (self.startGame) {
           switch (domId) {
@@ -3565,7 +3563,7 @@ require('./grid');
 
       });
       document.addEventListener("touchend",()=>{
-        clearInterval(othertime);
+        clearInterval(settime);
       });
 
 
