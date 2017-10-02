@@ -410,8 +410,9 @@ require('./grid');
       }).mouseup(()=>{
         clearInterval(settime);
       });
+      var othertime;
       document.addEventListener("touchstart", function( e ) {
-        settime = setInterval(()=>{
+        othertime = setInterval(()=>{
          let domId = $(e.target).data('id');
          if (self.startGame) {
           switch (domId) {
@@ -465,7 +466,7 @@ require('./grid');
 
       });
       document.addEventListener("touchend",()=>{
-        clearInterval(settime);
+        clearInterval(othertime);
       });
       $(document).click( function( e ) {
 
