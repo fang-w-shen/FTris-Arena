@@ -2403,7 +2403,6 @@ require('./grid');
 (function( global, Grid, Shape) {
   // let pauseGame = require('./canvas.js');
   var speed = 1065;
-  var rowscleared = [];
   var score = 0;
   var time;
   var themesong = document.getElementById("myAudio");
