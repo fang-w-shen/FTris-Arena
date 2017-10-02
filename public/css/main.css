@@ -1111,6 +1111,9 @@ span.badge {
 
   .space {
     margin-left: -60em !important; } }
+@media only screen and (min-device-width: 1440px) {
+  .mobileDevices {
+    margin-left: 3.5em !important; } }
 @media only screen and (min-device-width: 1500px) {
   .overlayCModal label {
     font-size: 1.4em !important; } }
@@ -1159,7 +1162,7 @@ span.badge {
 
   .mobileDevices {
     margin-top: 3vh !important;
-    margin-left: 1.1em; }
+    margin-left: 1.1em !important; }
 
   .frame {
     width: 450px !important; }
