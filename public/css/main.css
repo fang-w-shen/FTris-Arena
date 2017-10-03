@@ -955,9 +955,6 @@ span.badge {
 
   .howtoplaymodal {
     margin-top: -1em !important; } }
-@media only screen and (min-device-width: 1646px) and (max-device-width: 1800px) {
-  .blink_me {
-    padding-left: 3em; } }
 /*///////MEDIA FOR SCREENS ABOVE IPAD PORTRAIT////////*/
 @media only screen and (min-device-width: 767px) {
   #progressbar {
@@ -1042,6 +1039,9 @@ span.badge {
     position: absolute;
     top: 6em;
     right: 10em; } }
+@media only screen and (min-device-width: 1646px) {
+  .blink_me {
+    margin-left: -5em !important; } }
 /*///////MEDIA FOR IPAD 767PX PORTRAIT FORREAL////////*/
 @media only screen and (min-device-width: 767px) and (max-device-width: 1023px) {
   .overlay {
@@ -1986,7 +1986,7 @@ progress::-webkit-progress-value {
 /* Prefix-free was creating issues with the animation */
 @media screen and (min-width: 1500px) {
   .blink_me {
-    margin-left: -2em !important; }
+    margin-left: -1.6em !important; }
 
   .right-column {
     margin-left: -.8em !important;
