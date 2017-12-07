@@ -1,12 +1,12 @@
 # Tetris-Arena
 **[Play The Game](https://tetris-arena.firebaseapp.com)**
-
+[![Agency Preview](https://tetris-arena.firebaseapp.com)](https://fang-w-shen.github.io/Professional-Portfolio/)
 ## CLONING THE REPO
 
 To get started with the app, clone the repo and change directories into the newly created directory and then its 'public' subfolder:
 
 ```
-$ git clone https://github.com/fang-w-shen/SolarSystemAPI.git
+$ git clone https://github.com/fang-w-shen/Tetris-Arena.git
 $ cd Tetris-Arena/public
 ```
 Then change directories again into the lib folder to install all dependencies:
