@@ -14,7 +14,8 @@ FTris is a multiplayer online game modeled after Tetris that introduces a new sh
 Using the keyboard or on-screen touchpad on your laptop or mobile device, you can move the shapes and strategically place them to clear as many lines of blocks as possible before any reach the top!
 
 In multi-player mode, every 2 lines of blocks you clear enables you to use the F-Shape power-up which forces your opponent's next shape to drop the newly designed F-Shape. While this will surely 'F' your opponent's strategy up, be careful, your opponent can F-Shape you back at any moment so be prepared to constantly adjust your strategy!
-
+### Technologies Used:
+Multiplayer TETRIS Game made with HTML5, CSS/SCSS/SASS, BOOTSTRAP, MATERIALIZE, JS, JQUERY, BROWSERIFY, GRUNT, ANGULARJS, FIREBASE, GOOGLEAUTH
 **[Play The Game](https://tetris-arena.firebaseapp.com)**
 
 ## CLONING THE REPO
