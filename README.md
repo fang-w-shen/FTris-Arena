@@ -1,13 +1,13 @@
 # FTris-Arena
-## Game Name:
+### Game Name:
 
 FTris
 
-## Creator:
+### Creator:
 
 Fang W. Shen
 
-## Game Description:
+### Game Description:
 
 FTris is a multiplayer online game modeled after Tetris that introduces a new shape and a whole new way to play! Play at your own pace in single-player mode or play against your friends in the competitive multi-player arena! 
 
