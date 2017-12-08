@@ -1,6 +1,12 @@
 # Tetris-Arena
+FTris is a multiplayer online game modeled after Tetris that introduces a new shape and a whole new way to play! Play at your own pace in single-player mode or play against your friends in the competitive multi-player arena! 
+
+Using the keyboard or on-screen touchpad on your laptop or mobile device, you can move the shapes and strategically place them to clear as many lines of blocks as possible before any reach the top!
+
+In multi-player mode, every 2 lines of blocks you clear enables you to use the F-Shape power-up which forces your opponent's next shape to drop the newly designed F-Shape. While this will surely 'F' your opponent's strategy up, be careful, your opponent can F-Shape you back at any moment so be prepared to constantly adjust your strategy!
+
 **[Play The Game](https://tetris-arena.firebaseapp.com)**
-[![Agency Preview](https://tetris-arena.firebaseapp.com)](https://fang-w-shen.github.io/Professional-Portfolio/)
+
 ## CLONING THE REPO
 
 To get started with the app, clone the repo and change directories into the newly created directory and then its 'public' subfolder:
