@@ -1,7 +1,11 @@
-# Tetris-Arena
-Game Name: FTris
+# FTris-Arena
+Game Name:
 
-Creator: Fang W. Shen
+FTris
+
+Creator:
+
+Fang W. Shen
 
 Game Description:
 
