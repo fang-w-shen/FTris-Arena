@@ -523,63 +523,63 @@ require('./grid');
       }).mouseup(()=>{
         clearInterval(settime);
       });
-      document.addEventListener("touchstart", function( e ) {
-        settime = setInterval(()=>{
-         let domId = $(e.target).data('id');
-         if (self.startGame) {
-          switch (domId) {
-            case "control-b": // Space bar move all the way down
-            self.clearInterval();
+      // document.addEventListener("touchstart", function( e ) {
+      //   settime = setInterval(()=>{
+      //    let domId = $(e.target).data('id');
+      //    if (self.startGame) {
+      //     switch (domId) {
+      //       case "control-b": // Space bar move all the way down
+      //       self.clearInterval();
 
-            if (!self.paused) {
-              drop.play();
-              self.interval = setInterval(function() {
-                self.shape.moveDown();
-              }, 1);
-            }
-            break;
-            case "d-left":
-            if (!self.paused) {
-              move.play();
-              self.shape.moveLeft();
-            }
-            break;
-            case "d-right":
-            if (!self.paused) {
-              move.play();
-              self.shape.moveRight();
-            }
-            break;
-            case "d-down":
-            if (!self.paused) {
-              move.play();
-              self.shape.moveDown();
-            }
-            break;
-            case "control-a":
-            if (!self.paused) {
-              rotate.play();
-              self.shape.rotate();
-            }
-            break;
-            case "d-up":
-            if (!self.paused) {
-              rotate.play();
-              self.shape.rotate();
-            }
-            break;
-            case "pauser":
-            self.pause();
-            break;
-          }
-        }
-      },100);
-        // $(e.target).data.id is the id of the DOM element that is clicked
+      //       if (!self.paused) {
+      //         drop.play();
+      //         self.interval = setInterval(function() {
+      //           self.shape.moveDown();
+      //         }, 1);
+      //       }
+      //       break;
+      //       case "d-left":
+      //       if (!self.paused) {
+      //         move.play();
+      //         self.shape.moveLeft();
+      //       }
+      //       break;
+      //       case "d-right":
+      //       if (!self.paused) {
+      //         move.play();
+      //         self.shape.moveRight();
+      //       }
+      //       break;
+      //       case "d-down":
+      //       if (!self.paused) {
+      //         move.play();
+      //         self.shape.moveDown();
+      //       }
+      //       break;
+      //       case "control-a":
+      //       if (!self.paused) {
+      //         rotate.play();
+      //         self.shape.rotate();
+      //       }
+      //       break;
+      //       case "d-up":
+      //       if (!self.paused) {
+      //         rotate.play();
+      //         self.shape.rotate();
+      //       }
+      //       break;
+      //       case "pauser":
+      //       self.pause();
+      //       break;
+      //     }
+      //   }
+      // },100);
+      //   // $(e.target).data.id is the id of the DOM element that is clicked
 
-      });
-      document.addEventListener("touchend",()=>{
-        clearInterval(settime);
-      });
+      // });
+      // document.addEventListener("touchend",()=>{
+      //   clearInterval(settime);
+      // });
 
 
       $(document).on('click', function( e ) {
