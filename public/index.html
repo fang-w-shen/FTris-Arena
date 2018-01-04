@@ -2,10 +2,10 @@
 <html lang="en" ng-app="TetrisApp">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -13,10 +13,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <title>Tetris Arena</title>
-    <script>
-            document.ontouchmove = function(e){ e.preventDefault(); }
-
-    </script>
 </head>
 <body style="height:100%;width:100%" style="overflow:hidden !important">
     <div class="body" style="overflow:hidden !important">
@@ -34,31 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script>
-(function() {
-    var lastTouch = 0;
-    function preventZoom(e) {
-        var t2 = e.timeStamp;
-        var t1 = lastTouch || t2;
-        var dt = t2 - t1;
-        var fingers = e.touches.length;
-        lastTouch = t2;
 
-        if (!dt || dt >= 300 || fingers > 1) {
-            return;
-        }
-        resetPreventZoom();
-        e.preventDefault();
-        e.target.click();
-    }
-    function resetPreventZoom() {
-        lastTouch = 0;
-    }
-
-    document.addEventListener('touchstart', preventZoom, false);
-    document.addEventListener('touchmove', resetPreventZoom, false);
-})();
-    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 
     <!-- Materialize Dependency -->
