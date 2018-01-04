@@ -47,6 +47,9 @@ angular.module('TetrisApp').run(function($rootScope, $window, firebaseInfo) {
   'use strict';
 
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
+
+    document.ontouchmove = function(e){ e.preventDefault(); };
+
     $('body').css("overflow","hidden");
     $('body').css("overflow","none");
     $('body').css("height","100vh");
