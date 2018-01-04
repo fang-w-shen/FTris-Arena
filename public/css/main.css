@@ -1929,7 +1929,8 @@ input {
 
 @media only screen and (max-width: 737px) and (orientation: landscape) {
   .body::after {
-    content: "Landscape Mode on IPhones Is Currently Unavailable. Revert Back To Portrait To Continue..."; }
+    content: "Landscape Mode on IPhones Is Currently Unavailable. Revert Back To Portrait To Continue...";
+    color: white; }
 
   #ngview {
     display: none; } }
