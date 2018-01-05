@@ -1,5 +1,8 @@
 <script>
-$.fn.fullpage.setAutoScrolling(true);
+ $(window).find('html, body').css({
+ 'overflow': 'auto !important',
+ 'height': 'auto !important'
+ })
 </script>
 <div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
