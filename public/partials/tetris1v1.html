@@ -1,8 +1,5 @@
 <script>
- $(window).find('html, body').css({
- 'overflow': 'auto !important',
- 'height': 'auto !important'
- })
+$('body').unbind('touchmove')
 </script>
 <div ng-if="!gameMade" ng-include="'partials/navbar.html'">
 </div>
