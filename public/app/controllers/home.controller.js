@@ -3,7 +3,7 @@
 
   var HomeCtrl = function($rootScope, $scope,$window,FirebaseFactory) {
 
-    document.ontouchmove = function(e){ e.preventDefault(); };
+    $('body').bind('touchmove', function(e){e.preventDefault();});
 
     $('body').css("overflow","hidden");
     $('body').css("overflow","none");
