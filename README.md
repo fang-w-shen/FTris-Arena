@@ -23,21 +23,21 @@ HTML5
 
 CSS/SCSS/SASS
 
-BOOTSTRAP
+Bootstrap
 
-MATERIALIZE
+Materialize
 
-JS/JQUERY
+JS/JQuery
 
-BROWSERIFY
+Browserify
 
-GRUNT
+Grunt
 
-ANGULARJS
+AngularJS
 
-FIREBASE
+Google Authorization
 
-GOOGLEAUTH
+Firebase Database and Server
 
 
 **[Play The Game](https://tetris-arena.firebaseapp.com)**
