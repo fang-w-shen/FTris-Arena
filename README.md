@@ -1,4 +1,4 @@
-# [FTris-Arena](https://tetris-arena.firebaseapp.com)
+# FTris-Arena
 
 [![PREVIEW](https://github.com/fang-w-shen/Professional-Portfolio/blob/master/img/portfolio/ftris.png)](https://tetris-arena.firebaseapp.com)
 
@@ -6,7 +6,7 @@
 
 ### Game Name:
 
-FTris
+FTris-Arena
 
 ### Creator:
 
@@ -14,7 +14,7 @@ Fang W. Shen
 
 ### Game Description:
 
-FTris is a multiplayer online game modeled after Tetris that introduces a new shape and a whole new way to play! Play at your own pace in single-player mode or play against your friends in the competitive multi-player arena!
+FTris-Arena is a multiplayer online game modeled after Tetris that introduces a new shape and a whole new way to play! Play at your own pace in single-player mode or play against your friends in the competitive multi-player arena!
 
 Using the keyboard or on-screen touchpad on your laptop or mobile device, you can move the shapes and strategically place them to clear as many lines of blocks as possible before any reach the top!
 
@@ -43,7 +43,7 @@ Google Authorization
 Firebase Database and Server
 
 
-## CLONING THE REPO
+### Cloning the Repository:
 
 To get started with the app, clone the repo and change directories into the newly created directory and then its 'public' subfolder:
 
@@ -61,7 +61,7 @@ Then Run Grunt and a working server will automatically open on your preferred br
 $ grunt
 ```
 
-## Pull Requests
+### Pull Requests:
 If you find any bugs or have suggestions...
  * Make A New Branch and Push Up to Master!
 ```
