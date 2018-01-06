@@ -20,7 +20,7 @@ Using the keyboard or on-screen touchpad on your laptop or mobile device, you ca
 
 In multi-player mode, every 2 lines of blocks you clear enables you to use the F-Shape power-up which forces your opponent's next shape to drop the newly designed F-Shape. While this will surely 'F' your opponent's strategy up, be careful, your opponent can F-Shape you back at any moment so be prepared to constantly adjust your strategy!
 
-## Technologies Used:
+## Technologies Used
 
 HTML5
 
@@ -43,7 +43,7 @@ Google Authorization
 Firebase Database and Server
 
 
-## Cloning the Repository:
+## Cloning the Repository
 
 To get started with the app, clone the repo and change directories into the newly created directory and then its 'public' subfolder:
 
@@ -61,7 +61,7 @@ Then Run Grunt and a working server will automatically open on your preferred br
 $ grunt
 ```
 
-## Pull Requests:
+## Pull Requests
 If you find any bugs or have suggestions...
  * Make A New Branch and Push Up to Master!
 ```
