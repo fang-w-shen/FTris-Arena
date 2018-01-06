@@ -41,12 +41,12 @@ To get started with the app, clone the repo and change directories into the newl
 $ git clone https://github.com/fang-w-shen/FTris-Arena.git
 $ cd FTris-Arena/public
 ```
-Then change directories again into the lib folder to install all dependencies:
+Then, change directories again into the lib folder to install all dependencies:
 ```
 $ cd lib
 $ npm install
 ```
-Then run grunt and a working server will automatically open on your preferred browser:
+Finally, run grunt and a working server will automatically open on your preferred browser!
 ```
 $ grunt
 ```
