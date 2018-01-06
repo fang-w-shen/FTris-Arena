@@ -5,6 +5,7 @@ Using the keyboard or on-screen touchpad on your laptop or mobile device, you ca
 
 In multi-player mode, every 2 lines of blocks you clear enables you to use the F-Shape power-up which forces your opponent's next shape to drop the newly designed F-Shape. While this will surely 'F' your opponent's strategy up, be careful, your opponent can F-Shape you back at any moment so be prepared to constantly adjust your strategy!
 
+## Preview
 [![PREVIEW](https://github.com/fang-w-shen/Professional-Portfolio/blob/master/img/portfolio/ftris.png)](https://tetris-arena.firebaseapp.com)
 
 **[Play The Game!](https://tetris-arena.firebaseapp.com)**
