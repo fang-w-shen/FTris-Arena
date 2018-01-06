@@ -60,6 +60,6 @@ git push master {yourbranchname}
 ```
 * And Then Make a Pull Request!
 
-## Contributors
 
-[Fang W. Shen](https://github.com/fang-w-shen)
+## Copyright and License
+Copyright 2018 under [Fang-W-Shen](https://github.com/fang-w-shen).
