@@ -46,7 +46,7 @@ Then change directories again into the lib folder to install all dependencies:
 $ cd lib
 $ npm install
 ```
-Then Run Grunt and a working server will automatically open on your preferred browser:
+Then run grunt and a working server will automatically open on your preferred browser:
 ```
 $ grunt
 ```
