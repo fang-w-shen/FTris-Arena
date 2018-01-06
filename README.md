@@ -20,14 +20,23 @@ In multi-player mode, every 2 lines of blocks you clear enables you to use the F
 ### Technologies Used:
 
 HTML5
+
 CSS/SCSS/SASS
+
 BOOTSTRAP
+
 MATERIALIZE
+
 JS/JQUERY
+
 BROWSERIFY
+
 GRUNT
+
 ANGULARJS
+
 FIREBASE
+
 GOOGLEAUTH
 
 
