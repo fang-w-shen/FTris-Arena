@@ -2,7 +2,7 @@
 
 [![PREVIEW](https://github.com/fang-w-shen/Professional-Portfolio/blob/master/img/portfolio/ftris.png)](https://tetris-arena.firebaseapp.com)
 
-**[Play The Game](https://tetris-arena.firebaseapp.com)**
+**[Play The Game!](https://tetris-arena.firebaseapp.com)**
 
 ### Game Name:
 
