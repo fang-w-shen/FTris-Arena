@@ -48,8 +48,8 @@ Firebase Database and Server
 To get started with the app, clone the repo and change directories into the newly created directory and then its 'public' subfolder:
 
 ```
-$ git clone https://github.com/fang-w-shen/Tetris-Arena.git
-$ cd Tetris-Arena/public
+$ git clone https://github.com/fang-w-shen/FTris-Arena.git
+$ cd FTris-Arena/public
 ```
 Then change directories again into the lib folder to install all dependencies:
 ```
